@@ -1,0 +1,45 @@
+@theme {
+  --color-tandoori: #c97228;
+  --color-tandoori-dark: #a85b1f;
+  --color-cream: #faf8f5;
+  --color-ink: #2c2621;
+  --color-sage: #849079;
+
+  --color-brand: #c97228;
+  --color-leaf: #849079;
+  --color-madison: #2c2621;
+  --color-curry: #c97228;
+  --color-warm-brown: #8a4a2e;
+  --color-warm-white: #faf8f5;
+  --color-warm-cream: #f1e8de;
+  --color-warm-line: #e3d6c8;
+
+  --color-brand-dark: #2c2621;
+  --color-brand-surface: #f1e8de;
+  --color-brand-gold: #c97228;
+  --color-brand-gold-muted: #a85b1f;
+  --color-brand-light: #faf8f5;
+
+  --color-background: #faf8f5;
+  --color-foreground: #2c2621;
+  --color-card: #fffdfa;
+  --color-card-foreground: #2c2621;
+  --color-popover: #fffdfa;
+  --color-popover-foreground: #2c2621;
+  --color-primary: #c97228;
+  --color-primary-foreground: #faf8f5;
+  --color-secondary: #849079;
+  --color-secondary-foreground: #faf8f5;
+  --color-muted: #eee6dd;
+  --color-muted-foreground: #6f6257;
+  --color-accent: #f1e8de;
+  --color-accent-foreground: #2c2621;
+  --color-destructive: #c2410c;
+  --color-destructive-foreground: #faf8f5;
+  --color-border: #e3d6c8;
+  --color-input: #d8c8b8;
+  --color-ring: #c97228;
+
+  --radius-card: 0.5rem;
+  --shadow-card: 0 18px 45px rgb(44 38 33 / 0.1);
+}

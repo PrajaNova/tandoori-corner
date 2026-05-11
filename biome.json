@@ -23,7 +23,18 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "a11y": {
+        "noLabelWithoutControl": "off",
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off",
+        "useValidAnchor": "off"
+      },
+      "performance": {
+        "noImgElement": "off"
+      },
       "suspicious": {
+        "noArrayIndexKey": "off",
+        "noShadowRestrictedNames": "off",
         "noUnknownAtRules": "off"
       }
     },

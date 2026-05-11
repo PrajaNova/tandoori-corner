@@ -9,18 +9,18 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Stack
 
 - Next.js 16 App Router with TypeScript.
-- Tailwind CSS 4 uses theme tokens in `src/app/globals.css`.
+- Tailwind CSS 4 uses theme tokens in `app/globals.css` and `app/theme/`.
 - Biome is the formatter/linter. Tailwind directives are enabled in `biome.json`.
 - Package manager is `pnpm`.
 
 ## Work Scope
 
-- Active product work lives on the main root route `/`.
-- Put reusable app components in `src/component/`.
-- Keep shared shadcn-style primitives in `src/component/ui/`.
-- Do not create version folders such as `src/app/v1` or `src/component/v1`; use Git branches for alternate versions.
-- Treat `skills/` as local project guidance created by the user. Before work that matches a skill folder, read the relevant `skills/<name>/skill.md` file and follow it.
-- The current local skill source includes `skills/shadch-ui/skill.md`.
+- Active product work lives in App Router routes under `app/`, with `/` as the home route and real pages such as `/menu`, `/experience`, `/checkout`, and `/story`.
+- Put reusable app components in `components/`.
+- Keep shared shadcn-style primitives in `components/ui/`.
+- Do not create `src/` or version folders such as `app/v1` or `components/v1`; use Git branches for alternate versions.
+- Treat `agent/skills/` as local project guidance created by the user. Before work that matches a skill folder, read the relevant `agent/skills/<name>/skill.md` file and follow it.
+- The current local skill source includes `agent/skills/schadcn/skill.md`.
 
 ## Design Direction
 
@@ -29,8 +29,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Follow the extracted Tandoori Corner theme:
   - Body font: `Open Sans`.
   - Heading font: `Merriweather`.
-  - Primary colors: `brand`, `leaf`, `madison`, `curry`, `warm-brown`.
-- Prefer existing Tailwind tokens such as `bg-brand`, `text-leaf`, `bg-madison`, `rounded-card`, and `shadow-card`.
+  - Primary Tailwind tokens: `tandoori`, `tandoori-dark`, `cream`, `ink`, `sage`.
+  - Semantic shadcn tokens: `background`, `foreground`, `card`, `primary`, `secondary`, `muted`, `accent`, `border`, `input`, `ring`.
+- Prefer theme tokens such as `bg-primary`, `bg-card`, `text-muted-foreground`, `border-border`, `bg-brand-dark`, `text-brand-gold`, and `text-leaf`.
 - Build actual usable app sections/components, not placeholder marketing copy, unless the task is explicitly a preview.
 - Keep restaurant navigation simple and action-focused.
 
