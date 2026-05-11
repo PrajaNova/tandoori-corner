@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { SiteShell } from "@/component/site-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Tandoori Corner",
+  title: "Tandoori Corner Singapore",
   description:
-    "Tandoori Corner restaurant experience, menu, ordering, and reservations.",
+    "Tandoori Corner Singapore restaurant site with menu ordering and reservation flows.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SiteShell>{children}</SiteShell>
+      </body>
     </html>
   );
 }

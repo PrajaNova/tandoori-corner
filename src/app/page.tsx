@@ -1,5 +1,5 @@
-import App from "../App";
+import { HomePage } from "@/component/pages/home";
 
-export default function HomePage() {
-  return <App />;
+export default function Page() {
+  return <HomePage />;
 }
