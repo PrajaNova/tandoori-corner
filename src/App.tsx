@@ -11,7 +11,6 @@ import {
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FloatingChatBot } from "./components/FloatingChatBot";
 import { Checkout } from "./views/Checkout";
@@ -74,24 +73,22 @@ export default function App() {
     <div className="font-sans antialiased text-brand-light bg-brand-dark selection:bg-brand-gold selection:text-brand-dark min-h-screen flex flex-col pt-safe">
       {/* Navigation */}
       <nav
-        className={`fixed w-full z-50 transition-all duration-500 border-b ${isScrolled ? "bg-brand-dark/95 backdrop-blur-md py-4 border-white/10" : "bg-transparent py-6 border-transparent"}`}
+        className={`fixed w-full z-50 transition-all duration-500 border-b ${isScrolled ? "bg-brand-dark/95 backdrop-blur-md py-3 md:py-4 border-white/10" : "bg-transparent py-3 md:py-6 border-transparent"}`}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
           {/* Logo */}
           <button
             type="button"
-            className="relative block h-12 w-[160px] shrink-0 md:h-16 md:w-[210px]"
+            className="flex shrink-0 flex-col text-left"
             onClick={() => navigate("home")}
             aria-label="Tandoori Corner home"
           >
-            <Image
-              src="/tandoori-corner-header-logo.png"
-              alt="Tandoori Corner"
-              fill
-              priority
-              sizes="(min-width: 768px) 210px, 160px"
-              className="object-contain object-left"
-            />
+            <span className="font-space text-xl md:text-2xl font-bold tracking-tight text-white leading-none">
+              Tandoori<span className="text-brand-gold">Corner</span>
+            </span>
+            <span className="mt-1 text-[8px] md:text-[9px] uppercase tracking-[0.18em] md:tracking-[0.2em] text-white/50">
+              Est. 2008 &bull; Balestier
+            </span>
           </button>
 
           {/* Desktop Links */}
@@ -261,7 +258,7 @@ export default function App() {
               rel="noopener noreferrer"
               className="block relative w-full h-32 bg-brand-dark mb-6 overflow-hidden border border-white/10 group cursor-pointer hover:border-brand-gold transition-colors"
             >
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80')] bg-cover bg-center grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-500"></div>
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-all duration-500"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative">
                   <div className="absolute inset-0 bg-brand-gold blur-lg opacity-40 animate-pulse rounded-full"></div>

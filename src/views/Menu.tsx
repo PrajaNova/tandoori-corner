@@ -268,38 +268,38 @@ export function Menu({
   );
 
   return (
-    <div className="pt-28 pb-40 bg-brand-dark min-h-screen relative">
-      <div className="container mx-auto px-6 max-w-5xl">
+    <div className="pt-24 pb-32 sm:pt-28 sm:pb-40 bg-brand-dark min-h-screen relative">
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
         {/* Menu Header */}
-        <div className="text-center mb-16">
-          <span className="text-brand-gold font-sans tracking-[0.3em] uppercase text-xs mb-4 block font-bold">
+        <div className="text-center mb-10 sm:mb-16">
+          <span className="text-brand-gold font-sans tracking-[0.22em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs mb-3 sm:mb-4 block font-bold">
             DIGITAL MENU
           </span>
-          <h1 className="font-space text-5xl md:text-6xl font-bold mb-6 text-white">
+          <h1 className="font-space text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-white leading-tight">
             An Elevated <br /> Culinary Journey.
           </h1>
-          <p className="text-lg text-white/60 font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg text-white/60 font-light leading-relaxed max-w-2xl mx-auto">
             From the sizzling heat of our 15-year-old Tandoor to the velvety
             depths of our 24-hour slow-cooked curries. All dishes are prepared
             with authentic North Indian heritage.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-6 sm:mt-8">
             <span
               onClick={() => setSearchQuery("Vegetarian")}
-              className="border border-white/10 px-4 py-2 text-[10px] uppercase font-bold tracking-widest text-white/80 hover:bg-white/5 cursor-pointer"
+              className="border border-white/10 px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-white/80 hover:bg-white/5 cursor-pointer"
             >
               Vegetarian Friendly
             </span>
             <span
               onClick={() => setSearchQuery("Vegan")}
-              className="border border-white/10 px-4 py-2 text-[10px] uppercase font-bold tracking-widest text-white/80 hover:bg-white/5 cursor-pointer"
+              className="border border-white/10 px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-white/80 hover:bg-white/5 cursor-pointer"
             >
               Vegan Options
             </span>
             <span
               onClick={() => setSearchQuery("Signature")}
-              className="border border-white/10 px-4 py-2 text-[10px] uppercase font-bold tracking-widest text-[#D4AF37] hover:bg-white/5 cursor-pointer"
+              className="border border-white/10 px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-[#D4AF37] hover:bg-white/5 cursor-pointer"
             >
               Signatures
             </span>
@@ -307,13 +307,13 @@ export function Menu({
         </div>
 
         {/* Search Bar */}
-        <div className="relative max-w-2xl mx-auto mb-20 group">
+        <div className="relative max-w-2xl mx-auto mb-12 sm:mb-20 group">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <Search className="h-5 w-5 text-white/40 group-focus-within:text-brand-gold transition-colors" />
           </div>
           <input
             type="text"
-            className="block w-full pl-12 pr-4 py-4 bg-brand-dark border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-brand-gold transition-colors"
+            className="block w-full pl-12 pr-4 py-3.5 sm:py-4 bg-brand-dark border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-brand-gold transition-colors"
             placeholder="Search our menu..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -330,7 +330,7 @@ export function Menu({
         </div>
 
         {/* Categories */}
-        <div className="space-y-24">
+        <div className="space-y-12 sm:space-y-20 md:space-y-24">
           {filteredCategories.length === 0 ? (
             <div className="text-center text-white/50 py-20 border border-white/5">
               <p className="text-lg mb-2">
@@ -355,20 +355,22 @@ export function Menu({
                 className="relative"
               >
                 {/* Category Header */}
-                <div className="flex items-center gap-4 mb-10 border-b border-white/10 pb-4">
-                  {category.icon}
+                <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-10 border-b border-white/10 pb-3 sm:pb-4">
+                  <div className="[&_svg]:w-5 [&_svg]:h-5 sm:[&_svg]:w-6 sm:[&_svg]:h-6">
+                    {category.icon}
+                  </div>
                   <div>
-                    <h2 className="font-space text-3xl text-white">
+                    <h2 className="font-space text-2xl sm:text-3xl text-white">
                       {category.title}
                     </h2>
-                    <p className="text-brand-gold/80 text-xs uppercase tracking-widest font-medium mt-1">
+                    <p className="text-brand-gold/80 text-[10px] sm:text-xs uppercase tracking-widest font-medium mt-1">
                       {category.subtitle}
                     </p>
                   </div>
                 </div>
 
                 {/* Items Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <div className="grid grid-cols-2 gap-3 sm:gap-8 lg:gap-12">
                   {category.items.map((item, itemIdx) => (
                     <div
                       key={itemIdx}
@@ -377,35 +379,35 @@ export function Menu({
                     >
                       {/* Visual Eye Magnet Technique for Signatures */}
                       {item.img && (
-                        <div className="w-full h-48 sm:h-56 overflow-hidden relative">
+                        <div className="w-full h-24 sm:h-56 overflow-hidden relative">
                           <img
                             src={item.img}
                             alt={item.name}
-                            className="absolute inset-0 w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
-                          <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                            <h3 className="font-space text-2xl text-white drop-shadow-md pr-4">
+                          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-1 sm:gap-3">
+                            <h3 className="font-space text-sm sm:text-2xl text-white drop-shadow-md leading-tight line-clamp-2">
                               {item.name}
                             </h3>
-                            <span className="font-sans text-brand-gold font-bold text-lg shrink-0 drop-shadow-md bg-brand-dark/50 backdrop-blur-sm px-2 py-1 rounded">
+                            <span className="self-start sm:self-auto font-sans text-brand-gold font-bold text-xs sm:text-lg shrink-0 drop-shadow-md bg-brand-dark/50 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded">
                               {item.price}
                             </span>
                           </div>
                         </div>
                       )}
 
-                      <div className="flex-1 flex flex-col p-6 pt-4">
-                        <p className="text-white/50 text-sm leading-relaxed mb-6 font-light flex-1 line-clamp-3">
+                      <div className="flex-1 flex flex-col p-3 sm:p-6 sm:pt-4">
+                        <p className="text-white/50 text-[11px] sm:text-sm leading-relaxed mb-3 sm:mb-6 font-light flex-1 line-clamp-2 sm:line-clamp-3">
                           {item.desc}
                         </p>
 
-                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5 relative z-10">
-                          <div className="flex flex-wrap gap-2">
-                            {item.tags.map((tag, tIdx) => (
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mt-auto pt-2.5 sm:pt-4 border-t border-white/5 relative z-10">
+                          <div className="flex flex-wrap gap-1 sm:gap-2">
+                            {item.tags.slice(0, 1).map((tag, tIdx) => (
                               <span
                                 key={tIdx}
-                                className={`text-[9px] uppercase tracking-widest px-2 py-1 border ${
+                                className={`text-[7px] sm:text-[9px] uppercase tracking-widest px-1.5 sm:px-2 py-1 border ${
                                   tag === "Vegetarian" || tag === "Vegan"
                                     ? "border-emerald-500/30 text-emerald-400"
                                     : tag === "Signature"
@@ -425,9 +427,10 @@ export function Menu({
                               e.stopPropagation();
                               addToCart(item.name, item.price);
                             }}
-                            className="text-[10px] uppercase tracking-widest font-bold bg-white/5 hover:bg-brand-gold hover:text-brand-dark px-4 py-2 transition-all shrink-0"
+                            className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold bg-white/5 hover:bg-brand-gold hover:text-brand-dark px-2 sm:px-4 py-2 transition-all shrink-0"
                           >
-                            Add to Order
+                            Add
+                            <span className="hidden sm:inline"> to Order</span>
                           </button>
                         </div>
                       </div>

@@ -24,46 +24,46 @@ export function DailyOffers({
 
   return (
     <>
-      <section className="bg-brand-gold py-24 text-brand-dark">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="block font-bold uppercase tracking-[0.2em] text-xs mb-4 opacity-80 text-brand-dark">
+      <section className="bg-brand-gold py-12 sm:py-18 md:py-24 text-brand-dark">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <span className="block font-bold uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[10px] sm:text-xs mb-3 sm:mb-4 opacity-80 text-brand-dark">
               Current Exclusives & Promos
             </span>
-            <h2 className="font-space text-4xl md:text-5xl font-bold">
+            <h2 className="font-space text-3xl sm:text-4xl md:text-5xl font-bold">
               Daily Offers
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
             {offers.map((offer, idx) => (
               <div
                 key={idx}
                 onClick={() => setSelectedOffer(offer)}
-                className="relative h-[450px] overflow-hidden group bg-brand-dark box-border cursor-pointer"
+                className="relative h-56 sm:h-80 md:h-[450px] overflow-hidden group bg-brand-dark box-border cursor-pointer"
               >
                 <img
                   src={offer.image}
                   alt={offer.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 grayscale group-hover:grayscale-0"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent transition-opacity duration-500"></div>
 
                 <div
-                  className={`absolute top-6 right-6 ${offer.badgeColor} text-[9px] uppercase tracking-widest font-bold px-3 py-1 shadow-lg z-10 transition-transform duration-300 group-hover:-translate-y-1`}
+                  className={`absolute top-4 right-4 md:top-6 md:right-6 ${offer.badgeColor} text-[8px] sm:text-[9px] uppercase tracking-widest font-bold px-2.5 sm:px-3 py-1 shadow-lg z-10 transition-transform duration-300 group-hover:-translate-y-1`}
                 >
                   {offer.badge}
                 </div>
 
-                <div className="absolute inset-0 p-8 flex flex-col justify-end z-10 transition-transform duration-500 translate-y-10 group-hover:translate-y-0">
-                  <h3 className="font-space text-3xl font-bold mb-1 text-white">
+                <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end z-10 transition-transform duration-500 sm:translate-y-10 sm:group-hover:translate-y-0">
+                  <h3 className="font-space text-2xl sm:text-3xl font-bold mb-1 text-white">
                     {offer.title}
                   </h3>
-                  <p className="text-brand-gold font-bold text-2xl mb-4">
+                  <p className="text-brand-gold font-bold text-xl sm:text-2xl mb-0 sm:mb-4">
                     {offer.value}
                   </p>
 
-                  <div className="overflow-hidden transition-all duration-500 max-h-0 opacity-0 group-hover:max-h-48 group-hover:opacity-100">
+                  <div className="hidden sm:block overflow-hidden transition-all duration-500 max-h-0 opacity-0 group-hover:max-h-48 group-hover:opacity-100">
                     <ul className="space-y-3 text-white/70 text-sm mb-6">
                       {offer.points.slice(0, 2).map((point, i) => (
                         <li key={i} className="flex items-center gap-3">

@@ -64,23 +64,23 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen pt-20">
+    <div className="flex flex-col min-h-screen pt-16 md:pt-20">
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative flex items-start justify-center overflow-hidden pt-8 pb-10 sm:pt-12 sm:pb-20 md:h-[90vh] md:items-center md:py-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80')] bg-cover bg-center">
           <div className="absolute inset-0 bg-brand-dark/80 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-transparent" />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-10">
+        <div className="relative z-10 text-center px-5 sm:px-6 max-w-5xl mx-auto md:mt-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             {/* Stickers / Badges */}
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-xl">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2 sm:gap-4 mb-5 sm:mb-8">
+              <div className="flex max-w-full items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-3 py-2 sm:px-4 rounded-full shadow-xl">
                 <div className="flex text-brand-gold">
                   <Star className="w-3 h-3 fill-current" />
                   <Star className="w-3 h-3 fill-current" />
@@ -92,33 +92,34 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
                   4.5 on Google
                 </span>
               </div>
-              <div className="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-xl">
-                <span className="text-[10px] font-bold text-white uppercase tracking-widest">
-                  🏆 TripAdvisor Excellence
+              <div className="flex max-w-full items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-3 py-2 sm:px-4 rounded-full shadow-xl">
+                <span className="text-[10px] font-bold text-white uppercase tracking-[0.14em] sm:tracking-widest">
+                  TripAdvisor Excellence
                 </span>
               </div>
             </div>
 
-            <span className="text-brand-gold font-sans tracking-[0.3em] uppercase text-xs mb-6 block font-medium">
+            <span className="text-brand-gold font-sans tracking-[0.22em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs mb-4 sm:mb-6 block font-medium">
               Inside Tandoori Corner
             </span>
-            <h1 className="font-space text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.1] text-white">
-              Elevated Indian Dining &amp; <br />{" "}
+            <h1 className="font-space text-[1.95rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 leading-[1.08] sm:leading-[1.1] text-white">
+              Elevated Indian <br className="sm:hidden" />
+              Dining &amp; <br />{" "}
               <span className="text-white/90 italic font-light">
                 Evening Cocktails.
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-sm sm:text-base md:text-xl text-white/65 mb-7 sm:mb-10 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed">
               Experience the acclaimed flavors of our 15-year heritage, now
               served in the lush alfresco balcony or inside the exclusive TCB
               Bar.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
               <button
                 type="button"
                 onClick={() => navigate("menu")}
-                className="w-full sm:w-auto bg-brand-gold hover:bg-brand-gold-muted text-brand-dark px-10 py-5 text-xs uppercase tracking-widest font-bold transition-all flex items-center justify-center gap-3 group"
+                className="w-full sm:w-auto bg-brand-gold hover:bg-brand-gold-muted text-brand-dark px-6 sm:px-10 py-4 sm:py-5 text-xs uppercase tracking-[0.16em] sm:tracking-widest font-bold transition-all flex items-center justify-center gap-3 group"
               >
                 Explore The Menu{" "}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -126,7 +127,7 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
               <button
                 type="button"
                 onClick={() => navigate("experience")}
-                className="w-full sm:w-auto px-10 py-5 text-xs uppercase tracking-widest font-bold text-white transition-all flex items-center justify-center gap-3 border border-white/20 hover:bg-white/5"
+                className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 text-xs uppercase tracking-[0.16em] sm:tracking-widest font-bold text-white transition-all flex items-center justify-center gap-3 border border-white/20 hover:bg-white/5"
               >
                 Reserve Alfresco
               </button>
@@ -167,19 +168,19 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
       </section>
 
       {/* Culinary Offerings Teaser */}
-      <section className="py-24 md:py-32 bg-brand-surface relative overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center mb-16">
-          <h2 className="font-space text-4xl md:text-5xl font-bold mb-6">
+      <section className="py-14 sm:py-20 md:py-32 bg-brand-surface relative overflow-hidden">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10 text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="font-space text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
             Our Culinary Corners
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-white/60 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
             From the sizzling heat of the Tandoor to the rich depths of our
             signature Curries. Real food, tailored for alfresco evenings and
             stylish nights out.
           </p>
         </div>
 
-        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 md:gap-8 relative z-10">
           {[
             {
               tag: "Tandoori Corner",
@@ -202,30 +203,32 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
           ].map((item, i) => (
             <div
               key={i}
-              className="border border-white/10 bg-white/[0.02] p-8 hover:bg-white/[0.04] transition-colors group"
+              className="border border-white/10 bg-white/[0.02] p-4 sm:p-6 md:p-8 hover:bg-white/[0.04] transition-colors group"
             >
-              <div className="mb-8 overflow-hidden relative h-48 border border-white/5">
+              <div className="mb-4 sm:mb-6 md:mb-8 overflow-hidden relative h-28 sm:h-40 md:h-48 border border-white/5">
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                 />
               </div>
-              <span className="text-brand-gold text-[10px] uppercase tracking-widest font-bold block mb-3">
+              <span className="text-brand-gold text-[9px] sm:text-[10px] uppercase tracking-widest font-bold block mb-2 sm:mb-3">
                 {item.tag}
               </span>
-              <h3 className="font-space text-2xl mb-4">{item.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed mb-6">
+              <h3 className="font-space text-xl sm:text-2xl mb-2 sm:mb-4">
+                {item.title}
+              </h3>
+              <p className="text-white/50 text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-none">
                 {item.desc}
               </p>
             </div>
           ))}
         </div>
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 sm:mt-12">
           <button
             type="button"
             onClick={() => navigate("menu")}
-            className="bg-transparent border border-white/20 text-white px-10 py-5 text-xs uppercase tracking-widest font-bold transition-all hover:bg-white hover:text-brand-dark"
+            className="bg-transparent border border-white/20 text-white px-6 sm:px-10 py-4 sm:py-5 text-xs uppercase tracking-[0.16em] sm:tracking-widest font-bold transition-all hover:bg-white hover:text-brand-dark"
           >
             View Full Digital Menu
           </button>
@@ -282,45 +285,46 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
       {/* The TCB Bar Spotlight */}
       <section
         id="tcb"
-        className="py-24 md:py-32 bg-brand-dark relative overflow-hidden border-y border-white/5"
+        className="py-14 sm:py-20 md:py-32 bg-brand-dark relative overflow-hidden border-y border-white/5"
       >
-        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
-          <div className="space-y-8 order-2 lg:order-1">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center relative z-10">
+          <div className="space-y-5 sm:space-y-8 order-2 lg:order-1">
             <div className="inline-flex items-center gap-3 border border-white/10 px-4 py-2 text-[10px] uppercase tracking-widest font-medium text-brand-gold relative">
               <span className="w-1.5 h-1.5 bg-brand-gold rounded-full"></span>
               The Secret Room
             </div>
-            <h2 className="font-space text-4xl md:text-5xl font-bold leading-tight">
+            <h2 className="font-space text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
               An Intimate Nightlife <br />
               Destination.
             </h2>
-            <p className="text-lg text-white/60 leading-relaxed font-light">
+            <p className="text-sm sm:text-lg text-white/60 leading-relaxed font-light">
               Step away from the bustling Balestier pavement and into the TCB
               Bar. Designed for romantic dinners, after-work craft cocktails,
               and high-style corporate gatherings.
             </p>
-            <p className="text-lg text-white/60 leading-relaxed font-light">
+            <p className="text-sm sm:text-lg text-white/60 leading-relaxed font-light">
               Featuring our curated <strong>Beer Fest specials</strong> daily,
               paired with exclusive a la carte bites unavailable in our standard
               alfresco dining.
             </p>
             <div className="pt-6 border-t border-white/10">
-              <a
-                href="#events"
+              <button
+                type="button"
+                onClick={() => navigate("experience")}
                 className="inline-flex items-center gap-3 text-sm font-medium uppercase tracking-widest text-brand-gold hover:text-brand-light transition-colors group"
               >
                 Inquire for Private Events{" "}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </button>
             </div>
           </div>
           <div className="relative order-1 lg:order-2">
-            <div className="relative h-[500px] md:h-[600px] w-full rounded-tr-[100px] rounded-bl-[100px] overflow-hidden">
+            <div className="relative h-64 sm:h-[420px] md:h-[600px] w-full rounded-tr-[56px] rounded-bl-[56px] sm:rounded-tr-[80px] sm:rounded-bl-[80px] md:rounded-tr-[100px] md:rounded-bl-[100px] overflow-hidden">
               <div className="absolute inset-0 bg-brand-gold mix-blend-color opacity-20 z-10" />
               <img
                 src="https://images.unsplash.com/photo-1470337458703-4f5afd4b4667?auto=format&fit=crop&q=80"
                 alt="TCB Bar Interior"
-                className="w-full h-full object-cover object-center grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-1000"
+                className="w-full h-full object-cover object-center transition-all duration-1000"
               />
             </div>
           </div>
@@ -386,7 +390,7 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
                 <img
                   src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80"
                   alt="Restaurant Interior"
-                  className="w-full h-full object-cover grayscale opacity-90 transition-all duration-1000 hover:grayscale-0 hover:scale-105"
+                  className="w-full h-full object-cover transition-all duration-1000 hover:scale-105"
                 />
               </div>
 
@@ -394,7 +398,7 @@ export function Home({ navigate }: { navigate: (page: string) => void }) {
                 <img
                   src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&q=80"
                   alt="Authentic Spices"
-                  className="w-full h-full object-cover grayscale transition-all duration-1000 hover:grayscale-0"
+                  className="w-full h-full object-cover transition-all duration-1000"
                 />
               </div>
 
