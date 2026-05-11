@@ -39,12 +39,3 @@ h5,
 h6 {
   font-family: var(--font-serif);
 }
-
-.pill-image {
-  border-radius: 9999px;
-  object-fit: cover;
-}
-
-.clip-ellipse {
-  clip-path: ellipse(80% 100% at 50% 0%);
-}

@@ -16,20 +16,6 @@ export function Footer() {
             Experience the culinary heritage of North Indian cuisine. Crafted
             with passion, served with warmth.
           </p>
-          <div className="flex space-x-4">
-            <a
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 transition-all hover:border-transparent hover:bg-brand hover:text-cream"
-              href="/"
-            >
-              FB
-            </a>
-            <a
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 transition-all hover:border-transparent hover:bg-brand hover:text-cream"
-              href="/"
-            >
-              IG
-            </a>
-          </div>
         </div>
 
         <div className="flex flex-col gap-12 md:flex-row md:gap-24">
@@ -96,14 +82,6 @@ export function Footer() {
 
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between border-cream/10 border-t pt-8 text-cream/50 text-xs md:flex-row">
         <p>Tandoori Corner Singapore. All Rights Reserved.</p>
-        <div className="mt-4 flex space-x-6 md:mt-0">
-          <a className="transition-colors hover:text-cream" href="/">
-            Privacy Policy
-          </a>
-          <a className="transition-colors hover:text-cream" href="/">
-            Terms of Service
-          </a>
-        </div>
       </div>
     </footer>
   );

@@ -50,7 +50,7 @@ export function Navbar() {
 
         <div className="hidden items-center space-x-12 md:flex">
           <div
-            className={`flex space-x-8 text-sm font-medium uppercase tracking-wide ${
+            className={`flex space-x-8 font-medium text-sm uppercase tracking-wide ${
               navSolid ? "text-ink" : "text-cream/90"
             }`}
           >
