@@ -1,6 +1,8 @@
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-export function Journey({ navigate }: { navigate: (page: string) => void }) {
+export function StoryContent() {
   const team = [
     {
       name: "Surendar Singh",
@@ -47,7 +49,7 @@ export function Journey({ navigate }: { navigate: (page: string) => void }) {
     },
     {
       title: "With Bollywood Stars",
-      img: "https://images.unsplash.com/photo-1533174000263-149dd772ceb0?auto=format&fit=crop&q=80",
+      img: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80",
     },
     {
       title: "Our Restaurant",
@@ -79,15 +81,14 @@ export function Journey({ navigate }: { navigate: (page: string) => void }) {
   ];
 
   return (
-    <div className="pt-28 pb-40 bg-white min-h-screen">
+    <div className="pt-28 pb-40 bg-card min-h-screen">
       <div className="container mx-auto px-6 max-w-6xl">
-        <button
-          type="button"
-          onClick={() => navigate("home")}
+        <Link
+          href="/"
           className="flex items-center gap-2 text-brand-dark/50 hover:text-brand-gold text-xs uppercase tracking-widest font-bold transition-colors mb-12"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Home
-        </button>
+        </Link>
 
         {/* Intro */}
         <section className="text-center mb-24">
@@ -147,11 +148,13 @@ export function Journey({ navigate }: { navigate: (page: string) => void }) {
               inviting ambiance!
             </p>
           </div>
-          <div className="relative p-2 border border-[#d48c37]">
-            <img
+          <div className="relative aspect-[4/3] p-2 border border-[#d48c37]">
+            <Image
+              fill
               src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80"
               alt="Alfresco Dining"
-              className="w-full h-auto object-cover border border-white"
+              className="object-cover border border-border"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
         </section>
@@ -163,11 +166,13 @@ export function Journey({ navigate }: { navigate: (page: string) => void }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, idx) => (
               <div key={idx} className="flex flex-col">
-                <div className="mb-6 rounded overflow-hidden aspect-[4/5]">
-                  <img
+                <div className="relative mb-6 rounded overflow-hidden aspect-[4/5]">
+                  <Image
+                    fill
                     src={member.img}
                     alt={member.name}
                     className="w-full h-full object-cover"
+                    sizes="(max-width: 768px) 100vw, 25vw"
                   />
                 </div>
                 <h4 className="font-space font-bold text-xl text-brand-dark mb-2">
@@ -190,13 +195,15 @@ export function Journey({ navigate }: { navigate: (page: string) => void }) {
             {gallery.map((item, idx) => (
               <div
                 key={idx}
-                className="border border-gray-200 bg-white p-4 text-center"
+                className="border border-gray-200 bg-card p-4 text-center"
               >
-                <div className="aspect-[4/3] overflow-hidden mb-4 rounded-sm">
-                  <img
+                <div className="relative aspect-[4/3] overflow-hidden mb-4 rounded-sm">
+                  <Image
+                    fill
                     src={item.img}
                     alt={item.title}
                     className="w-full h-full object-cover"
+                    sizes="(max-width: 640px) 100vw, 33vw"
                   />
                 </div>
                 <h4 className="font-bold text-[#d48c37] text-lg">
@@ -213,13 +220,15 @@ export function Journey({ navigate }: { navigate: (page: string) => void }) {
             {articles.map((article, idx) => (
               <div
                 key={idx}
-                className="flex flex-col group cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-colors"
+                className="flex flex-col group cursor-pointer border border-transparent bg-card hover:border-primary hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <div className="aspect-[4/5] overflow-hidden mb-6 relative">
-                  <img
+                  <Image
+                    fill
                     src={article.img}
                     alt={article.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
                 <div className="px-4 pb-6 flex-1 flex flex-col">

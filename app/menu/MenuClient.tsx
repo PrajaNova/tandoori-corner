@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ChefHat,
   ChevronDown,
@@ -12,21 +14,15 @@ import {
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import type { CartItem } from "../App";
+import { useCart } from "@/components/cart/use-cart";
 
-export function Menu({
-  navigate,
-  cart,
-  addToCart,
-  updateQty,
-}: {
-  navigate: (page: string) => void;
-  cart: CartItem[];
-  addToCart: (name: string, priceStr: string) => void;
-  updateQty: (name: string, delta: number) => void;
-}) {
+export function MenuClient() {
+  const router = useRouter();
+  const { addToCart, cart, updateQty } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [isCartExpanded, setIsCartExpanded] = useState(false);
   const [selectedItem, setSelectedItem] = useState<{
@@ -122,7 +118,7 @@ export function Menu({
           desc: "A fiery, aromatic Kashmiri lamb curry. Slow-cooked until the meat yields to a spoon, swimming in a vibrant red gravy.",
           price: "$25.00",
           tags: ["Spicy"],
-          img: "https://images.unsplash.com/photo-1544025162-811c7daada68?auto=format&fit=crop&q=80",
+          img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80",
           ingredients: [
             "Lamb Braise",
             "Kashmiri Red Chilies",
@@ -268,17 +264,17 @@ export function Menu({
   );
 
   return (
-    <div className="pt-24 pb-32 sm:pt-28 sm:pb-40 bg-brand-dark min-h-screen relative">
+    <div className="pt-24 pb-32 sm:pt-28 sm:pb-40 bg-cream min-h-screen relative">
       <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
         {/* Menu Header */}
         <div className="text-center mb-10 sm:mb-16">
           <span className="text-brand-gold font-sans tracking-[0.22em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs mb-3 sm:mb-4 block font-bold">
             DIGITAL MENU
           </span>
-          <h1 className="font-space text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-white leading-tight">
+          <h1 className="font-space text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-ink leading-tight">
             An Elevated <br /> Culinary Journey.
           </h1>
-          <p className="text-sm sm:text-lg text-white/60 font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg text-ink/60 font-light leading-relaxed max-w-2xl mx-auto">
             From the sizzling heat of our 15-year-old Tandoor to the velvety
             depths of our 24-hour slow-cooked curries. All dishes are prepared
             with authentic North Indian heritage.
@@ -287,19 +283,19 @@ export function Menu({
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-6 sm:mt-8">
             <span
               onClick={() => setSearchQuery("Vegetarian")}
-              className="border border-white/10 px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-white/80 hover:bg-white/5 cursor-pointer"
+              className="border border-border px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-ink/80 hover:bg-accent cursor-pointer"
             >
               Vegetarian Friendly
             </span>
             <span
               onClick={() => setSearchQuery("Vegan")}
-              className="border border-white/10 px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-white/80 hover:bg-white/5 cursor-pointer"
+              className="border border-border px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-ink/80 hover:bg-accent cursor-pointer"
             >
               Vegan Options
             </span>
             <span
               onClick={() => setSearchQuery("Signature")}
-              className="border border-white/10 px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-[#D4AF37] hover:bg-white/5 cursor-pointer"
+              className="border border-border px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-tandoori hover:bg-accent cursor-pointer"
             >
               Signatures
             </span>
@@ -309,11 +305,11 @@ export function Menu({
         {/* Search Bar */}
         <div className="relative max-w-2xl mx-auto mb-12 sm:mb-20 group">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-white/40 group-focus-within:text-brand-gold transition-colors" />
+            <Search className="h-5 w-5 text-ink/40 group-focus-within:text-brand-gold transition-colors" />
           </div>
           <input
             type="text"
-            className="block w-full pl-12 pr-4 py-3.5 sm:py-4 bg-brand-dark border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-brand-gold transition-colors"
+            className="block w-full pl-12 pr-4 py-3.5 sm:py-4 bg-cream border border-border text-ink placeholder-muted-foreground/50 focus:outline-none focus:border-brand-gold transition-colors"
             placeholder="Search our menu..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -322,7 +318,7 @@ export function Menu({
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white transition-colors"
+              className="absolute inset-y-0 right-0 pr-4 flex items-center text-ink/40 hover:text-ink transition-colors"
             >
               <X className="h-4 w-4" />
             </button>
@@ -332,14 +328,14 @@ export function Menu({
         {/* Categories */}
         <div className="space-y-12 sm:space-y-20 md:space-y-24">
           {filteredCategories.length === 0 ? (
-            <div className="text-center text-white/50 py-20 border border-white/5">
+            <div className="text-center text-ink/50 py-20 border border-border">
               <p className="text-lg mb-2">
                 No items found matching "{searchQuery}"
               </p>
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="text-brand-gold text-xs uppercase tracking-widest font-bold hover:text-white transition-colors"
+                className="text-brand-gold text-xs uppercase tracking-widest font-bold hover:text-ink transition-colors"
               >
                 Clear Search
               </button>
@@ -355,12 +351,12 @@ export function Menu({
                 className="relative"
               >
                 {/* Category Header */}
-                <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-10 border-b border-white/10 pb-3 sm:pb-4">
+                <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-10 border-b border-border pb-3 sm:pb-4">
                   <div className="[&_svg]:w-5 [&_svg]:h-5 sm:[&_svg]:w-6 sm:[&_svg]:h-6">
                     {category.icon}
                   </div>
                   <div>
-                    <h2 className="font-space text-2xl sm:text-3xl text-white">
+                    <h2 className="font-space text-2xl sm:text-3xl text-ink">
                       {category.title}
                     </h2>
                     <p className="text-brand-gold/80 text-[10px] sm:text-xs uppercase tracking-widest font-medium mt-1">
@@ -375,22 +371,24 @@ export function Menu({
                     <div
                       key={itemIdx}
                       onClick={() => setSelectedItem(item)}
-                      className="flex flex-col group border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors p-0 cursor-pointer overflow-hidden rounded-sm"
+                      className="flex flex-col group border border-border bg-card hover:border-primary hover:bg-primary hover:text-primary-foreground transition-colors p-0 cursor-pointer overflow-hidden rounded-sm"
                     >
                       {/* Visual Eye Magnet Technique for Signatures */}
                       {item.img && (
                         <div className="w-full h-24 sm:h-56 overflow-hidden relative">
-                          <img
+                          <Image
+                            fill
                             src={item.img}
                             alt={item.name}
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
+                            sizes="(max-width: 640px) 50vw, 33vw"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-80"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-cream to-transparent opacity-80"></div>
                           <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-1 sm:gap-3">
-                            <h3 className="font-space text-sm sm:text-2xl text-white drop-shadow-md leading-tight line-clamp-2">
+                            <h3 className="font-space text-sm sm:text-2xl text-ink drop-shadow-md leading-tight line-clamp-2">
                               {item.name}
                             </h3>
-                            <span className="self-start sm:self-auto font-sans text-brand-gold font-bold text-xs sm:text-lg shrink-0 drop-shadow-md bg-brand-dark/50 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded">
+                            <span className="self-start sm:self-auto font-sans text-brand-gold font-bold text-xs sm:text-lg shrink-0 drop-shadow-md bg-cream/70 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded">
                               {item.price}
                             </span>
                           </div>
@@ -398,11 +396,11 @@ export function Menu({
                       )}
 
                       <div className="flex-1 flex flex-col p-3 sm:p-6 sm:pt-4">
-                        <p className="text-white/50 text-[11px] sm:text-sm leading-relaxed mb-3 sm:mb-6 font-light flex-1 line-clamp-2 sm:line-clamp-3">
+                        <p className="text-ink/50 text-[11px] sm:text-sm leading-relaxed mb-3 sm:mb-6 font-light flex-1 line-clamp-2 sm:line-clamp-3 transition-colors group-hover:text-primary-foreground/80">
                           {item.desc}
                         </p>
 
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mt-auto pt-2.5 sm:pt-4 border-t border-white/5 relative z-10">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mt-auto pt-2.5 sm:pt-4 border-t border-border relative z-10 transition-colors group-hover:border-primary-foreground/30">
                           <div className="flex flex-wrap gap-1 sm:gap-2">
                             {item.tags.slice(0, 1).map((tag, tIdx) => (
                               <span
@@ -414,7 +412,7 @@ export function Menu({
                                       ? "border-brand-gold/30 text-brand-gold"
                                       : tag === "Spicy"
                                         ? "border-red-500/30 text-red-400"
-                                        : "border-white/10 text-white/40"
+                                        : "border-border text-ink/40"
                                 }`}
                               >
                                 {tag}
@@ -427,7 +425,7 @@ export function Menu({
                               e.stopPropagation();
                               addToCart(item.name, item.price);
                             }}
-                            className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold bg-white/5 hover:bg-brand-gold hover:text-brand-dark px-2 sm:px-4 py-2 transition-all shrink-0"
+                            className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold bg-accent hover:bg-brand-gold hover:text-brand-dark px-2 sm:px-4 py-2 transition-all shrink-0"
                           >
                             Add
                             <span className="hidden sm:inline"> to Order</span>
@@ -443,11 +441,11 @@ export function Menu({
         </div>
 
         {/* Sticky CTAs / Bottom Ordering */}
-        <div className="mt-32 w-full bg-brand-surface p-10 border border-white/5 text-center">
-          <h3 className="font-space text-2xl text-white mb-4">
+        <div className="mt-32 w-full bg-brand-surface p-10 border border-border text-center">
+          <h3 className="font-space text-2xl text-ink mb-4">
             Ready to taste the heritage?
           </h3>
-          <p className="text-white/50 text-sm mb-8 font-light">
+          <p className="text-ink/50 text-sm mb-8 font-light">
             Order directly for island-wide home delivery or reserve a table.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -462,8 +460,8 @@ export function Menu({
             </button>
             <button
               type="button"
-              onClick={() => navigate("experience")}
-              className="bg-transparent border border-white/20 text-white px-10 py-4 text-xs uppercase tracking-widest font-bold hover:bg-white hover:text-brand-dark transition-colors"
+              onClick={() => router.push("/experience")}
+              className="bg-transparent border border-border text-ink px-10 py-4 text-xs uppercase tracking-widest font-bold hover:bg-cream hover:text-brand-dark transition-colors"
             >
               Reserve Table
             </button>
@@ -480,31 +478,33 @@ export function Menu({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedItem(null)}
-              className="absolute inset-0 bg-brand-dark/95 backdrop-blur-md"
+              className="absolute inset-0 bg-cream/95 backdrop-blur-md"
             ></motion.div>
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-4xl bg-brand-dark border border-white/10 shadow-2xl overflow-hidden z-10 flex flex-col md:flex-row max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-cream border border-border shadow-2xl overflow-hidden z-10 flex flex-col md:flex-row max-h-[90vh]"
             >
               <button
                 type="button"
                 onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 z-20 text-white hover:text-brand-gold bg-brand-dark/50 backdrop-blur-md rounded-full p-2 transition-colors"
+                className="absolute top-4 right-4 z-20 text-ink hover:text-brand-gold bg-cream/70 backdrop-blur-md rounded-full p-2 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
 
               {selectedItem.img && (
                 <div className="md:w-1/2 h-64 md:h-auto shrink-0 relative">
-                  <img
+                  <Image
+                    fill
                     src={selectedItem.img}
                     alt={selectedItem.name}
                     className="absolute inset-0 w-full h-full object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-brand-dark to-transparent opacity-60"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-cream to-transparent opacity-60"></div>
                 </div>
               )}
 
@@ -520,7 +520,7 @@ export function Menu({
                             ? "border-brand-gold/50 text-brand-gold bg-brand-gold/10"
                             : tag === "Spicy"
                               ? "border-red-500/50 text-red-400 bg-red-500/10"
-                              : "border-white/20 text-white/60 bg-white/5"
+                              : "border-border text-ink/60 bg-accent"
                       }`}
                     >
                       {tag}
@@ -528,14 +528,14 @@ export function Menu({
                   ))}
                 </div>
 
-                <h3 className="font-space text-3xl font-bold mb-2 text-white leading-tight">
+                <h3 className="font-space text-3xl font-bold mb-2 text-ink leading-tight">
                   {selectedItem.name}
                 </h3>
                 <p className="text-brand-gold font-bold text-2xl mb-6">
                   {selectedItem.price}
                 </p>
 
-                <p className="text-white/80 leading-relaxed mb-8 font-light text-base border-l-2 border-brand-gold/50 pl-4 py-1">
+                <p className="text-ink/80 leading-relaxed mb-8 font-light text-base border-l-2 border-brand-gold/50 pl-4 py-1">
                   "{selectedItem.desc}"
                 </p>
 
@@ -543,14 +543,14 @@ export function Menu({
                   {selectedItem.ingredients &&
                     selectedItem.ingredients.length > 0 && (
                       <div>
-                        <h4 className="text-[10px] uppercase tracking-widest font-bold text-white/40 mb-3 border-b border-white/10 pb-2">
+                        <h4 className="text-[10px] uppercase tracking-widest font-bold text-ink/40 mb-3 border-b border-border pb-2">
                           Key Ingredients
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedItem.ingredients.map((ing, i) => (
                             <span
                               key={i}
-                              className="text-sm text-white/70 bg-white/5 px-3 py-1.5 rounded-sm"
+                              className="text-sm text-ink/70 bg-accent px-3 py-1.5 rounded-sm"
                             >
                               {ing}
                             </span>
@@ -561,24 +561,24 @@ export function Menu({
 
                   {selectedItem.story && (
                     <div>
-                      <h4 className="text-[10px] uppercase tracking-widest font-bold text-white/40 mb-3 border-b border-white/10 pb-2">
+                      <h4 className="text-[10px] uppercase tracking-widest font-bold text-ink/40 mb-3 border-b border-border pb-2">
                         The Chef's Thought
                       </h4>
-                      <p className="text-sm text-white/60 leading-relaxed font-light italic">
+                      <p className="text-sm text-ink/60 leading-relaxed font-light italic">
                         {selectedItem.story}
                       </p>
                     </div>
                   )}
                 </div>
 
-                <div className="mt-10 pt-6 border-t border-white/10">
+                <div className="mt-10 pt-6 border-t border-border">
                   <button
                     type="button"
                     onClick={() => {
                       addToCart(selectedItem.name, selectedItem.price);
                       setSelectedItem(null);
                     }}
-                    className="w-full bg-brand-gold text-brand-dark px-6 py-4 flex items-center justify-center gap-3 text-xs uppercase tracking-widest font-bold hover:bg-white transition-colors"
+                    className="w-full bg-brand-gold text-brand-dark px-6 py-4 flex items-center justify-center gap-3 text-xs uppercase tracking-widest font-bold hover:bg-cream transition-colors"
                   >
                     Add to Order <Plus className="w-4 h-4" />
                   </button>
@@ -596,16 +596,16 @@ export function Menu({
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-0 inset-x-0 z-50 bg-brand-dark/95 backdrop-blur-xl border-t border-brand-gold/30 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]"
+            className="fixed bottom-0 inset-x-0 z-50 bg-cream/95 backdrop-blur-xl border-t border-brand-gold/30 shadow-[0_-16px_40px_rgba(44,38,33,0.14)]"
           >
             {isCartExpanded && (
-              <div className="container mx-auto px-6 py-6 border-b border-white/10 max-h-[60vh] overflow-y-auto">
+              <div className="container mx-auto px-6 py-6 border-b border-border max-h-[60vh] overflow-y-auto">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="font-space text-2xl text-white">Your Order</h3>
+                  <h3 className="font-space text-2xl text-ink">Your Order</h3>
                   <button
                     type="button"
                     onClick={() => setIsCartExpanded(false)}
-                    className="text-white/50 hover:text-white transition-colors"
+                    className="text-ink/50 hover:text-ink transition-colors"
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -617,28 +617,28 @@ export function Menu({
                       className="flex items-center justify-between gap-4"
                     >
                       <div className="flex-1">
-                        <h4 className="text-white text-sm font-medium">
+                        <h4 className="text-ink text-sm font-medium">
                           {item.name}
                         </h4>
-                        <span className="text-white/50 text-[10px] uppercase tracking-widest">
+                        <span className="text-ink/50 text-[10px] uppercase tracking-widest">
                           ${item.price.toFixed(2)} each
                         </span>
                       </div>
-                      <div className="flex items-center gap-4 bg-white/5 rounded-full px-3 py-1">
+                      <div className="flex items-center gap-4 bg-accent rounded-full px-3 py-1">
                         <button
                           type="button"
                           onClick={() => updateQty(item.name, -1)}
-                          className="text-white hover:text-brand-gold transition-colors"
+                          className="text-ink hover:text-brand-gold transition-colors"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="text-white font-mono text-sm w-4 text-center">
+                        <span className="text-ink font-mono text-sm w-4 text-center">
                           {item.qty}
                         </span>
                         <button
                           type="button"
                           onClick={() => updateQty(item.name, 1)}
-                          className="text-white hover:text-brand-gold transition-colors"
+                          className="text-ink hover:text-brand-gold transition-colors"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -649,8 +649,8 @@ export function Menu({
                     </div>
                   ))}
                 </div>
-                <div className="mt-8 pt-6 border-t border-white/10 flex justify-between items-center">
-                  <span className="text-white/50 uppercase tracking-widest text-xs font-bold">
+                <div className="mt-8 pt-6 border-t border-border flex justify-between items-center">
+                  <span className="text-ink/50 uppercase tracking-widest text-xs font-bold">
                     Subtotal
                   </span>
                   <span className="text-brand-gold font-space text-2xl font-bold">
@@ -667,22 +667,22 @@ export function Menu({
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <ShoppingBag className="w-6 h-6 sm:w-8 sm:h-8 text-brand-gold" />
-                  <span className="absolute -top-2 -right-2 bg-white text-brand-dark w-5 h-5 rounded-full text-[10px] sm:text-xs font-bold flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-card text-brand-dark w-5 h-5 rounded-full text-[10px] sm:text-xs font-bold flex items-center justify-center">
                     {cart.reduce((sum, item) => sum + item.qty, 0)}
                   </span>
                 </div>
                 <div className="hidden sm:block">
-                  <span className="block text-[10px] uppercase tracking-widest text-white/50 font-bold mb-1">
+                  <span className="block text-[10px] uppercase tracking-widest text-ink/50 font-bold mb-1">
                     Total Order
                   </span>
-                  <span className="block text-xl font-space font-bold text-white leading-none">
+                  <span className="block text-xl font-space font-bold text-ink leading-none">
                     ${totalAmount.toFixed(2)}
                   </span>
                 </div>
               </div>
 
               <div className="flex items-center gap-6">
-                <span className="text-white/50 hover:text-white transition-colors hidden sm:block">
+                <span className="text-ink/50 hover:text-ink transition-colors hidden sm:block">
                   {isCartExpanded ? (
                     <ChevronDown className="w-5 h-5" />
                   ) : (
@@ -693,9 +693,9 @@ export function Menu({
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate("checkout");
+                    router.push("/checkout");
                   }}
-                  className="bg-brand-gold text-brand-dark px-8 py-3 sm:px-10 sm:py-4 text-[10px] sm:text-xs uppercase tracking-widest font-bold hover:bg-white transition-colors"
+                  className="bg-brand-gold text-brand-dark px-8 py-3 sm:px-10 sm:py-4 text-[10px] sm:text-xs uppercase tracking-widest font-bold hover:bg-cream transition-colors"
                 >
                   Checkout
                 </button>

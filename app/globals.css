@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import "./theme/colors.css";
+@import "./theme/typography.css";
+
+:root {
+  --background: #faf8f5;
+  --foreground: #2c2621;
+  --card: #fffdfa;
+  --card-foreground: #2c2621;
+  --popover: #fffdfa;
+  --popover-foreground: #2c2621;
+  --primary: #c97228;
+  --primary-foreground: #faf8f5;
+  --secondary: #849079;
+  --secondary-foreground: #faf8f5;
+  --muted: #eee6dd;
+  --muted-foreground: #6f6257;
+  --accent: #f1e8de;
+  --accent-foreground: #2c2621;
+  --destructive: #c2410c;
+  --destructive-foreground: #faf8f5;
+  --border: #e3d6c8;
+  --input: #d8c8b8;
+  --ring: #c97228;
+  --radius: 0.5rem;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(201 114 40 / 0.55) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(201 114 40 / 0.55);
+  border-radius: 999px;
+}

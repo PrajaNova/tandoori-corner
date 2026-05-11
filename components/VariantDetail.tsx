@@ -36,7 +36,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
         <div
           className={`relative w-full h-[450px] border border-[#1A1A1A]/10 overflow-hidden ${variant.heroMockup.bgStyle} flex items-center`}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-cream/90 via-cream/60 to-transparent z-10" />
           <div className="relative z-20 p-12 max-w-2xl space-y-8">
             <h2
               className={`text-5xl leading-[1.05] ${variant.heroMockup.textClass} ${variant.heroMockup.heroFontClass}`}
@@ -132,7 +132,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
               {variant.typography.map((type) => (
                 <div
                   key={type.role}
-                  className="p-6 border border-[#1A1A1A]/10 bg-white"
+                  className="p-6 border border-[#1A1A1A]/10 bg-card"
                 >
                   <h4 className="text-[10px] text-[#1A1A1A]/50 uppercase tracking-widest font-bold">
                     {type.role}
@@ -156,7 +156,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
           The User Journey
         </h2>
         <div className="relative">
-          <div className="absolute left-[11px] top-4 bottom-4 w-px bg-[#1A1A1A]/10" />
+          <div className="absolute left-[11px] top-4 bottom-4 w-px bg-ink/10" />
           <div className="space-y-10">
             {variant.userJourney.map((step, idx) => {
               const [phase, ...descParts] = step.split(": ");
@@ -188,7 +188,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
           {variant.pageStructure.map((page) => (
             <div
               key={page.page}
-              className="p-8 border border-[#1A1A1A]/10 bg-white group hover:border-[#1A1A1A] transition-colors"
+              className="p-8 border border-[#1A1A1A]/10 bg-card group hover:border-primary hover:bg-primary hover:text-primary-foreground transition-colors"
             >
               <h3 className="text-xl font-serif italic text-[#1A1A1A] flex items-center justify-between">
                 {page.page}
@@ -216,7 +216,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
       <div className="pt-12 pb-16">
         <button
           type="button"
-          className="w-full py-5 bg-[#1A1A1A] text-white text-xs uppercase tracking-widest font-bold hover:bg-[#D97706] transition-colors flex items-center justify-center gap-3"
+          className="w-full py-5 bg-primary text-primary-foreground text-xs uppercase tracking-widest font-bold hover:bg-tandoori-dark transition-colors flex items-center justify-center gap-3"
         >
           Select {variant.name.split(": ")[0]}{" "}
           <ArrowRight className="w-4 h-4" />
