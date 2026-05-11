@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #2d2e2e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: #ef800d;
+  --color-brand-hover: #8e4c08;
+  --color-brand-soft: #fbb096;
+  --color-leaf: #749c07;
+  --color-leaf-light: #abcc37;
+  --color-curry: #eaa34c;
+  --color-gold: #f5bf2f;
+  --color-chili: #f54b0f;
+  --color-madison: #2d2e2e;
+  --color-ink: #212121;
+  --color-charcoal: #434345;
+  --color-muted: #888888;
+  --color-muted-light: #b1b1b1;
+  --color-line: #e5e5e5;
+  --color-section: #f6f7f8;
+  --color-cream: #fffaf2;
+  --color-warm-brown: #8a4a2e;
+  --color-info: #79ccf2;
+  --color-success: #abcc37;
+  --color-warning: #f5bf2f;
+  --color-danger: #f54b0f;
+  --font-sans: "Open Sans", Helvetica, Arial, sans-serif;
+  --font-serif: "Merriweather", "Times New Roman", Times, serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --text-hero: 4.5rem;
+  --text-display: 2.75rem;
+  --text-section: 1.875rem;
+  --text-lead: 1rem;
+  --radius-card: 0.3125rem;
+  --radius-image: 0.625rem;
+  --shadow-card: 0 4px 8px 0 rgb(0 0 0 / 18%);
+  --shadow-lifted: 0 4px 6px 0 rgb(0 0 0 / 20%);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.57143;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--foreground);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-brand);
+}
