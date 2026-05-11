@@ -176,10 +176,10 @@ export function ActionFooter() {
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
           <p>© Tandoori Corner Restaurant.</p>
           <div className="flex flex-wrap gap-4">
-            <a href="/#menu">Menu</a>
-            <a href="/#about">About</a>
-            <a href="/#gallery">Gallery</a>
-            <a href="/#contact">Contact</a>
+            <a href="/menu">Menu</a>
+            <a href="/about">About</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/contact">Contact</a>
           </div>
         </div>
       </div>

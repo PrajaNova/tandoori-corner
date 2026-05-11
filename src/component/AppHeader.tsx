@@ -22,10 +22,10 @@ import {
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Menu", href: "/#menu" },
-  { label: "About", href: "/#about" },
-  { label: "Gallery", href: "/#gallery" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Menu", href: "/menu" },
+  { label: "About", href: "/about" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const contactActions = [
@@ -46,7 +46,7 @@ const contactActions = [
   },
   {
     label: "Instagram",
-    href: "/#gallery",
+    href: "/gallery",
     icon: Camera,
   },
   {
@@ -231,7 +231,7 @@ export function AppHeader() {
               </SheetClose>
               <SheetClose asChild>
                 <Button asChild size="xl" variant="secondary">
-                  <a href="/#order">Order to Home</a>
+                  <a href="/menu">Order to Home</a>
                 </Button>
               </SheetClose>
             </div>
