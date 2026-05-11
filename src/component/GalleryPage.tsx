@@ -217,7 +217,7 @@ export function GalleryPage() {
               alfresco, and TCB assets as the fallback feed.
             </p>
             <Button asChild className="mt-7" variant="gold">
-              <a href="/#reserve">Book after browsing</a>
+              <a href="/reserve">Book after browsing</a>
             </Button>
           </div>
           <div className="grid grid-cols-3 gap-2">

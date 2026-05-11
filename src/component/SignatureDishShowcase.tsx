@@ -64,7 +64,7 @@ export function SignatureDishShowcase() {
             </p>
           </div>
           <Button asChild variant="gold" className="md:self-end">
-            <a href="/#order">Add to Online Order</a>
+            <a href="/menu">Add to Online Order</a>
           </Button>
         </div>
 
@@ -73,7 +73,7 @@ export function SignatureDishShowcase() {
             <a
               aria-label={`Add ${dish.name} to online order`}
               className={`group relative block overflow-hidden rounded-card bg-madison shadow-card outline-none ring-brand/30 transition focus-visible:ring-4 ${dish.className}`}
-              href="/#order"
+              href="/menu"
               key={dish.name}
             >
               <Image

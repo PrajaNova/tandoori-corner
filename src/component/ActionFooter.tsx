@@ -1,6 +1,7 @@
 import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/component/ui/button";
+import { restaurant } from "./site-data";
 
 const instagramImages = [
   "/dish-butter-chicken.jpg",
@@ -32,10 +33,6 @@ const faqs = [
 export function ActionFooter() {
   return (
     <footer id="contact" className="bg-madison text-white">
-      <div id="reserve" />
-      <div id="order" />
-      <div id="events" />
-
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr_0.95fr]">
           <section>
@@ -51,13 +48,13 @@ export function ActionFooter() {
                 className="h-72 w-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=400%20Balestier%20Road%20%2301-12%20Balestier%20Plaza%2C%20Singapore%20329802&output=embed"
+                src={restaurant.mapEmbed}
                 title="Tandoori Corner map"
               />
             </div>
             <address className="mt-5 flex gap-3 text-sm not-italic leading-6 text-white/75">
               <MapPin aria-hidden="true" className="mt-1 size-4 text-curry" />
-              400 Balestier Road #01-12 Balestier Plaza, Singapore 329802
+              {restaurant.address}
             </address>
           </section>
 
@@ -77,10 +74,10 @@ export function ActionFooter() {
                       Operating hours
                     </h3>
                     <p className="mt-3 text-sm leading-6 text-white/75">
-                      Mon-Sun: 12:00 PM to 2:45 PM, 6:00 PM to 9:45 PM
+                      {restaurant.hours}
                     </p>
                     <p className="mt-3 rounded-card bg-brand px-3 py-2 text-sm font-bold text-white">
-                      Closed between 2:45 PM and 6:00 PM
+                      {restaurant.closedNote}
                     </p>
                   </div>
                 </div>
@@ -88,14 +85,14 @@ export function ActionFooter() {
 
               <div className="grid gap-3">
                 <Button asChild variant="gold">
-                  <a href="tel:+6562500200">
+                  <a href={restaurant.phoneHref}>
                     <Phone aria-hidden="true" />
-                    Call 65-6250-0200
+                    Call {restaurant.phone}
                   </a>
                 </Button>
                 <Button asChild variant="secondary">
                   <a
-                    href="https://wa.me/6598627334"
+                    href={restaurant.whatsappHref}
                     rel="noreferrer"
                     target="_blank"
                   >
@@ -104,7 +101,7 @@ export function ActionFooter() {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="mailto:tandooricorner@singnet.com.sg">
+                  <a href={restaurant.emailHref}>
                     <Mail aria-hidden="true" />
                     Email us
                   </a>
@@ -157,7 +154,10 @@ export function ActionFooter() {
           </section>
         </div>
 
-        <div className="mt-10 grid gap-3 border-t border-white/10 pt-8 md:grid-cols-3">
+        <div
+          className="mt-10 grid gap-3 border-t border-white/10 pt-8 md:grid-cols-3"
+          id="faq"
+        >
           {faqs.map((faq) => (
             <details
               className="group rounded-card border border-white/10 bg-white/6 p-4"
@@ -173,13 +173,29 @@ export function ActionFooter() {
           ))}
         </div>
 
+        <div
+          className="mt-6 rounded-card border border-white/10 bg-white/6 p-5"
+          id="loyalty"
+        >
+          <h3 className="font-serif text-xl text-white">Login / loyalty</h3>
+          <p className="mt-2 text-sm leading-6 text-white/70">
+            Account login and loyalty rewards are intentionally moved out of the
+            main navigation so first-time visitors can focus on booking,
+            ordering, or planning TCB.
+          </p>
+        </div>
+
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
           <p>© Tandoori Corner Restaurant.</p>
           <div className="flex flex-wrap gap-4">
             <a href="/menu">Menu</a>
             <a href="/about">About</a>
             <a href="/gallery">Gallery</a>
+            <a href="/tcb">TCB Bar</a>
+            <a href="/reserve">Reserve</a>
             <a href="/contact">Contact</a>
+            <a href="/#faq">FAQ</a>
+            <a href="/#loyalty">Login / Loyalty</a>
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ export function HeroSection() {
 
         <div className="mt-9 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
           <Button asChild size="default" variant="gold" className="h-14 px-9">
-            <a href="/#reserve">Book Your Table</a>
+            <a href="/reserve">Book Your Table</a>
           </Button>
           <Button
             asChild
@@ -46,12 +46,12 @@ export function HeroSection() {
             variant="heroOutline"
             className="h-14 px-9"
           >
-            <a href="/#menu">Explore the Menu</a>
+            <a href="/menu">Explore the Menu</a>
           </Button>
         </div>
 
         <a
-          href="/#events"
+          href="/tcb"
           className="mt-6 text-sm font-semibold text-white/85 transition hover:text-curry"
         >
           Planning a private event? Book TCB -&gt;

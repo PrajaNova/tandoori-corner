@@ -79,7 +79,7 @@ export function VibeStudio() {
                 North Indian favourites, wine, and a relaxed balcony view.
               </p>
               <Button asChild className="mt-6" variant="gold">
-                <a href="/#reserve">Book an alfresco table</a>
+                <a href="/reserve">Book an alfresco table</a>
               </Button>
             </div>
           </article>
@@ -105,7 +105,7 @@ export function VibeStudio() {
                 for private events, wine pairing, cocktails, and celebrations.
               </p>
               <Button asChild className="mt-6" variant="outline">
-                <a href="/#events">Plan a private event</a>
+                <a href="/tcb">Plan a private event</a>
               </Button>
             </div>
           </article>

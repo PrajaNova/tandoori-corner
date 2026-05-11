@@ -2,6 +2,7 @@
 
 import {
   Camera,
+  Leaf,
   Mail,
   MapPin,
   Menu,
@@ -11,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/component/ui/button";
 import {
@@ -22,10 +24,11 @@ import {
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { label: "Our Story", href: "/about" },
   { label: "Menu", href: "/menu" },
-  { label: "About", href: "/about" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Contact", href: "/contact" },
+  { label: "Vibe & Gallery", href: "/gallery" },
+  { label: "Promos", href: "/#promos" },
+  { label: "TCB Bar", href: "/tcb" },
 ];
 
 const contactActions = [
@@ -79,6 +82,8 @@ function BrandLogo({ onClick }: { onClick?: () => void }) {
 export function AppHeader() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [dietMode, setDietMode] = useState<"all" | "veg" | "vegan">("all");
+  const pathname = usePathname();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -107,7 +112,7 @@ export function AppHeader() {
             : "-translate-y-full lg:translate-y-0",
         )}
       >
-        <div className="bg-brand/95 text-white shadow-lifted backdrop-blur">
+        <div className="bg-charcoal/95 text-white shadow-lifted backdrop-blur">
           <div className="mx-auto flex min-h-9 max-w-7xl items-center justify-between gap-4 px-5 py-2 text-xs font-semibold sm:px-8 lg:px-12">
             <a
               href="https://goo.gl/maps/3vm1gJyvuESZv6Lh8"
@@ -145,30 +150,76 @@ export function AppHeader() {
           </div>
         </div>
 
-        <div className="border-b border-white/10 bg-gradient-to-b from-madison/55 via-madison/25 to-transparent backdrop-blur-[2px]">
+        <div className="border-b border-white/10 bg-gradient-to-b from-madison/90 via-madison/70 to-madison/25 backdrop-blur-md">
           <div className="mx-auto flex h-20 max-w-7xl items-center px-5 sm:px-8 lg:h-24 lg:px-12">
             <div className="flex flex-1 items-center justify-start">
               <BrandLogo />
             </div>
 
-            <div className="flex flex-1 items-center justify-end gap-7">
+            <div className="flex flex-[2] items-center justify-end gap-5">
               <nav
                 aria-label="Primary navigation"
-                className="hidden items-center gap-8 lg:flex"
+                className="hidden items-center gap-6 xl:flex"
               >
-                {navLinks.map((link) => (
-                  <a
-                    href={link.href}
-                    key={link.label}
-                    className="text-sm font-bold uppercase tracking-[0.12em] text-white/80 transition hover:text-curry"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {navLinks.map((link) => {
+                  const isActive =
+                    link.href !== "/" && pathname.startsWith(link.href);
+
+                  return (
+                    <a
+                      href={link.href}
+                      key={link.label}
+                      className={cn(
+                        "text-xs font-bold uppercase tracking-[0.12em] text-white/75 transition hover:text-curry",
+                        isActive && "text-curry",
+                      )}
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })}
               </nav>
 
+              <div className="hidden items-center gap-1 rounded-card border border-white/10 bg-white/6 p-1 lg:flex">
+                {[
+                  ["all", "All"],
+                  ["veg", "Veg"],
+                  ["vegan", "Vegan"],
+                ].map(([value, label]) => (
+                  <button
+                    aria-pressed={dietMode === value}
+                    className={cn(
+                      "inline-flex h-9 items-center gap-1 rounded-card px-3 text-xs font-black uppercase tracking-[0.08em] transition",
+                      dietMode === value
+                        ? "bg-brand text-madison"
+                        : "text-white/70 hover:text-curry",
+                    )}
+                    key={value}
+                    onClick={() => setDietMode(value as typeof dietMode)}
+                    type="button"
+                  >
+                    {value !== "all" ? (
+                      <Leaf aria-hidden="true" className="size-3" />
+                    ) : null}
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              <Button
+                asChild
+                className="hidden lg:inline-flex"
+                variant="outline"
+              >
+                <a data-gtm-event="order_click" href="/menu">
+                  Order Online
+                </a>
+              </Button>
+
               <Button asChild className="hidden lg:inline-flex" variant="gold">
-                <a href="/#reserve">Book Now</a>
+                <a data-gtm-event="reserve_click" href="/reserve">
+                  Reserve a Table
+                </a>
               </Button>
 
               <SheetTrigger asChild>
@@ -226,7 +277,7 @@ export function AppHeader() {
             <div className="grid grid-cols-2 gap-3">
               <SheetClose asChild>
                 <Button asChild size="xl">
-                  <a href="/#reserve">Dine With Us</a>
+                  <a href="/reserve">Dine With Us</a>
                 </Button>
               </SheetClose>
               <SheetClose asChild>

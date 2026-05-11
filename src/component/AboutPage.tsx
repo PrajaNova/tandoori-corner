@@ -109,7 +109,7 @@ export function AboutPage() {
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="gold">
-              <a href="/#reserve">Reserve Your Table</a>
+              <a href="/reserve">Reserve Your Table</a>
             </Button>
             <Button asChild variant="heroOutline">
               <a href="/menu">Explore the Menu</a>
@@ -220,10 +220,10 @@ export function AboutPage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="gold">
-                <a href="/#events">Book TCB</a>
+                <a href="/tcb">Book TCB</a>
               </Button>
               <Button asChild variant="secondary">
-                <a href="/#reserve">Plan Dinner</a>
+                <a href="/reserve">Plan Dinner</a>
               </Button>
             </div>
           </div>
@@ -326,7 +326,7 @@ export function AboutPage() {
             </p>
           </div>
           <Button asChild variant="gold">
-            <a href="/#reserve">Reserve Your Table</a>
+            <a href="/reserve">Reserve Your Table</a>
           </Button>
         </div>
       </section>
