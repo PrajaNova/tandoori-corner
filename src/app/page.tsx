@@ -1,13 +1,5 @@
-import { ActionFooter } from "@/component/ActionFooter";
-import { AppHeader } from "@/component/AppHeader";
-import { SplitPersonaHome } from "@/component/SplitPersonaHome";
+import App from "../App";
 
-export default function Home() {
-  return (
-    <>
-      <AppHeader />
-      <SplitPersonaHome />
-      <ActionFooter />
-    </>
-  );
+export default function HomePage() {
+  return <App />;
 }
