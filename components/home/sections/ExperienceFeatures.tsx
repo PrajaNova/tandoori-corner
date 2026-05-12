@@ -1,42 +1,55 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Bike,
+  ChefHat,
+  PawPrint,
+  ShoppingBag,
+  SquareParking,
+  Utensils,
+  Wine,
+} from "lucide-react";
 
-const features = [
+const experienceItems = [
   {
-    description:
-      "Outdoor dining with vibrant views over the Balestier heritage trail. Perfect for brunch or sunset dinners.",
-    title: "Pet-Friendly Alfresco",
+    icon: PawPrint,
+    label: "Pet-Friendly Alfresco",
   },
   {
-    description:
-      "A stylish indoor sanctuary designed for romantic dates, small groups, and exclusive private event nights.",
-    title: "The TCB Bar",
+    icon: Wine,
+    label: "The TCB Bar",
   },
   {
-    description:
-      "Stress-free arrival with ample, easily accessible parking available directly at Balestier Plaza.",
-    title: "Plenty of Parking",
+    icon: SquareParking,
+    label: "Plenty of Parking",
   },
+  { icon: Utensils, label: "Dine-In" },
+  { icon: ShoppingBag, label: "Take Away" },
+  { icon: Bike, label: "Home Delivery" },
+  { icon: ChefHat, label: "Catering" },
 ];
 
 export function ExperienceFeatures() {
   return (
-    <section className="bg-cream border-b border-border relative z-20">
-      <div className="container mx-auto grid grid-cols-1 gap-4 px-6 py-12 md:grid-cols-3">
-        {features.map((feature) => (
-          <Card
-            className="border-border bg-card text-center shadow-none"
-            key={feature.title}
-          >
-            <CardHeader className="pb-3">
-              <h3 className="font-space text-xl text-ink">{feature.title}</h3>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm font-light leading-relaxed text-muted-foreground">
-                {feature.description}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
+    <section className="relative z-20 border-b border-border bg-cream">
+      <div className="container mx-auto px-6 py-8 lg:px-12">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-7">
+          {experienceItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <div
+                className="group flex flex-col items-center text-center"
+                key={item.label}
+              >
+                <div className="mb-2 flex h-12 w-12 items-center justify-center text-leaf transition-transform duration-500 group-hover:scale-110">
+                  <Icon className="h-8 w-8" strokeWidth={1.5} />
+                </div>
+                <h3 className="font-space text-lg leading-tight text-brand-dark">
+                  {item.label}
+                </h3>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
