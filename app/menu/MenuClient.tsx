@@ -632,7 +632,7 @@ export function MenuClient() {
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="text-ink font-mono text-sm w-4 text-center">
+                        <span className="text-ink font-sans text-sm w-4 text-center">
                           {item.qty}
                         </span>
                         <button

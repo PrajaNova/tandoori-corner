@@ -1,6 +1,8 @@
 @theme {
-  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: Merriweather, Georgia, serif;
-  --font-serif: Merriweather, Georgia, serif;
-  --font-space: Merriweather, Georgia, serif;
+  --font-sans: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Great Vibes", cursive;
+  --font-heading: "Kaushan Script", cursive;
+  --font-serif: "Kaushan Script", cursive;
+  --font-space: "Kaushan Script", cursive;
+  --font-mono: "Raleway", ui-sans-serif, system-ui, sans-serif;
 }

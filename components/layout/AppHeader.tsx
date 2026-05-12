@@ -51,7 +51,7 @@ export function AppHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-sm uppercase tracking-widest font-semibold transition-colors ${
+                  className={`font-space text-lg tracking-normal transition-colors ${
                     isActive
                       ? "text-primary"
                       : "text-foreground/90 hover:text-primary"
@@ -61,7 +61,11 @@ export function AppHeader() {
                 </Link>
               );
             })}
-            <ButtonLink href="/experience" size="default">
+            <ButtonLink
+              className="font-space text-base normal-case tracking-normal"
+              href="/experience"
+              size="default"
+            >
               Experience
             </ButtonLink>
           </div>
@@ -104,7 +108,7 @@ export function AppHeader() {
             <ButtonLink
               href="/experience"
               onClick={closeMobileMenu}
-              className="mt-4"
+              className="mt-4 font-space text-lg normal-case tracking-normal"
               size="lg"
             >
               Experience
