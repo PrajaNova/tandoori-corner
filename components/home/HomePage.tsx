@@ -2,6 +2,7 @@ import { AppShell } from "../layout/AppShell";
 import { CulinaryCorners } from "./sections/CulinaryCorners";
 import { DailyOffersSection } from "./sections/DailyOffersSection";
 import { ExperienceFeatures } from "./sections/ExperienceFeatures";
+import { GoogleReviewsSection } from "./sections/GoogleReviewsSection";
 import { HeritageSection } from "./sections/HeritageSection";
 import { HeroSection } from "./sections/HeroSection";
 import { ServicesSection } from "./sections/ServicesSection";
@@ -15,6 +16,7 @@ export function HomePage() {
       <ExperienceFeatures />
       <HeritageSection />
       <CulinaryCorners />
+      <GoogleReviewsSection />
       <ServicesSection />
       <TcbSpotlight />
       <DailyOffersSection />
