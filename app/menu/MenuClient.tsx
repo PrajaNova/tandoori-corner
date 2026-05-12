@@ -24,6 +24,8 @@ export function MenuClient() {
   const router = useRouter();
   const { addToCart, cart, updateQty } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategoryTitle, setActiveCategoryTitle] =
+    useState("Chef's Signatures");
   const [isCartExpanded, setIsCartExpanded] = useState(false);
   const [selectedItem, setSelectedItem] = useState<{
     name: string;
@@ -244,90 +246,102 @@ export function MenuClient() {
     },
   ];
 
-  const filteredCategories = menuCategories
-    .map((cat) => ({
-      ...cat,
-      items: cat.items.filter(
-        (item) =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.tags.some((tag) =>
-            tag.toLowerCase().includes(searchQuery.toLowerCase()),
-          ),
+  const activeCategory =
+    menuCategories.find((category) => category.title === activeCategoryTitle) ??
+    menuCategories[0];
+  const filteredItems = activeCategory.items.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.tags.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase()),
       ),
-    }))
-    .filter((cat) => cat.items.length > 0);
+  );
 
   const totalAmount = cart.reduce(
     (sum, item) => sum + item.price * item.qty,
     0,
   );
+  const getItemQty = (name: string) =>
+    cart.find((cartItem) => cartItem.name === name)?.qty ?? 0;
 
   return (
-    <div className="pt-24 pb-32 sm:pt-28 sm:pb-40 bg-cream min-h-screen relative">
-      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
-        {/* Menu Header */}
-        <div className="text-center mb-10 sm:mb-16">
-          <span className="text-brand-gold font-sans tracking-[0.22em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs mb-3 sm:mb-4 block font-bold">
-            DIGITAL MENU
-          </span>
-          <h1 className="font-space text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-ink leading-tight">
-            An Elevated <br /> Culinary Journey.
+    <div className="pt-20 pb-32 sm:pt-24 sm:pb-40 bg-cream min-h-screen relative">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="mb-8 text-center">
+          <p className="mb-1 font-script text-3xl leading-none text-brand-gold sm:text-4xl">
+            Taste life
+          </p>
+          <h1 className="font-space text-4xl leading-tight text-ink sm:text-5xl md:text-6xl">
+            Discover Our Menu
           </h1>
-          <p className="text-sm sm:text-lg text-ink/60 font-light leading-relaxed max-w-2xl mx-auto">
-            From the sizzling heat of our 15-year-old Tandoor to the velvety
-            depths of our 24-hour slow-cooked curries. All dishes are prepared
-            with authentic North Indian heritage.
+          <div
+            aria-hidden="true"
+            className="my-4 flex items-center justify-center gap-2 text-brand-gold"
+          >
+            <span className="h-px w-7 bg-current" />
+            <span className="font-script text-3xl leading-none">TC</span>
+            <span className="h-px w-7 bg-current" />
+          </div>
+          <p className="mx-auto max-w-2xl text-sm font-light leading-7 text-ink/60 sm:text-base">
+            Explore smoky tandoor plates, slow-cooked curries, vegetarian
+            favourites, breads, and rice from our North Indian kitchen.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-6 sm:mt-8">
-            <span
-              onClick={() => setSearchQuery("Vegetarian")}
-              className="border border-border px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-ink/80 hover:bg-accent cursor-pointer"
-            >
-              Vegetarian Friendly
-            </span>
-            <span
-              onClick={() => setSearchQuery("Vegan")}
-              className="border border-border px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-ink/80 hover:bg-accent cursor-pointer"
-            >
-              Vegan Options
-            </span>
-            <span
-              onClick={() => setSearchQuery("Signature")}
-              className="border border-border px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-tandoori hover:bg-accent cursor-pointer"
-            >
-              Signatures
-            </span>
+          <div className="mt-8 flex flex-col gap-4 text-left lg:flex-row lg:items-end lg:justify-between">
+            <div className="w-full lg:max-w-sm">
+              <div className="group relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                  <Search className="h-4 w-4 text-ink/35 transition-colors group-focus-within:text-brand-gold" />
+                </div>
+                <input
+                  type="text"
+                  className="block h-10 w-full border border-border bg-cream pl-10 pr-9 text-sm text-ink placeholder-muted-foreground/45 transition-colors focus:border-brand-gold focus:outline-none"
+                  placeholder="Search our menu..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-ink/40 transition-colors hover:text-ink"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end">
+              {menuCategories.map((category) => {
+                const isActive = category.title === activeCategoryTitle;
+
+                return (
+                  <button
+                    key={category.title}
+                    type="button"
+                    onClick={() => {
+                      setActiveCategoryTitle(category.title);
+                      setSearchQuery("");
+                    }}
+                    className={`border-b-2 px-0.5 pb-2 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors sm:text-xs ${
+                      isActive
+                        ? "border-brand-gold text-brand-gold"
+                        : "border-transparent text-ink/70 hover:text-brand-gold"
+                    }`}
+                  >
+                    {category.title.replace("The ", "").replace(" Corner", "")}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="relative max-w-2xl mx-auto mb-12 sm:mb-20 group">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-ink/40 group-focus-within:text-brand-gold transition-colors" />
-          </div>
-          <input
-            type="text"
-            className="block w-full pl-12 pr-4 py-3.5 sm:py-4 bg-cream border border-border text-ink placeholder-muted-foreground/50 focus:outline-none focus:border-brand-gold transition-colors"
-            placeholder="Search our menu..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={() => setSearchQuery("")}
-              className="absolute inset-y-0 right-0 pr-4 flex items-center text-ink/40 hover:text-ink transition-colors"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          )}
-        </div>
-
-        {/* Categories */}
-        <div className="space-y-12 sm:space-y-20 md:space-y-24">
-          {filteredCategories.length === 0 ? (
+        {/* Active Category */}
+        <div>
+          {filteredItems.length === 0 ? (
             <div className="text-center text-ink/50 py-20 border border-border">
               <p className="text-lg mb-2">
                 No items found matching "{searchQuery}"
@@ -341,102 +355,110 @@ export function MenuClient() {
               </button>
             </div>
           ) : (
-            filteredCategories.map((category, catIdx) => (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                key={catIdx}
-                className="relative"
-              >
-                {/* Category Header */}
-                <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-10 border-b border-border pb-3 sm:pb-4">
-                  <div className="[&_svg]:w-5 [&_svg]:h-5 sm:[&_svg]:w-6 sm:[&_svg]:h-6">
-                    {category.icon}
-                  </div>
-                  <div>
-                    <h2 className="font-space text-2xl sm:text-3xl text-ink">
-                      {category.title}
-                    </h2>
-                    <p className="text-brand-gold/80 text-[10px] sm:text-xs uppercase tracking-widest font-medium mt-1">
-                      {category.subtitle}
-                    </p>
-                  </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+              key={activeCategory.title}
+              className="relative"
+            >
+              <div className="mb-5 flex items-center gap-3 border-b border-border pb-4 sm:mb-6">
+                <div className="[&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6">
+                  {activeCategory.icon}
                 </div>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-left">
+                  <h2 className="font-space text-2xl text-ink sm:text-3xl">
+                    {activeCategory.title}
+                  </h2>
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-brand-gold/80 sm:text-xs">
+                    {activeCategory.subtitle}
+                  </p>
+                </div>
+              </div>
 
-                {/* Items Grid */}
-                <div className="grid grid-cols-2 gap-3 sm:gap-8 lg:gap-12">
-                  {category.items.map((item, itemIdx) => (
-                    <div
-                      key={itemIdx}
-                      onClick={() => setSelectedItem(item)}
-                      className="flex flex-col group border border-border bg-card hover:border-primary hover:bg-primary hover:text-primary-foreground transition-colors p-0 cursor-pointer overflow-hidden rounded-sm"
-                    >
-                      {/* Visual Eye Magnet Technique for Signatures */}
-                      {item.img && (
-                        <div className="w-full h-24 sm:h-56 overflow-hidden relative">
-                          <Image
-                            fill
-                            src={item.img}
-                            alt={item.name}
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                            sizes="(max-width: 640px) 50vw, 33vw"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-cream to-transparent opacity-80"></div>
-                          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-1 sm:gap-3">
-                            <h3 className="font-space text-sm sm:text-2xl text-ink drop-shadow-md leading-tight line-clamp-2">
-                              {item.name}
-                            </h3>
-                            <span className="self-start sm:self-auto font-sans text-brand-gold font-bold text-xs sm:text-lg shrink-0 drop-shadow-md bg-cream/70 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded">
-                              {item.price}
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {filteredItems.map((item, itemIdx) => (
+                  <article
+                    key={itemIdx}
+                    onClick={() => setSelectedItem(item)}
+                    className="group flex min-h-32 cursor-pointer overflow-hidden border border-border bg-card transition-colors hover:border-primary"
+                  >
+                    {item.img && (
+                      <div className="relative w-28 shrink-0 overflow-hidden sm:w-32">
+                        <Image
+                          fill
+                          src={item.img}
+                          alt={item.name}
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          sizes="(max-width: 640px) 112px, 128px"
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex min-w-0 flex-1 flex-col p-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <h3 className="line-clamp-2 font-sans text-sm font-semibold leading-snug text-ink sm:text-base">
+                          {item.name}
+                        </h3>
+                        <span className="shrink-0 text-xs font-bold text-brand-gold">
+                          {item.price}
+                        </span>
+                      </div>
+
+                      <p className="mt-2 line-clamp-2 text-xs font-light leading-relaxed text-ink/55">
+                        {(item.ingredients?.slice(0, 5) ?? item.tags).join(
+                          ", ",
+                        )}
+                      </p>
+
+                      <div className="relative z-10 mt-auto flex items-center justify-end pt-3">
+                        {getItemQty(item.name) > 0 ? (
+                          <div className="flex shrink-0 items-center gap-2 rounded-full bg-accent px-2 py-1">
+                            <button
+                              type="button"
+                              aria-label={`Remove one ${item.name}`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                updateQty(item.name, -1);
+                              }}
+                              className="flex h-7 w-7 items-center justify-center rounded-full text-ink transition-colors hover:bg-card hover:text-brand-gold"
+                            >
+                              <Minus className="h-3.5 w-3.5" />
+                            </button>
+                            <span className="w-5 text-center text-sm font-bold text-ink">
+                              {getItemQty(item.name)}
                             </span>
+                            <button
+                              type="button"
+                              aria-label={`Add one ${item.name}`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                updateQty(item.name, 1);
+                              }}
+                              className="flex h-7 w-7 items-center justify-center rounded-full text-ink transition-colors hover:bg-card hover:text-brand-gold"
+                            >
+                              <Plus className="h-3.5 w-3.5" />
+                            </button>
                           </div>
-                        </div>
-                      )}
-
-                      <div className="flex-1 flex flex-col p-3 sm:p-6 sm:pt-4">
-                        <p className="text-ink/50 text-[11px] sm:text-sm leading-relaxed mb-3 sm:mb-6 font-light flex-1 line-clamp-2 sm:line-clamp-3 transition-colors group-hover:text-primary-foreground/80">
-                          {item.desc}
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mt-auto pt-2.5 sm:pt-4 border-t border-border relative z-10 transition-colors group-hover:border-primary-foreground/30">
-                          <div className="flex flex-wrap gap-1 sm:gap-2">
-                            {item.tags.slice(0, 1).map((tag, tIdx) => (
-                              <span
-                                key={tIdx}
-                                className={`text-[7px] sm:text-[9px] uppercase tracking-widest px-1.5 sm:px-2 py-1 border ${
-                                  tag === "Vegetarian" || tag === "Vegan"
-                                    ? "border-emerald-500/30 text-emerald-400"
-                                    : tag === "Signature"
-                                      ? "border-brand-gold/30 text-brand-gold"
-                                      : tag === "Spicy"
-                                        ? "border-red-500/30 text-red-400"
-                                        : "border-border text-ink/40"
-                                }`}
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
+                        ) : (
                           <button
                             type="button"
+                            aria-label={`Add ${item.name} to order`}
                             onClick={(e) => {
                               e.stopPropagation();
                               addToCart(item.name, item.price);
                             }}
-                            className="text-[8px] sm:text-[10px] uppercase tracking-widest font-bold bg-accent hover:bg-brand-gold hover:text-brand-dark px-2 sm:px-4 py-2 transition-all shrink-0"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-gold text-brand-dark transition-colors hover:bg-ink hover:text-cream"
                           >
-                            Add
-                            <span className="hidden sm:inline"> to Order</span>
+                            <ShoppingBag className="h-4 w-4" />
                           </button>
-                        </div>
+                        )}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))
+                  </article>
+                ))}
+              </div>
+            </motion.div>
           )}
         </div>
 
@@ -572,16 +594,44 @@ export function MenuClient() {
                 </div>
 
                 <div className="mt-10 pt-6 border-t border-border">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      addToCart(selectedItem.name, selectedItem.price);
-                      setSelectedItem(null);
-                    }}
-                    className="w-full bg-brand-gold text-brand-dark px-6 py-4 flex items-center justify-center gap-3 text-xs uppercase tracking-widest font-bold hover:bg-cream transition-colors"
-                  >
-                    Add to Order <Plus className="w-4 h-4" />
-                  </button>
+                  {getItemQty(selectedItem.name) > 0 ? (
+                    <div className="flex items-center justify-between gap-4 bg-accent px-4 py-3">
+                      <button
+                        type="button"
+                        onClick={() => updateQty(selectedItem.name, -1)}
+                        className="flex h-11 w-11 items-center justify-center bg-card text-ink transition-colors hover:bg-brand-gold hover:text-brand-dark"
+                        aria-label={`Remove one ${selectedItem.name}`}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </button>
+                      <div className="text-center">
+                        <span className="block text-[10px] font-bold uppercase tracking-widest text-ink/50">
+                          In your order
+                        </span>
+                        <span className="font-space text-2xl text-ink">
+                          {getItemQty(selectedItem.name)}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => updateQty(selectedItem.name, 1)}
+                        className="flex h-11 w-11 items-center justify-center bg-card text-ink transition-colors hover:bg-brand-gold hover:text-brand-dark"
+                        aria-label={`Add one ${selectedItem.name}`}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        addToCart(selectedItem.name, selectedItem.price)
+                      }
+                      className="w-full bg-brand-gold text-brand-dark px-6 py-4 flex items-center justify-center gap-3 text-xs uppercase tracking-widest font-bold hover:bg-cream transition-colors"
+                    >
+                      Add to Order <Plus className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -632,7 +682,7 @@ export function MenuClient() {
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="text-ink font-mono text-sm w-4 text-center">
+                        <span className="text-ink font-sans text-sm w-4 text-center">
                           {item.qty}
                         </span>
                         <button

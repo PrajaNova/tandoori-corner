@@ -1,9 +1,6 @@
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 import { culinaryCorners } from "../home-content";
 
@@ -11,61 +8,64 @@ export function CulinaryCorners() {
   return (
     <section
       id="culinary-corners"
-      className="py-14 sm:py-20 md:py-32 bg-brand-surface relative overflow-hidden"
+      className="bg-background py-16 sm:py-24 md:py-32 border-b border-border bg-cream"
     >
-      <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10 text-center mb-8 sm:mb-12 md:mb-16">
-        <h2 className="font-space text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-          Our Culinary Corners
-        </h2>
-        <p className="text-ink/60 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
-          From the sizzling heat of the Tandoor to the rich depths of our
-          signature Curries. Real food, tailored for alfresco evenings and
-          stylish nights out.
-        </p>
-      </div>
-
-      <div className="container mx-auto px-5 sm:px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 md:gap-8 relative z-10">
-        {culinaryCorners.map((item) => (
-          <Card
-            key={item.title}
-            className="group overflow-hidden border-border bg-card p-4 shadow-none transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground sm:p-6 md:p-8"
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+          <p className="mb-2 font-script text-3xl text-brand-gold sm:text-4xl">
+            Hello dear
+          </p>
+          <h2 className="mb-4 font-space text-4xl leading-tight text-ink sm:text-5xl md:text-6xl">
+            Our Culinary Corners
+          </h2>
+          <div
+            aria-hidden="true"
+            className="mb-6 flex items-center justify-center gap-2 text-brand-gold"
           >
-            <div className="mb-4 sm:mb-6 md:mb-8 overflow-hidden relative h-28 sm:h-40 md:h-48 border border-border transition-colors group-hover:border-primary-foreground/30">
-              <Image
-                fill
-                src={item.img}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-              />
-            </div>
-            <CardContent className="p-0">
-              <Badge
-                className="mb-2 transition-colors group-hover:border-primary-foreground/40 group-hover:text-primary-foreground sm:mb-3"
-                variant="outline"
-              >
-                {item.tag}
-              </Badge>
-              <h3 className="font-space text-xl sm:text-2xl mb-2 sm:mb-4">
+            <span className="h-px w-7 bg-current" />
+            <span className="font-script text-3xl leading-none">TC</span>
+            <span className="h-px w-7 bg-current" />
+          </div>
+          <p className="mx-auto max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+            From the sizzling heat of the Tandoor to the rich depths of our
+            signature Curries. Real food, tailored for alfresco evenings and
+            stylish nights out.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+          {culinaryCorners.map((item) => (
+            <article key={item.title} className="group text-center">
+              <div className="relative mb-7 aspect-[3/2] overflow-hidden bg-muted">
+                <Image
+                  fill
+                  src={item.img}
+                  alt={item.title}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+                <p className="absolute inset-x-4 bottom-4 font-script text-3xl leading-none text-white drop-shadow-sm sm:text-4xl">
+                  {item.tag}
+                </p>
+              </div>
+              <h3 className="mb-4 font-space text-3xl leading-tight text-ink sm:text-4xl">
                 {item.title}
               </h3>
-              <p className="text-xs leading-relaxed text-muted-foreground transition-colors group-hover:text-primary-foreground/80 sm:text-sm line-clamp-2 sm:line-clamp-none">
+              <p className="mx-auto mb-7 max-w-sm text-sm leading-7 text-muted-foreground">
                 {item.desc}
               </p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-      <div className="text-center mt-8 sm:mt-12">
-        <ButtonLink
-          href="/menu"
-          className="group text-sm"
-          size="lg"
-          variant="outline"
-        >
-          View Full Digital Menu
-          <ArrowRight className="w-4 h-4 opacity-0 -translate-x-1 transition-all group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100" />
-        </ButtonLink>
+              <ButtonLink
+                className="h-12 min-w-36 border-ink px-8 text-[11px] text-ink hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                href="/menu"
+                size="default"
+                variant="outline"
+              >
+                Read more
+              </ButtonLink>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

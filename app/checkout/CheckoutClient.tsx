@@ -222,7 +222,7 @@ export function CheckoutClient() {
                     <input
                       required
                       type="text"
-                      className="w-full bg-transparent border-b border-border pb-2 text-ink font-mono focus:border-brand-gold focus:outline-none transition-colors"
+                      className="w-full bg-transparent border-b border-border pb-2 text-ink font-sans focus:border-brand-gold focus:outline-none transition-colors"
                       placeholder="0000 0000 0000 0000"
                     />
                   </div>
@@ -235,7 +235,7 @@ export function CheckoutClient() {
                       <input
                         required
                         type="text"
-                        className="w-full bg-transparent border-b border-border pb-2 text-ink font-mono focus:border-brand-gold focus:outline-none transition-colors"
+                        className="w-full bg-transparent border-b border-border pb-2 text-ink font-sans focus:border-brand-gold focus:outline-none transition-colors"
                         placeholder="MM/YY"
                       />
                     </div>
@@ -246,7 +246,7 @@ export function CheckoutClient() {
                       <input
                         required
                         type="text"
-                        className="w-full bg-transparent border-b border-border pb-2 text-ink font-mono focus:border-brand-gold focus:outline-none transition-colors"
+                        className="w-full bg-transparent border-b border-border pb-2 text-ink font-sans focus:border-brand-gold focus:outline-none transition-colors"
                         placeholder="123"
                       />
                     </div>
@@ -273,7 +273,7 @@ export function CheckoutClient() {
               <div className="space-y-6 mb-8 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
                 {cart.map((item, idx) => (
                   <div key={idx} className="flex gap-4 items-start">
-                    <div className="w-8 h-8 bg-accent rounded flex items-center justify-center text-brand-gold font-mono text-xs shrink-0 mt-1">
+                    <div className="w-8 h-8 bg-accent rounded flex items-center justify-center text-brand-gold font-sans text-xs shrink-0 mt-1">
                       {item.qty}x
                     </div>
                     <div className="flex-1">

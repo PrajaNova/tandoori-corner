@@ -20,7 +20,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
     >
       {/* Header */}
       <header className="space-y-6">
-        <h1 className="text-6xl font-serif italic leading-[1.05] tracking-tighter text-[#1A1A1A]">
+        <h1 className="text-6xl font-space leading-[1.05] tracking-tighter text-[#1A1A1A]">
           {variant.name}
         </h1>
         <p className="text-lg leading-relaxed text-[#4A4A4A] max-w-3xl">
@@ -73,7 +73,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
       {/* Strategy Grid */}
       <div className="grid md:grid-cols-2 gap-12 pt-8 border-t border-[#1A1A1A]/10">
         <div className="space-y-6">
-          <h2 className="text-3xl font-serif italic text-[#1A1A1A]">
+          <h2 className="text-3xl font-space text-[#1A1A1A]">
             Strategic Focus
           </h2>
           <p className="text-[#4A4A4A] leading-relaxed text-lg">
@@ -81,7 +81,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
           </p>
         </div>
         <div className="space-y-6">
-          <h2 className="text-3xl font-serif italic text-[#1A1A1A]">
+          <h2 className="text-3xl font-space text-[#1A1A1A]">
             Business Impact
           </h2>
           <div className="p-8 bg-[#FAF9F6] border border-[#1A1A1A]/10">
@@ -94,9 +94,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
 
       {/* Design System */}
       <section className="space-y-8 pt-8 border-t border-[#1A1A1A]/10">
-        <h2 className="text-3xl font-serif italic text-[#1A1A1A]">
-          Design System
-        </h2>
+        <h2 className="text-3xl font-space text-[#1A1A1A]">Design System</h2>
         <div className="grid md:grid-cols-2 gap-12">
           {/* Colors */}
           <div className="space-y-8">
@@ -114,7 +112,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
                     <p className="font-bold text-[#1A1A1A] text-xs uppercase tracking-widest">
                       {color.name}
                     </p>
-                    <p className="font-mono text-[#1A1A1A]/50 text-[10px] uppercase mt-1">
+                    <p className="font-sans text-[#1A1A1A]/50 text-[10px] uppercase mt-1">
                       {color.hex}
                     </p>
                   </div>
@@ -137,7 +135,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
                   <h4 className="text-[10px] text-[#1A1A1A]/50 uppercase tracking-widest font-bold">
                     {type.role}
                   </h4>
-                  <p className="text-2xl font-serif italic text-[#1A1A1A] mt-2">
+                  <p className="text-2xl font-space text-[#1A1A1A] mt-2">
                     {type.font}
                   </p>
                   <p className="text-[#4A4A4A] text-sm mt-3 leading-relaxed">
@@ -152,9 +150,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
 
       {/* User Journey */}
       <section className="space-y-8 pt-8 border-t border-[#1A1A1A]/10">
-        <h2 className="text-3xl font-serif italic text-[#1A1A1A]">
-          The User Journey
-        </h2>
+        <h2 className="text-3xl font-space text-[#1A1A1A]">The User Journey</h2>
         <div className="relative">
           <div className="absolute left-[11px] top-4 bottom-4 w-px bg-ink/10" />
           <div className="space-y-10">
@@ -181,7 +177,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
 
       {/* Page Structure */}
       <section className="space-y-8 pt-8 border-t border-[#1A1A1A]/10">
-        <h2 className="text-3xl font-serif italic text-[#1A1A1A]">
+        <h2 className="text-3xl font-space text-[#1A1A1A]">
           Page-by-Page Architecture
         </h2>
         <div className="grid sm:grid-cols-2 gap-6">
@@ -190,7 +186,7 @@ export function VariantDetail({ variant }: { variant: Variant }) {
               key={page.page}
               className="p-8 border border-[#1A1A1A]/10 bg-card group hover:border-primary hover:bg-primary hover:text-primary-foreground transition-colors"
             >
-              <h3 className="text-xl font-serif italic text-[#1A1A1A] flex items-center justify-between">
+              <h3 className="text-xl font-space text-[#1A1A1A] flex items-center justify-between">
                 {page.page}
                 <ChevronRight className="w-5 h-5 text-[#1A1A1A]/20 group-hover:text-[#D97706] transition-colors" />
               </h3>

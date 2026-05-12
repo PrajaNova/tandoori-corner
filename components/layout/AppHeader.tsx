@@ -4,7 +4,7 @@ import { Menu as MenuIcon, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button, ButtonLink } from "@/components/ui/button";
 
@@ -18,12 +18,31 @@ const navigationItems = [
 export function AppHeader() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const isHome = pathname === "/";
+  const isTransparent = isHome && !hasScrolled && !mobileMenuOpen;
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  useEffect(() => {
+    const updateHeaderState = () => setHasScrolled(window.scrollY > 24);
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateHeaderState);
+  }, []);
+
   return (
     <>
-      <nav className="fixed w-full z-50 border-b border-border bg-background/95 py-3 shadow-sm backdrop-blur-md transition-all duration-500 md:py-4">
+      <nav
+        className={`fixed z-50 w-full py-3 transition-all duration-500 md:py-4 ${
+          isTransparent
+            ? "border-b border-transparent bg-transparent"
+            : "border-b border-border bg-background/95 shadow-sm backdrop-blur-md"
+        }`}
+      >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link
             href="/"
@@ -31,10 +50,18 @@ export function AppHeader() {
             onClick={closeMobileMenu}
             aria-label="Tandoori Corner home"
           >
-            <span className="font-space text-xl md:text-2xl font-bold tracking-tight leading-none text-foreground">
+            <span
+              className={`font-space text-xl md:text-2xl font-bold tracking-tight leading-none transition-colors ${
+                isTransparent ? "text-cream" : "text-foreground"
+              }`}
+            >
               Tandoori<span className="text-brand-gold">Corner</span>
             </span>
-            <span className="mt-1 text-[8px] uppercase tracking-[0.18em] text-muted-foreground md:text-[9px] md:tracking-[0.2em]">
+            <span
+              className={`mt-1 text-[8px] uppercase tracking-[0.18em] transition-colors md:text-[9px] md:tracking-[0.2em] ${
+                isTransparent ? "text-cream/70" : "text-muted-foreground"
+              }`}
+            >
               Est. 2008 &bull; Balestier
             </span>
           </Link>
@@ -51,23 +78,31 @@ export function AppHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-sm uppercase tracking-widest font-semibold transition-colors ${
+                  className={`font-space text-lg tracking-normal transition-colors ${
                     isActive
                       ? "text-primary"
-                      : "text-foreground/90 hover:text-primary"
+                      : isTransparent
+                        ? "text-cream/90 hover:text-brand-gold"
+                        : "text-foreground/90 hover:text-primary"
                   }`}
                 >
                   {item.label}
                 </Link>
               );
             })}
-            <ButtonLink href="/experience" size="default">
+            <ButtonLink
+              className="font-space text-base normal-case tracking-normal"
+              href="/experience"
+              size="default"
+            >
               Experience
             </ButtonLink>
           </div>
 
           <Button
-            className="text-foreground lg:hidden"
+            className={`lg:hidden ${
+              isTransparent ? "text-cream" : "text-foreground"
+            }`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
@@ -104,7 +139,7 @@ export function AppHeader() {
             <ButtonLink
               href="/experience"
               onClick={closeMobileMenu}
-              className="mt-4"
+              className="mt-4 font-space text-lg normal-case tracking-normal"
               size="lg"
             >
               Experience

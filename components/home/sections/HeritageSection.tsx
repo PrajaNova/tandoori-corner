@@ -7,7 +7,7 @@ export function HeritageSection() {
   return (
     <section
       id="heritage"
-      className="py-32 bg-brand-light text-brand-dark relative overflow-hidden"
+      className="py-32 bg-brand-light text-brand-dark relative overflow-hidden border-b border-border bg-cream"
     >
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
