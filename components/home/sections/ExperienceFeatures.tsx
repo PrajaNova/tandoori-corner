@@ -5,17 +5,12 @@ import {
   ShoppingBag,
   SquareParking,
   Utensils,
-  Wine,
 } from "lucide-react";
 
 const experienceItems = [
   {
     icon: PawPrint,
     label: "Pet-Friendly Alfresco",
-  },
-  {
-    icon: Wine,
-    label: "The TCB Bar",
   },
   {
     icon: SquareParking,
@@ -31,7 +26,7 @@ export function ExperienceFeatures() {
   return (
     <section className="relative z-20 border-b border-border bg-cream">
       <div className="container mx-auto px-6 py-8 lg:px-12">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-7">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
           {experienceItems.map((item) => {
             const Icon = item.icon;
 

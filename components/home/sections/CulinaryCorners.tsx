@@ -8,7 +8,7 @@ export function CulinaryCorners() {
   return (
     <section
       id="culinary-corners"
-      className="bg-background py-16 sm:py-24 md:py-32"
+      className="bg-background py-16 sm:py-24 md:py-32 border-b border-border bg-cream"
     >
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
