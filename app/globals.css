@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kaushan+Script&family=Raleway:wght@300;400;500;600;700;800&display=swap");
 @import "tailwindcss";
-@import "./theme/colors.css";
-@import "./theme/typography.css";
+@import "../theme/colors.css";
+@import "../theme/typography.css";
+@import "../theme/gradient.css";
 
 :root {
   --background: #faf8f5;
@@ -74,7 +75,8 @@ button {
 
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgb(201 114 40 / 0.55) transparent;
+  scrollbar-color: color-mix(in srgb, var(--color-brand-gold) 55%, transparent)
+    transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -83,6 +85,6 @@ button {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgb(201 114 40 / 0.55);
+  background: color-mix(in srgb, var(--color-brand-gold) 55%, transparent);
   border-radius: 999px;
 }

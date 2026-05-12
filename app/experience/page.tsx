@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { AppShell } from "@/components/layout/AppShell";
 import { ExperienceClient } from "./ExperienceClient";
 
 export const metadata: Metadata = {
@@ -10,9 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
-  return (
-    <AppShell>
-      <ExperienceClient />
-    </AppShell>
-  );
+  return <ExperienceClient />;
 }
