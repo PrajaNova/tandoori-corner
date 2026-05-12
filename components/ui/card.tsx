@@ -6,7 +6,7 @@ export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        "rounded-card border border-border bg-card text-card-foreground shadow-card transition-colors hover:border-primary/45 hover:shadow-[0_18px_45px_rgb(201_114_40_/_0.14)]",
+        "rounded-card border border-border bg-card text-card-foreground shadow-card transition-colors hover:border-primary/45 hover:shadow-(--shadow-card-hover)",
         className,
       )}
       data-slot="card"

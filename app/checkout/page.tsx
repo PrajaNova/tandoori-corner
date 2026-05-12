@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { AppShell } from "@/components/layout/AppShell";
 import { CheckoutClient } from "./CheckoutClient";
 
 export const metadata: Metadata = {
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function CheckoutPage() {
-  return (
-    <AppShell>
-      <CheckoutClient />
-    </AppShell>
-  );
+  return <CheckoutClient />;
 }

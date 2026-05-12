@@ -4,6 +4,7 @@
   --color-cream: #faf8f5;
   --color-ink: #2c2621;
   --color-sage: #849079;
+  --color-tandoori-smoke: #8c3a18;
 
   --color-brand: #c97228;
   --color-leaf: #849079;
@@ -41,5 +42,8 @@
   --color-ring: #c97228;
 
   --radius-card: 0.5rem;
-  --shadow-card: 0 18px 45px rgb(44 38 33 / 0.1);
+  --shadow-card: 0 18px 45px
+    color-mix(in srgb, var(--color-ink) 10%, transparent);
+  --shadow-card-hover: 0 18px 45px
+    color-mix(in srgb, var(--color-brand-gold) 14%, transparent);
 }

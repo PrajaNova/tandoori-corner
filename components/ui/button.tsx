@@ -1,7 +1,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import Link from "next/link";
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
-
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ReactNode,
+} from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -48,12 +51,50 @@ export function buttonVariantsFor({
   return cn(buttonVariants({ size, variant }), className);
 }
 
+type ButtonIconProps = {
+  encIcon?: ReactNode;
+  endIcon?: ReactNode;
+  startIcon?: ReactNode;
+};
+
+function ButtonContent({
+  children,
+  encIcon,
+  endIcon,
+  startIcon,
+}: ButtonIconProps & {
+  children?: ReactNode;
+}) {
+  const trailingIcon = endIcon ?? encIcon;
+
+  return (
+    <>
+      {startIcon ? (
+        <span aria-hidden="true" className="inline-flex shrink-0">
+          {startIcon}
+        </span>
+      ) : null}
+      {children}
+      {trailingIcon ? (
+        <span aria-hidden="true" className="inline-flex shrink-0">
+          {trailingIcon}
+        </span>
+      ) : null}
+    </>
+  );
+}
+
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants>;
+  VariantProps<typeof buttonVariants> &
+  ButtonIconProps;
 
 export function Button({
+  children,
   className,
+  encIcon,
+  endIcon,
   size,
+  startIcon,
   type = "button",
   variant,
   ...props
@@ -64,19 +105,27 @@ export function Button({
       data-slot="button"
       type={type}
       {...props}
-    />
+    >
+      <ButtonContent encIcon={encIcon} endIcon={endIcon} startIcon={startIcon}>
+        {children}
+      </ButtonContent>
+    </button>
   );
 }
 
 type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   VariantProps<typeof buttonVariants> & {
     href: string;
-  };
+  } & ButtonIconProps;
 
 export function ButtonLink({
+  children,
   className,
+  encIcon,
+  endIcon,
   href,
   size,
+  startIcon,
   variant,
   ...props
 }: ButtonLinkProps) {
@@ -86,6 +135,10 @@ export function ButtonLink({
       data-slot="button-link"
       href={href}
       {...props}
-    />
+    >
+      <ButtonContent encIcon={encIcon} endIcon={endIcon} startIcon={startIcon}>
+        {children}
+      </ButtonContent>
+    </Link>
   );
 }
