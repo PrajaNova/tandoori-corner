@@ -11,9 +11,11 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 
-import { useCart } from "@/components/cart/use-cart";
+import { FormField } from "@/components/common/forms/FormField";
+import { checkoutDeliveryFields, checkoutPaymentFields } from "@/data/checkout";
+import { useCart } from "@/hooks/use-cart";
 
 export function CheckoutClient() {
   const router = useRouter();
@@ -25,8 +27,8 @@ export function CheckoutClient() {
   const deliveryFee = 5.0;
   const total = subtotal + tax + deliveryFee;
 
-  const handleCheckout = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleCheckout = (event: FormEvent) => {
+    event.preventDefault();
     setIsSuccess(true);
     setTimeout(() => {
       clearCart();
@@ -66,8 +68,9 @@ export function CheckoutClient() {
         </motion.div>
         <h2 className="font-space text-4xl text-ink mb-4">Order Confirmed!</h2>
         <p className="text-ink/60 mb-8 font-light text-center max-w-md">
-          Your order has been successfully placed. We've sent a confirmation to
-          your mobile number. Your food will arrive in approximately 45 minutes.
+          Your order has been successfully placed. We&apos;ve sent a
+          confirmation to your mobile number. Your food will arrive in
+          approximately 45 minutes.
         </p>
       </div>
     );
@@ -85,7 +88,6 @@ export function CheckoutClient() {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Checkout Form */}
           <div className="lg:col-span-7">
             <div className="mb-10 pb-10 border-b border-border">
               <h1 className="font-space text-4xl text-ink mb-6">Checkout</h1>
@@ -109,7 +111,6 @@ export function CheckoutClient() {
             </div>
 
             <form onSubmit={handleCheckout} className="space-y-12">
-              {/* Contact & Delivery */}
               <section>
                 <h3 className="font-space text-2xl text-ink mb-6 flex items-center gap-3">
                   <MapPin className="text-brand-gold w-6 h-6" /> Delivery
@@ -118,75 +119,45 @@ export function CheckoutClient() {
 
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                        First Name
-                      </label>
-                      <input
-                        required
-                        type="text"
-                        className="w-full bg-transparent border-b border-border pb-2 text-ink focus:border-brand-gold focus:outline-none transition-colors"
-                        placeholder="John"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                        Last Name
-                      </label>
-                      <input
-                        required
-                        type="text"
-                        className="w-full bg-transparent border-b border-border pb-2 text-ink focus:border-brand-gold focus:outline-none transition-colors"
-                        placeholder="Doe"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                      Delivery Address
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      className="w-full bg-transparent border-b border-border pb-2 text-ink focus:border-brand-gold focus:outline-none transition-colors"
-                      placeholder="123 Balestier Road, #05-12"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                        Mobile Number
-                      </label>
-                      <div className="flex items-center">
-                        <span className="text-ink/50 border-b border-border pb-2 pr-2">
-                          +65
-                        </span>
-                        <input
+                    {checkoutDeliveryFields.map((field) => (
+                      <div
+                        key={field.id}
+                        className={field.fullWidth ? "md:col-span-2" : ""}
+                      >
+                        <FormField
+                          label={field.label}
+                          htmlFor={field.id}
                           required
-                          type="tel"
-                          className="w-full bg-transparent border-b border-border pb-2 text-ink focus:border-brand-gold focus:outline-none transition-colors pl-2"
-                          placeholder="8123 4567"
-                        />
+                        >
+                          {field.type === "tel" && field.id === "mobile" ? (
+                            <div className="flex items-center">
+                              <span className="text-ink/50 border-b border-border pb-2 pr-2">
+                                +65
+                              </span>
+                              <input
+                                required
+                                id={field.id}
+                                type={field.type}
+                                className="w-full bg-transparent border-b border-border pb-2 text-ink focus:border-brand-gold focus:outline-none transition-colors pl-2"
+                                placeholder={field.placeholder}
+                              />
+                            </div>
+                          ) : (
+                            <input
+                              required
+                              id={field.id}
+                              type={field.type}
+                              className="w-full bg-transparent border-b border-border pb-2 text-ink focus:border-brand-gold focus:outline-none transition-colors"
+                              placeholder={field.placeholder}
+                            />
+                          )}
+                        </FormField>
                       </div>
-                    </div>
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                        Email Address
-                      </label>
-                      <input
-                        required
-                        type="email"
-                        className="w-full bg-transparent border-b border-border pb-2 text-ink focus:border-brand-gold focus:outline-none transition-colors"
-                        placeholder="john@example.com"
-                      />
-                    </div>
+                    ))}
                   </div>
                 </div>
               </section>
 
-              {/* Payment Info */}
               <section className="pt-6 border-t border-border">
                 <h3 className="font-space text-2xl text-ink mb-6 flex items-center gap-3">
                   <CreditCard className="text-brand-gold w-6 h-6" /> Payment
@@ -214,43 +185,27 @@ export function CheckoutClient() {
                   </div>
                 </div>
 
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                      Card Number
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      className="w-full bg-transparent border-b border-border pb-2 text-ink font-sans focus:border-brand-gold focus:outline-none transition-colors"
-                      placeholder="0000 0000 0000 0000"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                        Expiry Date
-                      </label>
-                      <input
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {checkoutPaymentFields.map((field) => (
+                    <div
+                      key={field.id}
+                      className={field.id === "cvc" ? "md:col-span-1" : ""}
+                    >
+                      <FormField
+                        label={field.label}
+                        htmlFor={field.id}
                         required
-                        type="text"
-                        className="w-full bg-transparent border-b border-border pb-2 text-ink font-sans focus:border-brand-gold focus:outline-none transition-colors"
-                        placeholder="MM/YY"
-                      />
+                      >
+                        <input
+                          required
+                          id={field.id}
+                          type={field.type}
+                          className="w-full bg-transparent border-b border-border pb-2 text-ink font-sans focus:border-brand-gold focus:outline-none transition-colors"
+                          placeholder={field.placeholder}
+                        />
+                      </FormField>
                     </div>
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest text-ink/50 mb-2 font-bold">
-                        CVC
-                      </label>
-                      <input
-                        required
-                        type="text"
-                        className="w-full bg-transparent border-b border-border pb-2 text-ink font-sans focus:border-brand-gold focus:outline-none transition-colors"
-                        placeholder="123"
-                      />
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </section>
 
@@ -263,7 +218,6 @@ export function CheckoutClient() {
             </form>
           </div>
 
-          {/* Order Summary */}
           <div className="lg:col-span-5">
             <div className="bg-card border border-border p-8 sticky top-32">
               <h3 className="font-space text-2xl text-ink mb-6">

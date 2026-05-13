@@ -1,51 +1,54 @@
 import {
   Bike,
   ChefHat,
+  type LucideProps,
   PawPrint,
   ShoppingBag,
   SquareParking,
   Utensils,
 } from "lucide-react";
+import type { ComponentType } from "react";
+import { IconFeatureCard } from "@/components/common/cards/IconFeatureCard";
+import { SectionShell } from "@/components/common/section-shell/SectionShell";
+import { experienceFeatureItems } from "@/data/home";
+import type { IconKey } from "@/data/types";
 
-const experienceItems = [
-  {
-    icon: PawPrint,
-    label: "Pet-Friendly Alfresco",
-  },
-  {
-    icon: SquareParking,
-    label: "Plenty of Parking",
-  },
-  { icon: Utensils, label: "Dine-In" },
-  { icon: ShoppingBag, label: "Take Away" },
-  { icon: Bike, label: "Home Delivery" },
-  { icon: ChefHat, label: "Catering" },
-];
+type FeatureIcon = ComponentType<LucideProps>;
+
+const iconMap: Record<IconKey, FeatureIcon> = {
+  chefHat: ChefHat,
+  flame: ChefHat,
+  leaf: ChefHat,
+  sparkles: ChefHat,
+  pawPrint: PawPrint,
+  shoppingBag: ShoppingBag,
+  bike: Bike,
+  utensils: Utensils,
+  squareParking: SquareParking,
+  calendarDays: ChefHat,
+  glassWater: ChefHat,
+  utensilsFill: Utensils,
+};
 
 export function ExperienceFeatures() {
   return (
-    <section className="relative z-20 border-b border-border bg-cream">
-      <div className="container mx-auto px-6 py-8 lg:px-12">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
-          {experienceItems.map((item) => {
-            const Icon = item.icon;
+    <SectionShell
+      className="relative z-20 border-b border-border bg-cream"
+      innerClassName="py-8"
+    >
+      <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+        {experienceFeatureItems.map((item) => {
+          const Icon = iconMap[item.icon];
 
-            return (
-              <div
-                className="group flex flex-col items-center text-center"
-                key={item.label}
-              >
-                <div className="mb-2 flex h-12 w-12 items-center justify-center text-leaf transition-transform duration-500 group-hover:scale-110">
-                  <Icon className="h-8 w-8" strokeWidth={1.5} />
-                </div>
-                <h3 className="font-space text-lg leading-tight text-brand-dark">
-                  {item.label}
-                </h3>
-              </div>
-            );
-          })}
-        </div>
+          return (
+            <IconFeatureCard
+              key={item.label}
+              icon={<Icon className="h-8 w-8" />}
+              label={item.label}
+            />
+          );
+        })}
       </div>
-    </section>
+    </SectionShell>
   );
 }
