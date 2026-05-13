@@ -3,6 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import RatingStar from "@/components/ui/ratingStart";
 
+import { heroCopy } from "@/data/home";
+
 export function Hero() {
   return (
     <section className="relative flex items-start justify-center overflow-hidden bg-ink pt-28 pb-10 text-cream sm:pt-32 sm:pb-20 md:h-[90vh] md:items-center md:py-0">
@@ -42,32 +44,29 @@ export function Hero() {
         </div>
         <div>
           <h1 className="font-space text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 leading-[1.08] sm:leading-[1.1]">
-            Elevated Indian <br className="sm:hidden" />
-            Dining &amp; <br />{" "}
-            <span className="italic font-light">Evening Cocktails</span>
+            {heroCopy.title}
           </h1>
           <p className="text-sm sm:text-base md:text-xl text-cream/90 mb-7 sm:mb-10 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-            Enjoy our 15-year heritage flavors at the TCB Bar or our alfresco
-            balcony
+            {heroCopy.description}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
             <ButtonLink
-              href="/menu"
+              href={heroCopy.ctaPrimary.href}
               className="w-full group text-sm sm:w-auto"
               size="lg"
               encIcon={
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               }
             >
-              Explore The Menu
+              {heroCopy.ctaPrimary.label}
             </ButtonLink>
             <ButtonLink
-              href="/experience"
+              href={heroCopy.ctaSecondary.href}
               className="w-full border-cream/70 text-sm text-cream hover:bg-cream hover:text-ink sm:w-auto"
               size="lg"
               variant="outline"
             >
-              Reserve Alfresco
+              {heroCopy.ctaSecondary.label}
             </ButtonLink>
           </div>
         </div>

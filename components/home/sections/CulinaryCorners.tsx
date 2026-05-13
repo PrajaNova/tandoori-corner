@@ -1,8 +1,5 @@
-import Image from "next/image";
-
-import { ButtonLink } from "@/components/ui/button";
-
-import { culinaryCorners } from "../home-content";
+import { ImageTextCard } from "@/components/common/cards/ImageTextCard";
+import { culinaryCorners } from "@/data/home";
 
 export function CulinaryCorners() {
   return (
@@ -35,35 +32,16 @@ export function CulinaryCorners() {
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
           {culinaryCorners.map((item) => (
-            <article key={item.title} className="group text-center">
-              <div className="relative mb-7 aspect-[3/2] overflow-hidden bg-muted">
-                <Image
-                  fill
-                  src={item.img}
-                  alt={item.title}
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
-                <p className="absolute inset-x-4 bottom-4 font-script text-3xl leading-none text-white drop-shadow-sm sm:text-4xl">
-                  {item.tag}
-                </p>
-              </div>
-              <h3 className="mb-4 font-space text-3xl leading-tight text-ink sm:text-4xl">
-                {item.title}
-              </h3>
-              <p className="mx-auto mb-7 max-w-sm text-sm leading-7 text-muted-foreground">
-                {item.desc}
-              </p>
-              <ButtonLink
-                className="h-12 min-w-36 border-ink px-8 text-[11px] text-ink hover:border-primary hover:bg-primary hover:text-primary-foreground"
-                href="/menu"
-                size="default"
-                variant="outline"
-              >
-                Read more
-              </ButtonLink>
-            </article>
+            <ImageTextCard
+              key={item.title}
+              image={item.img}
+              imageAlt={item.title}
+              eyebrow={item.tag}
+              title={item.title}
+              description={item.description}
+              ctaLabel="Read more"
+              ctaHref="/menu"
+            />
           ))}
         </div>
       </div>

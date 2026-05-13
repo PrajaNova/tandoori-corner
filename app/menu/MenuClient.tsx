@@ -1,24 +1,24 @@
 "use client";
 
 import {
-  ChefHat,
   ChevronDown,
   ChevronUp,
-  Flame,
-  Leaf,
   Minus,
   Plus,
   Search,
   ShoppingBag,
-  Sparkles,
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-import { useCart } from "@/components/cart/use-cart";
+import { MenuCategoryNav } from "@/components/menu/MenuCategoryNav";
+import { MenuItemList } from "@/components/menu/MenuItemList";
+import { menuCategories } from "@/data/menu";
+import type { MenuItem } from "@/data/types";
+import { useCart } from "@/hooks/use-cart";
 
 export function MenuClient() {
   const router = useRouter();
@@ -27,243 +27,40 @@ export function MenuClient() {
   const [activeCategoryTitle, setActiveCategoryTitle] =
     useState("Chef's Signatures");
   const [isCartExpanded, setIsCartExpanded] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<{
-    name: string;
-    desc: string;
-    price: string;
-    tags: string[];
-    img?: string;
-    ingredients?: string[];
-    story?: string;
-  } | null>(null);
-
-  const menuCategories = [
-    {
-      title: "Chef's Signatures",
-      subtitle: "The Master's Touch",
-      icon: <ChefHat className="w-5 h-5 text-brand-gold" />,
-      items: [
-        {
-          name: "The Tandoori Mixed Seafood Platter",
-          desc: "Our most lavish offering. Jumbo prawns, tender chunks of fish, and calamari marinated for 24 hours in handcrafted spice blends. Fired inside a traditional clay oven to smoky perfection.",
-          price: "$48.00",
-          tags: ["Signature", "Sharing"],
-          img: "https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Tiger Prawns",
-            "Kingfish",
-            "Calamari",
-            "Kashmiri Chili",
-            "Yogurt",
-            "Ajwain (Carom Seeds)",
-          ],
-          story:
-            "Inspired by the coastal bounties of India, this platter represents our Chef's dedication to mastering the delicate art of tandoor-cooking seafood without losing its natural sweetness.",
-        },
-        {
-          name: "Reshmi Tandoori Chicken",
-          desc: "Fall-apart tender chicken on the bone. The 24-hour yogurt and kashmiri chili marinade produces a vibrant color and a deep, velvety crust.",
-          price: "$28.00",
-          tags: ["Signature"],
-          img: "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Free-range Chicken",
-            "Hung Curd",
-            "Deggi Mirch",
-            "Garam Masala",
-            "Mustard Oil",
-          ],
-          story:
-            "A recipe passed down through three generations. The secret lies in double-marination, ensuring the spices penetrate right to the bone.",
-        },
-      ],
-    },
-    {
-      title: "The Curry Corner",
-      subtitle: "Silken & Robust Gravies",
-      icon: <Flame className="w-5 h-5 text-brand-gold" />,
-      items: [
-        {
-          name: "OG Butter Chicken",
-          desc: "Tandoor-charred chicken pieces submerged in a rich, 4-hour slow-cooked tomato gravy. Finished with cold butter and a swirl of cream. Mild and velvety.",
-          price: "$22.00",
-          tags: ["Bestseller"],
-          img: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Chicken Tikka",
-            "San Marzano Tomatoes",
-            "White Butter",
-            "Fenugreek Leaves",
-            "Cashew Paste",
-          ],
-          story:
-            "Our tribute to the original 1950s Delhi recipe. We never add sugar; the sweetness comes purely from slow-roasted tomatoes.",
-        },
-        {
-          name: "Saag Mutton",
-          desc: "Tender chunks of mutton in a deep-green spinach gravy. Ginger and garlic hit the palate before the gentle heat. The dish Chef learned from his mother.",
-          price: "$24.00",
-          tags: ["Heritage"],
-          img: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&q=80",
-          ingredients: [
-            "New Zealand Mutton",
-            "Fresh Pureed Spinach",
-            "Garlic",
-            "Ginger",
-            "Green Chili",
-          ],
-          story:
-            "A winter staple in Punjab, elevated for our dining room. The spinach is blanched for exactly 60 seconds to retain its vibrant emerald hue.",
-        },
-        {
-          name: "Rogan Josh",
-          desc: "A fiery, aromatic Kashmiri lamb curry. Slow-cooked until the meat yields to a spoon, swimming in a vibrant red gravy.",
-          price: "$25.00",
-          tags: ["Spicy"],
-          img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Lamb Braise",
-            "Kashmiri Red Chilies",
-            "Fennel Powder",
-            "Dry Ginger",
-            "Yogurt",
-          ],
-          story:
-            "Authentic Kashmiri Rogan Josh never uses tomatoes or onions. We stay true to this ancient method, relying on fennel and ginger for body.",
-        },
-      ],
-    },
-    {
-      title: "The Sabzi Corner",
-      subtitle: "From The Fields",
-      icon: <Leaf className="w-5 h-5 text-brand-gold" />,
-      items: [
-        {
-          name: "Palak Paneer",
-          desc: "Soft cottage cheese cubes enveloped in a vibrant, spiced spinach puree. A North Indian classic.",
-          price: "$18.00",
-          tags: ["Vegetarian"],
-          img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Homemade Paneer",
-            "Fresh Spinach",
-            "Fenugreek",
-            "Garlic",
-            "Heavy Cream",
-          ],
-          story:
-            "We make our cottage cheese fresh every morning, ensuring it literally melts in your mouth against the robust spinach.",
-        },
-        {
-          name: "Aloo Gobi",
-          desc: "Cauliflower and potatoes wok-tossed with turmeric, cumin, and fresh coriander. Homestyle and comforting.",
-          price: "$15.00",
-          tags: ["Vegan", "Vegetarian"],
-          img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Cauliflower Florets",
-            "Potatoes",
-            "Cumin Seeds",
-            "Turmeric",
-            "Fresh Coriander",
-          ],
-          story:
-            "A dry curry that relies entirely on the precise timing of spices hitting the hot oil to release their essential oils.",
-        },
-        {
-          name: "Dal Makhani",
-          desc: "Black lentils slow-cooked overnight with tomatoes, butter, and cream. The ultimate comfort food.",
-          price: "$16.00",
-          tags: ["Vegetarian", "Signature"],
-          img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Whole Black Lentils",
-            "Kidney Beans",
-            "Butter",
-            "Tomato Puree",
-            "Cream",
-          ],
-          story:
-            "Cooked for a minimum of 18 hours on the residual heat of the cooling tandoor oven, developing a matchless smoky depth.",
-        },
-      ],
-    },
-    {
-      title: "Breads & Rice",
-      subtitle: "The Perfect Pairings",
-      icon: <Sparkles className="w-5 h-5 text-brand-gold" />,
-      items: [
-        {
-          name: "Garlic Naan",
-          desc: "Crispy edges, fluffy center. Slathered with aromatic garlic butter straight from the Tandoor.",
-          price: "$6.00",
-          tags: ["Vegetarian"],
-          img: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Refined Flour",
-            "Yogurt",
-            "Garlic",
-            "Butter",
-            "Fresh Coriander",
-          ],
-          story:
-            "Slapped against the 400-degree walls of our clay oven and baked in under two minutes for the perfect char.",
-        },
-        {
-          name: "Mutton Biryani",
-          desc: "Slow-steamed, fall-apart tender mutton buried in a mountain of saffron-scented, long-grain basmati. Perfectly charred, zero fluff.",
-          price: "$24.00",
-          tags: [],
-          img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Basmati Rice",
-            "Marinated Mutton",
-            "Saffron",
-            "Rose Water",
-            "Fried Onions",
-            "Whole Spices",
-          ],
-          story:
-            "Prepared in the traditional 'Dum' style, sealed with dough to lock in the steam and aromas of 15 different whole spices.",
-        },
-        {
-          name: "Saffron Basmati Pulao",
-          desc: "Fragrant, long-grain basmati rice cooked with whole spices and saffron threads.",
-          price: "$9.00",
-          tags: ["Vegetarian"],
-          img: "https://images.unsplash.com/photo-1512132411229-c30391241dd8?auto=format&fit=crop&q=80",
-          ingredients: [
-            "Aged Basmati",
-            "Kashmiri Saffron",
-            "Cardamom",
-            "Cloves",
-            "Ghee",
-          ],
-          story:
-            "We only use rice that has been aged for at least two years to ensure every grain remains distinct and fluffy.",
-        },
-      ],
-    },
-  ];
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const activeCategory =
     menuCategories.find((category) => category.title === activeCategoryTitle) ??
     menuCategories[0];
-  const filteredItems = activeCategory.items.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.tags.some((tag) =>
-        tag.toLowerCase().includes(searchQuery.toLowerCase()),
-      ),
-  );
+
+  const filteredItems = useMemo(() => {
+    if (!searchQuery) return activeCategory.items;
+
+    const query = searchQuery.toLowerCase();
+    return activeCategory.items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(query) ||
+        item.desc.toLowerCase().includes(query) ||
+        item.tags.some((tag) => tag.toLowerCase().includes(query)),
+    );
+  }, [activeCategory.items, searchQuery]);
 
   const totalAmount = cart.reduce(
     (sum, item) => sum + item.price * item.qty,
     0,
   );
-  const getItemQty = (name: string) =>
-    cart.find((cartItem) => cartItem.name === name)?.qty ?? 0;
+
+  const itemQtyByName = useMemo(() => {
+    const map: Record<string, number> = {};
+
+    cart.forEach((item) => {
+      map[item.name] = item.qty;
+    });
+
+    return map;
+  }, [cart]);
+
+  const activeItemCount = cart.reduce((count, item) => count + item.qty, 0);
 
   return (
     <div className="pt-20 pb-32 sm:pt-24 sm:pb-40 bg-cream min-h-screen relative">
@@ -313,29 +110,12 @@ export function MenuClient() {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end">
-              {menuCategories.map((category) => {
-                const isActive = category.title === activeCategoryTitle;
-
-                return (
-                  <button
-                    key={category.title}
-                    type="button"
-                    onClick={() => {
-                      setActiveCategoryTitle(category.title);
-                      setSearchQuery("");
-                    }}
-                    className={`border-b-2 px-0.5 pb-2 font-sans text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors sm:text-xs ${
-                      isActive
-                        ? "border-brand-gold text-brand-gold"
-                        : "border-transparent text-ink/70 hover:text-brand-gold"
-                    }`}
-                  >
-                    {category.title.replace("The ", "").replace(" Corner", "")}
-                  </button>
-                );
-              })}
-            </div>
+            <MenuCategoryNav
+              categories={menuCategories}
+              activeTitle={activeCategoryTitle}
+              onChange={setActiveCategoryTitle}
+              onFilterClear={() => setSearchQuery("")}
+            />
           </div>
         </div>
 
@@ -362,102 +142,14 @@ export function MenuClient() {
               key={activeCategory.title}
               className="relative"
             >
-              <div className="mb-5 flex items-center gap-3 border-b border-border pb-4 sm:mb-6">
-                <div className="[&_svg]:h-5 [&_svg]:w-5 sm:[&_svg]:h-6 sm:[&_svg]:w-6">
-                  {activeCategory.icon}
-                </div>
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-left">
-                  <h2 className="font-space text-2xl text-ink sm:text-3xl">
-                    {activeCategory.title}
-                  </h2>
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-brand-gold/80 sm:text-xs">
-                    {activeCategory.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {filteredItems.map((item, itemIdx) => (
-                  <article
-                    key={itemIdx}
-                    onClick={() => setSelectedItem(item)}
-                    className="group flex min-h-32 cursor-pointer overflow-hidden border border-border bg-card transition-colors hover:border-primary"
-                  >
-                    {item.img && (
-                      <div className="relative w-28 shrink-0 overflow-hidden sm:w-32">
-                        <Image
-                          fill
-                          src={item.img}
-                          alt={item.name}
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="(max-width: 640px) 112px, 128px"
-                        />
-                      </div>
-                    )}
-
-                    <div className="flex min-w-0 flex-1 flex-col p-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="line-clamp-2 font-sans text-sm font-semibold leading-snug text-ink sm:text-base">
-                          {item.name}
-                        </h3>
-                        <span className="shrink-0 text-xs font-bold text-brand-gold">
-                          {item.price}
-                        </span>
-                      </div>
-
-                      <p className="mt-2 line-clamp-2 text-xs font-light leading-relaxed text-ink/55">
-                        {(item.ingredients?.slice(0, 5) ?? item.tags).join(
-                          ", ",
-                        )}
-                      </p>
-
-                      <div className="relative z-10 mt-auto flex items-center justify-end pt-3">
-                        {getItemQty(item.name) > 0 ? (
-                          <div className="flex shrink-0 items-center gap-2 rounded-full bg-accent px-2 py-1">
-                            <button
-                              type="button"
-                              aria-label={`Remove one ${item.name}`}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                updateQty(item.name, -1);
-                              }}
-                              className="flex h-7 w-7 items-center justify-center rounded-full text-ink transition-colors hover:bg-card hover:text-brand-gold"
-                            >
-                              <Minus className="h-3.5 w-3.5" />
-                            </button>
-                            <span className="w-5 text-center text-sm font-bold text-ink">
-                              {getItemQty(item.name)}
-                            </span>
-                            <button
-                              type="button"
-                              aria-label={`Add one ${item.name}`}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                updateQty(item.name, 1);
-                              }}
-                              className="flex h-7 w-7 items-center justify-center rounded-full text-ink transition-colors hover:bg-card hover:text-brand-gold"
-                            >
-                              <Plus className="h-3.5 w-3.5" />
-                            </button>
-                          </div>
-                        ) : (
-                          <button
-                            type="button"
-                            aria-label={`Add ${item.name} to order`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              addToCart(item.name, item.price);
-                            }}
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-gold text-brand-dark transition-colors hover:bg-ink hover:text-cream"
-                          >
-                            <ShoppingBag className="h-4 w-4" />
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
+              <MenuItemList
+                activeCategory={activeCategory}
+                itemQtyByName={itemQtyByName}
+                onOpenItem={setSelectedItem}
+                onAddToCart={addToCart}
+                onIncrementItem={(name) => updateQty(name, 1)}
+                onDecrementItem={(name) => updateQty(name, -1)}
+              />
             </motion.div>
           )}
         </div>
@@ -558,7 +250,7 @@ export function MenuClient() {
                 </p>
 
                 <p className="text-ink/80 leading-relaxed mb-8 font-light text-base border-l-2 border-brand-gold/50 pl-4 py-1">
-                  "{selectedItem.desc}"
+                  &quot;{selectedItem.desc}&quot;
                 </p>
 
                 <div className="space-y-8 flex-1">
@@ -569,12 +261,12 @@ export function MenuClient() {
                           Key Ingredients
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {selectedItem.ingredients.map((ing, i) => (
+                          {selectedItem.ingredients.map((ingredient, i) => (
                             <span
                               key={i}
                               className="text-sm text-ink/70 bg-accent px-3 py-1.5 rounded-sm"
                             >
-                              {ing}
+                              {ingredient}
                             </span>
                           ))}
                         </div>
@@ -594,7 +286,7 @@ export function MenuClient() {
                 </div>
 
                 <div className="mt-10 pt-6 border-t border-border">
-                  {getItemQty(selectedItem.name) > 0 ? (
+                  {itemQtyByName[selectedItem.name] > 0 ? (
                     <div className="flex items-center justify-between gap-4 bg-accent px-4 py-3">
                       <button
                         type="button"
@@ -609,7 +301,7 @@ export function MenuClient() {
                           In your order
                         </span>
                         <span className="font-space text-2xl text-ink">
-                          {getItemQty(selectedItem.name)}
+                          {itemQtyByName[selectedItem.name]}
                         </span>
                       </div>
                       <button
@@ -718,7 +410,7 @@ export function MenuClient() {
                 <div className="relative">
                   <ShoppingBag className="w-6 h-6 sm:w-8 sm:h-8 text-brand-gold" />
                   <span className="absolute -top-2 -right-2 bg-card text-brand-dark w-5 h-5 rounded-full text-[10px] sm:text-xs font-bold flex items-center justify-center">
-                    {cart.reduce((sum, item) => sum + item.qty, 0)}
+                    {activeItemCount}
                   </span>
                 </div>
                 <div className="hidden sm:block">

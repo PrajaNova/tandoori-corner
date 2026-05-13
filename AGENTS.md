@@ -19,8 +19,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Put reusable app components in `components/`.
 - Keep shared shadcn-style primitives in `components/ui/`.
 - Do not create `src/` or version folders such as `app/v1` or `components/v1`; use Git branches for alternate versions.
-- Treat `agent/skills/` as local project guidance created by the user. Before work that matches a skill folder, read the relevant `agent/skills/<name>/skill.md` file and follow it.
-- The current local skill source includes `agent/skills/schadcn/skill.md`.
+- Treat `skills/` as local project guidance created by the user. Before work that matches a skill folder, read the relevant `skills/<name>/skill.md` file and follow it.
+- The current local skill source includes `skills/schadcn/skill.md`.
 
 ## Design Direction
 

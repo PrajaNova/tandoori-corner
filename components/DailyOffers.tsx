@@ -9,22 +9,18 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import type { OfferCardItem } from "@/data/types";
 
-export interface Offer {
-  title: string;
-  value: string;
-  image: string;
-  badge: string;
-  badgeColor: string;
-  points: string[];
-  actionLabel: string;
-  actionType: "experience" | "menu";
+export interface DailyOffersProps {
+  offers: OfferCardItem[];
 }
 
-export function DailyOffers({ offers }: { offers: Offer[] }) {
+export function DailyOffers({ offers }: DailyOffersProps) {
   const router = useRouter();
-  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
-  const goToOfferAction = (actionType: Offer["actionType"]) => {
+  const [selectedOffer, setSelectedOffer] = useState<OfferCardItem | null>(
+    null,
+  );
+  const goToOfferAction = (actionType: OfferCardItem["actionType"]) => {
     router.push(actionType === "menu" ? "/menu" : "/experience");
   };
 
