@@ -1,5 +1,30 @@
 import { Facebook, Instagram, Mail, Map, MapPin, Twitter } from "lucide-react";
 
+const footerLinks = {
+  instagram:
+    process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM_URL ??
+    "https://www.instagram.com/tandooricornersingapore",
+  facebook:
+    process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK_URL ??
+    "https://www.facebook.com/Tandoori-Corner-333078973565275",
+  twitter: process.env.NEXT_PUBLIC_SOCIAL_X_URL ?? "https://x.com",
+  email:
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL ??
+    "mailto:tandooricorner@singnet.com.sg",
+};
+
+const footerContact = {
+  address:
+    process.env.NEXT_PUBLIC_CONTACT_ADDRESS ??
+    "400 Balestier Road #01-12 Balestier Plaza, Singapore 329802",
+  mapUrl:
+    process.env.NEXT_PUBLIC_CONTACT_MAP_URL ??
+    "https://maps.app.goo.gl/jE9ppAZ8BDcoJHZY9",
+  mapEmbedUrl:
+    process.env.NEXT_PUBLIC_CONTACT_MAP_EMBED_URL ??
+    "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3988.7503502617474!2d103.8480438!3d1.3257154!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da179192b34053%3A0xf0d76653d50b435e!2sTandoori%20Corner!5e0!3m2!1sen!2ssg!4v1778663342121!5m2!1sen!2ssg",
+};
+
 export function AppFooter() {
   return (
     <footer className="bg-cream pt-24 pb-12 border-t border-border relative mt-auto">
@@ -15,28 +40,34 @@ export function AppFooter() {
           </p>
           <div className="flex gap-4">
             <a
-              href="#top"
+              href={footerLinks.instagram}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-brand-gold hover:border-brand-gold hover:text-brand-dark transition-all"
               aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Instagram className="w-4 h-4" />
             </a>
             <a
-              href="#top"
+              href={footerLinks.facebook}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-ink transition-all"
               aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Facebook className="w-4 h-4" />
             </a>
             <a
-              href="#top"
+              href={footerLinks.twitter}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-[#1DA1F2] hover:border-[#1DA1F2] hover:text-ink transition-all"
               aria-label="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Twitter className="w-4 h-4" />
             </a>
             <a
-              href="#top"
+              href={footerLinks.email}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-[#EA4335] hover:border-[#EA4335] hover:text-ink transition-all"
               aria-label="Email"
             >
@@ -50,43 +81,37 @@ export function AppFooter() {
             Contact & Logistics
           </h4>
 
-          <a
-            href="https://maps.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block relative w-full h-32 bg-cream mb-6 overflow-hidden border border-border group cursor-pointer hover:border-brand-gold transition-colors"
-          >
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-all duration-500" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative">
-                <div className="absolute inset-0 bg-brand-gold blur-lg opacity-40 animate-pulse rounded-full" />
-                <MapPin
-                  className="relative w-10 h-10 text-brand-gold drop-shadow-2xl group-hover:-translate-y-2 group-hover:scale-110 transition-transform duration-300"
-                  strokeWidth={1.5}
-                  fill="#faf8f5"
-                />
-              </div>
-            </div>
-            <div className="absolute bottom-2 right-2 bg-cream/80 backdrop-blur-sm px-2 py-1 text-[8px] uppercase tracking-widest font-bold text-ink border border-border group-hover:border-brand-gold/50 transition-colors">
+          <div className="relative mb-6 h-40 w-full overflow-hidden border border-border bg-cream">
+            <iframe
+              src={footerContact.mapEmbedUrl}
+              className="h-full w-full"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              title="Tandoori Corner map"
+            />
+            <a
+              href={footerContact.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-2 right-2 bg-cream/90 px-2 py-1 text-[8px] font-bold uppercase tracking-widest text-ink border border-border transition-colors hover:border-brand-gold/50"
+            >
               View Map
-            </div>
-          </a>
+            </a>
+          </div>
 
           <ul className="space-y-4 text-sm text-ink/70">
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 mt-0.5 text-brand-gold shrink-0" />
-              <span>
-                400 Balestier Road
-                <br />
-                Balestier Plaza
-                <br />
-                Singapore 329802
-              </span>
+              <span>{footerContact.address}</span>
             </li>
             <li className="flex items-center gap-3 mt-4">
               <Map className="w-4 h-4 text-brand-gold shrink-0" />
               <a
-                href="https://maps.google.com"
+                href={footerContact.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="border-b border-border pb-0.5 hover:text-ink hover:border-border transition-colors"
               >
                 Get Directions

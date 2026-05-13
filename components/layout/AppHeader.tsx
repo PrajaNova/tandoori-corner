@@ -1,6 +1,14 @@
 "use client";
 
-import { Menu as MenuIcon, X } from "lucide-react";
+import {
+  Facebook,
+  Globe2,
+  Instagram,
+  MapPin,
+  Menu as MenuIcon,
+  Phone,
+  X,
+} from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,6 +23,25 @@ const navigationItems = [
   { href: "/story", label: "Our Story" },
 ];
 
+const stripConfig = {
+  phoneDisplay:
+    process.env.NEXT_PUBLIC_CONTACT_PHONE_DISPLAY ?? "+65 9862 7334",
+  phoneHref: process.env.NEXT_PUBLIC_CONTACT_PHONE_HREF ?? "tel:+6598627334",
+  address:
+    process.env.NEXT_PUBLIC_CONTACT_ADDRESS ??
+    "400 Balestier Road #01-12 Balestier Plaza, Singapore 329802",
+  mapUrl:
+    process.env.NEXT_PUBLIC_CONTACT_MAP_URL ??
+    "https://goo.gl/maps/3vm1gJyvuESZv6Lh8",
+  instagramUrl: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM_URL ?? "#top",
+  facebookUrl:
+    process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK_URL ??
+    "https://www.facebook.com/Tandoori-Corner-333078973565275",
+  tripadvisorUrl:
+    process.env.NEXT_PUBLIC_SOCIAL_TRIPADVISOR_URL ??
+    "https://www.tripadvisor.com/Restaurant_Review-g294265-d1580656-Reviews-Tandoori_Corner_Balestier_Road-Singapore.html",
+};
+
 export function AppHeader() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,18 +53,88 @@ export function AppHeader() {
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
   useEffect(() => {
-    const updateHeaderState = () => setHasScrolled(window.scrollY > 24);
+    const getScrollTop = () =>
+      Math.max(
+        window.scrollY,
+        document.documentElement.scrollTop,
+        document.body.scrollTop,
+      );
+
+    const updateHeaderState = () => setHasScrolled(getScrollTop() > 24);
 
     updateHeaderState();
     window.addEventListener("scroll", updateHeaderState, { passive: true });
+    window.addEventListener("touchmove", updateHeaderState, { passive: true });
+    window.addEventListener("resize", updateHeaderState);
 
-    return () => window.removeEventListener("scroll", updateHeaderState);
+    return () => {
+      window.removeEventListener("scroll", updateHeaderState);
+      window.removeEventListener("touchmove", updateHeaderState);
+      window.removeEventListener("resize", updateHeaderState);
+    };
   }, []);
 
   return (
     <>
+      <div className="fixed top-0 z-[60] w-full border-b border-white/10 bg-brand-dark text-cream">
+        <div className="container mx-auto flex h-9 items-center justify-between px-6 text-[11px] md:px-12">
+          <a
+            href={stripConfig.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-cream/85 transition-colors hover:text-brand-gold"
+          >
+            <MapPin className="h-3.5 w-3.5" />
+            <span className="hidden max-w-[330px] truncate md:inline">
+              {stripConfig.address}
+            </span>
+          </a>
+
+          <div className="flex items-center gap-3 text-cream/90">
+            <a
+              href={stripConfig.phoneHref}
+              className="inline-flex items-center gap-1.5 font-medium tracking-wide transition-colors hover:text-brand-gold"
+              aria-label="Call Tandoori Corner"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              <span>{stripConfig.phoneDisplay}</span>
+            </a>
+            <div className="h-3.5 w-px bg-cream/25" />
+            <div className="flex items-center gap-1">
+              <a
+                href={stripConfig.instagramUrl}
+                aria-label="Instagram"
+                className="inline-flex h-6 w-6 items-center justify-center rounded-full text-cream/80 transition-colors hover:text-brand-gold"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={stripConfig.facebookUrl}
+                aria-label="Facebook"
+                className="inline-flex h-6 w-6 items-center justify-center rounded-full text-cream/80 transition-colors hover:text-brand-gold"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={stripConfig.tripadvisorUrl}
+                aria-label="Tripadvisor"
+                className="inline-flex h-6 w-6 items-center justify-center rounded-full text-cream/80 transition-colors hover:text-brand-gold"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Globe2 className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <nav
-        className={`fixed z-50 w-full py-3 transition-all duration-500 md:py-4 ${
+        className={`fixed top-9 z-50 w-full py-3 transition-all duration-500 md:py-4 ${
           isTransparent
             ? "border-b border-transparent bg-transparent"
             : "border-b border-border bg-background/95 shadow-sm backdrop-blur-md"
@@ -124,7 +221,7 @@ export function AppHeader() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background pt-28 px-6 flex flex-col gap-6 lg:hidden"
+            className="fixed inset-0 z-40 flex flex-col gap-6 bg-background px-6 pt-36 lg:hidden"
           >
             {navigationItems.map((item) => (
               <Link

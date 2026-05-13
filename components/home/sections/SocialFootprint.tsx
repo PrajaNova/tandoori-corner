@@ -3,8 +3,7 @@ import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-
-import { socialImages } from "../home-content";
+import { socialImages } from "@/data/home";
 
 export function SocialFootprint() {
   return (

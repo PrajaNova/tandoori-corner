@@ -5,23 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const googleReviews = [
-  {
-    author: "Fab N",
-    excerpt: "Every dish was well balanced and the service was great.",
-    source: "Google review",
-  },
-  {
-    author: "Abhyasa Home Yoga",
-    excerpt: "Very delicious and excellent service!",
-    source: "Google review",
-  },
-  {
-    author: "Kiku C",
-    excerpt: "The food is awesome.",
-    source: "Google review",
-  },
-];
+import { googleReviews } from "@/data/home";
 
 export function GoogleReviewsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
