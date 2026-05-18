@@ -8,16 +8,19 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Stack
 
-- Next.js 16 App Router with TypeScript.
-- Tailwind CSS 4 uses theme tokens in `app/globals.css` and `app/theme/`.
+- Pnpm workspace with app packages under `apps/`.
+- `apps/tc-web-app` is the Next.js 16 App Router web app with TypeScript.
+- `apps/rc-backend` is the Fastify TypeScript backend for restaurant services.
+- Tailwind CSS 4 uses theme tokens in `apps/tc-web-app/app/globals.css` and `apps/tc-web-app/theme/`.
 - Biome is the formatter/linter. Tailwind directives are enabled in `biome.json`.
 - Package manager is `pnpm`.
 
 ## Work Scope
 
-- Active product work lives in App Router routes under `app/`, with `/` as the home route and real pages such as `/menu`, `/experience`, `/checkout`, and `/story`.
-- Put reusable app components in `components/`.
-- Keep shared shadcn-style primitives in `components/ui/`.
+- Active web product work lives in App Router routes under `apps/tc-web-app/app/`, with `/` as the home route and real pages such as `/menu`, `/experience`, `/checkout`, and `/story`.
+- Put reusable web components in `apps/tc-web-app/components/`.
+- Keep shared shadcn-style primitives in `apps/tc-web-app/components/ui/`.
+- Put backend API routes, services, and adapters in `apps/rc-backend/src/`.
 - Do not create `src/` or version folders such as `app/v1` or `components/v1`; use Git branches for alternate versions.
 - Treat `skills/` as local project guidance created by the user. Before work that matches a skill folder, read the relevant `skills/<name>/skill.md` file and follow it.
 - The current local skill source includes `skills/schadcn/skill.md`.
@@ -45,5 +48,5 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Verification
 
 - Run `pnpm lint` after code changes.
-- Run `pnpm build` after page, routing, Tailwind theme, or component changes.
+- Run `pnpm build` after page, routing, Tailwind theme, component, or backend service changes.
 - If the dev server is already running, smoke-check changed routes such as `/`.

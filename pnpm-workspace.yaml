@@ -1,6 +1,15 @@
+packages:
+  - "apps/*"
+
+allowBuilds:
+  esbuild: true
+  msw: true
+  sharp: false
+
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
 
 onlyBuiltDependencies:
+  - esbuild
   - msw
