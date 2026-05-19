@@ -1,3 +1,4 @@
+import { AboutBalestier } from "./sections/AboutBalestier";
 import { CulinaryCorners } from "./sections/CulinaryCorners";
 import { DailyOffersSection } from "./sections/DailyOffersSection";
 import { ExperienceFeatures } from "./sections/ExperienceFeatures";
@@ -17,6 +18,7 @@ export function HomePage() {
       <GoogleReviewsSection />
       <TcbSpotlight />
       <DailyOffersSection />
+      <AboutBalestier />
       <SocialFootprint />
     </>
   );
