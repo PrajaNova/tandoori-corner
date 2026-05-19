@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const siteUrl = "https://www.tandooricorner.sg";
 
 const defaultDescription =
-  "Tandoori Corner is a North Indian curry house at Balestier Plaza serving alfresco dining, home delivery, catering, and table bookings.";
+  "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza, serving alfresco dining, tandoori grills, evening cocktails, home delivery, catering, and table bookings.";
 
 export const restaurantSeo = {
   name: "Tandoori Corner",
@@ -32,7 +32,14 @@ export const restaurantSeo = {
     "https://www.instagram.com/tandooricornersingapore",
     "https://www.facebook.com/Tandoori-Corner-333078973565275",
     "https://www.tripadvisor.com/Restaurant_Review-g294265-d1580656-Reviews-Tandoori_Corner_Balestier_Road-Singapore.html",
+    "https://x.com/TandooriCornerS",
   ],
+  aggregateRating: {
+    ratingValue: 4.5,
+    reviewCount: 380,
+    bestRating: 5,
+    worstRating: 1,
+  },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -85,32 +92,32 @@ export const contact = {
 export const seoRoutes = [
   {
     path: "/",
-    title: "Tandoori Corner | North Indian Restaurant in Balestier",
+    title: "Tandoori Corner | North Indian Restaurant & TCB Bar in Balestier",
     description: defaultDescription,
     priority: 1,
     changeFrequency: "weekly",
   },
   {
     path: "/menu",
-    title: "Menu",
+    title: "Menu | Tandoori Grills, Curries & TCB Bar Cocktails",
     description:
-      "Explore Tandoori Corner's North Indian menu, chef signatures, curries, tandoori dishes, rice, breads, drinks, and sweets.",
+      "Explore Tandoori Corner's North Indian menu at Balestier Plaza — chef signatures, tandoori grills, silken curries, biryanis, breads, and TCB Bar cocktails.",
     priority: 0.9,
     changeFrequency: "weekly",
   },
   {
     path: "/experience",
-    title: "Reservations, Takeaway & Private Events",
+    title: "Reservations, TCB Bar & Alfresco Dining",
     description:
-      "Book a table, reserve the TCB Bar, or order from Tandoori Corner's North Indian kitchen in Balestier Plaza.",
+      "Reserve a table on the pet-friendly alfresco balcony, book the TCB Bar, arrange private events, or order takeaway and catering from Tandoori Corner in Balestier Plaza.",
     priority: 0.8,
     changeFrequency: "monthly",
   },
   {
     path: "/story",
-    title: "Our Story",
+    title: "Our Story | 15 Years at Balestier Plaza",
     description:
-      "Learn the Tandoori Corner story, team, gallery, and media highlights from Balestier Plaza.",
+      "The Tandoori Corner story — 15 years of North Indian cooking, the TCB Bar, alfresco dining, our team, and press from Balestier Plaza, Singapore.",
     priority: 0.7,
     changeFrequency: "monthly",
   },
@@ -213,6 +220,98 @@ export function buildRestaurantJsonLd() {
     hasMap: restaurantSeo.mapUrl,
     sameAs: restaurantSeo.sameAs,
     openingHoursSpecification: restaurantSeo.openingHoursSpecification,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: restaurantSeo.aggregateRating.ratingValue,
+      reviewCount: restaurantSeo.aggregateRating.reviewCount,
+      bestRating: restaurantSeo.aggregateRating.bestRating,
+      worstRating: restaurantSeo.aggregateRating.worstRating,
+    },
+  };
+}
+
+export function buildOrganizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    name: restaurantSeo.name,
+    legalName: restaurantSeo.legalName,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl(restaurantSeo.logoPath),
+    },
+    sameAs: restaurantSeo.sameAs,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: restaurantSeo.telephone,
+        contactType: "customer service",
+        areaServed: "SG",
+        availableLanguage: ["English"],
+        email: restaurantSeo.email,
+      },
+    ],
+  };
+}
+
+export function buildBreadcrumbJsonLd(
+  items: ReadonlyArray<{ name: string; path: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+interface MenuSchemaItem {
+  name: string;
+  description?: string;
+  priceText?: string;
+  image?: string;
+}
+
+interface MenuSchemaSection {
+  title: string;
+  items: ReadonlyArray<MenuSchemaItem>;
+}
+
+export function buildMenuJsonLd(
+  sections: ReadonlyArray<MenuSchemaSection>,
+  menuPath = "/menu",
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    "@id": `${absoluteUrl(menuPath)}#menu`,
+    name: `${restaurantSeo.name} Menu`,
+    url: absoluteUrl(menuPath),
+    inLanguage: "en-SG",
+    hasMenuSection: sections.map((section) => ({
+      "@type": "MenuSection",
+      name: section.title,
+      hasMenuItem: section.items.map((item) => ({
+        "@type": "MenuItem",
+        name: item.name,
+        description: item.description,
+        image: item.image,
+        offers: item.priceText
+          ? {
+              "@type": "Offer",
+              price: item.priceText.replace(/[^\d.]/g, ""),
+              priceCurrency: "SGD",
+              availability: "https://schema.org/InStock",
+            }
+          : undefined,
+      })),
+    })),
   };
 }
 
