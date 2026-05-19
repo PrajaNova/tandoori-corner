@@ -39,6 +39,21 @@ Every category at **A** or **A+** after PR-A + PR-B + PR-C + PR-D ship, plus the
 | Add `public/llms.txt` | new file | Brand summary, key pages, NAP, links to menu / hours |
 | Add `AggregateRating` to Restaurant schema | `lib/seo.ts` `buildRestaurantJsonLd` | Source from Google rating shown in hero badge (`4.5★`) until live API |
 
+### PR-B follow-up — Identity Schema enrichment (closes SEOptimer "Identity Schema" finding)
+
+The initial `buildOrganizationJsonLd()` shipped with `@id`, `name`, `logo`, `sameAs`, and a `contactPoint`. SEOptimer's AI-search guidance asks for richer entity-disambiguation signals so LLMs answer brand queries with confidence. Enriched in-place (no new Person schema, no new pages):
+
+| Field | Source |
+|---|---|
+| `description`, `slogan`, `foundingDate` | New constants in `restaurantSeo` |
+| `address` (`PostalAddress`), `telephone`, `email` | Promoted to root of Organization (still inside `contactPoint` too) |
+| `areaServed` | `["Singapore", "Balestier", "Novena"]` |
+| `knowsAbout` | North Indian cuisine, Tandoori cooking, Indian catering Singapore, Alfresco dining Singapore, Cocktail bar |
+| `knowsLanguage` | `["en", "en-SG"]` |
+| `image`, `mainEntityOfPage` | Mirror Restaurant for Organization-only crawls |
+
+`Restaurant` schema continues to own `aggregateRating` and `openingHoursSpecification`; the two entities cross-link by `@id` so LLMs see one coherent graph.
+
 ## PR-C — Performance (lifts Performance / Usability)
 
 | Action | File | Notes |
