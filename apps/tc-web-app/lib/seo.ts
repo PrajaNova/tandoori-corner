@@ -40,6 +40,17 @@ export const restaurantSeo = {
     bestRating: 5,
     worstRating: 1,
   },
+  foundingDate: "2008",
+  slogan: "15 years of North Indian cooking at Balestier Plaza.",
+  areaServed: ["Singapore", "Balestier", "Novena"],
+  knowsAbout: [
+    "North Indian cuisine",
+    "Tandoori cooking",
+    "Indian catering Singapore",
+    "Alfresco dining Singapore",
+    "Cocktail bar",
+  ],
+  knowsLanguage: ["en", "en-SG"],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -238,10 +249,24 @@ export function buildOrganizationJsonLd() {
     name: restaurantSeo.name,
     legalName: restaurantSeo.legalName,
     url: siteUrl,
+    mainEntityOfPage: siteUrl,
+    description: restaurantSeo.description,
+    slogan: restaurantSeo.slogan,
+    foundingDate: restaurantSeo.foundingDate,
+    image: absoluteUrl(restaurantSeo.ogImagePath),
     logo: {
       "@type": "ImageObject",
       url: absoluteUrl(restaurantSeo.logoPath),
     },
+    telephone: restaurantSeo.telephone,
+    email: restaurantSeo.email,
+    address: {
+      "@type": "PostalAddress",
+      ...restaurantSeo.address,
+    },
+    areaServed: restaurantSeo.areaServed,
+    knowsAbout: restaurantSeo.knowsAbout,
+    knowsLanguage: restaurantSeo.knowsLanguage,
     sameAs: restaurantSeo.sameAs,
     contactPoint: [
       {
