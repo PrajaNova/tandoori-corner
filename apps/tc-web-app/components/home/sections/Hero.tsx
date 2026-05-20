@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <section className="relative flex items-start justify-center overflow-hidden bg-ink pt-28 pb-10 text-cream sm:pt-32 sm:pb-20 md:h-[90vh] md:items-center md:py-0">
       <div className="absolute inset-0">
-        <Image
+        {/* <Image
           fill
           priority
           src={heroPoster}
@@ -21,11 +21,11 @@ export function Hero() {
           aria-hidden="true"
           className="object-cover md:hidden"
           sizes="(max-width: 767px) 100vw, 0px"
-        />
+        /> */}
         <video
           aria-hidden="true"
           autoPlay
-          className="hidden h-full w-full object-cover md:block"
+          className=" h-full w-full object-cover "
           loop
           muted
           poster={heroPoster}
