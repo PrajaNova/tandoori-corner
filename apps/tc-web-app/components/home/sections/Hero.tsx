@@ -40,7 +40,6 @@ export function Hero() {
           />
         </video>
         <div className="absolute inset-0 bg-hero-vignette" />
-        <div className="absolute inset-0 bg-hero-depth" />
       </div>
       <div className="relative z-1 mx-auto max-w-5xl px-5 text-center sm:px-6 md:mt-10">
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2 sm:gap-4 mb-5 sm:mb-8">
@@ -63,10 +62,10 @@ export function Hero() {
           </Badge>
         </div>
         <div>
-          <h1 className="font-space text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 leading-[1.08] sm:leading-[1.1]">
+          <h1 className="font-space text-[2rem] sm:text-5xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-[1.08] sm:leading-[1.1]">
             {heroCopy.title}
           </h1>
-          <p className="text-sm sm:text-base md:text-xl text-cream/90 mb-7 sm:mb-10 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-sm sm:text-base md:text-md text-cream/90 mb-7 sm:mb-10 md:mb-12 max-w-2xl mx-auto font-light leading-relaxed">
             {heroCopy.description}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
