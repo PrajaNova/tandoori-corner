@@ -26,7 +26,8 @@
 }
 
 .bg-hero-vignette {
-  background: var(--gradient-hero-vignette);
+  background: var(--color-black);
+  opacity: 0.5;
 }
 
 .bg-hero-depth {
