@@ -15,7 +15,9 @@
       "!dist",
       "!**/dist",
       "!build",
-      "!**/build"
+      "!**/build",
+      "!**/generated",
+      "!**/src/generated"
     ]
   },
   "formatter": {

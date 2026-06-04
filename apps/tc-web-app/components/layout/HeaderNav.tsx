@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Button, ButtonLink } from "@/components/ui/button";
+import { ExperienceDialog } from "@/components/layout/ExperienceDialog";
+import { Button } from "@/components/ui/button";
 
 interface NavigationItem {
   href: string;
@@ -20,10 +21,15 @@ export function HeaderNav({ items }: HeaderNavProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [experienceOpen, setExperienceOpen] = useState(false);
 
   const isHome = pathname === "/";
   const isTransparent = isHome && !hasScrolled && !mobileMenuOpen;
   const closeMobileMenu = () => setMobileMenuOpen(false);
+  const openExperience = () => {
+    setMobileMenuOpen(false);
+    setExperienceOpen(true);
+  };
 
   useEffect(() => {
     const updateHeaderState = () => setHasScrolled(window.scrollY > 24);
@@ -94,13 +100,13 @@ export function HeaderNav({ items }: HeaderNavProps) {
                 </Link>
               );
             })}
-            <ButtonLink
+            <Button
               className="font-space text-base normal-case tracking-normal"
-              href="/experience"
+              onClick={openExperience}
               size="default"
             >
               Experience
-            </ButtonLink>
+            </Button>
           </div>
 
           <Button
@@ -134,16 +140,20 @@ export function HeaderNav({ items }: HeaderNavProps) {
               {item.label}
             </Link>
           ))}
-          <ButtonLink
-            href="/experience"
-            onClick={closeMobileMenu}
+          <Button
+            onClick={openExperience}
             className="mt-4 font-space text-lg normal-case tracking-normal"
             size="lg"
           >
             Experience
-          </ButtonLink>
+          </Button>
         </div>
       ) : null}
+
+      <ExperienceDialog
+        open={experienceOpen}
+        onClose={() => setExperienceOpen(false)}
+      />
     </>
   );
 }

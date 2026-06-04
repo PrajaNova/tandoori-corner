@@ -117,6 +117,22 @@ export const seoRoutes = [
     changeFrequency: "weekly",
   },
   {
+    path: "/catering",
+    title: "Catering & Party Menu | Tandoori Corner Singapore",
+    description:
+      "North Indian catering at Balestier Plaza — Silver, Gold & Platinum party packages or build your own feast. Tandoori grills, curries & biryani for parties of 30+.",
+    priority: 0.8,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/private-events",
+    title: "Private Events at the TCB Bar | Tandoori Corner Singapore",
+    description:
+      "Host your private event at the TCB Bar in Balestier — corporate gatherings, birthdays & celebrations. Browse past events, see the space, and enquire to book.",
+    priority: 0.8,
+    changeFrequency: "monthly",
+  },
+  {
     path: "/experience",
     title: "Reservations, TCB Bar & Alfresco Dining",
     description:

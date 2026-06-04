@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model CatalogCategory {
+  id        String        @id
+  slug      String        @unique
+  title     String
+  subtitle  String
+  icon      String
+  status    String        @default("active")
+  sortOrder Int           @map("sort_order")
+  items     CatalogItem[]
+
+  @@map("catalog_categories")
+}
+
+model CateringPackage {
+  id          String  @id
+  slug        String  @unique
+  name        String
+  tagline     String
+  description String  @db.Text
+  accent      String  @default("dark")
+  priceCents  Int     @map("price_cents")
+  currency    String  @default("SGD")
+  minGuests   Int     @map("min_guests")
+  badge       String?
+  features    Json    @default("[]")
+  status      String  @default("active")
+  sortOrder   Int     @map("sort_order")
+
+  @@index([status])
+  @@map("catering_packages")
+}
+
+model CatalogItem {
+  id          String          @id
+  slug        String          @unique
+  categoryId  String          @map("category_id")
+  category    CatalogCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  name        String
+  description String          @db.Text
+  story       String?         @db.Text
+  imageUrl    String?         @map("image_url")
+  priceCents  Int             @map("price_cents")
+  currency    String          @default("SGD")
+  tags        String[]        @default([])
+  ingredients String[]        @default([])
+  status      String          @default("active")
+  sortOrder   Int             @map("sort_order")
+
+  @@index([categoryId, sortOrder])
+  @@index([status])
+  @@map("catalog_items")
+}

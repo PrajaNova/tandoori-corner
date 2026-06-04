@@ -31,7 +31,7 @@ export function TcbSpotlight() {
             alfresco dining.
           </p>
           <div className="pt-6 border-t border-border">
-            <ButtonLink href="/experience" className="group" variant="link">
+            <ButtonLink href="/private-events" className="group" variant="link">
               Inquire for Private Events{" "}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </ButtonLink>

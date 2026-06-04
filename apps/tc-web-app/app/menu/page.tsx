@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script.js";
-
-import { menuCategories } from "@/data/menu";
+import { getMenuCategories, MENU_REVALIDATE_SECONDS } from "@/lib/catalog";
 import {
   buildBreadcrumbJsonLd,
   buildMenuJsonLd,
@@ -11,6 +10,10 @@ import {
 
 import { MenuClient } from "./MenuClient";
 
+// Render on the server and serve one shared, cached page to every visitor.
+// Revalidated at most once every 24 hours (ISR).
+export const revalidate = 86400;
+
 export const metadata: Metadata = buildPageMetadata({
   path: "/menu",
   title: "Menu | Tandoori Grills, Curries & TCB Bar Cocktails",
@@ -18,22 +21,26 @@ export const metadata: Metadata = buildPageMetadata({
     "Explore Tandoori Corner's North Indian menu at Balestier Plaza — chef signatures, tandoori grills, silken curries, biryanis, breads, and TCB Bar cocktails.",
 });
 
-const menuSchemaSections = menuCategories.map((category) => ({
-  title: category.title,
-  items: category.items.map((item) => ({
-    name: item.name,
-    description: item.desc,
-    priceText: item.price,
-    image: item.img,
-  })),
-}));
-
 const breadcrumbs = [
   { name: "Home", path: "/" },
   { name: "Menu", path: "/menu" },
 ] as const;
 
-export default function MenuPage() {
+export default async function MenuPage() {
+  // Keep MENU_REVALIDATE_SECONDS and the route `revalidate` aligned.
+  void MENU_REVALIDATE_SECONDS;
+  const menuCategories = await getMenuCategories();
+
+  const menuSchemaSections = menuCategories.map((category) => ({
+    title: category.title,
+    items: category.items.map((item) => ({
+      name: item.name,
+      description: item.desc,
+      priceText: item.price,
+      image: item.img,
+    })),
+  }));
+
   return (
     <>
       <Script
@@ -54,7 +61,7 @@ export default function MenuPage() {
           __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
         }}
       />
-      <MenuClient />
+      <MenuClient menuCategories={menuCategories} />
     </>
   );
 }

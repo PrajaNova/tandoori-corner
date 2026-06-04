@@ -6,8 +6,9 @@ import { contact } from "@/lib/seo";
 
 const navigationItems = [
   { href: "/", label: "Home" },
-  { href: "/menu", label: "Full Menu" },
-  { href: "/#tcb", label: "The TCB Bar" },
+  { href: "/menu", label: "Our Menu" },
+  { href: "/catering", label: "Catering" },
+  { href: "/private-events", label: "Private Events" },
   { href: "/story", label: "Our Story" },
 ];
 

@@ -2,13 +2,34 @@ import cors from "@fastify/cors";
 import Fastify from "fastify";
 
 import { getConfig } from "./config.js";
+import type { PrismaClient } from "./generated/prisma/client.js";
+import { createPrismaClient } from "./lib/prisma.js";
+import { registerCatalogRoutes } from "./routes/catalog.js";
+import { registerCateringRoutes } from "./routes/catering.js";
 import { registerHealthRoutes } from "./routes/health.js";
 import { registerMenuRoutes } from "./routes/menu.js";
 import { registerOrderRoutes } from "./routes/orders.js";
-import { createMenuService } from "./services/menu-service.js";
-import { createOrderService } from "./services/order-service.js";
+import {
+  type CatalogService,
+  createPrismaCatalogService,
+} from "./services/catalog-service.js";
+import {
+  type CateringService,
+  createPrismaCateringService,
+} from "./services/catering-service.js";
+import {
+  createOrderService,
+  type OrderService,
+} from "./services/order-service.js";
 
-export async function buildApp() {
+interface AppDependencies {
+  catalogService?: CatalogService;
+  cateringService?: CateringService;
+  orderService?: OrderService;
+  prisma?: PrismaClient;
+}
+
+export async function buildApp(dependencies: AppDependencies = {}) {
   const config = getConfig();
   const app = Fastify({
     logger: true,
@@ -18,17 +39,44 @@ export async function buildApp() {
     origin: config.frontendOrigin,
   });
 
-  const menuService = createMenuService();
-  const orderService = createOrderService();
+  // Only spin up a Prisma client when a catalog service isn't injected
+  // (tests inject an in-memory catalog service and skip the database).
+  const prisma =
+    dependencies.prisma ??
+    (dependencies.catalogService
+      ? undefined
+      : createPrismaClient(config.databaseUrl));
+
+  const catalogService =
+    dependencies.catalogService ??
+    createPrismaCatalogService(prisma as PrismaClient);
+  const cateringService =
+    dependencies.cateringService ??
+    createPrismaCateringService(prisma as PrismaClient);
+  const orderService = dependencies.orderService ?? createOrderService();
+
+  if (prisma && !dependencies.prisma) {
+    app.addHook("onClose", async () => {
+      await prisma.$disconnect();
+    });
+  }
 
   await app.register(registerHealthRoutes);
+  await app.register(registerCatalogRoutes, {
+    prefix: "/api/catalog",
+    catalogService,
+  });
   await app.register(registerMenuRoutes, {
     prefix: "/api/menu",
-    menuService,
+    catalogService,
+  });
+  await app.register(registerCateringRoutes, {
+    prefix: "/api/catering",
+    cateringService,
   });
   await app.register(registerOrderRoutes, {
     prefix: "/api/orders",
-    menuService,
+    catalogService,
     orderService,
   });
 

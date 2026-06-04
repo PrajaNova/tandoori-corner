@@ -1,22 +1,22 @@
 import type { FastifyInstance } from "fastify";
 
-import type { MenuService } from "../services/menu-service.js";
+import type { CatalogService } from "../services/catalog-service.js";
 
 interface MenuRouteOptions {
-  menuService: MenuService;
+  catalogService: CatalogService;
 }
 
 export async function registerMenuRoutes(
   app: FastifyInstance,
-  { menuService }: MenuRouteOptions,
+  { catalogService }: MenuRouteOptions,
 ) {
   app.get("/", async () => ({
-    categories: menuService.listCategories(),
+    categories: await catalogService.listCategories(),
   }));
 
   app.get("/:categorySlug", async (request, reply) => {
     const { categorySlug } = request.params as { categorySlug: string };
-    const category = menuService.getCategory(categorySlug);
+    const category = await catalogService.getCategory(categorySlug);
 
     if (!category) {
       return reply.code(404).send({
@@ -25,8 +25,6 @@ export async function registerMenuRoutes(
       });
     }
 
-    return {
-      category,
-    };
+    return { category };
   });
 }

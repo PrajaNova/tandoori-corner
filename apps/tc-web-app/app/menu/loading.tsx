@@ -1,6 +1,6 @@
 export default function MenuLoading() {
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-32">
+    <div className="min-h-screen bg-cream pt-28 pb-32 sm:pt-32">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="mx-auto mb-10 h-10 w-72 animate-pulse bg-muted" />
         <div className="mb-10 flex flex-wrap justify-center gap-3">

@@ -4,12 +4,16 @@ import { AnimatePresence, motion } from "motion/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { ALL_CATEGORIES_VALUE } from "@/components/menu/MenuCategoryNav";
 import { MenuItemList } from "@/components/menu/MenuItemList";
-import { menuCategories } from "@/data/menu";
-import type { MenuItem } from "@/data/types";
+import type { MenuCategory, MenuItem } from "@/data/types";
 import { useCart } from "@/hooks/use-cart";
 import { CartSummary } from "./parts/CartSummary";
 import { MenuFilters } from "./parts/MenuFilters";
+
+type MenuClientProps = {
+  menuCategories: MenuCategory[];
+};
 
 const MenuItemDetailsDialog = dynamic(
   () =>
@@ -19,30 +23,47 @@ const MenuItemDetailsDialog = dynamic(
   { ssr: false },
 );
 
-export function MenuClient() {
+export function MenuClient({ menuCategories }: MenuClientProps) {
   const router = useRouter();
   const { addToCart, cart, updateQty } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
+  // Default to "All" so the page initially shows the entire menu from the API
+  // with no filter applied. Filtering happens client-side on user interaction.
   const [activeCategoryTitle, setActiveCategoryTitle] =
-    useState("Chef's Signatures");
+    useState(ALL_CATEGORIES_VALUE);
   const [isCartExpanded, setIsCartExpanded] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
-  const activeCategory =
-    menuCategories.find((category) => category.title === activeCategoryTitle) ??
-    menuCategories[0];
+  // Apply the category + search filters entirely on the client. When "All" is
+  // selected we keep every category; otherwise we narrow to the chosen one.
+  const visibleCategories = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    const byCategory =
+      activeCategoryTitle === ALL_CATEGORIES_VALUE
+        ? menuCategories
+        : menuCategories.filter(
+            (category) => category.title === activeCategoryTitle,
+          );
 
-  const filteredItems = useMemo(() => {
-    if (!searchQuery) return activeCategory.items;
+    if (!query) return byCategory;
 
-    const query = searchQuery.toLowerCase();
-    return activeCategory.items.filter(
-      (item) =>
-        item.name.toLowerCase().includes(query) ||
-        item.desc.toLowerCase().includes(query) ||
-        item.tags.some((tag) => tag.toLowerCase().includes(query)),
-    );
-  }, [activeCategory.items, searchQuery]);
+    return byCategory
+      .map((category) => ({
+        ...category,
+        items: category.items.filter(
+          (item) =>
+            item.name.toLowerCase().includes(query) ||
+            item.desc.toLowerCase().includes(query) ||
+            item.tags.some((tag) => tag.toLowerCase().includes(query)),
+        ),
+      }))
+      .filter((category) => category.items.length > 0);
+  }, [menuCategories, activeCategoryTitle, searchQuery]);
+
+  const totalVisibleItems = visibleCategories.reduce(
+    (count, category) => count + category.items.length,
+    0,
+  );
 
   const totalAmount = cart.reduce(
     (sum, item) => sum + item.price * item.qty,
@@ -62,7 +83,7 @@ export function MenuClient() {
   const activeItemCount = cart.reduce((count, item) => count + item.qty, 0);
 
   return (
-    <div className="relative min-h-screen bg-cream pt-20 pb-32 sm:pt-24 sm:pb-40">
+    <div className="relative min-h-screen bg-cream pt-28 pb-32 sm:pt-32 sm:pb-40">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="mb-8 text-center">
           <p className="mb-1 font-script text-3xl leading-none text-brand-gold sm:text-4xl">
@@ -93,7 +114,7 @@ export function MenuClient() {
           />
         </div>
 
-        {filteredItems.length === 0 ? (
+        {totalVisibleItems === 0 ? (
           <div className="border border-border py-20 text-center text-ink/50">
             <p className="mb-2 text-lg">
               No items found matching &quot;{searchQuery}&quot;
@@ -111,17 +132,20 @@ export function MenuClient() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            key={activeCategory.title}
-            className="relative"
+            key={`${activeCategoryTitle}-${searchQuery}`}
+            className="relative space-y-16"
           >
-            <MenuItemList
-              activeCategory={{ ...activeCategory, items: filteredItems }}
-              itemQtyByName={itemQtyByName}
-              onOpenItem={setSelectedItem}
-              onAddToCart={addToCart}
-              onIncrementItem={(name) => updateQty(name, 1)}
-              onDecrementItem={(name) => updateQty(name, -1)}
-            />
+            {visibleCategories.map((category) => (
+              <MenuItemList
+                key={category.title}
+                activeCategory={category}
+                itemQtyByName={itemQtyByName}
+                onOpenItem={setSelectedItem}
+                onAddToCart={addToCart}
+                onIncrementItem={(name) => updateQty(name, 1)}
+                onDecrementItem={(name) => updateQty(name, -1)}
+              />
+            ))}
           </motion.div>
         )}
 

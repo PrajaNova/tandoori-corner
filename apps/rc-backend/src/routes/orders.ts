@@ -1,13 +1,13 @@
 import type { FastifyInstance } from "fastify";
 
-import type { MenuService } from "../services/menu-service.js";
+import type { CatalogService } from "../services/catalog-service.js";
 import type {
   CreateOrderInput,
   OrderService,
 } from "../services/order-service.js";
 
 interface OrderRouteOptions {
-  menuService: MenuService;
+  catalogService: CatalogService;
   orderService: OrderService;
 }
 
@@ -58,19 +58,19 @@ const createOrderSchema = {
 
 export async function registerOrderRoutes(
   app: FastifyInstance,
-  { menuService, orderService }: OrderRouteOptions,
+  { catalogService, orderService }: OrderRouteOptions,
 ) {
   app.post("/", { schema: createOrderSchema }, async (request, reply) => {
     const input = request.body as CreateOrderInput;
-    const invalidItem = input.items.find(
-      (item) => !menuService.getItem(item.menuItemId),
-    );
 
-    if (invalidItem) {
-      return reply.code(400).send({
-        error: "MENU_ITEM_NOT_FOUND",
-        message: `Menu item ${invalidItem.menuItemId} was not found.`,
-      });
+    for (const item of input.items) {
+      const found = await catalogService.getItem(item.menuItemId);
+      if (!found) {
+        return reply.code(400).send({
+          error: "MENU_ITEM_NOT_FOUND",
+          message: `Menu item ${item.menuItemId} was not found.`,
+        });
+      }
     }
 
     const order = orderService.create(input);

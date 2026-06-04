@@ -132,7 +132,7 @@ function DefaultMenuControls({
     <button
       type="button"
       aria-label={`Add ${itemName}`}
-      className="h-9 w-9 shrink-0 rounded-full bg-brand-gold text-brand-dark transition-colors hover:bg-ink hover:text-cream"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-gold text-brand-dark transition-colors hover:bg-ink hover:text-cream"
       onClick={(e) => {
         e.stopPropagation();
         onAdd();
