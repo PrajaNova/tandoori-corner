@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Script from "next/script.js";
-import { getMenuCategories, MENU_REVALIDATE_SECONDS } from "@/lib/catalog";
 import {
   buildBreadcrumbJsonLd,
   buildMenuJsonLd,
@@ -8,11 +7,8 @@ import {
   jsonLdScript,
 } from "@/lib/seo";
 
-import { MenuClient } from "./MenuClient";
-
-// Render on the server and serve one shared, cached page to every visitor.
-// Revalidated at most once every 24 hours (ISR).
-export const revalidate = 86400;
+import { MenuClassic } from "./MenuClassic";
+import { menuCategories } from "./menu-data";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/menu",
@@ -26,21 +22,16 @@ const breadcrumbs = [
   { name: "Menu", path: "/menu" },
 ] as const;
 
-export default async function MenuPage() {
-  // Keep MENU_REVALIDATE_SECONDS and the route `revalidate` aligned.
-  void MENU_REVALIDATE_SECONDS;
-  const menuCategories = await getMenuCategories();
+const menuSchemaSections = menuCategories.map((category) => ({
+  title: category.title,
+  items: category.items.map((item) => ({
+    name: item.name,
+    description: item.desc,
+    priceText: item.price,
+  })),
+}));
 
-  const menuSchemaSections = menuCategories.map((category) => ({
-    title: category.title,
-    items: category.items.map((item) => ({
-      name: item.name,
-      description: item.desc,
-      priceText: item.price,
-      image: item.img,
-    })),
-  }));
-
+export default function MenuPage() {
   return (
     <>
       <Script
@@ -61,7 +52,7 @@ export default async function MenuPage() {
           __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
         }}
       />
-      <MenuClient menuCategories={menuCategories} />
+      <MenuClassic />
     </>
   );
 }

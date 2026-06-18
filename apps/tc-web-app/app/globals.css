@@ -1,29 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Great+Vibes&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "../theme/colors.css";
 @import "../theme/typography.css";
 @import "../theme/gradient.css";
 
 :root {
-  --background: #faf8f5;
-  --foreground: #2c2621;
-  --card: #fffdfa;
-  --card-foreground: #2c2621;
-  --popover: #fffdfa;
-  --popover-foreground: #2c2621;
-  --primary: #c97228;
-  --primary-foreground: #faf8f5;
-  --secondary: #849079;
-  --secondary-foreground: #faf8f5;
-  --muted: #eee6dd;
-  --muted-foreground: #6f6257;
-  --accent: #f1e8de;
-  --accent-foreground: #2c2621;
+  --background: #ffffff;
+  --foreground: #222222;
+  --card: #ffffff;
+  --card-foreground: #222222;
+  --popover: #ffffff;
+  --popover-foreground: #222222;
+  --primary: #c59d5f;
+  --primary-foreground: #ffffff;
+  --secondary: #222222;
+  --secondary-foreground: #ffffff;
+  --muted: #f9f9f9;
+  --muted-foreground: #9b9b9b;
+  --accent: #f9f9f9;
+  --accent-foreground: #222222;
   --destructive: #c2410c;
-  --destructive-foreground: #faf8f5;
-  --border: #e3d6c8;
-  --input: #d8c8b8;
-  --ring: #c97228;
+  --destructive-foreground: #ffffff;
+  --border: #eeeeee;
+  --input: #eeeeee;
+  --ring: #c59d5f;
   --radius: 0.5rem;
   color-scheme: light;
 }
@@ -47,13 +47,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
 }
 
 button,

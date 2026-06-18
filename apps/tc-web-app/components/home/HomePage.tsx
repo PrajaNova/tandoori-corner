@@ -1,27 +1,25 @@
-import { AboutBalestier } from "./sections/AboutBalestier";
-import { CulinaryCorners } from "./sections/CulinaryCorners";
-import { DailyOffersSection } from "./sections/DailyOffersSection";
-import { ExperienceFeatures } from "./sections/ExperienceFeatures";
-import { GoogleReviewsSection } from "./sections/GoogleReviewsSection";
-import { HeritageSection } from "./sections/HeritageSection";
-import { Hero } from "./sections/Hero";
-import { RatingsStrip } from "./sections/RatingsStrip";
-import { SocialFootprint } from "./sections/SocialFootprint";
-import { TcbSpotlight } from "./sections/TcbSpotlight";
+import { GrannyHero } from "./sections/GrannyHero";
+import { GrannyWelcome } from "./sections/GrannyWelcome";
+import { GrannySpecials } from "./sections/GrannySpecials";
+import { GrannyHighlightLeft } from "./sections/GrannyHighlightLeft";
+import { GrannyHighlightRight } from "./sections/GrannyHighlightRight";
+import { GrannyParallaxQuote } from "./sections/GrannyParallaxQuote";
+import { GrannyMenuPreview } from "./sections/GrannyMenuPreview";
+import { GrannyReservation } from "./sections/GrannyReservation";
+import { GrannyTestimonial } from "./sections/GrannyTestimonial";
 
 export function HomePage() {
   return (
     <>
-      <Hero />
-      <RatingsStrip />
-      <ExperienceFeatures />
-      <HeritageSection />
-      <CulinaryCorners />
-      <GoogleReviewsSection />
-      <TcbSpotlight />
-      <DailyOffersSection />
-      <AboutBalestier />
-      <SocialFootprint />
+      <GrannyHero />
+      <GrannyWelcome />
+      <GrannySpecials />
+      <GrannyHighlightLeft />
+      <GrannyHighlightRight />
+      <GrannyParallaxQuote />
+      <GrannyMenuPreview />
+      <GrannyReservation />
+      <GrannyTestimonial />
     </>
   );
 }

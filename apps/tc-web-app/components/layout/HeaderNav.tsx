@@ -1,12 +1,9 @@
 "use client";
 
-import { Menu as MenuIcon, X } from "lucide-react";
+import { Menu, Search, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-import { ExperienceDialog } from "@/components/layout/ExperienceDialog";
-import { Button } from "@/components/ui/button";
 
 interface NavigationItem {
   href: string;
@@ -19,141 +16,87 @@ interface HeaderNavProps {
 
 export function HeaderNav({ items }: HeaderNavProps) {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [experienceOpen, setExperienceOpen] = useState(false);
-
-  const isHome = pathname === "/";
-  const isTransparent = isHome && !hasScrolled && !mobileMenuOpen;
-  const closeMobileMenu = () => setMobileMenuOpen(false);
-  const openExperience = () => {
-    setMobileMenuOpen(false);
-    setExperienceOpen(true);
-  };
 
   useEffect(() => {
     const updateHeaderState = () => setHasScrolled(window.scrollY > 24);
-
     updateHeaderState();
     window.addEventListener("scroll", updateHeaderState, { passive: true });
-    window.addEventListener("resize", updateHeaderState);
-
-    return () => {
-      window.removeEventListener("scroll", updateHeaderState);
-      window.removeEventListener("resize", updateHeaderState);
-    };
+    return () => window.removeEventListener("scroll", updateHeaderState);
   }, []);
 
+  const isDarkBg = !hasScrolled;
+
+  const leftItems = items.slice(0, Math.ceil(items.length / 2));
+  const rightItems = items.slice(Math.ceil(items.length / 2));
+
   return (
-    <>
-      <nav
-        className={`fixed top-9 z-50 w-full py-3 transition-all duration-500 md:py-4 ${
-          isTransparent
-            ? "border-b border-transparent bg-transparent"
-            : "border-b border-border bg-background/95 shadow-sm backdrop-blur-md"
-        }`}
-      >
-        <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-          <Link
-            href="/"
-            className="flex shrink-0 flex-col text-left"
-            onClick={closeMobileMenu}
-            aria-label="Tandoori Corner home"
-          >
-            <span
-              className={`font-space text-xl md:text-2xl font-bold tracking-tight leading-none transition-colors ${
-                isTransparent ? "text-cream" : "text-foreground"
-              }`}
-            >
-              Tandoori<span className="text-brand-gold">Corner</span>
-            </span>
-            <span
-              className={`mt-1 text-[8px] uppercase tracking-[0.18em] transition-colors md:text-[9px] md:tracking-[0.2em] ${
-                isTransparent ? "text-cream/70" : "text-muted-foreground"
-              }`}
-            >
-              Est. 2008 &bull; Balestier
-            </span>
-          </Link>
-
-          <div className="hidden lg:flex items-center gap-10">
-            {items.map((item) => {
-              const isActive = item.href.includes("#")
-                ? false
-                : item.href === "/"
-                  ? pathname === "/"
-                  : pathname === item.href.split("#")[0];
-
+    <nav
+      className={`fixed top-0 z-50 w-full transition-all duration-500 py-6 border-b border-white/10 ${
+        isDarkBg
+          ? "bg-transparent text-white"
+          : "bg-ink text-white shadow-md"
+      }`}
+    >
+      <div className="container mx-auto px-8 flex items-center justify-between relative">
+        
+        {/* Left Side (Left Nav Links + Mobile Hamburger) */}
+        <div className="flex items-center space-x-8 z-10 w-1/3">
+          <button className="hover:text-primary transition-colors lg:hidden">
+            <Menu className="w-5 h-5" />
+          </button>
+          <div className="hidden lg:flex items-center space-x-8">
+            {leftItems.map((item) => {
+              const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
               return (
                 <Link
-                  key={item.href}
+                  key={item.label}
                   href={item.href}
-                  className={`font-space text-lg tracking-normal transition-colors ${
-                    isActive
-                      ? "text-primary"
-                      : isTransparent
-                        ? "text-cream/90 hover:text-brand-gold"
-                        : "text-foreground/90 hover:text-primary"
+                  className={`font-raleway text-xs font-bold tracking-widest transition-colors hover:text-primary ${
+                    isActive ? "text-primary" : "text-white"
                   }`}
                 >
                   {item.label}
                 </Link>
               );
             })}
-            <Button
-              className="font-space text-base normal-case tracking-normal"
-              onClick={openExperience}
-              size="default"
-            >
-              Experience
-            </Button>
           </div>
-
-          <Button
-            className={`lg:hidden ${
-              isTransparent ? "text-cream" : "text-foreground"
-            }`}
-            onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-            size="icon"
-            variant="ghost"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <MenuIcon className="w-6 h-6" />
-            )}
-          </Button>
         </div>
-      </nav>
 
-      {mobileMenuOpen ? (
-        <div className="fixed inset-0 z-40 flex flex-col gap-6 bg-background/95 px-6 pt-36 backdrop-blur-md lg:hidden">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={closeMobileMenu}
-              className="text-2xl text-left font-space border-b border-border pb-4 text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Button
-            onClick={openExperience}
-            className="mt-4 font-space text-lg normal-case tracking-normal"
-            size="lg"
-          >
-            Experience
-          </Button>
+        {/* Center Logo */}
+        <Link href="/" className="flex flex-col items-center absolute left-1/2 -translate-x-1/2 z-20 mt-1">
+          <span className="font-raleway text-[10px] tracking-[0.3em] uppercase leading-none text-white mb-1">Restaurant</span>
+          <span className="font-script text-4xl leading-none text-white capitalize">Granny</span>
+        </Link>
+
+        {/* Right Side (Right Nav Links + Action Icons) */}
+        <div className="flex items-center justify-end space-x-6 z-10 w-1/3">
+          <div className="hidden lg:flex items-center space-x-8 mr-4">
+            {rightItems.map((item) => {
+              const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`font-raleway text-xs font-bold tracking-widest transition-colors hover:text-primary ${
+                    isActive ? "text-primary" : "text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+          
+          <button className="hover:text-primary transition-colors">
+            <Search className="w-4 h-4" />
+          </button>
+          <button className="relative hover:text-primary transition-colors">
+            <ShoppingBag className="w-4 h-4" />
+            <span className="absolute -top-2 -right-2 bg-primary text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center text-white">0</span>
+          </button>
         </div>
-      ) : null}
-
-      <ExperienceDialog
-        open={experienceOpen}
-        onClose={() => setExperienceOpen(false)}
-      />
-    </>
+      </div>
+    </nav>
   );
 }
