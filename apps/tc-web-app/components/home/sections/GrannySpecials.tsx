@@ -4,44 +4,45 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const specials = [
   {
-    name: "Grilled Fillet",
+    name: "Tandoori Chicken",
     description:
-      "Pork fillet, ginger, garlic, honey, pepper & canola oil, Pork fillet, ginger.",
-    price: "$26.95",
+      "Tender chicken marinated overnight in yoghurt, fresh ginger, garlic & aromatic spices, charred in the tandoor.",
+    price: "S$22.00",
     image: "/granny/granny_specials_1.jpg",
   },
   {
-    name: "Alder Grilled Seafood Paella",
+    name: "Butter Chicken",
     description:
-      "Monkfish, onion, paella rice,smoked paprika, Monkfish, onion, paella rice, garlic.",
-    price: "$40.95",
+      "Succulent chicken in a velvety tomato-cream sauce with fenugreek, cardamom & house butter — our all-time bestseller.",
+    price: "S$18.00",
     image: "/granny/granny_specials_2.jpg",
   },
   {
-    name: "Chicken Breast",
-    description: "Paupiette of chicken, blue cheese, rosemary & beans.",
-    price: "$26.95",
+    name: "Lamb Seekh Kebab",
+    description:
+      "Minced lamb blended with green chilli, fresh coriander & warming spices, grilled on skewers in the clay oven.",
+    price: "S$20.00",
     image: "/granny/granny_specials_3.jpg",
   },
   {
-    name: "Sea Trout",
+    name: "Palak Paneer",
     description:
-      "Roast trout, English asparagus, watercress & watercress & royals.",
-    price: "$44.95",
+      "Creamy spinach curry with house-made cottage cheese, cumin-tempered ghee & a hint of fresh cream.",
+    price: "S$16.00",
     image: "/granny/granny_specials_4.jpg",
   },
   {
-    name: "Smoked Paprika Hummus",
+    name: "Peshawari Naan",
     description:
-      "Red peppers, roasted garlic, lemon slices, olives & mint.Red peppers.",
-    price: "$13.95",
+      "Tandoor-baked flatbread stuffed with coconut, almonds & sultanas — the perfect partner to any curry.",
+    price: "S$6.00",
     image: "/granny/granny_specials_5.jpg",
   },
   {
-    name: "Roasted Steak Roulade",
+    name: "Chicken Biryani",
     description:
-      "Mint parsley with apple cider vinegar, salt & spices, parsley with apple cider.",
-    price: "$29.95",
+      "Fragrant basmati rice slow-cooked with saffron-marinated chicken, caramelised onions & whole spices.",
+    price: "S$18.00",
     image: "/granny/granny_specials_6.jpg",
   },
 ];
@@ -62,8 +63,8 @@ export function GrannySpecials() {
 
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeading
-          cursiveText="What's for lunch?"
-          mainText="Check Our Daily Specials"
+          cursiveText="Chef's selection"
+          mainText="Our Signature Dishes"
           dark
         />
 
@@ -76,6 +77,7 @@ export function GrannySpecials() {
                     src={item.image}
                     alt={item.name}
                     fill
+                    sizes="88px"
                     className="object-cover"
                   />
                 </div>

@@ -2,13 +2,11 @@ import { HeaderNav } from "@/components/layout/HeaderNav";
 
 const navigationItems = [
   { href: "/", label: "HOME" },
-  { href: "/story", label: "ABOUT" },
   { href: "/menu", label: "MENU" },
-  { href: "#features", label: "FEATURES" },
-  { href: "#gallery", label: "GALLERY" },
-  { href: "#blog", label: "BLOG" },
-  { href: "#shop", label: "SHOP" },
-  { href: "#elements", label: "ELEMENTS" },
+  { href: "/story", label: "ABOUT" },
+  { href: "/order", label: "ORDER ONLINE" },
+  { href: "/private-events", label: "EVENT SPACE" },
+  { href: "/catering", label: "CATERING" },
 ];
 
 export function AppHeader() {

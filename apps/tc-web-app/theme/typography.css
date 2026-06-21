@@ -1,11 +1,11 @@
 @theme {
-  --font-sans: "Raleway", ui-sans-serif, system-ui, sans-serif;
-  --font-raleway: "Raleway", ui-sans-serif, system-ui, sans-serif;
-  --font-script: "Great Vibes", cursive;
-  --font-cursive: "Great Vibes", cursive;
-  --font-kaushan: "Kaushan Script", cursive;
-  --font-heading: "Raleway", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Raleway", ui-sans-serif, system-ui, sans-serif;
-  --font-space: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-raleway: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--ff-script), "Brush Script MT", cursive;
+  --font-cursive: var(--ff-script), "Brush Script MT", cursive;
+  --font-kaushan: var(--ff-kaushan), "Brush Script MT", cursive;
+  --font-heading: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-space: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }

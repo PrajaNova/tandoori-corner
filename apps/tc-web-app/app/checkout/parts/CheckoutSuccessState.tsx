@@ -11,7 +11,7 @@ export function CheckoutSuccessState() {
       >
         <CheckCircle2 className="h-12 w-12 text-brand-gold" />
       </motion.div>
-      <h2 className="mb-4 font-space text-4xl text-ink">Order Confirmed!</h2>
+      <h2 className="mb-4 font-kaushan text-4xl text-ink">Order Confirmed!</h2>
       <p className="mb-8 max-w-md text-center font-light text-ink/60">
         Your order has been successfully placed. We&apos;ve sent a confirmation
         to your mobile number. Your food will arrive in approximately 45

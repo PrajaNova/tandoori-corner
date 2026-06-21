@@ -9,39 +9,45 @@ interface Dish {
   price: string;
 }
 
+const columnAlts = [
+  "Tandoori Corner starters — Samosa, Seekh Kebab, Fish Tikka and Paneer Tikka",
+  "North Indian curries — Butter Chicken, Lamb Rogan Josh and Palak Paneer",
+  "Tandoor breads, biryani and Indian desserts at Tandoori Corner",
+];
+
 const columns: { image: string; items: Dish[] }[] = [
   {
     image: "/granny/granny_menu_simple-banner_1.jpg",
     items: [
       {
-        name: "Chicken Breast",
-        price: "$33.95",
-        desc: "Paupiette of chicken, blue cheese, rosemary & beans.",
+        name: "Samosa (2 pcs)",
+        price: "S$8.00",
+        desc: "Crispy pastry parcels filled with spiced potato & peas, served with tamarind chutney.",
       },
       {
-        name: "Salmon Steak",
-        price: "$41.95",
-        desc: "Salmon, butter, lemon juice, onion, garlic & salad.",
+        name: "Onion Bhaji",
+        price: "S$8.00",
+        desc: "Golden fritters of sliced onion, green chilli, cumin & fresh coriander.",
       },
       {
-        name: "Chicken Crispy",
-        price: "$33.95",
-        desc: "Smoked quail, crispy egg, spelt, girolles, parsley.",
+        name: "Seekh Kebab",
+        price: "S$20.00",
+        desc: "Minced lamb with green chilli, ginger & warming spices, grilled in the tandoor.",
       },
       {
-        name: "Grilled Fillet",
-        price: "$26.95",
-        desc: "Baguette, basil, arugula, olives, cherry-tomatoes.",
+        name: "Fish Tikka",
+        price: "S$22.00",
+        desc: "Chunks of fish marinated in mustard, turmeric & yoghurt, charred over live coals.",
       },
       {
-        name: "Roasted Steak Roulade",
-        price: "$29.95",
-        desc: "Mint parsley with apple cider vinegar, salt & spices.",
+        name: "Paneer Tikka",
+        price: "S$16.00",
+        desc: "Cottage cheese cubes with capsicum & onion, marinated in spiced yoghurt & grilled.",
       },
       {
-        name: "Sea Trout",
-        price: "$44.95",
-        desc: "Roast trout, English asparagus, watercress & royals.",
+        name: "Aloo Tikki",
+        price: "S$10.00",
+        desc: "Pan-fried potato patties with cumin, peas & coriander, topped with tangy chutneys.",
       },
     ],
   },
@@ -49,34 +55,34 @@ const columns: { image: string; items: Dish[] }[] = [
     image: "/granny/granny_menu_simple-banner_2.jpg",
     items: [
       {
-        name: "Alder Grilled Seafood Paella",
-        price: "$40.95",
-        desc: "Monkfish, onion, paella rice, garlic & smoked paprika.",
+        name: "Butter Chicken",
+        price: "S$18.00",
+        desc: "Classic tomato-cream curry with tender chicken tikka, fenugreek & house butter.",
       },
       {
-        name: "Cordon Bleu",
-        price: "$19.95",
-        desc: "chicken breasts, ham, pepper & Swiss cheese.",
+        name: "Lamb Rogan Josh",
+        price: "S$22.00",
+        desc: "Slow-braised lamb in a deep Kashmiri sauce of whole spices & caramelised onion.",
       },
       {
-        name: "Smoked Paprika Hummus",
-        price: "$13.95",
-        desc: "Red peppers, roasted garlic, lemon slices, olives .",
+        name: "Dal Makhani",
+        price: "S$14.00",
+        desc: "Black lentils slow-cooked overnight with tomato, garlic & a swirl of cream.",
       },
       {
-        name: "Beef/Pork Ribs",
-        price: "$35.95",
-        desc: "Beef ribs, ginger, garlic, honey, pepper & canola oil.",
+        name: "Palak Paneer",
+        price: "S$16.00",
+        desc: "Creamy spinach curry with house-made cottage cheese & cumin-tempered ghee.",
       },
       {
-        name: "Creamy Smoked Salmon",
-        price: "$44.95",
-        desc: "Smoked salmon, leek, potato soup & chives.",
+        name: "Chicken Tikka Masala",
+        price: "S$18.00",
+        desc: "Chargrilled chicken tikka in a rich, aromatic masala sauce with fresh cream.",
       },
       {
-        name: "Boerewors",
-        price: "$29.95",
-        desc: "Meat, vinger, plass wors spice & some thick.",
+        name: "Prawn Masala",
+        price: "S$24.00",
+        desc: "Juicy prawns tossed in a bold, tomato-based masala with mustard seeds & curry leaf.",
       },
     ],
   },
@@ -84,52 +90,49 @@ const columns: { image: string; items: Dish[] }[] = [
     image: "/granny/granny_menu_simple-banner_3.jpg",
     items: [
       {
-        name: "Traditional pancakes",
-        price: "$8.95",
-        desc: "Milk, eggs, strawberries, butter & maple syrup.",
+        name: "Chicken Biryani",
+        price: "S$18.00",
+        desc: "Saffron-scented basmati with marinated chicken, caramelised onion & whole spices.",
       },
       {
-        name: "American Brunch",
-        price: "$14.95",
-        desc: "Applewood smoked bacon, tomatoes & green onions.",
+        name: "Peshawari Naan",
+        price: "S$6.00",
+        desc: "Tandoor-baked bread stuffed with coconut, almonds & sweet sultanas.",
       },
       {
-        name: "Cannoli with cream cheese",
-        price: "$15.95",
-        desc: "Smoked quail, crispy egg, spelt, girolles, parsley.",
+        name: "Garlic Naan",
+        price: "S$5.00",
+        desc: "Soft flatbread brushed with garlic butter & fresh coriander, fresh from the tandoor.",
       },
       {
-        name: "Chocolate Cherry Cake",
-        price: "$9.95",
-        desc: "Vanilla, milk, dark chocolate, cherries, eggs, butter.",
+        name: "Mango Lassi",
+        price: "S$6.00",
+        desc: "Chilled blend of fresh mango, creamy yoghurt & a whisper of cardamom.",
       },
       {
-        name: "Pain au chocolat",
-        price: "$3.95",
-        desc: "Homemade croissant contain a bar of dark chocolate.",
+        name: "Gulab Jamun",
+        price: "S$7.00",
+        desc: "Soft milk-solid dumplings soaked in rose-saffron syrup, served warm.",
       },
       {
-        name: "Tarte Tatin",
-        price: "$5.95",
-        desc: "Caramelised apple tart, vanilla ice cream.",
+        name: "Kulfi",
+        price: "S$8.00",
+        desc: "Traditional Indian ice cream with pistachio & saffron, set in a cone mould.",
       },
     ],
   },
 ];
 
-const tabs = ["Lunch", "Dinner", "Dessert", "Drinks"];
+const tabs = ["Tandoori", "Curry", "Sabzi", "Sweets"];
 
 export function GrannyMenuPreview() {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
-        <SectionHeading cursiveText="Taste life" mainText="Discover Our Menu" />
+        <SectionHeading cursiveText="Taste the flavours" mainText="Discover Our Menu" />
 
         <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-          Everyone has taste, even if they don&apos;t realize it. Even if
-          you&apos;re not a great chef, there&apos;s nothing to stop you
-          understanding the difference between what tastes good and what
-          doesn&apos;t.
+          From smoky tandoori starters to fragrant biryanis and indulgent desserts, our menu celebrates the full breadth of North Indian cuisine — prepared fresh every day by our expert kitchen team.
         </p>
 
         <div className="flex justify-center flex-wrap gap-x-10 gap-y-2 mb-14">
@@ -153,8 +156,9 @@ export function GrannyMenuPreview() {
               <div className="relative aspect-[4/3] overflow-hidden mb-8">
                 <Image
                   src={col.image}
-                  alt={`Menu category ${idx + 1}`}
+                  alt={columnAlts[idx]}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>

@@ -21,26 +21,26 @@ interface Slide {
 const slides: Slide[] = [
   {
     image: "/granny/granny_sliders_slide-bg_3.jpg",
-    cursive: "Made With Love",
-    heading: "We Serve Quality Food",
-    desc: "Granny is a restaurant, bar and coffee roastery located on Egypt. We have awesome recipes and the most talented chefs in town!",
+    cursive: "Since 2008",
+    heading: "Authentic North Indian Cuisine",
+    desc: "Tandoori Corner is a beloved North Indian curry house on Balestier Road, Singapore. Experience tandoor-fired perfection and time-honoured recipes from our master chefs.",
     actions: [
       { label: "View Menu", href: "/menu", variant: "solid" },
-      { label: "Reserve Now", href: "/checkout", variant: "outline" },
+      { label: "Reserve Now", href: "/#reservation", variant: "outline" },
     ],
   },
   {
     image: "/granny/granny_sliders_slide-bg_4.jpg",
-    cursive: "Creative & Talented Chefs",
-    heading: "Hot and Ready to Serve",
-    actions: [{ label: "Reserve Now", href: "/checkout", variant: "solid" }],
+    cursive: "Expert Chefs",
+    heading: "Tandoor-Fired Perfection",
+    actions: [{ label: "Reserve Now", href: "/#reservation", variant: "solid" }],
   },
   {
     image: "/granny/granny_sliders_slide-bg_7.jpg",
-    cursive: "Made With Love",
-    heading: "Delicious Food",
-    desc: "Granny is a restaurant, bar and coffee roastery located on Egypt. We have awesome recipes and the most talented chefs in town!",
-    actions: [{ label: "Purchase Now", href: "/menu", variant: "solid" }],
+    cursive: "Balestier Road, Singapore",
+    heading: "Discover Our Flavours",
+    desc: "From succulent Tandoori Chicken to rich Butter Chicken and freshly baked Peshawari Naan — every dish tells a story of passion and authentic spice.",
+    actions: [{ label: "Explore Menu", href: "/menu", variant: "solid" }],
   },
 ];
 

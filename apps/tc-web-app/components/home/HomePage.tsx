@@ -5,6 +5,7 @@ import { GrannyHighlightLeft } from "./sections/GrannyHighlightLeft";
 import { GrannyHighlightRight } from "./sections/GrannyHighlightRight";
 import { GrannyParallaxQuote } from "./sections/GrannyParallaxQuote";
 import { GrannyMenuPreview } from "./sections/GrannyMenuPreview";
+import { GrannyAmenities } from "./sections/GrannyAmenities";
 import { GrannyReservation } from "./sections/GrannyReservation";
 import { GrannyTestimonial } from "./sections/GrannyTestimonial";
 
@@ -18,6 +19,7 @@ export function HomePage() {
       <GrannyHighlightRight />
       <GrannyParallaxQuote />
       <GrannyMenuPreview />
+      <GrannyAmenities />
       <GrannyReservation />
       <GrannyTestimonial />
     </>

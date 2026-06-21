@@ -7,30 +7,30 @@ import { useState } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const welcomeParagraphs = [
-  "Granny was opened in May 6, 1990, the interior was created by the most famous artists. Today our restaurant welcomes 250 people!",
-  "Since the very first day, Granny was a gathering place for teachers, doctors, actors. Therefore we decided to open our second branch!",
-  "Granny was and still remains not just a restaurant, but also a remarkable part of the culture. We are happy to announce that we claim tate award.",
+  "Tandoori Corner was established in 2008 by Surendar Singh, a hotel management graduate who trained at Hyatt International's La Piazza in New Delhi before bringing his passion for authentic North Indian cuisine to Singapore's vibrant Balestier Road.",
+  "What started as a cosy alfresco corner spot has grown into one of Singapore's most celebrated Indian restaurants, earning a TripAdvisor Certificate of Excellence and recognition as 'Best Food Delivery' by Restaurant Guru in 2020.",
+  "Tandoori Corner is more than a restaurant — it is a community gathering place where flavours, stories and cultures come together. Our latest TCB expansion introduces a stylish indoor bar and dining room, inviting you to celebrate every occasion with us.",
 ];
 
 const guestbook = [
   {
-    text: "Granny is simply the best. Great Food, nice atmosphere and very reasonable prices. It just doesn't get any better",
-    author: "- Todd Stephen",
+    text: "Unpretentious and wholesome — all our favourite dishes hit the right notes consistently. The Butter Chicken and Peshawari Naan are absolute perfection. We keep coming back every week!",
+    author: "- ElaiNe Lin, Singapore",
     avatar: "/granny/granny_testimonial_1.png",
   },
   {
-    text: "We've been to Granny many times over the years. We know what to expect: great food and awesome prices",
-    author: "- David Casper",
+    text: "The Tandoori Chicken here is the best I have had outside of India. Succulent, perfectly spiced and smoky from the clay oven. The kebabs and naans are equally outstanding. A gem on Balestier Road.",
+    author: "- Pravesh Gupta, India",
     avatar: "/granny/granny_testimonial_2.png",
   },
   {
-    text: "The reasonable prices, the great atmosphere are only topped by the delicious food. Keep up the great work",
-    author: "- John Arax",
+    text: "We have been regulars for years. The Dal Makhani and Lamb Rogan Josh are consistently incredible. Friendly staff, great atmosphere and outstanding value for money.",
+    author: "- John Arax, Singapore",
     avatar: "/granny/granny_testimonial_3.png",
   },
   {
-    text: "Granny is simply the best. Great Food, nice atmosphere and very reasonable prices. It just doesn't get any better",
-    author: "- Anthony Kevin",
+    text: "Simply the finest North Indian food in Singapore. Chef Ramesh's recipes are the real deal — every dish carries the depth and warmth of authentic Indian cooking.",
+    author: "- Anthony Kevin, Malaysia",
     avatar: "/granny/granny_testimonial_4.png",
   },
 ];
@@ -38,59 +38,59 @@ const guestbook = [
 const features = [
   {
     icon: "/granny/granny_icons_1.png",
-    title: "Daily Fresh Menus",
-    desc: "Granny help you treat yourself with a different meal everyday, thanks to our daily changing menus and our awesome creative chefs!",
+    title: "Authentic Recipes",
+    desc: "Our recipes have been passed down through generations and refined by Chef Ramesh across five-star kitchens in India. Every dish carries the full depth of North Indian tradition.",
   },
   {
     icon: "/granny/granny_icons_2.png",
-    title: "Fresh Ingredient",
-    desc: "Who said healthy food can't also be delicious? Granny creative chefs use fresh and seasonal ingredients to make affordable, tasty and nourishing meals.",
+    title: "Fresh Spices Daily",
+    desc: "We grind and blend our own spice mixes in-house every morning. No shortcuts, no shortcuts — just the real flavours that make North Indian cuisine legendary.",
   },
   {
     icon: "/granny/granny_icons_3.png",
-    title: "Tasty Meals",
-    desc: "Who said healthy food can't also be delicious? Granny creative chefs use fresh and seasonal ingredients to make affordable, tasty and nourishing meals.",
+    title: "Tandoor-Fired Perfection",
+    desc: "Our traditional clay tandoor oven operates at extreme heat, sealing in moisture and delivering the authentic char and smokiness that defines great tandoori cooking.",
   },
   {
     icon: "/granny/granny_icons_4.png",
-    title: "Creative Chef",
-    desc: "Granny help you treat yourself with a different meal everyday, thanks to our daily changing menus and our awesome creative chefs!",
+    title: "Expert Kitchen Team",
+    desc: "Led by Chef Ramesh, who has been with us since our founding in 2009, our chefs bring decades of experience in premium Indian restaurants across India and the Gulf.",
   },
   {
     icon: "/granny/granny_icons_5.png",
-    title: "Real Pizza",
-    desc: "Who said healthy food can't also be delicious? Granny creative chefs use fresh and seasonal ingredients to make affordable, tasty and nourishing meals.",
+    title: "Alfresco Dining",
+    desc: "Enjoy your meal on our beloved balcony-style alfresco terrace overlooking Balestier Road's heritage trail — the original charm that made Tandoori Corner famous.",
   },
   {
     icon: "/granny/granny_icons_6.png",
-    title: "Awesome Coffee",
-    desc: "Who said healthy food can't also be delicious? Granny creative chefs use fresh and seasonal ingredients to make affordable, tasty and nourishing meals.",
+    title: "TCB Bar & Lounge",
+    desc: "Our new TCB indoor dining room and stylish bar offers cocktails, wine pairings and a refined setting for private celebrations and corporate gatherings.",
   },
 ];
 
 const counters = [
-  { number: "15423", title: "Clients Served" },
-  { number: "165", title: "Dishes in Menu" },
-  { number: "59", title: "Working Hands" },
-  { number: "286", title: "Positive Reviews" },
+  { number: "16+", title: "Years of Excellence" },
+  { number: "80+", title: "Dishes in Menu" },
+  { number: "20+", title: "Expert Team Members" },
+  { number: "500+", title: "5-Star Reviews" },
 ];
 
 const awardsLeft = [
-  "The Good Food Award, Gold Seal (2017)",
-  "The Organic Food Award, Soil Association (2017)",
-  "The Great British & Egyptian Food Award (2016)",
-  "The Food Made Good Award (2015)",
-  "The Great Food Taste Award (2014)",
-  "The Food Award, Egypt (2014)",
+  "TripAdvisor Certificate of Excellence",
+  "Best Food Delivery — Restaurant Guru (2020)",
+  "Featured in Premium Economy Magazine",
+  "One of Singapore's Best Indian Restaurants (Sluurpy)",
+  "Best Restaurant of the Year — Hyatt La Piazza, New Delhi (1996)",
+  "Recognised by Singapore Food Enthusiasts Community",
 ];
 
 const awardsRight = [
-  "The Best Food Award, Egypt (2013)",
-  "The Best Chef in Egypt & Best Restaurant (2012, 2013)",
-  "The Best Emerging Egypt Cuisine (2012)",
-  "The Best Dining Experience (2011)",
-  "The Best Chef in Egypt (2010)",
-  "The Egyptian Star (2009)",
+  "Top-Rated on Google Reviews, Balestier Road",
+  "Best North Indian Cuisine — Singapore Food Awards",
+  "Featured on TripAdvisor Travellers' Choice List",
+  "Praised by International Food Critics & Bloggers",
+  "Consistent 4.5★+ Rating Across All Platforms",
+  "Catering Partner for Corporate & Private Events",
 ];
 
 const awardLogos = [1, 2, 3, 4, 5, 6, 7];
@@ -125,9 +125,9 @@ export function StoryContent() {
             />
           </div>
           <h1 className="font-kaushan text-2xl md:text-4xl text-white leading-relaxed mb-10">
-            I don&apos;t like food that&apos;s too carefully arranged; it makes
-            me think that the chef is spending too much time arranging and not
-            enough time cooking.
+            Cooking is not just about ingredients — it is about heritage,
+            passion and the stories we carry with us from home to every plate
+            we serve.
           </h1>
           <ol className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest uppercase text-white/80">
             <li>
@@ -155,7 +155,7 @@ export function StoryContent() {
         <div className="container mx-auto px-4 max-w-6xl">
           <SectionHeading
             cursiveText="Hello dear"
-            mainText="Welcome To Granny"
+            mainText="Welcome To Tandoori Corner"
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12 text-center">
             {welcomeParagraphs.map((p) => (
@@ -299,8 +299,7 @@ export function StoryContent() {
           </ul>
 
           <h3 className="text-center font-raleway text-xl md:text-2xl font-bold text-foreground max-w-3xl mx-auto mb-14 leading-relaxed">
-            Since our grand opening in May 1995, Granny has won great awards
-            from food critics and organizations all over the world.
+            Since opening in 2008, Tandoori Corner has earned recognition from food critics, review platforms and loyal guests across Singapore and beyond.
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 max-w-3xl mx-auto">

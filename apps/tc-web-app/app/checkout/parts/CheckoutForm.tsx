@@ -11,8 +11,6 @@ export function CheckoutForm({ onSubmit }: CheckoutFormProps) {
   return (
     <div className="lg:col-span-7">
       <div className="mb-10 border-b border-border pb-10">
-        <h1 className="mb-6 font-space text-4xl text-ink">Checkout</h1>
-
         <div className="flex flex-col items-center justify-between gap-6 border border-border bg-card p-6 sm:flex-row">
           <div>
             <h3 className="mb-1 text-sm font-medium text-ink">
@@ -33,7 +31,7 @@ export function CheckoutForm({ onSubmit }: CheckoutFormProps) {
 
       <form onSubmit={onSubmit} className="space-y-12">
         <section>
-          <h3 className="mb-6 flex items-center gap-3 font-space text-2xl text-ink">
+          <h3 className="mb-6 flex items-center gap-3 font-kaushan text-2xl text-ink">
             <MapPin className="h-6 w-6 text-brand-gold" /> Delivery Details
           </h3>
 
@@ -75,7 +73,7 @@ export function CheckoutForm({ onSubmit }: CheckoutFormProps) {
         </section>
 
         <section className="border-t border-border pt-6">
-          <h3 className="mb-6 flex items-center gap-3 font-space text-2xl text-ink">
+          <h3 className="mb-6 flex items-center gap-3 font-kaushan text-2xl text-ink">
             <CreditCard className="h-6 w-6 text-brand-gold" /> Payment Method
           </h3>
 

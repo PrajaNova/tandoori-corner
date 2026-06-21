@@ -20,7 +20,7 @@ export function OrderSummary({
   return (
     <div className="lg:col-span-5">
       <div className="sticky top-32 border border-border bg-card p-8">
-        <h3 className="mb-6 font-space text-2xl text-ink">Order Summary</h3>
+        <h3 className="mb-6 font-kaushan text-2xl text-ink">Order Summary</h3>
 
         <div className="custom-scrollbar mb-8 max-h-[40vh] space-y-6 overflow-y-auto pr-2">
           {cart.map((item) => (
@@ -62,8 +62,8 @@ export function OrderSummary({
           </div>
 
           <div className="mt-4 mb-2 flex items-center justify-between border-t border-border pt-4 text-ink">
-            <span className="font-space text-lg font-bold">Total</span>
-            <span className="font-space text-2xl font-bold text-brand-gold">
+            <span className="font-raleway text-lg font-bold">Total</span>
+            <span className="font-raleway text-2xl font-bold text-brand-gold">
               ${total.toFixed(2)}
             </span>
           </div>

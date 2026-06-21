@@ -4,12 +4,19 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-const quote =
-  "Once again, I feel compelled to write about our wonderful dining experience at Granny. My wife and I have often had wonderful meals. We have shared either meals or conversations about our meals at your restaurant with friends and family";
-
 const testimonials = [
-  { author: "- Todd Stephen", avatar: "/granny/granny_testimonial_1.png" },
-  { author: "- David Casper", avatar: "/granny/granny_testimonial_2.png" },
+  {
+    quote:
+      "Unpretentious and wholesome — all our favourite dishes hit the right notes consistently. The Butter Chicken and Peshawari Naan are absolute perfection. We keep coming back every week!",
+    author: "- ElaiNe Lin, Singapore",
+    avatar: "/granny/granny_testimonial_1.png",
+  },
+  {
+    quote:
+      "The Tandoori Chicken here is the best I have had outside of India. Succulent, perfectly spiced and smoky from the clay oven. The kebabs and naans are equally outstanding. A gem on Balestier Road.",
+    author: "- Pravesh Gupta, India",
+    avatar: "/granny/granny_testimonial_2.png",
+  },
 ];
 
 export function GrannyTestimonial() {
@@ -26,15 +33,16 @@ export function GrannyTestimonial() {
         </div>
 
         <blockquote className="font-kaushan text-2xl md:text-[34px] text-foreground leading-relaxed mb-10">
-          &ldquo; {quote} &rdquo;
+          &ldquo; {current.quote} &rdquo;
         </blockquote>
 
         <div className="flex flex-col items-center">
           <div className="relative w-16 h-16 rounded-full overflow-hidden mb-4">
             <Image
               src={current.avatar}
-              alt={current.author}
+              alt={`Review by ${current.author.replace(/^-\s*/, "")}`}
               fill
+              sizes="64px"
               className="object-cover"
             />
           </div>

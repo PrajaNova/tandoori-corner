@@ -1,10 +1,11 @@
 import { Facebook, Globe, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
+import { contact } from "@/lib/seo";
 
 const hours = [
-  { day: "Week days", time: "09.00 – 24:00" },
-  { day: "Saturday", time: "08:00 – 03.00" },
-  { day: "Sunday", time: "Day off" },
+  { day: "Lunch (Daily)", time: "12:00 – 14:45" },
+  { day: "Dinner (Daily)", time: "18:00 – 21:45" },
+  { day: "Monday – Sunday", time: "Open All Week" },
 ];
 
 export function AppFooter() {
@@ -25,12 +26,14 @@ export function AppFooter() {
               Our address
             </h3>
             <p className="text-muted-foreground text-sm leading-loose mb-6">
-              22 Alnahas Building, 2 AlBahr St, Tanta
+              400 Balestier Road #01-12
               <br />
-              Al-Gharbia Governorate, Egypt
+              Balestier Plaza, Singapore 329802
             </p>
             <a
-              href="#"
+              href={contact.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-primary font-bold text-xs tracking-widest uppercase hover:text-white transition-colors"
             >
               View On Map
@@ -57,7 +60,7 @@ export function AppFooter() {
               </div>
 
               <Link
-                href="/checkout"
+                href="/#reservation"
                 className="w-full border border-primary text-primary font-bold text-xs tracking-widest uppercase py-4 text-center hover:bg-primary hover:text-white transition-colors"
               >
                 Find A Table
@@ -71,12 +74,12 @@ export function AppFooter() {
               Contact us
             </h3>
             <p className="text-muted-foreground text-sm leading-loose mb-6">
-              Main Email: 7oroof@7oroof.com
+              Email: {contact.email}
               <br />
-              Phone: 02 01065370701
+              Phone: {contact.phoneLandlineDisplay} / {contact.phoneDisplay}
             </p>
             <a
-              href="#"
+              href={contact.emailHref}
               className="text-primary font-bold text-xs tracking-widest uppercase hover:text-white transition-colors"
             >
               Send A Message
@@ -87,10 +90,18 @@ export function AppFooter() {
         {/* Socials and Newsletter */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-10">
           <div className="flex space-x-3">
-            {[Facebook, Twitter, Instagram, Globe].map((Icon, idx) => (
+            {[
+              { Icon: Facebook, href: contact.social.facebook, label: "Tandoori Corner on Facebook" },
+              { Icon: Twitter, href: contact.social.x, label: "Tandoori Corner on X" },
+              { Icon: Instagram, href: contact.social.instagram, label: "Tandoori Corner on Instagram" },
+              { Icon: Globe, href: contact.social.tripadvisor, label: "Tandoori Corner on TripAdvisor" },
+            ].map(({ Icon, href, label }) => (
               <a
-                key={idx}
-                href="#"
+                key={label}
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
               >
                 <Icon className="w-4 h-4" />
@@ -111,8 +122,7 @@ export function AppFooter() {
         </div>
 
         <div className="text-center text-xs text-white/40 pt-8 border-t border-white/10 font-light">
-          © 2017 Granny, With Love by{" "}
-          <span className="text-primary">7oroof</span>
+          © 2024 Tandoori Corner. North Indian Curry House, Singapore.
         </div>
       </div>
     </footer>

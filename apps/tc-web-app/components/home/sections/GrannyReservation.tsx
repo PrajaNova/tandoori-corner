@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { contact } from "@/lib/seo";
 
 const selectClass =
   "flex h-12 w-full rounded-none border border-input bg-transparent px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-muted-foreground";
@@ -16,17 +17,20 @@ const peopleOptions = [
   "10 People",
 ];
 const dateOptions = [
-  "March 23, 2017",
-  "March 24, 2017",
-  "March 25, 2017",
-  "March 26, 2017",
-  "March 27, 2017",
+  "Today",
+  "Tomorrow",
+  "In 2 days",
+  "In 3 days",
+  "In 4 days",
 ];
-const timeOptions = ["8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM"];
+const timeOptions = ["12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM"];
 
 export function GrannyReservation() {
   return (
-    <section className="relative py-24 flex items-center justify-center">
+    <section
+      id="reservation"
+      className="relative py-24 flex items-center justify-center scroll-mt-24"
+    >
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -47,9 +51,7 @@ export function GrannyReservation() {
 
         <div className="bg-white p-8 md:p-14 max-w-4xl mx-auto shadow-2xl mt-12">
           <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            You can Book a table online easily in just a couple of minutes. We
-            take reservations for lunch and dinner, just check the availability
-            of your table & book it now!
+            Reserve your table at Tandoori Corner in just a few clicks. We welcome walk-ins and reservations for lunch (12:00 – 2:45 PM) and dinner (6:00 – 9:45 PM), seven days a week.
           </p>
 
           <form className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -105,8 +107,14 @@ export function GrannyReservation() {
           </form>
 
           <p className="text-center text-[11px] tracking-widest uppercase text-muted-foreground mt-8 font-bold">
-            Reservation Powered by{" "}
-            <span className="text-primary">Opentable</span>
+            Or call us at{" "}
+            <a href={contact.phoneLandlineHref} className="text-primary hover:underline">
+              {contact.phoneLandlineDisplay}
+            </a>
+            {" "}/{" "}
+            <a href={contact.phoneHref} className="text-primary hover:underline">
+              {contact.phoneDisplay}
+            </a>
           </p>
         </div>
       </div>

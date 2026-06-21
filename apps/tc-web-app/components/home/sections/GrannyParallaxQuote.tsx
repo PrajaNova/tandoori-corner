@@ -19,18 +19,20 @@ export function GrannyParallaxQuote() {
         <div className="flex justify-center mb-8">
           <Image
             src="/granny/granny_testimonial_chef-hat2.png"
-            alt="Chef hat"
+            alt="Chef hat icon representing Tandoori Corner's culinary heritage"
             width={70}
             height={70}
+            style={{ width: 70, height: "auto" }}
             className="opacity-90"
           />
         </div>
         <h3 className="font-kaushan text-3xl md:text-[42px] text-white leading-snug mb-8">
-          I think the most wonderful thing in the world is another chef.
-          I&apos;m always excited about learning new things about food.
+          Food is not just fuel. It is information. It talks to your DNA and
+          tells it what to do. The most powerful thing you can do is eat real,
+          authentic food made with love and tradition.
         </h3>
         <p className="font-raleway text-primary tracking-widest uppercase font-bold text-sm">
-          - Todd Stephen
+          - Surendar Singh, Founder of Tandoori Corner
         </p>
       </div>
     </section>

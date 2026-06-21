@@ -5,25 +5,25 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const cards = [
   {
-    subtitle: "Start eating better",
-    title: "Daily New Fresh Menus",
+    subtitle: "Spices from the heart",
+    title: "Authentic Indian Recipes",
     image: "/granny/granny_banners_1.jpg",
     description:
-      "Granny help you treat yourself with a different meal everyday, thanks to our daily changing menus and our awesome creative chefs!",
+      "Every dish at Tandoori Corner is crafted using traditional North Indian recipes handed down through generations — rich in spice, aroma, and soul.",
   },
   {
-    subtitle: "Quality is the heart",
-    title: "Fresh Ingredient, Tasty Meals",
+    subtitle: "Quality is everything",
+    title: "Fresh Ingredients Daily",
     image: "/granny/granny_banners_2.jpg",
     description:
-      "Who said healthy food can't also be delicious? Granny creative chefs use fresh and seasonal ingredients to make affordable.",
+      "We source the finest halal meats and freshest vegetables daily. Our spice blends are prepared in-house to ensure every meal bursts with authentic flavour.",
   },
   {
-    subtitle: "Hot & ready to serve",
-    title: "Creative & Talented Chefs",
+    subtitle: "Masters of the tandoor",
+    title: "Expert Chefs, Since 2008",
     image: "/granny/granny_banners_3.jpg",
     description:
-      "Granny have offered a team of culinary professionals that make delectable dishes at memorable events for both private clientele.",
+      "Led by Chef Ramesh, who trained in five-star hotels across India, our culinary team brings decades of expertise to every plate we serve.",
   },
 ];
 
@@ -31,13 +31,10 @@ export function GrannyWelcome() {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
-        <SectionHeading cursiveText="Hello dear" mainText="Welcome To Granny" />
+        <SectionHeading cursiveText="Hello dear" mainText="Welcome To Tandoori Corner" />
 
         <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-16 leading-relaxed">
-          Granny was the first retaurant to open in Egypt, the resturant was
-          designed with the history in mind we have created a soft industrial
-          dining room, combined with an open kitchen, coffee take out bar and on
-          site coffee roastery.
+          Established in 2008, Tandoori Corner is Singapore&apos;s favourite North Indian curry house, nestled along the heritage trail of Balestier Road. We combine the warmth of alfresco dining with bold, authentic flavours that keep our guests coming back for more.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -51,20 +48,21 @@ export function GrannyWelcome() {
                   src={card.image}
                   alt={card.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <span className="font-script text-primary text-2xl mb-1">
                 {card.subtitle}
               </span>
-              <h4 className="font-raleway text-lg font-bold uppercase tracking-wide mb-4">
+              <h3 className="font-raleway text-lg font-bold uppercase tracking-wide mb-4">
                 {card.title}
-              </h4>
+              </h3>
               <p className="text-muted-foreground px-4 mb-6 text-sm leading-relaxed">
                 {card.description}
               </p>
               <Link
-                href="/about"
+                href="/story"
                 className="font-raleway text-xs font-bold tracking-widest uppercase text-foreground hover:text-primary transition-colors"
               >
                 Read More
