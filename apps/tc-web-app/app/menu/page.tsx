@@ -7,7 +7,7 @@ import {
   jsonLdScript,
 } from "@/lib/seo";
 
-import { MenuClassic } from "./MenuClassic";
+import { OrderOnline } from "../order/OrderOnline";
 import { menuCategories } from "./menu-data";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -52,7 +52,7 @@ export default function MenuPage() {
           __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
         }}
       />
-      <MenuClassic />
+      <OrderOnline />
     </>
   );
 }
