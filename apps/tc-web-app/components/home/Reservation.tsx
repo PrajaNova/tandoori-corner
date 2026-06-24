@@ -11,27 +11,15 @@ export function Reservation() {
   return (
     <section
       id="reservation"
-      className="relative py-24 flex items-center justify-center scroll-mt-24"
+      className="py-24 bg-background flex items-center justify-center scroll-mt-24"
     >
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url('${reservationContent.backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
-      />
-      <div className="absolute inset-0 bg-black/70 z-0" />
-
-      <div className="container relative z-10 px-4">
+      <div className="container px-4">
         <SectionHeading
           cursiveText={reservationContent.cursiveText}
           mainText={reservationContent.mainText}
-          dark
         />
 
-        <div className="bg-white p-8 md:p-14 max-w-4xl mx-auto shadow-2xl mt-12">
+        <div className="bg-card border border-border p-8 md:p-14 max-w-4xl mx-auto shadow-xl mt-12">
           <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
             {reservationContent.description}
           </p>

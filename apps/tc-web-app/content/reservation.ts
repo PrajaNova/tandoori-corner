@@ -1,7 +1,6 @@
 export const reservationContent = {
   cursiveText: "Book a table",
   mainText: "Make A Reservation",
-  backgroundImage: "/granny/granny_background_7.jpg",
   description:
     "Reserve your table at Tandoori Corner in just a few clicks. We welcome walk-ins and reservations for lunch (12:00 – 2:45 PM) and dinner (6:00 – 9:45 PM), seven days a week.",
   peopleOptions: [

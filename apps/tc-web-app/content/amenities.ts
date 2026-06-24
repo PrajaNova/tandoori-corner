@@ -17,6 +17,7 @@ export interface Amenity {
 export const amenitiesContent = {
   cursiveText: "Why choose us",
   mainText: "Your Comfort, Our Priority",
+  backgroundImage: "/granny/granny_background_1.jpg",
   items: [
     {
       icon: Accessibility,
