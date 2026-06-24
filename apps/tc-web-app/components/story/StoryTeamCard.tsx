@@ -18,7 +18,7 @@ export function StoryTeamCard({ member }: { member: TeamMember }) {
         {member.name}
       </h4>
       <p className="text-gray-500 font-light text-sm mb-6">{member.role}</p>
-      <p className="text-gray-600 font-light text-sm leading-relaxed text-left flex-1">
+      <p className="text-gray-600 font-light text-sm leading-relaxed text-left flex-1 line-clamp-4">
         {member.bio}
       </p>
     </div>
