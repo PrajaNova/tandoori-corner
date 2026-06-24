@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { MenuHero } from "@/components/menu/MenuHero";
+import { OrderCatalog } from "@/components/order/OrderCatalog";
+import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
 import {
   buildBreadcrumbJsonLd,
   buildMenuJsonLd,
   buildPageMetadata,
   jsonLdScript,
 } from "@/lib/seo";
-import { OrderCatalog } from "../order/parts/OrderCatalog";
-import { OrderFloatingCart } from "../order/parts/OrderFloatingCart";
 import { menuCategories } from "./menu-data";
-import { MenuHero } from "./parts/MenuHero";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/menu",

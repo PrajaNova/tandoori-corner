@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-
+import { EventBookingCTA } from "@/components/private-events/EventBookingCTA";
+import { EventGallerySection } from "@/components/private-events/EventGallerySection";
+import { EventHero } from "@/components/private-events/EventHero";
+import { EventHighlights } from "@/components/private-events/EventHighlights";
+import { EventTypes } from "@/components/private-events/EventTypes";
 import {
   buildBreadcrumbJsonLd,
   buildPageMetadata,
   jsonLdScript,
 } from "@/lib/seo";
-import { EventBookingCTA } from "./parts/EventBookingCTA";
-import { EventGallerySection } from "./parts/EventGallerySection";
-import { EventHero } from "./parts/EventHero";
-import { EventHighlights } from "./parts/EventHighlights";
-import { EventTypes } from "./parts/EventTypes";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/private-events",

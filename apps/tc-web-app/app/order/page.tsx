@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { OrderCatalog } from "@/components/order/OrderCatalog";
+import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
+import { OrderHero } from "@/components/order/OrderHero";
 import {
   buildBreadcrumbJsonLd,
   buildPageMetadata,
   jsonLdScript,
 } from "@/lib/seo";
-
-import { OrderCatalog } from "./parts/OrderCatalog";
-import { OrderFloatingCart } from "./parts/OrderFloatingCart";
-import { OrderHero } from "./parts/OrderHero";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/order",

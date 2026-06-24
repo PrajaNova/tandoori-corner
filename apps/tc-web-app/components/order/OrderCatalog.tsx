@@ -3,8 +3,8 @@
 import { Minus, Plus, Search, X } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { menuCategories } from "@/app/menu/menu-data";
 import { useCart } from "@/hooks/use-cart";
-import { menuCategories } from "../../menu/menu-data";
 
 interface OrderItem {
   id: string;

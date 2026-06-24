@@ -3,12 +3,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
+import { RequestQuoteButton } from "@/components/catering/RequestQuoteButton";
 import { cateringCourses, dishesForCourse } from "@/data/catering";
 import { getCateringPackageBySlug } from "@/lib/catering";
 import { buildPageMetadata } from "@/lib/seo";
-
-import { RequestQuoteButton } from "../parts/RequestQuoteButton";
 
 export const dynamic = "force-dynamic";
 

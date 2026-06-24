@@ -1,10 +1,10 @@
 import { Testimonial } from "@/components/home/Testimonial";
-import { StoryAwards } from "./parts/StoryAwards";
-import { StoryCounters } from "./parts/StoryCounters";
-import { StoryFeatures } from "./parts/StoryFeatures";
-import { StoryHero } from "./parts/StoryHero";
-import { StoryTeam } from "./parts/StoryTeam";
-import { StoryWelcome } from "./parts/StoryWelcome";
+import { StoryAwards } from "@/components/story/StoryAwards";
+import { StoryCounters } from "@/components/story/StoryCounters";
+import { StoryFeatures } from "@/components/story/StoryFeatures";
+import { StoryHero } from "@/components/story/StoryHero";
+import { StoryTeam } from "@/components/story/StoryTeam";
+import { StoryWelcome } from "@/components/story/StoryWelcome";
 
 export function StoryContent() {
   return (

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-
+import { CheckoutHero } from "@/components/checkout/CheckoutHero";
 import { buildPageMetadata } from "@/lib/seo";
-
 import { CheckoutClient } from "./CheckoutClient";
-import { CheckoutHero } from "./parts/CheckoutHero";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/checkout",

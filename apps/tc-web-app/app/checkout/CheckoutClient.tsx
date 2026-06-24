@@ -3,11 +3,11 @@
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
+import { CheckoutEmptyState } from "@/components/checkout/CheckoutEmptyState";
+import { CheckoutForm } from "@/components/checkout/CheckoutForm";
+import { CheckoutSuccessState } from "@/components/checkout/CheckoutSuccessState";
+import { OrderSummary } from "@/components/checkout/OrderSummary";
 import { useCart } from "@/hooks/use-cart";
-import { CheckoutEmptyState } from "./parts/CheckoutEmptyState";
-import { CheckoutForm } from "./parts/CheckoutForm";
-import { CheckoutSuccessState } from "./parts/CheckoutSuccessState";
-import { OrderSummary } from "./parts/OrderSummary";
 
 export function CheckoutClient() {
   const router = useRouter();

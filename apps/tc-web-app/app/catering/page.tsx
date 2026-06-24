@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { CateringHero } from "@/components/catering/CateringHero";
+import { CateringPackages } from "@/components/catering/CateringPackages";
 import {
   buildBreadcrumbJsonLd,
   buildPageMetadata,
   jsonLdScript,
 } from "@/lib/seo";
-
-import { CateringHero } from "./parts/CateringHero";
-import { CateringPackages } from "./parts/CateringPackages";
 
 export const dynamic = "force-dynamic";
 
