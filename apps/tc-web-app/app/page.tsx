@@ -1,7 +1,6 @@
 import { Amenities } from "@/components/home/Amenities";
 import { Hero } from "@/components/home/Hero";
-import { HighlightLeft } from "@/components/home/HighlightLeft";
-import { HighlightRight } from "@/components/home/HighlightRight";
+import { Highlights } from "@/components/home/Highlights";
 import { MenuPreview } from "@/components/home/MenuPreview";
 import { ParallaxQuote } from "@/components/home/ParallaxQuote";
 import { Reservation } from "@/components/home/Reservation";
@@ -15,8 +14,7 @@ export default function HomePage() {
       <Hero />
       <Welcome />
       <Specials />
-      <HighlightLeft />
-      <HighlightRight />
+      <Highlights />
       <ParallaxQuote />
       <MenuPreview />
       <Amenities />
