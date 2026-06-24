@@ -14,7 +14,7 @@ export function StoryTeamCard({ member }: { member: TeamMember }) {
           sizes="(max-width: 768px) 100vw, 25vw"
         />
       </div>
-      <h4 className="font-space font-bold text-xl text-brand-dark mb-2">
+      <h4 className="font-raleway font-bold text-xl text-primary mb-2">
         {member.name}
       </h4>
       <p className="text-gray-500 font-light text-sm mb-6">{member.role}</p>

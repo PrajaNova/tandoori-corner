@@ -8,7 +8,7 @@ export function StoryTeam() {
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionHeading
           cursiveText="Meet the family"
-          mainText="Our Dedicated Team"
+          mainText="The Team Behind the Taste"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-16">
           {storyTeam.map((member) => (
