@@ -18,7 +18,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
-  { name: "Our Story", path: "/story" },
+  { name: "About", path: "/story" },
 ] as const;
 
 export default function StoryPage() {

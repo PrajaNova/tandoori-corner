@@ -36,16 +36,7 @@ export function StoryHero() {
             </Link>
           </li>
           <li className="text-white/40">/</li>
-          <li>
-            <Link
-              href="/story"
-              className="hover:text-primary transition-colors"
-            >
-              about
-            </Link>
-          </li>
-          <li className="text-white/40">/</li>
-          <li className="text-primary">Our Story</li>
+          <li className="text-primary">About</li>
         </ol>
       </div>
     </section>
