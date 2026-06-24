@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { contact } from "@/lib/seo";
@@ -20,9 +21,17 @@ export function EventHero() {
       <div className="absolute inset-x-0 bottom-0 z-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
-        <span className="font-script text-primary text-3xl md:text-4xl">
-          The TCB Bar
-        </span>
+        <div className="flex justify-center mb-6">
+          <Image
+            src="/homepage/tcb-logo.png"
+            alt="The TCB Bar"
+            width={175}
+            height={175}
+            priority
+            className="w-24 h-auto md:w-28"
+            style={{ height: "auto" }}
+          />
+        </div>
         <h1 className="font-kaushan mt-2 text-4xl leading-tight text-white sm:text-6xl md:text-7xl">
           Your Private Night,
           <br />
