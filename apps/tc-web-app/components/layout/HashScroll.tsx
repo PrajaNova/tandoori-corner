@@ -35,9 +35,9 @@ export function HashScroll() {
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0) return;
       const target = event.target as HTMLElement | null;
-      const anchor = target?.closest?.("a[href*='#']") as
-        | HTMLAnchorElement
-        | null;
+      const anchor = target?.closest?.(
+        "a[href*='#']",
+      ) as HTMLAnchorElement | null;
       if (!anchor) return;
 
       const url = new URL(anchor.href, window.location.origin);

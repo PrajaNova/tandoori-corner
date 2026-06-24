@@ -9,7 +9,13 @@
           "category": "Snacks Corner",
           "price": 9,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "vegetable-samosa"
         },
         {
@@ -18,7 +24,13 @@
           "category": "Snacks Corner",
           "price": 8,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tomato-dhaniye-ka-soup"
         },
         {
@@ -27,7 +39,13 @@
           "category": "Snacks Corner",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "onion-bhaji"
         },
         {
@@ -36,7 +54,13 @@
           "category": "Snacks Corner",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["milk", "wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["milk", "wheat"]
+          },
           "imageSlug": "papri-chaat"
         },
         {
@@ -45,7 +69,13 @@
           "category": "Snacks Corner",
           "price": 8,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": ["peanuts"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["peanuts"]
+          },
           "imageSlug": "masala-peanuts"
         },
         {
@@ -54,7 +84,13 @@
           "category": "Snacks Corner",
           "price": 12,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "chicken-samosa"
         },
         {
@@ -63,7 +99,13 @@
           "category": "Snacks Corner",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "masala-papad"
         }
       ]
@@ -77,7 +119,13 @@
           "category": "Tandoori Corner",
           "price": 18,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "chicken-tikka"
         },
         {
@@ -86,7 +134,13 @@
           "category": "Tandoori Corner",
           "price": 20,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tandoori-chicken-half"
         },
         {
@@ -95,7 +149,13 @@
           "category": "Tandoori Corner",
           "price": 20,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "mutton-sheekh-kebab-4pcs"
         },
         {
@@ -104,7 +164,13 @@
           "category": "Tandoori Corner",
           "price": 22,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["shellfish"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["shellfish"]
+          },
           "imageSlug": "tandoori-prawn"
         },
         {
@@ -113,7 +179,13 @@
           "category": "Tandoori Corner",
           "price": 28,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["fish"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["fish"]
+          },
           "imageSlug": "tandoori-platter"
         },
         {
@@ -122,7 +194,13 @@
           "category": "Tandoori Corner",
           "price": 18,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tandoori-broccoli"
         },
         {
@@ -131,7 +209,13 @@
           "category": "Tandoori Corner",
           "price": 19,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "tandoori-paneer-tikka"
         },
         {
@@ -140,7 +224,13 @@
           "category": "Tandoori Corner",
           "price": 20,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["fish", "milk"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["fish", "milk"]
+          },
           "imageSlug": "fish-tikka"
         },
         {
@@ -149,7 +239,13 @@
           "category": "Tandoori Corner",
           "price": 24,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "murgh-malai-tikka"
         },
         {
@@ -158,7 +254,13 @@
           "category": "Tandoori Corner",
           "price": 30,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tandoori-lamb-chop"
         }
       ]
@@ -172,7 +274,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 17,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "butter-chicken"
         },
         {
@@ -181,7 +289,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 17,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "chicken-vindaloo"
         },
         {
@@ -190,7 +304,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 17,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "chicken-curry"
         },
         {
@@ -199,7 +319,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 18,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "mutton-rogan-josh"
         },
         {
@@ -208,7 +334,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 18,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "saag-mutton"
         },
         {
@@ -217,7 +349,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 15,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["egg"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["egg"]
+          },
           "imageSlug": "egg-curry"
         },
         {
@@ -226,7 +364,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 20,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["fish"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["fish"]
+          },
           "imageSlug": "fish-curry"
         },
         {
@@ -235,7 +379,13 @@
           "category": "Curry Corner (Main Course)",
           "price": 22,
           "variants": [],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["shellfish"] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["shellfish"]
+          },
           "imageSlug": "prawn-masala"
         }
       ]
@@ -249,7 +399,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 12,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tadka-dhal"
         },
         {
@@ -258,7 +414,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 14,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "makhni-dhal"
         },
         {
@@ -267,7 +429,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 14,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "aloo-gobi"
         },
         {
@@ -276,7 +444,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 14,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "corn-palak"
         },
         {
@@ -285,7 +459,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 14,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "baigan-bartha"
         },
         {
@@ -294,7 +474,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 16,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "palak-paneer"
         },
         {
@@ -303,7 +489,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 14,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "vegetable-curry"
         },
         {
@@ -312,7 +504,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 16,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "malai-kofta-curry"
         },
         {
@@ -321,7 +519,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 14,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "bhindi-masala"
         },
         {
@@ -330,7 +534,13 @@
           "category": "Sabzi Corner (Main Course)",
           "price": 16,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "paneer-makhni"
         }
       ]
@@ -344,7 +554,13 @@
           "category": "Rice Corner",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "plain-rice"
         },
         {
@@ -353,7 +569,13 @@
           "category": "Rice Corner",
           "price": 8,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "onion-rice"
         },
         {
@@ -362,7 +584,13 @@
           "category": "Rice Corner",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "jeera-rice"
         },
         {
@@ -371,7 +599,13 @@
           "category": "Rice Corner",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "green-salad"
         },
         {
@@ -380,7 +614,13 @@
           "category": "Rice Corner",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "vegetable-raita"
         },
         {
@@ -389,7 +629,13 @@
           "category": "Rice Corner",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "vegetable-biryani"
         },
         {
@@ -400,7 +646,13 @@
             { "label": "Mutton", "price": 14 },
             { "label": "Chicken", "price": 12 }
           ],
-          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "mutton-chicken-biryani"
         }
       ]
@@ -414,7 +666,13 @@
           "category": "Side Orders",
           "price": 1,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "papadum-basket"
         },
         {
@@ -423,7 +681,13 @@
           "category": "Side Orders",
           "price": 2,
           "variants": [],
-          "dietary": { "veg": false, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": false,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "extra-curry"
         },
         {
@@ -432,7 +696,13 @@
           "category": "Side Orders",
           "price": 2,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "onion-salad"
         }
       ]
@@ -446,7 +716,13 @@
           "category": "Bread corner",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "plain-naan"
         },
         {
@@ -455,7 +731,13 @@
           "category": "Bread corner",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "tandoori-roti"
         },
         {
@@ -464,7 +746,13 @@
           "category": "Bread corner",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat", "milk"]
+          },
           "imageSlug": "butter-roti"
         },
         {
@@ -473,7 +761,13 @@
           "category": "Bread corner",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat", "milk"]
+          },
           "imageSlug": "butter-naan"
         },
         {
@@ -482,7 +776,13 @@
           "category": "Bread corner",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "garlic-naan"
         },
         {
@@ -491,7 +791,13 @@
           "category": "Bread corner",
           "price": 7,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat", "milk"]
+          },
           "imageSlug": "tandoori-paratha"
         },
         {
@@ -500,7 +806,13 @@
           "category": "Bread corner",
           "price": 7,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "phudina-paratha"
         },
         {
@@ -509,7 +821,13 @@
           "category": "Bread corner",
           "price": 8,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat", "milk"]
+          },
           "imageSlug": "cheese-naan"
         },
         {
@@ -518,7 +836,13 @@
           "category": "Bread corner",
           "price": 8,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "peshawari-naan"
         },
         {
@@ -527,7 +851,13 @@
           "category": "Bread corner",
           "price": 9,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "stuffed-tandoori-paratha"
         },
         {
@@ -536,7 +866,13 @@
           "category": "Bread corner",
           "price": 7,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": false,
+            "spiceLevel": null,
+            "allergens": ["wheat"]
+          },
           "imageSlug": "tandoori-kulcha-ajwain"
         }
       ]
@@ -550,7 +886,13 @@
           "category": "House Pour",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "inspired-company-shiraz-cabernet"
         },
         {
@@ -559,7 +901,13 @@
           "category": "House Pour",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "inspired-company-chardonnay"
         }
       ]
@@ -573,7 +921,13 @@
           "category": "Wines",
           "price": 40,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "inspired-company-shiraz-cabernet"
         },
         {
@@ -582,7 +936,13 @@
           "category": "Wines",
           "price": 40,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "inspired-company-chardonnay"
         },
         {
@@ -591,7 +951,13 @@
           "category": "Wines",
           "price": 45,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "inspired-company-cabernet-merlot"
         },
         {
@@ -600,7 +966,13 @@
           "category": "Wines",
           "price": 50,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "woolshed-sauvignon-blanc"
         },
         {
@@ -609,7 +981,13 @@
           "category": "Wines",
           "price": 50,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "francoise-chauvenet-lajolie-pinot-noir"
         }
       ]
@@ -623,7 +1001,13 @@
           "category": "Beer",
           "price": 8,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tiger-330ml"
         },
         {
@@ -632,7 +1016,13 @@
           "category": "Beer",
           "price": 9,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "heineken-330ml"
         },
         {
@@ -641,7 +1031,13 @@
           "category": "Beer",
           "price": 9,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "corona-330ml"
         },
         {
@@ -650,7 +1046,13 @@
           "category": "Beer",
           "price": 9,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "hoegaarden-330ml"
         },
         {
@@ -659,7 +1061,13 @@
           "category": "Beer",
           "price": 12,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "erdinger-white-dark-500ml"
         },
         {
@@ -668,7 +1076,13 @@
           "category": "Beer",
           "price": 14,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "king-fisher-premium-600ml"
         },
         {
@@ -677,7 +1091,13 @@
           "category": "Beer",
           "price": 30,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "house-pour-bucket-5-btl"
         }
       ]
@@ -691,7 +1111,13 @@
           "category": "Soft Drinks",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "coke"
         },
         {
@@ -700,7 +1126,13 @@
           "category": "Soft Drinks",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "sprite"
         },
         {
@@ -709,7 +1141,13 @@
           "category": "Soft Drinks",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "ginger-ale"
         },
         {
@@ -718,7 +1156,13 @@
           "category": "Soft Drinks",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tonic-water"
         },
         {
@@ -727,7 +1171,13 @@
           "category": "Soft Drinks",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "mineral-water"
         },
         {
@@ -736,7 +1186,13 @@
           "category": "Soft Drinks",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "coke-zero"
         },
         {
@@ -745,7 +1201,13 @@
           "category": "Soft Drinks",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "ice-lemon-tea"
         },
         {
@@ -754,7 +1216,13 @@
           "category": "Soft Drinks",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "perrier"
         }
       ]
@@ -768,7 +1236,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "smirnoff-vodka"
         },
         {
@@ -777,7 +1251,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "absolut-vodka"
         },
         {
@@ -786,7 +1266,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "bacardi-rum-white"
         },
         {
@@ -795,7 +1281,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "jw-black-label"
         },
         {
@@ -804,7 +1296,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "chivas-regal"
         },
         {
@@ -813,7 +1311,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "glenfiddich"
         },
         {
@@ -822,7 +1326,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tequila"
         },
         {
@@ -831,7 +1341,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "bombay-sapphire-gin"
         },
         {
@@ -840,7 +1356,13 @@
           "category": "Hard Drinks",
           "price": 10,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "gordons-gin"
         },
         {
@@ -849,7 +1371,13 @@
           "category": "Hard Drinks",
           "price": 100,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "jw-black-label-singleton-bottle"
         },
         {
@@ -858,7 +1386,13 @@
           "category": "Hard Drinks",
           "price": 120,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "chivas-regal-glenfiddich-bottle"
         }
       ]
@@ -872,7 +1406,13 @@
           "category": "Fruit Juice",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "mango-juice"
         },
         {
@@ -881,7 +1421,13 @@
           "category": "Fruit Juice",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "lime-juice"
         },
         {
@@ -890,7 +1436,13 @@
           "category": "Fruit Juice",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "fresh-thai-coconut"
         }
       ]
@@ -904,7 +1456,13 @@
           "category": "Lassi",
           "price": 7,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "mango-lassi"
         },
         {
@@ -913,7 +1471,13 @@
           "category": "Lassi",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "sweet-lassi"
         },
         {
@@ -922,7 +1486,13 @@
           "category": "Lassi",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "chaas-butter-milk-salted"
         }
       ]
@@ -936,7 +1506,13 @@
           "category": "Tea/Coffee",
           "price": 4,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "tea-with-lemon"
         },
         {
@@ -945,7 +1521,13 @@
           "category": "Tea/Coffee",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "coffee-with-milk"
         },
         {
@@ -954,7 +1536,13 @@
           "category": "Tea/Coffee",
           "price": 5,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "masala-tea"
         },
         {
@@ -963,7 +1551,13 @@
           "category": "Tea/Coffee",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "iced-masala-tea"
         },
         {
@@ -972,7 +1566,13 @@
           "category": "Tea/Coffee",
           "price": 6,
           "variants": [],
-          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "dietary": {
+            "veg": true,
+            "vegan": null,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": []
+          },
           "imageSlug": "iced-coffee"
         }
       ]
@@ -986,7 +1586,13 @@
           "category": "Sweet Corner",
           "price": 7,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk"]
+          },
           "imageSlug": "gulab-jamun"
         },
         {
@@ -995,7 +1601,13 @@
           "category": "Sweet Corner",
           "price": 8,
           "variants": [],
-          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk", "nuts"] },
+          "dietary": {
+            "veg": true,
+            "vegan": false,
+            "glutenFree": null,
+            "spiceLevel": null,
+            "allergens": ["milk", "nuts"]
+          },
           "imageSlug": "kulfi"
         }
       ]

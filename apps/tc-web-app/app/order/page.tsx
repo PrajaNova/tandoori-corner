@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import Script from "next/script.js";
+import Script from "next/script";
+import { OrderCatalog } from "@/components/order/OrderCatalog";
+import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
+import { OrderHero } from "@/components/order/OrderHero";
 import {
   buildBreadcrumbJsonLd,
   buildPageMetadata,
   jsonLdScript,
 } from "@/lib/seo";
-
-import { OrderOnline } from "./OrderOnline";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/order",
@@ -32,7 +33,11 @@ export default function OrderPage() {
           __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
         }}
       />
-      <OrderOnline />
+      <div className="bg-white">
+        <OrderHero />
+        <OrderCatalog />
+        <OrderFloatingCart />
+      </div>
     </>
   );
 }

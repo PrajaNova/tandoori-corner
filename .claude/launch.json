@@ -4,7 +4,15 @@
     {
       "name": "tc-web-app",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "apps/tc-web-app", "run", "dev", "--", "-p", "3939"],
+      "runtimeArgs": [
+        "--prefix",
+        "apps/tc-web-app",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "3939"
+      ],
       "port": 3939
     }
   ]

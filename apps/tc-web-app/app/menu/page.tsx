@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import Script from "next/script.js";
+import Script from "next/script";
+import { MenuHero } from "@/components/menu/MenuHero";
+import { OrderCatalog } from "@/components/order/OrderCatalog";
+import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
 import {
   buildBreadcrumbJsonLd,
   buildMenuJsonLd,
   buildPageMetadata,
   jsonLdScript,
 } from "@/lib/seo";
-
-import { MenuClassic } from "./MenuClassic";
 import { menuCategories } from "./menu-data";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -52,7 +53,11 @@ export default function MenuPage() {
           __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
         }}
       />
-      <MenuClassic />
+      <div className="bg-white">
+        <MenuHero />
+        <OrderCatalog />
+        <OrderFloatingCart />
+      </div>
     </>
   );
 }

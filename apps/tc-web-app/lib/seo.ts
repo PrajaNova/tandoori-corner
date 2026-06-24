@@ -91,6 +91,8 @@ export const contact = {
   phoneLandlineDisplay: restaurantSeo.phoneLandlineDisplay,
   phoneLandlineHref: restaurantSeo.phoneLandlineHref,
   telephone: restaurantSeo.telephone,
+  whatsappDisplay: "+65 9862 7334",
+  whatsappHref: "https://wa.me/6598627334",
   email: restaurantSeo.email,
   emailHref: `mailto:${restaurantSeo.email}`,
   addressDisplay: `${restaurantSeo.address.streetAddress}, ${restaurantSeo.address.addressLocality} ${restaurantSeo.address.postalCode}`,
