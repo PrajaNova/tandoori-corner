@@ -64,10 +64,8 @@ export default function RootLayout({
       lang="en"
       className={`${raleway.variable} ${kaushan.variable} ${greatVibes.variable}`}
     >
-      <head>
-        <SchemaScripts />
-      </head>
       <body className="font-sans antialiased text-foreground bg-background selection:bg-primary selection:text-primary-foreground min-h-screen flex flex-col pt-safe">
+        <SchemaScripts />
         <HashScroll />
         <AppHeader />
         <main className="flex-1 w-full">{children}</main>
