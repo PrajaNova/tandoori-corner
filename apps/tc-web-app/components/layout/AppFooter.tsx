@@ -1,12 +1,8 @@
-import { Facebook, Globe, Instagram, Twitter } from "lucide-react";
-import Link from "next/link";
+import { NewsletterForm } from "@/components/layout/footer/NewsletterForm";
+import { OpeningHours } from "@/components/layout/footer/OpeningHours";
+import { SocialLinks } from "@/components/layout/footer/SocialLinks";
+import { operationalHours } from "@/content/hours";
 import { contact } from "@/lib/seo";
-
-const hours = [
-  { day: "Lunch (Daily)", time: "12:00 – 14:45" },
-  { day: "Dinner (Daily)", time: "18:00 – 21:45" },
-  { day: "Monday – Sunday", time: "Open All Week" },
-];
 
 export function AppFooter() {
   return (
@@ -41,32 +37,7 @@ export function AppFooter() {
           </div>
 
           {/* Center Column: Hours box */}
-          <div className="flex justify-center -mt-8 relative z-10">
-            <div className="border border-white/10 w-full max-w-[300px] p-8 pt-10 flex flex-col items-center relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1a1a1a] px-2 text-primary/70">
-                <span className="text-xl">✧</span>
-              </div>
-
-              <div className="w-full space-y-4 text-xs text-muted-foreground mb-8">
-                {hours.map((row) => (
-                  <div
-                    key={row.day}
-                    className="flex justify-between border-b border-white/5 pb-2"
-                  >
-                    <span>{row.day}</span>
-                    <span>{row.time}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Link
-                href="/#reservation"
-                className="w-full border border-primary text-primary font-bold text-xs tracking-widest uppercase py-4 text-center hover:bg-primary hover:text-white transition-colors"
-              >
-                Find A Table
-              </Link>
-            </div>
-          </div>
+          <OpeningHours hours={operationalHours} />
 
           {/* Right Column: Contact us */}
           <div className="flex flex-col items-center">
@@ -89,55 +60,8 @@ export function AppFooter() {
 
         {/* Socials and Newsletter */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-10">
-          <div className="flex space-x-3">
-            {[
-              {
-                Icon: Facebook,
-                href: contact.social.facebook,
-                label: "Tandoori Corner on Facebook",
-              },
-              {
-                Icon: Twitter,
-                href: contact.social.x,
-                label: "Tandoori Corner on X",
-              },
-              {
-                Icon: Instagram,
-                href: contact.social.instagram,
-                label: "Tandoori Corner on Instagram",
-              },
-              {
-                Icon: Globe,
-                href: contact.social.tripadvisor,
-                label: "Tandoori Corner on TripAdvisor",
-              },
-            ].map(({ Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-              >
-                <Icon className="w-4 h-4" />
-              </a>
-            ))}
-          </div>
-
-          <div className="flex w-full max-w-sm border border-white/15 rounded-full overflow-hidden">
-            <input
-              type="email"
-              placeholder="Subscribe Our Newsletter"
-              className="bg-transparent border-none outline-none text-sm px-6 py-3 w-full text-white placeholder:text-white/30"
-            />
-            <button
-              type="button"
-              className="px-6 text-primary hover:text-white transition-colors"
-            >
-              →
-            </button>
-          </div>
+          <SocialLinks />
+          <NewsletterForm />
         </div>
 
         <div className="text-center text-xs text-white/40 pt-8 border-t border-white/10 font-light">

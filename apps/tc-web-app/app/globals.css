@@ -89,3 +89,47 @@ button {
   background: color-mix(in srgb, var(--color-brand-gold) 55%, transparent);
   border-radius: 999px;
 }
+
+/* Scroll-driven transparent/solid header styling */
+.scroll-header {
+  background-color: rgba(
+    12,
+    24,
+    21,
+    0.85
+  ); /* Solid semi-transparent background as fallback */
+  backdrop-filter: blur(12px);
+}
+
+@supports (animation-timeline: scroll()) {
+  @keyframes header-scroll {
+    from {
+      background-color: transparent;
+      backdrop-filter: none;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.15) 80%,
+        transparent 100%
+      );
+      box-shadow: none;
+    }
+    to {
+      background-color: var(--color-ink);
+      backdrop-filter: blur(8px);
+      background-image: none;
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .scroll-header {
+    background-color: transparent;
+    backdrop-filter: none;
+    animation: header-scroll linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 50px;
+  }
+}
