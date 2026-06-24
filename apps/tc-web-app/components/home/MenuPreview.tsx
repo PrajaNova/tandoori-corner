@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
+import { MenuItem } from "@/components/ui/MenuItem";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 interface Dish {
@@ -169,19 +170,12 @@ export function MenuPreview() {
               </div>
               <div className="space-y-6">
                 {col.items.map((item) => (
-                  <div key={item.name}>
-                    <div className="flex items-baseline justify-between gap-3">
-                      <h3 className="font-raleway font-bold text-base text-foreground">
-                        {item.name}
-                      </h3>
-                      <span className="font-raleway font-bold text-primary">
-                        {item.price}
-                      </span>
-                    </div>
-                    <p className="text-muted-foreground text-sm mt-1">
-                      {item.desc}
-                    </p>
-                  </div>
+                  <MenuItem
+                    key={item.name}
+                    name={item.name}
+                    price={item.price}
+                    description={item.desc}
+                  />
                 ))}
               </div>
             </div>
