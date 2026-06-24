@@ -68,7 +68,7 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
 
       <motion.div
         {...scaleIn}
-        className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-card border border-border bg-cream shadow-2xl"
+        className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-none border border-border bg-cream shadow-2xl"
       >
         <button
           type="button"
@@ -84,9 +84,7 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
               <Check className="h-7 w-7" />
             </span>
-            <h3 className="font-space text-2xl font-bold text-ink">
-              Almost there!
-            </h3>
+            <h3 className="font-kaushan text-3xl text-ink">Almost there!</h3>
             <p className="max-w-sm text-sm font-light leading-relaxed text-ink/60">
               Tap the button below to send your enquiry — our events team will
               reply within one business day to plan your night. Prefer to talk?
@@ -115,11 +113,11 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
           </div>
         ) : (
           <div className="flex flex-col overflow-y-auto">
-            <div className="border-b border-border bg-brand-dark px-7 py-5 text-cream">
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold">
+            <div className="border-b border-border bg-brand-dark px-7 py-6 text-cream">
+              <p className="font-script text-2xl text-brand-gold leading-none">
                 Book the TCB Bar
               </p>
-              <h3 className="mt-1 font-space text-2xl font-bold">
+              <h3 className="mt-1 font-kaushan text-3xl">
                 Private Event Enquiry
               </h3>
             </div>

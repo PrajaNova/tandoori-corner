@@ -117,7 +117,7 @@ export function FloatingChatBot() {
                   <Button
                     onClick={() => {
                       setIsOpen(false);
-                      router.push("/experience");
+                      router.push("/#reservation");
                     }}
                     className="shrink-0 rounded-full normal-case tracking-normal"
                     size="sm"

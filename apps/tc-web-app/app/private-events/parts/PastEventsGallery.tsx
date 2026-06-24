@@ -1,7 +1,6 @@
 import { Users } from "lucide-react";
 import Image from "next/image";
 
-import { Badge } from "@/components/ui/badge";
 import type { PastEvent } from "@/data/private-events";
 
 export function PastEventsGallery({ events }: { events: PastEvent[] }) {
@@ -10,10 +9,10 @@ export function PastEventsGallery({ events }: { events: PastEvent[] }) {
       {events.map((event) => (
         <article
           key={event.id}
-          className="group flex flex-col overflow-hidden rounded-card border border-border bg-card"
+          className="group flex flex-col overflow-hidden border border-border bg-white transition-shadow duration-300 hover:shadow-xl"
         >
           <div className="relative h-56 w-full overflow-hidden">
-            <div className="absolute inset-0 z-10 bg-brand-gold opacity-0 mix-blend-color transition-opacity duration-700 group-hover:opacity-20" />
+            <div className="absolute inset-0 z-10 bg-black/0 transition-colors duration-500 group-hover:bg-black/15" />
             <Image
               fill
               src={event.image}
@@ -21,23 +20,23 @@ export function PastEventsGallery({ events }: { events: PastEvent[] }) {
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
-            <Badge className="absolute left-4 top-4 z-20 border-0 bg-brand-dark/85 text-cream">
+            <span className="absolute left-4 top-4 z-20 bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
               {event.type}
-            </Badge>
+            </span>
           </div>
 
           <div className="flex flex-1 flex-col gap-3 p-6">
-            <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-widest text-ink/45">
+            <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
               <span>{event.date}</span>
               <span className="inline-flex items-center gap-1.5">
-                <Users className="h-3.5 w-3.5 text-brand-gold" />
+                <Users className="h-3.5 w-3.5 text-primary" />
                 {event.guests} guests
               </span>
             </div>
-            <h3 className="font-space text-xl font-bold leading-snug text-ink">
+            <h3 className="font-raleway text-xl font-bold leading-snug text-foreground">
               {event.title}
             </h3>
-            <p className="text-sm font-light leading-relaxed text-ink/60">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               {event.blurb}
             </p>
           </div>

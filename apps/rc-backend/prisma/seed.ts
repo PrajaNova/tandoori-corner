@@ -3,6 +3,7 @@ import "dotenv/config";
 import { createPrismaClient } from "../src/lib/prisma.js";
 import { catalogSeedCategories } from "../src/services/catalog-service.js";
 import { cateringSeedPackages } from "../src/services/catering-service.js";
+import { seedMenu } from "./menu-seed.js";
 
 async function main() {
   const prisma = createPrismaClient(process.env.DATABASE_URL);
@@ -88,8 +89,10 @@ async function main() {
     });
   }
 
+  await seedMenu(prisma);
+
   await prisma.$disconnect();
-  console.log("Catalog + catering seed complete.");
+  console.log("Catalog + catering + menu seed complete.");
 }
 
 main().catch((error) => {

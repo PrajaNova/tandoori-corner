@@ -24,7 +24,7 @@ export function RequestQuoteButton({
         onClick={() => setOpen(true)}
         className={
           className ??
-          "inline-flex items-center justify-center gap-2 bg-brand-gold px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
+          "inline-flex items-center justify-center gap-2 bg-brand-gold px-8 py-3.5 font-raleway text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
         }
       >
         {label}

@@ -3,8 +3,8 @@ import Link from "next/link";
 import type { CateringPackage } from "@/data/catering";
 
 const accentBand: Record<CateringPackage["accent"], string> = {
-  dark: "bg-brand-dark",
-  mid: "bg-primary-dark",
+  dark: "bg-ink",
+  mid: "bg-[#3a2f23]",
   light: "bg-primary",
 };
 
@@ -14,20 +14,18 @@ export function OptionCard({ pkg }: { pkg: CateringPackage }) {
   return (
     <Link
       href={`/catering/${pkg.id}`}
-      className="group flex flex-col overflow-hidden rounded-card border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-primary/45 hover:shadow-card-hover"
+      className="group flex flex-col overflow-hidden border border-border bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:shadow-xl"
     >
       <div
-        className={`relative px-6 py-7 text-center text-cream ${accentBand[pkg.accent]}`}
+        className={`relative px-6 py-7 text-center text-white ${accentBand[pkg.accent]}`}
       >
         {pkg.badge ? (
-          <span className="absolute right-3 top-3 rounded-full bg-cream/15 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-cream">
+          <span className="absolute right-3 top-3 rounded-full bg-white/15 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white">
             {pkg.badge}
           </span>
         ) : null}
-        <h3 className="font-space text-2xl font-bold uppercase tracking-[0.12em]">
-          {pkg.name}
-        </h3>
-        <p className="mt-1 text-[11px] font-light uppercase tracking-[0.22em] text-cream/75">
+        <h3 className="font-kaushan text-3xl">{pkg.name}</h3>
+        <p className="mt-1 text-[11px] font-light uppercase tracking-[0.22em] text-white/75">
           {pkg.tagline}
         </p>
       </div>
@@ -35,12 +33,12 @@ export function OptionCard({ pkg }: { pkg: CateringPackage }) {
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-4 flex items-end justify-between border-b border-border pb-4">
           <div>
-            <span className="font-space text-3xl font-bold text-ink">
+            <span className="font-raleway text-3xl font-bold text-foreground">
               {pkg.pricePerHead}
             </span>
-            <span className="ml-1 text-xs text-ink/50">/ guest</span>
+            <span className="ml-1 text-xs text-muted-foreground">/ guest</span>
           </div>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-ink/45">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             Min {pkg.minGuests} pax
           </span>
         </div>
@@ -49,15 +47,15 @@ export function OptionCard({ pkg }: { pkg: CateringPackage }) {
           {includedFeatures.map((feature) => (
             <li
               key={feature.label}
-              className="flex items-center gap-2.5 text-sm text-ink/80"
+              className="flex items-center gap-2.5 text-sm text-foreground/80"
             >
-              <Check className="h-4 w-4 shrink-0 text-brand-gold" />
+              <Check className="h-4 w-4 shrink-0 text-primary" />
               <span className="leading-tight">{feature.label}</span>
             </li>
           ))}
         </ul>
 
-        <span className="mt-6 inline-flex items-center justify-center gap-2 bg-brand-gold px-6 py-3 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors group-hover:bg-brand-dark group-hover:text-cream">
+        <span className="mt-6 inline-flex items-center justify-center gap-2 bg-ink px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors group-hover:bg-primary">
           View Menu
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </span>

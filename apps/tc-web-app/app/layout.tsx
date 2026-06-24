@@ -2,10 +2,34 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Great_Vibes, Kaushan_Script, Raleway } from "next/font/google";
 import Script from "next/script.js";
+
+// Self-hosted fonts (downloaded & served from our own origin at build time —
+// no runtime request to Google Fonts, so they render reliably everywhere).
+const raleway = Raleway({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--ff-raleway",
+});
+
+const kaushan = Kaushan_Script({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--ff-kaushan",
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--ff-script",
+});
 import { LazyChatBot } from "@/components/home/LazyChatBot";
 import { AppFooter } from "@/components/layout/AppFooter";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { HashScroll } from "@/components/layout/HashScroll";
 import {
   absoluteUrl,
   buildOrganizationJsonLd,
@@ -16,7 +40,7 @@ import {
 } from "@/lib/seo";
 
 const rootTitle =
-  "Tandoori Corner | North Indian Restaurant & TCB Bar in Balestier";
+  "Tandoori Corner | North Indian Restaurant & TCB Bar";
 
 export const metadata: Metadata = {
   ...buildPageMetadata({
@@ -61,7 +85,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-scroll-behavior="smooth" lang="en">
+    <html
+      data-scroll-behavior="smooth"
+      lang="en"
+      className={`${raleway.variable} ${kaushan.variable} ${greatVibes.variable}`}
+    >
       <head>
         <Script
           id="restaurant-schema"
@@ -101,6 +129,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased text-foreground bg-background selection:bg-primary selection:text-primary-foreground min-h-screen flex flex-col pt-safe">
+        <HashScroll />
         <AppHeader />
         <main className="flex-1 w-full">{children}</main>
         <AppFooter />

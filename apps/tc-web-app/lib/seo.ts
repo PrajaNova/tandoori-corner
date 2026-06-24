@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const siteUrl = "https://www.tandooricorner.sg";
 
 const defaultDescription =
-  "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza, serving alfresco dining, tandoori grills, evening cocktails, home delivery, catering, and table bookings.";
+  "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza — tandoori grills, alfresco dining, home delivery and catering. Est. 2008.";
 
 export const restaurantSeo = {
   name: "Tandoori Corner",
@@ -18,6 +18,8 @@ export const restaurantSeo = {
   phoneDisplay: "+65 9862 7334",
   phoneHref: "tel:+6598627334",
   telephone: "+6598627334",
+  phoneLandlineDisplay: "+65 6250 0200",
+  phoneLandlineHref: "tel:+6562500200",
   email: "tandooricorner@singnet.com.sg",
   address: {
     streetAddress: "400 Balestier Road #01-12 Balestier Plaza",
@@ -86,6 +88,8 @@ export const restaurantSeo = {
 export const contact = {
   phoneDisplay: restaurantSeo.phoneDisplay,
   phoneHref: restaurantSeo.phoneHref,
+  phoneLandlineDisplay: restaurantSeo.phoneLandlineDisplay,
+  phoneLandlineHref: restaurantSeo.phoneLandlineHref,
   telephone: restaurantSeo.telephone,
   email: restaurantSeo.email,
   emailHref: `mailto:${restaurantSeo.email}`,
@@ -133,14 +137,6 @@ export const seoRoutes = [
     changeFrequency: "monthly",
   },
   {
-    path: "/experience",
-    title: "Reservations, TCB Bar & Alfresco Dining",
-    description:
-      "Reserve a table on the pet-friendly alfresco balcony, book the TCB Bar, arrange private events, or order takeaway and catering from Tandoori Corner in Balestier Plaza.",
-    priority: 0.8,
-    changeFrequency: "monthly",
-  },
-  {
     path: "/story",
     title: "Our Story | 15 Years at Balestier Plaza",
     description:
@@ -182,7 +178,7 @@ export function buildPageMetadata({
   ];
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,
@@ -228,7 +224,7 @@ export function buildPageMetadata({
 export function buildRestaurantJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "Restaurant",
+    "@type": ["Restaurant", "LocalBusiness"],
     "@id": `${siteUrl}/#restaurant`,
     name: restaurantSeo.name,
     legalName: restaurantSeo.legalName,
@@ -245,6 +241,11 @@ export function buildRestaurantJsonLd() {
       ...restaurantSeo.address,
     },
     hasMap: restaurantSeo.mapUrl,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 1.3257154,
+      longitude: 103.8480438,
+    },
     sameAs: restaurantSeo.sameAs,
     openingHoursSpecification: restaurantSeo.openingHoursSpecification,
     aggregateRating: {

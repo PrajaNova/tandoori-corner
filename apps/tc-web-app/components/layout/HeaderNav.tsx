@@ -1,12 +1,11 @@
 "use client";
 
-import { Menu as MenuIcon, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-import { ExperienceDialog } from "@/components/layout/ExperienceDialog";
-import { Button } from "@/components/ui/button";
+import { useCart } from "@/hooks/use-cart";
 
 interface NavigationItem {
   href: string;
@@ -19,141 +18,187 @@ interface HeaderNavProps {
 
 export function HeaderNav({ items }: HeaderNavProps) {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cart } = useCart();
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [experienceOpen, setExperienceOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isHome = pathname === "/";
-  const isTransparent = isHome && !hasScrolled && !mobileMenuOpen;
-  const closeMobileMenu = () => setMobileMenuOpen(false);
-  const openExperience = () => {
-    setMobileMenuOpen(false);
-    setExperienceOpen(true);
-  };
+  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
   useEffect(() => {
     const updateHeaderState = () => setHasScrolled(window.scrollY > 24);
-
     updateHeaderState();
     window.addEventListener("scroll", updateHeaderState, { passive: true });
-    window.addEventListener("resize", updateHeaderState);
-
-    return () => {
-      window.removeEventListener("scroll", updateHeaderState);
-      window.removeEventListener("resize", updateHeaderState);
-    };
+    return () => window.removeEventListener("scroll", updateHeaderState);
   }, []);
 
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll while the mobile menu is open.
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const isDarkBg = !hasScrolled;
+
+  const leftItems = items.slice(0, Math.ceil(items.length / 2));
+  const rightItems = items.slice(Math.ceil(items.length / 2));
+
+  const isItemActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   return (
-    <>
-      <nav
-        className={`fixed top-9 z-50 w-full py-3 transition-all duration-500 md:py-4 ${
-          isTransparent
-            ? "border-b border-transparent bg-transparent"
-            : "border-b border-border bg-background/95 shadow-sm backdrop-blur-md"
-        }`}
-      >
-        <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-          <Link
-            href="/"
-            className="flex shrink-0 flex-col text-left"
-            onClick={closeMobileMenu}
-            aria-label="Tandoori Corner home"
+    <nav
+      className={`fixed top-0 z-50 w-full transition-all duration-500 py-4 text-white md:py-6 ${
+        isDarkBg
+          ? "bg-gradient-to-b from-black/80 via-black/45 to-transparent"
+          : "bg-ink border-b border-white/10 shadow-md"
+      }`}
+    >
+      <div className="container mx-auto flex items-center justify-between relative px-5 sm:px-8">
+        {/* Left Side (Left Nav Links + Mobile Hamburger) */}
+        <div className="flex items-center space-x-8 z-10 w-auto xl:w-1/3">
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen(true)}
+            className="hover:text-primary transition-colors xl:hidden"
           >
-            <span
-              className={`font-space text-xl md:text-2xl font-bold tracking-tight leading-none transition-colors ${
-                isTransparent ? "text-cream" : "text-foreground"
-              }`}
-            >
-              Tandoori<span className="text-brand-gold">Corner</span>
-            </span>
-            <span
-              className={`mt-1 text-[8px] uppercase tracking-[0.18em] transition-colors md:text-[9px] md:tracking-[0.2em] ${
-                isTransparent ? "text-cream/70" : "text-muted-foreground"
-              }`}
-            >
-              Est. 2008 &bull; Balestier
-            </span>
-          </Link>
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="hidden xl:flex items-center space-x-8">
+            {leftItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`font-raleway text-xs font-bold tracking-widest whitespace-nowrap transition-colors hover:text-primary ${
+                  isItemActive(item.href) ? "text-primary" : "text-white"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
 
-          <div className="hidden lg:flex items-center gap-10">
-            {items.map((item) => {
-              const isActive = item.href.includes("#")
-                ? false
-                : item.href === "/"
-                  ? pathname === "/"
-                  : pathname === item.href.split("#")[0];
+        {/* Center Logo */}
+        <Link
+          href="/"
+          aria-label="Tandoori Corner — home"
+          className="flex items-center absolute left-1/2 -translate-x-1/2 z-20"
+        >
+          <Image
+            src="/tandoori-corner-logo.png"
+            alt="Tandoori Corner — North Indian Curry House"
+            width={600}
+            height={183}
+            priority
+            className="h-11 w-auto rounded-md bg-white/92 px-2.5 py-1 shadow-lg ring-1 ring-black/5 sm:h-14 sm:px-3 sm:py-1.5"
+          />
+        </Link>
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`font-space text-lg tracking-normal transition-colors ${
-                    isActive
-                      ? "text-primary"
-                      : isTransparent
-                        ? "text-cream/90 hover:text-brand-gold"
-                        : "text-foreground/90 hover:text-primary"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <Button
-              className="font-space text-base normal-case tracking-normal"
-              onClick={openExperience}
-              size="default"
-            >
-              Experience
-            </Button>
+        {/* Right Side (Right Nav Links + Action Icons) */}
+        <div className="flex items-center justify-end space-x-5 z-10 w-auto sm:space-x-6 xl:w-1/3">
+          <div className="hidden xl:flex items-center space-x-8 mr-4">
+            {rightItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`font-raleway text-xs font-bold tracking-widest whitespace-nowrap transition-colors hover:text-primary ${
+                  isItemActive(item.href) ? "text-primary" : "text-white"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
-          <Button
-            className={`lg:hidden ${
-              isTransparent ? "text-cream" : "text-foreground"
-            }`}
-            onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-            size="icon"
-            variant="ghost"
+          <button
+            type="button"
+            aria-label="Search"
+            className="hidden hover:text-primary transition-colors sm:block"
           >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <MenuIcon className="w-6 h-6" />
+            <Search className="w-4 h-4" />
+          </button>
+          <Link
+            href="/checkout"
+            aria-label="View cart"
+            className="relative hover:text-primary transition-colors"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-primary text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center text-white">
+                {cartCount}
+              </span>
             )}
-          </Button>
+          </Link>
         </div>
-      </nav>
+      </div>
 
-      {mobileMenuOpen ? (
-        <div className="fixed inset-0 z-40 flex flex-col gap-6 bg-background/95 px-6 pt-36 backdrop-blur-md lg:hidden">
+      {/* Mobile menu overlay + drawer */}
+      <button
+        type="button"
+        aria-label="Close menu"
+        tabIndex={mobileOpen ? 0 : -1}
+        onClick={() => setMobileOpen(false)}
+        className={`fixed inset-0 z-40 bg-black/60 transition-opacity duration-300 xl:hidden ${
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
+      <div
+        className={`fixed left-0 top-0 z-50 h-full w-[82%] max-w-xs bg-ink text-white shadow-2xl transition-transform duration-300 ease-in-out xl:hidden ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+          <Image
+            src="/tandoori-corner-logo.png"
+            alt="Tandoori Corner"
+            width={600}
+            height={183}
+            className="h-10 w-auto rounded-md bg-white/92 px-2 py-1"
+          />
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setMobileOpen(false)}
+            className="text-white/70 hover:text-primary transition-colors"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        <nav className="flex flex-col px-2 py-4">
           {items.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
-              onClick={closeMobileMenu}
-              className="text-2xl text-left font-space border-b border-border pb-4 text-foreground"
+              onClick={() => setMobileOpen(false)}
+              className={`border-b border-white/5 px-4 py-4 font-raleway text-sm font-bold uppercase tracking-widest transition-colors hover:text-primary ${
+                isItemActive(item.href) ? "text-primary" : "text-white"
+              }`}
             >
               {item.label}
             </Link>
           ))}
-          <Button
-            onClick={openExperience}
-            className="mt-4 font-space text-lg normal-case tracking-normal"
-            size="lg"
-          >
-            Experience
-          </Button>
-        </div>
-      ) : null}
+        </nav>
 
-      <ExperienceDialog
-        open={experienceOpen}
-        onClose={() => setExperienceOpen(false)}
-      />
-    </>
+        <div className="px-6 py-6">
+          <Link
+            href="/order"
+            onClick={() => setMobileOpen(false)}
+            className="flex w-full items-center justify-center bg-primary px-6 py-4 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-ink"
+          >
+            Order Online
+          </Link>
+        </div>
+      </div>
+    </nav>
   );
 }

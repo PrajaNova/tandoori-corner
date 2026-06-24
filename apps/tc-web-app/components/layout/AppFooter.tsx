@@ -1,140 +1,128 @@
-import { Facebook, Instagram, Mail, Map, MapPin, Twitter } from "lucide-react";
-import { buttonVariantsFor } from "@/components/ui/button";
-import { Eyebrow } from "@/components/ui/typography";
+import { Facebook, Globe, Instagram, Twitter } from "lucide-react";
+import Link from "next/link";
 import { contact } from "@/lib/seo";
 
+const hours = [
+  { day: "Lunch (Daily)", time: "12:00 – 14:45" },
+  { day: "Dinner (Daily)", time: "18:00 – 21:45" },
+  { day: "Monday – Sunday", time: "Open All Week" },
+];
+
 export function AppFooter() {
-  const socialLinkClass = buttonVariantsFor({
-    className: "transition-all",
-    size: "iconCircle",
-    variant: "outline",
-  });
-
   return (
-    <footer className="bg-cream pt-24 pb-12 border-t border-border relative mt-auto">
-      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-        <div className="md:col-span-4">
-          <span className="font-space text-2xl font-bold text-ink mb-6 block">
-            Tandoori<span className="text-brand-gold">Corner</span>
-          </span>
-          <p className="text-ink/50 text-sm pr-8 leading-relaxed mb-8">
-            Tucked inside Balestier Plaza, we offer both the lush pet-friendly
-            alfresco balcony and the exclusive indoor TCB Bar for a premium
-            dining experience.
-          </p>
-          <div className="flex gap-4">
-            <a
-              href={contact.social.instagram}
-              className={`${socialLinkClass} hover:border-brand-gold hover:bg-brand-gold hover:text-brand-dark`}
-              aria-label="Instagram"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Instagram className="w-4 h-4" />
-            </a>
-            <a
-              href={contact.social.facebook}
-              className={`${socialLinkClass} hover:border-[#1877F2] hover:bg-[#1877F2] hover:text-ink`}
-              aria-label="Facebook"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Facebook className="w-4 h-4" />
-            </a>
-            <a
-              href={contact.social.x}
-              className={`${socialLinkClass} hover:border-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-ink`}
-              aria-label="Twitter"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Twitter className="w-4 h-4" />
-            </a>
-            <a
-              href={contact.emailHref}
-              className={`${socialLinkClass} hover:border-[#EA4335] hover:bg-[#EA4335] hover:text-ink`}
-              aria-label="Email"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
+    <footer className="bg-[#1a1a1a] pt-24 pb-8 text-white relative mt-auto">
+      {/* Top "Make A Reservation" tab */}
+      <div className="absolute left-1/2 -top-[20px] -translate-x-1/2 w-[260px] h-[44px] bg-[#1a1a1a] rounded-t-[60px] flex items-center justify-center">
+        <h3 className="font-script text-white text-2xl -mt-2">
+          Make A Reservation
+        </h3>
+      </div>
 
-        <div className="md:col-span-3 md:col-start-6">
-          <Eyebrow className="mb-6 block text-ink/50">
-            Contact & Logistics
-          </Eyebrow>
-
-          <div className="relative mb-6 h-40 w-full overflow-hidden border border-border bg-cream">
-            <iframe
-              src={contact.mapEmbedUrl}
-              className="h-full w-full"
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-              title="Tandoori Corner map"
-            />
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 mb-16 text-center">
+          {/* Left Column: Our address */}
+          <div className="flex flex-col items-center">
+            <h3 className="font-script text-primary text-3xl mb-6">
+              Our address
+            </h3>
+            <p className="text-muted-foreground text-sm leading-loose mb-6">
+              400 Balestier Road #01-12
+              <br />
+              Balestier Plaza, Singapore 329802
+            </p>
             <a
               href={contact.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute bottom-2 right-2 bg-cream/90 px-2 py-1 text-[8px] font-bold uppercase tracking-widest text-ink border border-border transition-colors hover:border-brand-gold/50"
+              className="text-primary font-bold text-xs tracking-widest uppercase hover:text-white transition-colors"
             >
-              View Map
+              View On Map
             </a>
           </div>
 
-          <ul className="space-y-4 text-sm text-ink/70">
-            <li className="flex items-start gap-3">
-              <MapPin className="w-4 h-4 mt-0.5 text-brand-gold shrink-0" />
-              <span>{contact.addressDisplay}</span>
-            </li>
-            <li className="flex items-center gap-3 mt-4">
-              <Map className="w-4 h-4 text-brand-gold shrink-0" />
+          {/* Center Column: Hours box */}
+          <div className="flex justify-center -mt-8 relative z-10">
+            <div className="border border-white/10 w-full max-w-[300px] p-8 pt-10 flex flex-col items-center relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1a1a1a] px-2 text-primary/70">
+                <span className="text-xl">✧</span>
+              </div>
+
+              <div className="w-full space-y-4 text-xs text-muted-foreground mb-8">
+                {hours.map((row) => (
+                  <div
+                    key={row.day}
+                    className="flex justify-between border-b border-white/5 pb-2"
+                  >
+                    <span>{row.day}</span>
+                    <span>{row.time}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/#reservation"
+                className="w-full border border-primary text-primary font-bold text-xs tracking-widest uppercase py-4 text-center hover:bg-primary hover:text-white transition-colors"
+              >
+                Find A Table
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column: Contact us */}
+          <div className="flex flex-col items-center">
+            <h3 className="font-script text-primary text-3xl mb-6">
+              Contact us
+            </h3>
+            <p className="text-muted-foreground text-sm leading-loose mb-6">
+              Email: {contact.email}
+              <br />
+              Phone: {contact.phoneLandlineDisplay} / {contact.phoneDisplay}
+            </p>
+            <a
+              href={contact.emailHref}
+              className="text-primary font-bold text-xs tracking-widest uppercase hover:text-white transition-colors"
+            >
+              Send A Message
+            </a>
+          </div>
+        </div>
+
+        {/* Socials and Newsletter */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-10">
+          <div className="flex space-x-3">
+            {[
+              { Icon: Facebook, href: contact.social.facebook, label: "Tandoori Corner on Facebook" },
+              { Icon: Twitter, href: contact.social.x, label: "Tandoori Corner on X" },
+              { Icon: Instagram, href: contact.social.instagram, label: "Tandoori Corner on Instagram" },
+              { Icon: Globe, href: contact.social.tripadvisor, label: "Tandoori Corner on TripAdvisor" },
+            ].map(({ Icon, href, label }) => (
               <a
-                href={contact.mapUrl}
+                key={label}
+                href={href}
+                aria-label={label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-b border-border pb-0.5 hover:text-ink hover:border-border transition-colors"
+                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
               >
-                Get Directions
+                <Icon className="w-4 h-4" />
               </a>
-            </li>
-          </ul>
+            ))}
+          </div>
+
+          <div className="flex w-full max-w-sm border border-white/15 rounded-full overflow-hidden">
+            <input
+              type="email"
+              placeholder="Subscribe Our Newsletter"
+              className="bg-transparent border-none outline-none text-sm px-6 py-3 w-full text-white placeholder:text-white/30"
+            />
+            <button className="px-6 text-primary hover:text-white transition-colors">
+              →
+            </button>
+          </div>
         </div>
 
-        <div className="md:col-span-4">
-          <Eyebrow className="mb-6 block text-ink/50">Service Hours</Eyebrow>
-          <ul className="space-y-4 text-sm text-ink/70">
-            <li className="flex justify-between border-b border-border pb-2">
-              <span>Lunch Service</span>
-              <span className="font-medium text-ink">12:00 PM - 2:45 PM</span>
-            </li>
-            <li className="flex justify-between border-b border-border pb-2 text-brand-gold/60 italic text-xs">
-              <span>Kitchen Reset / Closed</span>
-              <span>2:45 PM - 6:00 PM</span>
-            </li>
-            <li className="flex justify-between border-b border-border pb-2">
-              <span>Evening & TCB Bar</span>
-              <span className="font-medium text-ink">6:00 PM - 9:45 PM</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-6 border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-ink/40">
-        <p>
-          &copy; {new Date().getFullYear()} Tandoori Corner. All Rights
-          Reserved.
-        </p>
-        <div className="flex items-center gap-6">
-          <a href="#top" className="hover:text-ink transition-colors">
-            Privacy Policy
-          </a>
-          <a href="#top" className="hover:text-ink transition-colors">
-            Terms of Service
-          </a>
+        <div className="text-center text-xs text-white/40 pt-8 border-t border-white/10 font-light">
+          © 2024 Tandoori Corner. North Indian Curry House, Singapore.
         </div>
       </div>
     </footer>

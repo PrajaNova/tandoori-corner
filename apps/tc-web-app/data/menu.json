@@ -1,0 +1,1004 @@
+{
+  "categories": [
+    {
+      "name": "Snacks Corner",
+      "items": [
+        {
+          "name": "Vegetable Samosa",
+          "description": "Probably the most famous snack. Crispy patty filled with spiced potatoes and peas, served with tamarind sauce.",
+          "category": "Snacks Corner",
+          "price": 9,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "vegetable-samosa"
+        },
+        {
+          "name": "Tomato Dhaniye ka soup",
+          "description": "A wholesome blend of fresh tomatoes & coriander cooked with mild spices.",
+          "category": "Snacks Corner",
+          "price": 8,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tomato-dhaniye-ka-soup"
+        },
+        {
+          "name": "Onion Bhaji",
+          "description": "Thinly sliced Red onions mixed with batter and fried.",
+          "category": "Snacks Corner",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "onion-bhaji"
+        },
+        {
+          "name": "Papri Chaat",
+          "description": "Indian nachos served with potatoes, Tomatoes, yogurt and tamarind sauce.",
+          "category": "Snacks Corner",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["milk", "wheat"] },
+          "imageSlug": "papri-chaat"
+        },
+        {
+          "name": "Masala Peanuts",
+          "description": "Typical North Indian Street food, served with fresh cut Onion, tomato n green chillies.",
+          "category": "Snacks Corner",
+          "price": 8,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": ["peanuts"] },
+          "imageSlug": "masala-peanuts"
+        },
+        {
+          "name": "Chicken Samosa",
+          "description": "Crispy patty filled with minced chicken.",
+          "category": "Snacks Corner",
+          "price": 12,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "chicken-samosa"
+        },
+        {
+          "name": "Masala Papad",
+          "description": "onions, tomatoes, green chilies, coriander leaves, salt, chaat masala, red chili powder and lemon juice",
+          "category": "Snacks Corner",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "masala-papad"
+        }
+      ]
+    },
+    {
+      "name": "Tandoori Corner",
+      "items": [
+        {
+          "name": "Chicken Tikka",
+          "description": "Boneless marinated chicken leg cooked in tandoor, served with mint chutney.",
+          "category": "Tandoori Corner",
+          "price": 18,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "chicken-tikka"
+        },
+        {
+          "name": "Tandoori Chicken (Half)",
+          "description": "Chicken marinated and cooked in tandoor, served with mint chutney.",
+          "category": "Tandoori Corner",
+          "price": 20,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tandoori-chicken-half"
+        },
+        {
+          "name": "Mutton Sheekh Kebab (4pcs)",
+          "description": "Succulent mutton mince spiced with fresh coriander and freshly ground spices, barbecued in tandoor.",
+          "category": "Tandoori Corner",
+          "price": 20,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "mutton-sheekh-kebab-4pcs"
+        },
+        {
+          "name": "Tandoori Prawn",
+          "description": "Prawns marinated with spices and cooked in tandoor.",
+          "category": "Tandoori Corner",
+          "price": 22,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["shellfish"] },
+          "imageSlug": "tandoori-prawn"
+        },
+        {
+          "name": "Tandoori Platter",
+          "description": "2 PC's chicken Tikka, 2 PC's Fish Tikka & 2 PC's Mutton Kebab",
+          "category": "Tandoori Corner",
+          "price": 28,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["fish"] },
+          "imageSlug": "tandoori-platter"
+        },
+        {
+          "name": "Tandoori Broccoli",
+          "description": "Fresh Broccoli marinated with spices and grilled in tandoor.",
+          "category": "Tandoori Corner",
+          "price": 18,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tandoori-broccoli"
+        },
+        {
+          "name": "Tandoori Paneer Tikka",
+          "description": "Fresh cottage cheese marinated in herbs and grilled in tandoor.",
+          "category": "Tandoori Corner",
+          "price": 19,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "tandoori-paneer-tikka"
+        },
+        {
+          "name": "Fish Tikka",
+          "description": "Boneless fish fillet marinated with yoghurt & Indian spices barbecued in tandoor, served with mint chutney.",
+          "category": "Tandoori Corner",
+          "price": 20,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["fish", "milk"] },
+          "imageSlug": "fish-tikka"
+        },
+        {
+          "name": "Murgh Malai Tikka",
+          "description": "Cheese & Yogurt marinated Juicy chicken breast cooked in tandoor.",
+          "category": "Tandoori Corner",
+          "price": 24,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "murgh-malai-tikka"
+        },
+        {
+          "name": "Tandoori Lamb Chop",
+          "description": "Fresh lamb chops marinated with spices and grilled in tandoor.",
+          "category": "Tandoori Corner",
+          "price": 30,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tandoori-lamb-chop"
+        }
+      ]
+    },
+    {
+      "name": "Curry Corner (Main Course)",
+      "items": [
+        {
+          "name": "Butter Chicken",
+          "description": "Tender tandoori chicken tikka cooked in a traditional creamy tomato sauce with butter.",
+          "category": "Curry Corner (Main Course)",
+          "price": 17,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "butter-chicken"
+        },
+        {
+          "name": "Chicken Vindaloo",
+          "description": "Boneless chicken cubes cooked in traditional delicately spiced Vindaloo sauce.",
+          "category": "Curry Corner (Main Course)",
+          "price": 17,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "chicken-vindaloo"
+        },
+        {
+          "name": "Chicken Curry",
+          "description": "Fresh boneless chicken marinated in spices and cooked in onion based sauce.",
+          "category": "Curry Corner (Main Course)",
+          "price": 17,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "chicken-curry"
+        },
+        {
+          "name": "Mutton Rogan Josh",
+          "description": "An aromatic traditional mutton curry cooked in a blend of exotic spices.",
+          "category": "Curry Corner (Main Course)",
+          "price": 18,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "mutton-rogan-josh"
+        },
+        {
+          "name": "Saag Mutton",
+          "description": "Mutton chunks cooked to perfection with spinach, ginger, garlic tomatoes and spices.",
+          "category": "Curry Corner (Main Course)",
+          "price": 18,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "saag-mutton"
+        },
+        {
+          "name": "Egg Curry",
+          "description": "Boiled egg cooked with spices in a home style curry.",
+          "category": "Curry Corner (Main Course)",
+          "price": 15,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["egg"] },
+          "imageSlug": "egg-curry"
+        },
+        {
+          "name": "Fish Curry",
+          "description": "Fresh fish fillet marinated and cooked with a rich onion gravy.",
+          "category": "Curry Corner (Main Course)",
+          "price": 20,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["fish"] },
+          "imageSlug": "fish-curry"
+        },
+        {
+          "name": "Prawn Masala",
+          "description": "Prawns cooked in a delicious tomato and onion sauce.",
+          "category": "Curry Corner (Main Course)",
+          "price": 22,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["shellfish"] },
+          "imageSlug": "prawn-masala"
+        }
+      ]
+    },
+    {
+      "name": "Sabzi Corner (Main Course)",
+      "items": [
+        {
+          "name": "Tadka Dhal",
+          "description": "A special mix of tuar and moong dhal cooked with an onion and tomato tadka.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 12,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tadka-dhal"
+        },
+        {
+          "name": "Makhni Dhal",
+          "description": "Rich black dhal spiced and cooked overnight with cream and butter.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 14,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "makhni-dhal"
+        },
+        {
+          "name": "Aloo Gobi",
+          "description": "Cauliflower and potatoes, sauted with fresh tomatoes, ginger, green chilies and ground coriander.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 14,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "aloo-gobi"
+        },
+        {
+          "name": "Corn Palak",
+          "description": "Palak Gravy cooked with Corn and spices.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 14,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "corn-palak"
+        },
+        {
+          "name": "Baigan Bartha",
+          "description": "Oven roasted Eggplant cooked to perfection with a selection of mild spices.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 14,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "baigan-bartha"
+        },
+        {
+          "name": "Palak Paneer",
+          "description": "A classic traditional pureed spinach and cottage cheese cooked with onion, ginger and green chillies.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 16,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "palak-paneer"
+        },
+        {
+          "name": "Vegetable Curry",
+          "description": "Exotic garden green vegetables cooked in tomato onion gravy.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 14,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "vegetable-curry"
+        },
+        {
+          "name": "Malai Kofta Curry",
+          "description": "Cottage cheese dumplings cooked in rich korma gravy.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 16,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "malai-kofta-curry"
+        },
+        {
+          "name": "Bhindi Masala",
+          "description": "Fresh cut ladyfingers cooked with dry masala.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 14,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "bhindi-masala"
+        },
+        {
+          "name": "Paneer Makhni",
+          "description": "Fresh cottage cheese cooked in a traditional creamy tomato sauce.",
+          "category": "Sabzi Corner (Main Course)",
+          "price": 16,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "paneer-makhni"
+        }
+      ]
+    },
+    {
+      "name": "Rice Corner",
+      "items": [
+        {
+          "name": "Plain Rice",
+          "description": "Steamed basmati rice.",
+          "category": "Rice Corner",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "plain-rice"
+        },
+        {
+          "name": "Onion Rice",
+          "description": "Aromatic Basmati rice cooked with fresh onions.",
+          "category": "Rice Corner",
+          "price": 8,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "onion-rice"
+        },
+        {
+          "name": "Jeera Rice",
+          "description": "Aromatic Basmati rice cooked with Cumin(Jeera).",
+          "category": "Rice Corner",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "jeera-rice"
+        },
+        {
+          "name": "Green Salad",
+          "description": "",
+          "category": "Rice Corner",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "green-salad"
+        },
+        {
+          "name": "Vegetable Raita",
+          "description": "Homemade yoghurt blended with exotic vegetables and spices.",
+          "category": "Rice Corner",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "vegetable-raita"
+        },
+        {
+          "name": "Vegetable Biryani",
+          "description": "Basmati rice cooked with mildly spiced seasonal vegetables.",
+          "category": "Rice Corner",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "vegetable-biryani"
+        },
+        {
+          "name": "Mutton / Chicken Biryani",
+          "description": "Tender juicy chunks of mutton or chicken cooked with mild spices and Basmati rice.",
+          "category": "Rice Corner",
+          "variants": [
+            { "label": "Mutton", "price": 14 },
+            { "label": "Chicken", "price": 12 }
+          ],
+          "dietary": { "veg": false, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "mutton-chicken-biryani"
+        }
+      ]
+    },
+    {
+      "name": "Side Orders",
+      "items": [
+        {
+          "name": "Papadum Basket",
+          "description": "",
+          "category": "Side Orders",
+          "price": 1,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "papadum-basket"
+        },
+        {
+          "name": "Extra Curry",
+          "description": "",
+          "category": "Side Orders",
+          "price": 2,
+          "variants": [],
+          "dietary": { "veg": false, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "extra-curry"
+        },
+        {
+          "name": "Onion Salad",
+          "description": "",
+          "category": "Side Orders",
+          "price": 2,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "onion-salad"
+        }
+      ]
+    },
+    {
+      "name": "Bread corner",
+      "items": [
+        {
+          "name": "Plain Naan",
+          "description": "Delicious tandoor baked bread made with fine flour dough.",
+          "category": "Bread corner",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "plain-naan"
+        },
+        {
+          "name": "Tandoori Roti",
+          "description": "Whole wheat bread cooked in tandoor.",
+          "category": "Bread corner",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "tandoori-roti"
+        },
+        {
+          "name": "Butter Roti",
+          "description": "Whole wheat bread cooked in tandoor.",
+          "category": "Bread corner",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "imageSlug": "butter-roti"
+        },
+        {
+          "name": "Butter Naan",
+          "description": "Flaky tandoor baked bread topped with butter.",
+          "category": "Bread corner",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "imageSlug": "butter-naan"
+        },
+        {
+          "name": "Garlic Naan",
+          "description": "Bread rubbed with fresh garlic and baked in tandoor.",
+          "category": "Bread corner",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "garlic-naan"
+        },
+        {
+          "name": "Tandoori Paratha",
+          "description": "Whole wheat unleavened bread topped with butter baked in tandoor.",
+          "category": "Bread corner",
+          "price": 7,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "imageSlug": "tandoori-paratha"
+        },
+        {
+          "name": "Phudina Paratha",
+          "description": "Dry mint topped whole wheat bread baked in tandoor.",
+          "category": "Bread corner",
+          "price": 7,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "phudina-paratha"
+        },
+        {
+          "name": "Cheese Naan",
+          "description": "Stuffed Cheese Naan.",
+          "category": "Bread corner",
+          "price": 8,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat", "milk"] },
+          "imageSlug": "cheese-naan"
+        },
+        {
+          "name": "Peshawari Naan",
+          "description": "Bread topped with mixture of dried fruits.",
+          "category": "Bread corner",
+          "price": 8,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "peshawari-naan"
+        },
+        {
+          "name": "Stuffed Tandoori Paratha",
+          "description": "Mashed potatoes bland with spices.",
+          "category": "Bread corner",
+          "price": 9,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "stuffed-tandoori-paratha"
+        },
+        {
+          "name": "Tandoori Kulcha (Ajwain)",
+          "description": "Freshly baked bread in tandoor with Ajwain.",
+          "category": "Bread corner",
+          "price": 7,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": false, "spiceLevel": null, "allergens": ["wheat"] },
+          "imageSlug": "tandoori-kulcha-ajwain"
+        }
+      ]
+    },
+    {
+      "name": "House Pour",
+      "items": [
+        {
+          "name": "Inspired Company Shiraz Cabernet",
+          "description": "",
+          "category": "House Pour",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "inspired-company-shiraz-cabernet"
+        },
+        {
+          "name": "Inspired Company Chardonnay",
+          "description": "",
+          "category": "House Pour",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "inspired-company-chardonnay"
+        }
+      ]
+    },
+    {
+      "name": "Wines",
+      "items": [
+        {
+          "name": "Inspired Company Shiraz Cabernet",
+          "description": "",
+          "category": "Wines",
+          "price": 40,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "inspired-company-shiraz-cabernet"
+        },
+        {
+          "name": "Inspired Company Chardonnay",
+          "description": "",
+          "category": "Wines",
+          "price": 40,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "inspired-company-chardonnay"
+        },
+        {
+          "name": "Inspired Company Cabernet Merlot",
+          "description": "",
+          "category": "Wines",
+          "price": 45,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "inspired-company-cabernet-merlot"
+        },
+        {
+          "name": "Woolshed Sauvignon Blanc",
+          "description": "",
+          "category": "Wines",
+          "price": 50,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "woolshed-sauvignon-blanc"
+        },
+        {
+          "name": "Francoise Chauvenet Lajolie Pinot Noir",
+          "description": "",
+          "category": "Wines",
+          "price": 50,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "francoise-chauvenet-lajolie-pinot-noir"
+        }
+      ]
+    },
+    {
+      "name": "Beer",
+      "items": [
+        {
+          "name": "Tiger (330ml)",
+          "description": "",
+          "category": "Beer",
+          "price": 8,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tiger-330ml"
+        },
+        {
+          "name": "Heineken (330ml)",
+          "description": "",
+          "category": "Beer",
+          "price": 9,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "heineken-330ml"
+        },
+        {
+          "name": "Corona (330ml)",
+          "description": "",
+          "category": "Beer",
+          "price": 9,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "corona-330ml"
+        },
+        {
+          "name": "Hoegaarden (330ml)",
+          "description": "",
+          "category": "Beer",
+          "price": 9,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "hoegaarden-330ml"
+        },
+        {
+          "name": "Erdinger White/Dark (500ml)",
+          "description": "",
+          "category": "Beer",
+          "price": 12,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "erdinger-white-dark-500ml"
+        },
+        {
+          "name": "King Fisher Premium (600ml)",
+          "description": "",
+          "category": "Beer",
+          "price": 14,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "king-fisher-premium-600ml"
+        },
+        {
+          "name": "House Pour Bucket (5 Btl)",
+          "description": "",
+          "category": "Beer",
+          "price": 30,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "house-pour-bucket-5-btl"
+        }
+      ]
+    },
+    {
+      "name": "Soft Drinks",
+      "items": [
+        {
+          "name": "Coke",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "coke"
+        },
+        {
+          "name": "Sprite",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "sprite"
+        },
+        {
+          "name": "Ginger Ale",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "ginger-ale"
+        },
+        {
+          "name": "Tonic Water",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tonic-water"
+        },
+        {
+          "name": "Mineral Water",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "mineral-water"
+        },
+        {
+          "name": "Coke Zero",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "coke-zero"
+        },
+        {
+          "name": "Ice lemon Tea",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "ice-lemon-tea"
+        },
+        {
+          "name": "Perrier",
+          "description": "",
+          "category": "Soft Drinks",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "perrier"
+        }
+      ]
+    },
+    {
+      "name": "Hard Drinks",
+      "items": [
+        {
+          "name": "Smirnoff Vodka",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "smirnoff-vodka"
+        },
+        {
+          "name": "Absolut Vodka",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "absolut-vodka"
+        },
+        {
+          "name": "Bacardi Rum (White)",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "bacardi-rum-white"
+        },
+        {
+          "name": "J.W. Black Label",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "jw-black-label"
+        },
+        {
+          "name": "Chivas Regal",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "chivas-regal"
+        },
+        {
+          "name": "Glenfiddich",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "glenfiddich"
+        },
+        {
+          "name": "Tequila",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tequila"
+        },
+        {
+          "name": "Bombay Sapphire Gin",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "bombay-sapphire-gin"
+        },
+        {
+          "name": "Gordon's Gin",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 10,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "gordons-gin"
+        },
+        {
+          "name": "J.W. Black Label / Singleton (Bottle)",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 100,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "jw-black-label-singleton-bottle"
+        },
+        {
+          "name": "Chivas Regal / Glenfiddich (Bottle)",
+          "description": "",
+          "category": "Hard Drinks",
+          "price": 120,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "chivas-regal-glenfiddich-bottle"
+        }
+      ]
+    },
+    {
+      "name": "Fruit Juice",
+      "items": [
+        {
+          "name": "Mango Juice",
+          "description": "",
+          "category": "Fruit Juice",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "mango-juice"
+        },
+        {
+          "name": "Lime Juice",
+          "description": "",
+          "category": "Fruit Juice",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "lime-juice"
+        },
+        {
+          "name": "Fresh Thai Coconut",
+          "description": "",
+          "category": "Fruit Juice",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "fresh-thai-coconut"
+        }
+      ]
+    },
+    {
+      "name": "Lassi",
+      "items": [
+        {
+          "name": "Mango Lassi",
+          "description": "",
+          "category": "Lassi",
+          "price": 7,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "mango-lassi"
+        },
+        {
+          "name": "Sweet Lassi",
+          "description": "",
+          "category": "Lassi",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "sweet-lassi"
+        },
+        {
+          "name": "Chaas (Butter Milk Salted)",
+          "description": "",
+          "category": "Lassi",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "chaas-butter-milk-salted"
+        }
+      ]
+    },
+    {
+      "name": "Tea/Coffee",
+      "items": [
+        {
+          "name": "Tea with lemon",
+          "description": "",
+          "category": "Tea/Coffee",
+          "price": 4,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "tea-with-lemon"
+        },
+        {
+          "name": "Coffee with Milk",
+          "description": "",
+          "category": "Tea/Coffee",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "coffee-with-milk"
+        },
+        {
+          "name": "Masala Tea",
+          "description": "",
+          "category": "Tea/Coffee",
+          "price": 5,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "masala-tea"
+        },
+        {
+          "name": "Iced Masala Tea",
+          "description": "",
+          "category": "Tea/Coffee",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "iced-masala-tea"
+        },
+        {
+          "name": "Iced coffee",
+          "description": "",
+          "category": "Tea/Coffee",
+          "price": 6,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": null, "glutenFree": null, "spiceLevel": null, "allergens": [] },
+          "imageSlug": "iced-coffee"
+        }
+      ]
+    },
+    {
+      "name": "Sweet Corner",
+      "items": [
+        {
+          "name": "Gulab Jamun",
+          "description": "Milk spheres, soaked in saffron flavor syrup – served hot.",
+          "category": "Sweet Corner",
+          "price": 7,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk"] },
+          "imageSlug": "gulab-jamun"
+        },
+        {
+          "name": "Kulfi",
+          "description": "Homemade Indian ice cream, flavored with pistachios – A Must Try!",
+          "category": "Sweet Corner",
+          "price": 8,
+          "variants": [],
+          "dietary": { "veg": true, "vegan": false, "glutenFree": null, "spiceLevel": null, "allergens": ["milk", "nuts"] },
+          "imageSlug": "kulfi"
+        }
+      ]
+    }
+  ]
+}

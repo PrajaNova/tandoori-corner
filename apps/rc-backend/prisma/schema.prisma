@@ -39,6 +39,50 @@ model CateringPackage {
   @@map("catering_packages")
 }
 
+enum DietarySpiceLevel {
+  MILD
+  MEDIUM
+  HOT
+  EXTRA
+
+  @@map("dietary_spice_level")
+}
+
+model MenuCategory {
+  id        String     @id
+  slug      String     @unique
+  name      String
+  sortOrder Int        @map("sort_order")
+  status    String     @default("active")
+  items     MenuItem[]
+
+  @@map("menu_categories")
+}
+
+model MenuItem {
+  id          String             @id
+  slug        String             @unique
+  categoryId  String             @map("category_id")
+  category    MenuCategory       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  name        String
+  description String             @db.Text
+  priceCents  Int?               @map("price_cents")
+  currency    String             @default("SGD")
+  variants    Json               @default("[]")
+  imageSlug   String             @map("image_slug")
+  veg         Boolean            @default(false)
+  vegan       Boolean?
+  glutenFree  Boolean?           @map("gluten_free")
+  spiceLevel  DietarySpiceLevel? @map("spice_level")
+  allergens   String[]           @default([])
+  status      String             @default("active")
+  sortOrder   Int                @map("sort_order")
+
+  @@index([categoryId, sortOrder])
+  @@index([status])
+  @@map("menu_items")
+}
+
 model CatalogItem {
   id          String          @id
   slug        String          @unique

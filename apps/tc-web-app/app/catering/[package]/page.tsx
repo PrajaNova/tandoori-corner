@@ -59,8 +59,47 @@ export default async function CateringPackagePage({
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24 pt-24 sm:pt-28">
-      <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+    <div className="min-h-screen bg-background pb-24">
+      <section className="relative flex items-center justify-center min-h-[360px] pt-24">
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('/granny/granny_background_8.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        />
+        <div className="absolute inset-0 z-0 bg-black/65" />
+        <div className="relative z-10 text-center px-4">
+          <span className="font-script text-primary text-3xl md:text-4xl mb-1 block">
+            Party package
+          </span>
+          <h1 className="font-kaushan text-5xl md:text-6xl text-white capitalize mb-6 leading-tight">
+            {pkg.name}
+          </h1>
+          <ol className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest uppercase text-white/80">
+            <li>
+              <a href="/" className="hover:text-primary transition-colors">
+                Home
+              </a>
+            </li>
+            <li className="text-white/40">/</li>
+            <li>
+              <a
+                href="/catering"
+                className="hover:text-primary transition-colors"
+              >
+                Catering
+              </a>
+            </li>
+            <li className="text-white/40">/</li>
+            <li className="text-primary">{pkg.name}</li>
+          </ol>
+        </div>
+      </section>
+
+      <div className="container mx-auto px-5 pt-12 sm:px-6 lg:px-12">
         <Link
           href="/catering"
           className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-ink/50 transition-colors hover:text-brand-gold"
@@ -70,7 +109,7 @@ export default async function CateringPackagePage({
         </Link>
 
         {/* Header */}
-        <div className="mt-6 overflow-hidden rounded-card border border-border bg-brand-dark text-cream">
+        <div className="mt-6 overflow-hidden rounded-none border border-border bg-brand-dark text-cream">
           <div className="flex flex-col gap-6 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-10">
             <div>
               {pkg.badge ? (
@@ -78,7 +117,7 @@ export default async function CateringPackagePage({
                   {pkg.badge}
                 </span>
               ) : null}
-              <h1 className="font-space text-4xl font-bold uppercase tracking-[0.08em] sm:text-5xl">
+              <h1 className="font-kaushan text-4xl uppercase tracking-[0.08em] sm:text-5xl">
                 {pkg.name}
               </h1>
               <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-cream/75">
@@ -86,7 +125,7 @@ export default async function CateringPackagePage({
               </p>
             </div>
             <div className="shrink-0 text-left sm:text-right">
-              <p className="font-space text-4xl font-bold text-brand-gold">
+              <p className="font-raleway text-4xl font-bold text-brand-gold">
                 {pkg.pricePerHead}
                 <span className="ml-1 text-sm font-normal text-cream/60">
                   / guest
@@ -104,7 +143,7 @@ export default async function CateringPackagePage({
           {pkg.features.map((feature) => (
             <div
               key={feature.label}
-              className={`flex items-center gap-3 rounded-card border border-border px-4 py-3 text-sm ${
+              className={`flex items-center gap-3 rounded-none border border-border px-4 py-3 text-sm ${
                 feature.included
                   ? "bg-card text-ink"
                   : "bg-muted/50 text-ink/35"
@@ -122,7 +161,7 @@ export default async function CateringPackagePage({
 
         {/* Dishes by course */}
         <div className="mt-12">
-          <h2 className="font-space text-2xl font-bold text-ink sm:text-3xl">
+          <h2 className="font-kaushan text-2xl text-ink sm:text-3xl">
             Dishes in this package
           </h2>
           <p className="mt-2 text-sm font-light text-ink/60">
@@ -139,7 +178,7 @@ export default async function CateringPackagePage({
               return (
                 <section key={course.id}>
                   <div className="mb-4 flex items-baseline justify-between border-b border-border pb-2">
-                    <h3 className="font-space text-lg font-bold text-ink">
+                    <h3 className="font-kaushan text-lg text-ink">
                       {course.label}
                     </h3>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-ink/40">
@@ -151,7 +190,7 @@ export default async function CateringPackagePage({
                     {dishes.map((dish) => (
                       <div
                         key={dish.id}
-                        className="flex gap-3 rounded-card border border-border bg-card p-3"
+                        className="flex gap-3 rounded-none border border-border bg-card p-3"
                       >
                         {dish.img ? (
                           <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-sm">
@@ -203,9 +242,9 @@ export default async function CateringPackagePage({
         </div>
 
         {/* CTA */}
-        <div className="mt-12 flex flex-col items-center gap-4 rounded-card bg-accent px-6 py-10 text-center">
+        <div className="mt-12 flex flex-col items-center gap-4 rounded-none bg-accent px-6 py-10 text-center">
           <Leaf className="h-6 w-6 text-brand-gold" />
-          <h2 className="font-space text-2xl font-bold text-ink">
+          <h2 className="font-kaushan text-2xl text-ink">
             Ready to book the {pkg.name} feast?
           </h2>
           <p className="max-w-md text-sm font-light leading-relaxed text-ink/60">

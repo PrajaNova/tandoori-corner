@@ -1,8 +1,11 @@
 @theme {
-  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-script: "Merriweather", ui-serif, Georgia, serif;
-  --font-heading: "Merriweather", ui-serif, Georgia, serif;
-  --font-serif: "Merriweather", ui-serif, Georgia, serif;
-  --font-space: "Merriweather", ui-serif, Georgia, serif;
+  --font-sans: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-raleway: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--ff-script), "Brush Script MT", cursive;
+  --font-cursive: var(--ff-script), "Brush Script MT", cursive;
+  --font-kaushan: var(--ff-kaushan), "Brush Script MT", cursive;
+  --font-heading: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
+  --font-space: var(--ff-raleway), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }

@@ -101,8 +101,47 @@ export function BuildClient() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-32 pt-24 sm:pt-28">
-      <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+    <div className="min-h-screen bg-background pb-32">
+      <section className="relative flex items-center justify-center min-h-[360px] pt-24">
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('/granny/granny_background_8.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        />
+        <div className="absolute inset-0 z-0 bg-black/65" />
+        <div className="relative z-10 text-center px-4">
+          <span className="font-script text-primary text-3xl md:text-4xl mb-1 block">
+            Build your feast
+          </span>
+          <h1 className="font-kaushan text-5xl md:text-6xl text-white capitalize mb-6 leading-tight">
+            Custom Catering Menu
+          </h1>
+          <ol className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest uppercase text-white/80">
+            <li>
+              <a href="/" className="hover:text-primary transition-colors">
+                Home
+              </a>
+            </li>
+            <li className="text-white/40">/</li>
+            <li>
+              <a
+                href="/catering"
+                className="hover:text-primary transition-colors"
+              >
+                Catering
+              </a>
+            </li>
+            <li className="text-white/40">/</li>
+            <li className="text-primary">Build</li>
+          </ol>
+        </div>
+      </section>
+
+      <div className="container mx-auto px-5 pt-12 sm:px-6 lg:px-12">
         <Link
           href="/catering"
           className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-ink/50 transition-colors hover:text-brand-gold"
@@ -142,7 +181,7 @@ export function BuildClient() {
 
         {step === "select" ? (
           <div className="mt-8">
-            <h1 className="font-space text-3xl font-bold text-ink sm:text-4xl">
+            <h1 className="font-kaushan text-3xl text-ink sm:text-4xl">
               Build Your Own Feast
             </h1>
             <p className="mt-2 max-w-xl text-sm font-light leading-7 text-ink/60">
@@ -230,7 +269,7 @@ export function BuildClient() {
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
               <Check className="h-8 w-8" />
             </span>
-            <h1 className="font-space text-3xl font-bold text-ink">
+            <h1 className="font-kaushan text-3xl text-ink">
               Almost there!
             </h1>
             <p className="text-sm font-light leading-relaxed text-ink/60">
@@ -262,7 +301,7 @@ export function BuildClient() {
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-cream/95 backdrop-blur-md">
           <div className="container mx-auto flex items-center justify-between gap-4 px-5 py-3.5 sm:px-6 lg:px-12">
             <span className="text-sm font-medium text-ink">
-              <span className="font-space text-xl font-bold text-brand-gold">
+              <span className="font-raleway text-xl font-bold text-brand-gold">
                 {selectedIds.length}
               </span>{" "}
               dish{selectedIds.length === 1 ? "" : "es"} selected
@@ -317,7 +356,7 @@ function DishCard({
 }) {
   return (
     <div
-      className={`flex gap-3 rounded-card border bg-card p-3 transition-colors ${
+      className={`flex gap-3 rounded-none border bg-card p-3 transition-colors ${
         selected ? "border-brand-gold" : "border-border"
       }`}
     >
@@ -382,7 +421,7 @@ function ReviewStep({
       {/* Selected list grouped by course */}
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="font-space text-2xl font-bold text-ink sm:text-3xl">
+          <h1 className="font-kaushan text-2xl text-ink sm:text-3xl">
             Review your menu
           </h1>
           <button
@@ -400,14 +439,14 @@ function ReviewStep({
             if (dishes.length === 0) return null;
             return (
               <section key={course.id}>
-                <h3 className="mb-3 border-b border-border pb-2 font-space text-base font-bold text-ink">
+                <h3 className="mb-3 border-b border-border pb-2 font-kaushan text-base text-ink">
                   {course.label}
                 </h3>
                 <ul className="space-y-2">
                   {dishes.map((dish) => (
                     <li
                       key={dish.id}
-                      className="flex items-center justify-between gap-3 rounded-card border border-border bg-card px-4 py-2.5"
+                      className="flex items-center justify-between gap-3 rounded-none border border-border bg-card px-4 py-2.5"
                     >
                       <span className="flex items-center gap-2 text-sm text-ink">
                         <DietDot diet={dish.diet} />
@@ -431,8 +470,8 @@ function ReviewStep({
       </div>
 
       {/* Quote form */}
-      <div className="h-fit rounded-card border border-border bg-card p-6 lg:sticky lg:top-28">
-        <h2 className="font-space text-xl font-bold text-ink">
+      <div className="h-fit rounded-none border border-border bg-card p-6 lg:sticky lg:top-28">
+        <h2 className="font-kaushan text-xl text-ink">
           Your details
         </h2>
         <p className="mt-1 text-xs font-light text-ink/55">
