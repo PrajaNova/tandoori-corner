@@ -6,14 +6,7 @@ import { contact } from "@/lib/seo";
 
 export function AppFooter() {
   return (
-    <footer className="bg-[#1a1a1a] pt-24 pb-8 text-white relative mt-auto">
-      {/* Top "Make A Reservation" tab */}
-      <div className="absolute left-1/2 -top-[20px] -translate-x-1/2 w-[260px] h-[44px] bg-[#1a1a1a] rounded-t-[60px] flex items-center justify-center">
-        <h3 className="font-script text-white text-2xl -mt-2">
-          Make A Reservation
-        </h3>
-      </div>
-
+    <footer className="bg-[#1a1a1a] pt-16 pb-8 text-white relative mt-auto">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 mb-16 text-center">
           {/* Left Column: Our address */}
