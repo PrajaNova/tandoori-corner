@@ -1,40 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { reservationContent } from "@/content/reservation";
 import { contact } from "@/lib/seo";
 
 const selectClass =
   "flex h-12 w-full rounded-none border border-input bg-transparent px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-muted-foreground";
-
-const peopleOptions = [
-  "2 People",
-  "3 People",
-  "4 People",
-  "5 People",
-  "6 People",
-  "8 People",
-  "10 People",
-];
-const dateOptions = [
-  "Today",
-  "Tomorrow",
-  "In 2 days",
-  "In 3 days",
-  "In 4 days",
-];
-const timeOptions = [
-  "12:00 PM",
-  "12:30 PM",
-  "1:00 PM",
-  "1:30 PM",
-  "6:00 PM",
-  "6:30 PM",
-  "7:00 PM",
-  "7:30 PM",
-  "8:00 PM",
-  "8:30 PM",
-  "9:00 PM",
-];
 
 export function Reservation() {
   return (
@@ -45,7 +16,7 @@ export function Reservation() {
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('/granny/granny_background_7.jpg')",
+          backgroundImage: `url('${reservationContent.backgroundImage}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -55,31 +26,29 @@ export function Reservation() {
 
       <div className="container relative z-10 px-4">
         <SectionHeading
-          cursiveText="Book a table"
-          mainText="Make A Reservation"
+          cursiveText={reservationContent.cursiveText}
+          mainText={reservationContent.mainText}
           dark
         />
 
         <div className="bg-white p-8 md:p-14 max-w-4xl mx-auto shadow-2xl mt-12">
           <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            Reserve your table at Tandoori Corner in just a few clicks. We
-            welcome walk-ins and reservations for lunch (12:00 – 2:45 PM) and
-            dinner (6:00 – 9:45 PM), seven days a week.
+            {reservationContent.description}
           </p>
 
           <form className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <select className={selectClass} defaultValue="4 People">
-              {peopleOptions.map((o) => (
+              {reservationContent.peopleOptions.map((o) => (
                 <option key={o}>{o}</option>
               ))}
             </select>
-            <select className={selectClass} defaultValue="March 23, 2017">
-              {dateOptions.map((o) => (
+            <select className={selectClass} defaultValue="Today">
+              {reservationContent.dateOptions.map((o) => (
                 <option key={o}>{o}</option>
               ))}
             </select>
             <select className={selectClass} defaultValue="8:00 PM">
-              {timeOptions.map((o) => (
+              {reservationContent.timeOptions.map((o) => (
                 <option key={o}>{o}</option>
               ))}
             </select>

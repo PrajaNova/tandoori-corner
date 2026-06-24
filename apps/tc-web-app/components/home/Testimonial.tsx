@@ -3,25 +3,12 @@
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-
-const testimonials = [
-  {
-    quote:
-      "Unpretentious and wholesome — all our favourite dishes hit the right notes consistently. The Butter Chicken and Peshawari Naan are absolute perfection. We keep coming back every week!",
-    author: "- ElaiNe Lin, Singapore",
-    avatar: "/granny/granny_testimonial_1.png",
-  },
-  {
-    quote:
-      "The Tandoori Chicken here is the best I have had outside of India. Succulent, perfectly spiced and smoky from the clay oven. The kebabs and naans are equally outstanding. A gem on Balestier Road.",
-    author: "- Pravesh Gupta, India",
-    avatar: "/granny/granny_testimonial_2.png",
-  },
-];
+import { Button } from "@/components/ui/button";
+import { testimonialContent } from "@/content/testimonial";
 
 export function Testimonial() {
   const [active, setActive] = useState(0);
-  const current = testimonials[active];
+  const current = testimonialContent[active];
 
   return (
     <section className="py-24 bg-background flex items-center justify-center">
@@ -52,17 +39,17 @@ export function Testimonial() {
         </div>
 
         <div className="flex justify-center space-x-2 mt-8">
-          {testimonials.map((_, idx) => (
-            <button
-              type="button"
+          {testimonialContent.map((_, idx) => (
+            <Button
               key={idx}
               onClick={() => setActive(idx)}
-              aria-label={`Testimonial ${idx + 1}`}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${
+              variant="ghost"
+              className={`w-2.5 h-2.5 p-0 rounded-full min-w-0 min-h-0 border cursor-pointer transition-colors ${
                 idx === active
-                  ? "bg-ink"
-                  : "border border-primary bg-transparent"
+                  ? "bg-ink border-ink hover:bg-ink"
+                  : "border-primary bg-transparent hover:bg-primary/20"
               }`}
+              aria-label={`Testimonial ${idx + 1}`}
             />
           ))}
         </div>
