@@ -19,7 +19,7 @@ const testimonials = [
   },
 ];
 
-export function GrannyTestimonial() {
+export function Testimonial() {
   const [active, setActive] = useState(0);
   const current = testimonials[active];
 

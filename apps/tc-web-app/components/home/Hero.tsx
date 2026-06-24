@@ -46,7 +46,7 @@ const slides: Slide[] = [
   },
 ];
 
-export function GrannyHero() {
+export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {

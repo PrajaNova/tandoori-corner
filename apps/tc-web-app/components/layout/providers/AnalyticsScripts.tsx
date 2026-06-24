@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script.js";
+import Script from "next/script";
 
 export function AnalyticsScripts() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;

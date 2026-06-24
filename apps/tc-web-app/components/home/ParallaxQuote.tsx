@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function GrannyParallaxQuote() {
+export function ParallaxQuote() {
   return (
     <section className="relative py-32 flex items-center justify-center min-h-[460px]">
       <div

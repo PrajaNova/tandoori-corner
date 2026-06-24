@@ -46,7 +46,7 @@ const specials = [
   },
 ];
 
-export function GrannySpecials() {
+export function Specials() {
   return (
     <section className="relative py-24">
       <div

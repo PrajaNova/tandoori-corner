@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script.js";
+import Script from "next/script";
 
 import {
   buildBreadcrumbJsonLd,

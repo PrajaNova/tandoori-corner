@@ -41,7 +41,7 @@ const amenities = [
   },
 ];
 
-export function GrannyAmenities() {
+export function Amenities() {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">

@@ -10,7 +10,11 @@ interface HeaderLinkProps {
   children: ReactNode;
 }
 
-export function HeaderLink({ href, className = "", children }: HeaderLinkProps) {
+export function HeaderLink({
+  href,
+  className = "",
+  children,
+}: HeaderLinkProps) {
   const pathname = usePathname();
   const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
 

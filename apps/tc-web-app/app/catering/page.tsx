@@ -1,7 +1,7 @@
 import { ArrowRight, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script.js";
+import Script from "next/script";
 
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getCateringPackages } from "@/lib/catering";

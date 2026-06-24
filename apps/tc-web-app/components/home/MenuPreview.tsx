@@ -124,7 +124,7 @@ const columns: { image: string; items: Dish[] }[] = [
 
 const tabs = ["Tandoori", "Curry", "Sabzi", "Sweets"];
 
-export function GrannyMenuPreview() {
+export function MenuPreview() {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">

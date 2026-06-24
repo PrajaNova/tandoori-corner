@@ -1,4 +1,4 @@
-import Script from "next/script.js";
+import Script from "next/script";
 import {
   buildOrganizationJsonLd,
   buildRestaurantJsonLd,

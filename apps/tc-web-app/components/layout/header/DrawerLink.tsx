@@ -9,7 +9,11 @@ interface DrawerLinkProps {
   children: ReactNode;
 }
 
-export function DrawerLink({ href, className = "", children }: DrawerLinkProps) {
+export function DrawerLink({
+  href,
+  className = "",
+  children,
+}: DrawerLinkProps) {
   const pathname = usePathname();
   const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
 

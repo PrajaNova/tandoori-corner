@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 
-export function GrannyHighlightRight() {
+export function HighlightRight() {
   return (
     <section className="pt-24 pb-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">

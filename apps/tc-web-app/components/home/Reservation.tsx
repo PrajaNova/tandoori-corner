@@ -36,7 +36,7 @@ const timeOptions = [
   "9:00 PM",
 ];
 
-export function GrannyReservation() {
+export function Reservation() {
   return (
     <section
       id="reservation"
