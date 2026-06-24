@@ -1,5 +1,6 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { contact } from "@/lib/seo";
 
 export function CateringHero() {
@@ -33,17 +34,20 @@ export function CateringHero() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
           <Link
             href="/catering/build"
-            className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden bg-white px-10 py-5 text-xs font-bold uppercase tracking-widest text-ink shadow-lg shadow-black/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-white"
+            className="group relative inline-flex items-center justify-center gap-2.5 bg-primary px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
           >
             Build Your Feast
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <a
-            href={contact.phoneHref}
-            className="group inline-flex items-center gap-2 font-raleway text-xs font-bold uppercase tracking-widest text-white/90 transition-colors hover:text-primary"
+            href={contact.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 font-raleway text-xs font-bold uppercase tracking-widest text-[#25D366] transition-colors hover:text-[#128C7E]"
           >
-            <Phone className="h-4 w-4" />
-            Call {contact.phoneDisplay}
+            <WhatsAppIcon className="h-5 w-5 fill-[#25D366] transition-transform group-hover:scale-110" />
+            WhatsApp Us
+            <ArrowRight className="h-4 w-4 text-white transition-transform group-hover:translate-x-1" />
           </a>
         </div>
 
