@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
-import Link from "next/link";
 import { HeaderCart } from "@/components/layout/HeaderCart";
 import { BrandLogo } from "@/components/layout/header/BrandLogo";
+import { HeaderLink } from "@/components/layout/header/HeaderLink";
 import { MobileDrawer } from "@/components/layout/header/MobileDrawer";
 
 interface NavigationItem {
@@ -48,13 +48,9 @@ export function HeaderNav({ items }: HeaderNavProps) {
             {/* Desktop Center Navigation Links */}
             <div className="hidden min-[1080px]:flex items-center space-x-6 lg:space-x-8">
               {items.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="font-raleway text-xs font-bold tracking-widest uppercase transition-colors hover:text-primary text-white whitespace-nowrap"
-                >
+                <HeaderLink key={item.label} href={item.href}>
                   {item.label}
-                </Link>
+                </HeaderLink>
               ))}
             </div>
           </div>
