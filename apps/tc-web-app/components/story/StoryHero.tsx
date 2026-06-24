@@ -23,6 +23,7 @@ export function StoryHero() {
             width={64}
             height={64}
             className="opacity-90"
+            style={{ height: "auto" }}
           />
         </div>
         <h1 className="font-kaushan text-2xl md:text-4xl text-white leading-relaxed mb-10">
