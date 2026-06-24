@@ -33,7 +33,7 @@ export function HighlightSection({
       <div className="container mx-auto px-4 max-w-6xl">
         <div
           className={cn(
-            "flex flex-col md:flex-row items-center gap-16",
+            "flex flex-col-reverse md:flex-row items-center gap-16",
             isImageLeft && "md:flex-row-reverse",
           )}
         >
@@ -67,13 +67,13 @@ export function HighlightSection({
           </div>
 
           {/* Grid of Images */}
-          <div className="flex-1 w-full grid grid-cols-2 gap-4">
+          <div className="flex-1 w-full max-w-xs md:max-w-none mx-auto grid grid-cols-2 gap-4">
             {images.map((img, idx) => (
               <div
                 key={img.src}
                 className={cn(
                   "relative aspect-[3/4] w-full",
-                  idx === 1 && "mt-12",
+                  idx === 1 && "mt-6 md:mt-12",
                 )}
               >
                 <Image
