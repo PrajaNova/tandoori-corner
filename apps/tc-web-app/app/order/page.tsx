@@ -6,7 +6,9 @@ import {
   jsonLdScript,
 } from "@/lib/seo";
 
-import { OrderOnline } from "./OrderOnline";
+import { OrderCatalog } from "./parts/OrderCatalog";
+import { OrderFloatingCart } from "./parts/OrderFloatingCart";
+import { OrderHero } from "./parts/OrderHero";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/order",
@@ -32,7 +34,11 @@ export default function OrderPage() {
           __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
         }}
       />
-      <OrderOnline />
+      <div className="bg-white">
+        <OrderHero />
+        <OrderCatalog />
+        <OrderFloatingCart />
+      </div>
     </>
   );
 }
