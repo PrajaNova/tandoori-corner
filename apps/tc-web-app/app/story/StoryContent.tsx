@@ -1,7 +1,7 @@
+import { Testimonial } from "@/components/home/Testimonial";
 import { StoryAwards } from "./parts/StoryAwards";
 import { StoryCounters } from "./parts/StoryCounters";
 import { StoryFeatures } from "./parts/StoryFeatures";
-import { StoryGuestbook } from "./parts/StoryGuestbook";
 import { StoryHero } from "./parts/StoryHero";
 import { StoryWelcome } from "./parts/StoryWelcome";
 
@@ -10,7 +10,7 @@ export function StoryContent() {
     <div className="bg-white">
       <StoryHero />
       <StoryWelcome />
-      <StoryGuestbook />
+      <Testimonial />
       <StoryFeatures />
       <StoryCounters />
       <StoryAwards />
