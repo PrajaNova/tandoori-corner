@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 export function CheckoutSuccessState() {
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center pt-32 pb-40">
+    <div className="flex flex-col items-center justify-center py-24">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}

@@ -4,7 +4,7 @@ type CheckoutEmptyStateProps = {
 
 export function CheckoutEmptyState({ onViewMenu }: CheckoutEmptyStateProps) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-cream pt-32 pb-40">
+    <div className="flex flex-col items-center justify-center py-24">
       <h2 className="mb-4 font-kaushan text-3xl text-ink">
         Your order is empty
       </h2>
