@@ -36,7 +36,7 @@ export function EventHero() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
-          <EventEnquiryButton label="Enquire to Book" variant="light" />
+          <EventEnquiryButton label="Enquire to Book" variant="solid" />
           <a
             href={contact.whatsappHref}
             target="_blank"
