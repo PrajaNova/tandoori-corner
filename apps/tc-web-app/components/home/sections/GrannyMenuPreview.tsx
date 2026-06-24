@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -129,15 +128,21 @@ export function GrannyMenuPreview() {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
-        <SectionHeading cursiveText="Taste the flavours" mainText="Discover Our Menu" />
+        <SectionHeading
+          cursiveText="Taste the flavours"
+          mainText="Discover Our Menu"
+        />
 
         <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-          From smoky tandoori starters to fragrant biryanis and indulgent desserts, our menu celebrates the full breadth of North Indian cuisine — prepared fresh every day by our expert kitchen team.
+          From smoky tandoori starters to fragrant biryanis and indulgent
+          desserts, our menu celebrates the full breadth of North Indian cuisine
+          — prepared fresh every day by our expert kitchen team.
         </p>
 
         <div className="flex justify-center flex-wrap gap-x-10 gap-y-2 mb-14">
           {tabs.map((tab, idx) => (
             <button
+              type="button"
               key={tab}
               className={`font-script text-2xl transition-colors ${
                 idx === 0

@@ -10,9 +10,5 @@ const navigationItems = [
 ];
 
 export function AppHeader() {
-  return (
-    <>
-      <HeaderNav items={navigationItems} />
-    </>
-  );
+  return <HeaderNav items={navigationItems} />;
 }

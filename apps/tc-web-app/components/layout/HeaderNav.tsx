@@ -34,7 +34,7 @@ export function HeaderNav({ items }: HeaderNavProps) {
   // Close the mobile menu whenever the route changes.
   useEffect(() => {
     setMobileOpen(false);
-  }, [pathname]);
+  }, []);
 
   // Lock body scroll while the mobile menu is open.
   useEffect(() => {
@@ -94,7 +94,7 @@ export function HeaderNav({ items }: HeaderNavProps) {
           className="flex items-center absolute left-1/2 -translate-x-1/2 z-20"
         >
           <Image
-            src="/tandoori-corner-logo.png"
+            src="/homepage/tc-logo.png"
             alt="Tandoori Corner — North Indian Curry House"
             width={600}
             height={183}

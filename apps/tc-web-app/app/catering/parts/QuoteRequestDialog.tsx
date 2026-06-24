@@ -86,9 +86,7 @@ export function QuoteRequestDialog({
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
               <Check className="h-7 w-7" />
             </span>
-            <h3 className="font-kaushan text-2xl text-ink">
-              Almost there!
-            </h3>
+            <h3 className="font-kaushan text-2xl text-ink">Almost there!</h3>
             <p className="max-w-sm text-sm font-light leading-relaxed text-ink/60">
               Tap the button below to send your enquiry — our catering team will
               reply within one business day with a tailored quote. Prefer to
@@ -121,9 +119,7 @@ export function QuoteRequestDialog({
               <p className="font-script text-2xl text-brand-gold">
                 Request a Quote
               </p>
-              <h3 className="mt-1 font-kaushan text-2xl">
-                {subject.name}
-              </h3>
+              <h3 className="mt-1 font-kaushan text-2xl">{subject.name}</h3>
             </div>
 
             <div className="border-b border-border bg-accent px-7 py-4">

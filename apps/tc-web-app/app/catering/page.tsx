@@ -68,8 +68,8 @@ export default async function CateringPage() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-raleway text-base leading-relaxed text-white/85 md:text-lg">
               From the sizzling heat of the tandoor to the rich depths of our
-              signature curries — let Tandoori Corner cater your celebration with
-              authentic North Indian flavours for parties of 30 and beyond.
+              signature curries — let Tandoori Corner cater your celebration
+              with authentic North Indian flavours for parties of 30 and beyond.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-5">

@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -31,10 +30,16 @@ export function GrannyWelcome() {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
-        <SectionHeading cursiveText="Hello dear" mainText="Welcome To Tandoori Corner" />
+        <SectionHeading
+          cursiveText="Hello dear"
+          mainText="Welcome To Tandoori Corner"
+        />
 
         <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-16 leading-relaxed">
-          Established in 2008, Tandoori Corner is Singapore&apos;s favourite North Indian curry house, nestled along the heritage trail of Balestier Road. We combine the warmth of alfresco dining with bold, authentic flavours that keep our guests coming back for more.
+          Established in 2008, Tandoori Corner is Singapore&apos;s favourite
+          North Indian curry house, nestled along the heritage trail of
+          Balestier Road. We combine the warmth of alfresco dining with bold,
+          authentic flavours that keep our guests coming back for more.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

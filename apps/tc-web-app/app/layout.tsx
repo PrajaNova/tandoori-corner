@@ -26,6 +26,7 @@ const greatVibes = Great_Vibes({
   display: "swap",
   variable: "--ff-script",
 });
+
 import { LazyChatBot } from "@/components/home/LazyChatBot";
 import { AppFooter } from "@/components/layout/AppFooter";
 import { AppHeader } from "@/components/layout/AppHeader";
@@ -39,8 +40,7 @@ import {
   restaurantSeo,
 } from "@/lib/seo";
 
-const rootTitle =
-  "Tandoori Corner | North Indian Restaurant & TCB Bar";
+const rootTitle = "Tandoori Corner | North Indian Restaurant & TCB Bar";
 
 export const metadata: Metadata = {
   ...buildPageMetadata({

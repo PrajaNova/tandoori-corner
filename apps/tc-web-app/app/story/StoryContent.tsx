@@ -126,8 +126,8 @@ export function StoryContent() {
           </div>
           <h1 className="font-kaushan text-2xl md:text-4xl text-white leading-relaxed mb-10">
             Cooking is not just about ingredients — it is about heritage,
-            passion and the stories we carry with us from home to every plate
-            we serve.
+            passion and the stories we carry with us from home to every plate we
+            serve.
           </h1>
           <ol className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest uppercase text-white/80">
             <li>
@@ -299,7 +299,9 @@ export function StoryContent() {
           </ul>
 
           <h3 className="text-center font-raleway text-xl md:text-2xl font-bold text-foreground max-w-3xl mx-auto mb-14 leading-relaxed">
-            Since opening in 2008, Tandoori Corner has earned recognition from food critics, review platforms and loyal guests across Singapore and beyond.
+            Since opening in 2008, Tandoori Corner has earned recognition from
+            food critics, review platforms and loyal guests across Singapore and
+            beyond.
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 max-w-3xl mx-auto">

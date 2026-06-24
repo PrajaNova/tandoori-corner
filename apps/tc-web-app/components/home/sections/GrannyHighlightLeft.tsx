@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 
@@ -23,9 +22,9 @@ export function GrannyHighlightLeft() {
             <p className="text-muted-foreground leading-relaxed mb-8">
               Our legendary Butter Chicken is a Singapore favourite. Tender
               chicken tikka simmered in a velvety tomato-cream sauce infused
-              with fenugreek, cardamom and our house butter. Rich, indulgent
-              and utterly satisfying — best paired with a Peshawari Naan fresh
-              from our clay tandoor oven.
+              with fenugreek, cardamom and our house butter. Rich, indulgent and
+              utterly satisfying — best paired with a Peshawari Naan fresh from
+              our clay tandoor oven.
             </p>
 
             <div className="flex items-center justify-center md:justify-start gap-8">

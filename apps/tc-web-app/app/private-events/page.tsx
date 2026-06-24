@@ -1,6 +1,5 @@
 import { ArrowRight, Phone } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script.js";
 
@@ -66,10 +65,10 @@ export default function PrivateEventsPage() {
               In Our Secret Room
             </h1>
             <p className="mx-auto mt-6 max-w-2xl font-raleway text-base leading-relaxed text-white/85 md:text-lg">
-              Tucked away from the bustling Balestier pavement, the TCB Bar is an
-              intimate, high-style space for celebrations, corporate evenings and
-              milestone dinners. Book it out — for the night, it&apos;s entirely
-              yours.
+              Tucked away from the bustling Balestier pavement, the TCB Bar is
+              an intimate, high-style space for celebrations, corporate evenings
+              and milestone dinners. Book it out — for the night, it&apos;s
+              entirely yours.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
@@ -104,9 +103,9 @@ export default function PrivateEventsPage() {
               mainText="Crafted For Your Celebration"
             />
             <p className="mx-auto mb-14 max-w-2xl text-center leading-relaxed text-muted-foreground">
-              Pair our beer-fest specials and craft cocktails with a bespoke menu
-              of tandoori grills and signature curries — plated, family-style, or
-              as canapés for a standing reception.
+              Pair our beer-fest specials and craft cocktails with a bespoke
+              menu of tandoori grills and signature curries — plated,
+              family-style, or as canapés for a standing reception.
             </p>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">

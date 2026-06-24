@@ -16,8 +16,7 @@ const baseClass =
   "group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-none px-10 py-5 text-xs font-bold uppercase tracking-widest shadow-lg transition-all duration-300 hover:-translate-y-0.5";
 
 const variantClass = {
-  solid:
-    "bg-primary text-white shadow-primary/30 hover:bg-ink hover:shadow-xl",
+  solid: "bg-primary text-white shadow-primary/30 hover:bg-ink hover:shadow-xl",
   light:
     "bg-white text-ink shadow-black/30 hover:bg-primary hover:text-white hover:shadow-xl",
 } as const;

@@ -1,4 +1,11 @@
-import { Car, PawPrint, Accessibility, Utensils, Wine, Truck } from "lucide-react";
+import {
+  Accessibility,
+  Car,
+  PawPrint,
+  Truck,
+  Utensils,
+  Wine,
+} from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const amenities = [

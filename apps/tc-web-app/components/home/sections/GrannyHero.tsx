@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { ButtonLink } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ButtonLink } from "@/components/ui/button";
 
 interface SlideAction {
   label: string;
@@ -33,7 +33,9 @@ const slides: Slide[] = [
     image: "/granny/granny_sliders_slide-bg_4.jpg",
     cursive: "Expert Chefs",
     heading: "Tandoor-Fired Perfection",
-    actions: [{ label: "Reserve Now", href: "/#reservation", variant: "solid" }],
+    actions: [
+      { label: "Reserve Now", href: "/#reservation", variant: "solid" },
+    ],
   },
   {
     image: "/granny/granny_sliders_slide-bg_7.jpg",
@@ -76,6 +78,7 @@ export function GrannyHero() {
 
       {/* Arrows (visible on hover) */}
       <button
+        type="button"
         onClick={prevSlide}
         aria-label="Previous slide"
         className="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white/50 hover:text-white opacity-0 group-hover:opacity-100 transition-all duration-300"
@@ -83,6 +86,7 @@ export function GrannyHero() {
         <ChevronLeft className="w-12 h-12" strokeWidth={1} />
       </button>
       <button
+        type="button"
         onClick={nextSlide}
         aria-label="Next slide"
         className="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white/50 hover:text-white opacity-0 group-hover:opacity-100 transition-all duration-300"
@@ -136,6 +140,7 @@ export function GrannyHero() {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
         {slides.map((_, idx) => (
           <button
+            type="button"
             key={idx}
             onClick={() => setCurrentSlide(idx)}
             className={`w-2.5 h-2.5 rounded-full transition-colors ${

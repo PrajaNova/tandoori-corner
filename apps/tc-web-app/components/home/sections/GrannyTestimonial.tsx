@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
 import { Star } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 const testimonials = [
   {
@@ -54,6 +54,7 @@ export function GrannyTestimonial() {
         <div className="flex justify-center space-x-2 mt-8">
           {testimonials.map((_, idx) => (
             <button
+              type="button"
               key={idx}
               onClick={() => setActive(idx)}
               aria-label={`Testimonial ${idx + 1}`}

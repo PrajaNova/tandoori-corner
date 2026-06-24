@@ -91,10 +91,26 @@ export function AppFooter() {
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-10">
           <div className="flex space-x-3">
             {[
-              { Icon: Facebook, href: contact.social.facebook, label: "Tandoori Corner on Facebook" },
-              { Icon: Twitter, href: contact.social.x, label: "Tandoori Corner on X" },
-              { Icon: Instagram, href: contact.social.instagram, label: "Tandoori Corner on Instagram" },
-              { Icon: Globe, href: contact.social.tripadvisor, label: "Tandoori Corner on TripAdvisor" },
+              {
+                Icon: Facebook,
+                href: contact.social.facebook,
+                label: "Tandoori Corner on Facebook",
+              },
+              {
+                Icon: Twitter,
+                href: contact.social.x,
+                label: "Tandoori Corner on X",
+              },
+              {
+                Icon: Instagram,
+                href: contact.social.instagram,
+                label: "Tandoori Corner on Instagram",
+              },
+              {
+                Icon: Globe,
+                href: contact.social.tripadvisor,
+                label: "Tandoori Corner on TripAdvisor",
+              },
             ].map(({ Icon, href, label }) => (
               <a
                 key={label}
@@ -115,7 +131,10 @@ export function AppFooter() {
               placeholder="Subscribe Our Newsletter"
               className="bg-transparent border-none outline-none text-sm px-6 py-3 w-full text-white placeholder:text-white/30"
             />
-            <button className="px-6 text-primary hover:text-white transition-colors">
+            <button
+              type="button"
+              className="px-6 text-primary hover:text-white transition-colors"
+            >
               →
             </button>
           </div>

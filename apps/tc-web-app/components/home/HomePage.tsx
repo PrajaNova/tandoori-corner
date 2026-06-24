@@ -1,13 +1,13 @@
+import { GrannyAmenities } from "./sections/GrannyAmenities";
 import { GrannyHero } from "./sections/GrannyHero";
-import { GrannyWelcome } from "./sections/GrannyWelcome";
-import { GrannySpecials } from "./sections/GrannySpecials";
 import { GrannyHighlightLeft } from "./sections/GrannyHighlightLeft";
 import { GrannyHighlightRight } from "./sections/GrannyHighlightRight";
-import { GrannyParallaxQuote } from "./sections/GrannyParallaxQuote";
 import { GrannyMenuPreview } from "./sections/GrannyMenuPreview";
-import { GrannyAmenities } from "./sections/GrannyAmenities";
+import { GrannyParallaxQuote } from "./sections/GrannyParallaxQuote";
 import { GrannyReservation } from "./sections/GrannyReservation";
+import { GrannySpecials } from "./sections/GrannySpecials";
 import { GrannyTestimonial } from "./sections/GrannyTestimonial";
+import { GrannyWelcome } from "./sections/GrannyWelcome";
 
 export function HomePage() {
   return (

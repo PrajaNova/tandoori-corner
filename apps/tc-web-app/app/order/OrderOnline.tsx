@@ -14,12 +14,13 @@ interface OrderItem {
   category: string;
 }
 
-const allItems: OrderItem[] = menuCategories.flatMap((category, categoryIndex) =>
-  category.items.map((item, itemIndex) => ({
-    ...item,
-    category: category.title,
-    id: `${categoryIndex}-${itemIndex}`,
-  })),
+const allItems: OrderItem[] = menuCategories.flatMap(
+  (category, categoryIndex) =>
+    category.items.map((item, itemIndex) => ({
+      ...item,
+      category: category.title,
+      id: `${categoryIndex}-${itemIndex}`,
+    })),
 );
 
 const filters = ["All", ...menuCategories.map((c) => c.title)];
@@ -54,10 +55,7 @@ export function OrderOnline() {
   }, [activeFilter, query]);
 
   const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0,
-  );
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   return (
     <div className="bg-white">
