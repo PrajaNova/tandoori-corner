@@ -6,11 +6,10 @@ import {
   buildPageMetadata,
   jsonLdScript,
 } from "@/lib/seo";
-
+import { OrderCatalog } from "../order/parts/OrderCatalog";
+import { OrderFloatingCart } from "../order/parts/OrderFloatingCart";
 import { menuCategories } from "./menu-data";
-import { MenuCategorySection } from "./parts/MenuCategorySection";
 import { MenuHero } from "./parts/MenuHero";
-import { MenuIntro } from "./parts/MenuIntro";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/menu",
@@ -56,8 +55,8 @@ export default function MenuPage() {
       />
       <div className="bg-white">
         <MenuHero />
-        <MenuIntro />
-        <MenuCategorySection />
+        <OrderCatalog />
+        <OrderFloatingCart />
       </div>
     </>
   );
