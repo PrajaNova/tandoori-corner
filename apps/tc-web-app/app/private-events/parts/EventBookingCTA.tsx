@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { contact } from "@/lib/seo";
 import { EventEnquiryButton } from "./EventEnquiryButton";
-import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function EventBookingCTA() {
   return (

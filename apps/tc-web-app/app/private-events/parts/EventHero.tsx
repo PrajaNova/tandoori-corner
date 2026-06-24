@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { contact } from "@/lib/seo";
 import { EventEnquiryButton } from "./EventEnquiryButton";
-import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function EventHero() {
   return (
