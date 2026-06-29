@@ -3,8 +3,17 @@
 import { Minus, Plus, Search, X } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { menuCategories } from "@/app/menu/menu-data";
 import { useCart } from "@/hooks/use-cart";
+
+type OrderCatalogCategory = {
+  title: string;
+  items: Array<{
+    id?: string;
+    name: string;
+    price: string;
+    desc: string;
+  }>;
+};
 
 interface OrderItem {
   id: string;
@@ -45,8 +54,8 @@ const categoryImages: Record<string, string[]> = {
   ],
 };
 
-const allItems: OrderItem[] = menuCategories.flatMap(
-  (category, categoryIndex) =>
+function buildItems(categories: OrderCatalogCategory[]): OrderItem[] {
+  return categories.flatMap((category, categoryIndex) =>
     category.items.map((item, itemIndex) => {
       const images = categoryImages[category.title] || [
         "/granny/granny_specials_1.jpg",
@@ -54,27 +63,36 @@ const allItems: OrderItem[] = menuCategories.flatMap(
       const image = images[itemIndex % images.length];
       return {
         ...item,
+        desc: item.desc,
         category: category.title,
-        id: `${categoryIndex}-${itemIndex}`,
+        id: item.id ?? `${categoryIndex}-${itemIndex}`,
         image,
       };
     }),
-);
-
-const filters = ["All", ...menuCategories.map((c) => c.title)];
+  );
+}
 
 function cleanLabel(label: string) {
   return label.replace(/ Menu$/i, "");
 }
 
-export function OrderCatalog() {
+export function OrderCatalog({
+  categories,
+}: {
+  categories: OrderCatalogCategory[];
+}) {
   const { cart, addToCart, updateQty } = useCart();
   const [activeFilter, setActiveFilter] = useState("All");
   const [query, setQuery] = useState("");
+  const allItems = useMemo(() => buildItems(categories), [categories]);
+  const filters = useMemo(
+    () => ["All", ...categories.map((category) => category.title)],
+    [categories],
+  );
 
-  const qtyByName = useMemo(() => {
+  const qtyById = useMemo(() => {
     const map = new Map<string, number>();
-    for (const item of cart) map.set(item.name, item.qty);
+    for (const item of cart) map.set(item.menuItemId, item.qty);
     return map;
   }, [cart]);
 
@@ -90,7 +108,7 @@ export function OrderCatalog() {
         item.desc.toLowerCase().includes(normalisedQuery)
       );
     });
-  }, [activeFilter, query]);
+  }, [activeFilter, allItems, query]);
 
   return (
     <>
@@ -110,7 +128,7 @@ export function OrderCatalog() {
                     key={filter}
                     type="button"
                     onClick={() => setActiveFilter(filter)}
-                    className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors ${
+                    className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                       isActive
                         ? "bg-primary text-white"
                         : "bg-muted text-foreground hover:bg-primary/10 hover:text-primary"
@@ -127,6 +145,9 @@ export function OrderCatalog() {
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="search"
+                aria-label="Search dishes"
+                autoComplete="off"
+                name="dishSearch"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search dishes…"
@@ -137,7 +158,7 @@ export function OrderCatalog() {
                   type="button"
                   onClick={() => setQuery("")}
                   aria-label="Clear search"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -178,11 +199,11 @@ export function OrderCatalog() {
         ) : (
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {visibleItems.map((item) => {
-              const qty = qtyByName.get(item.name) ?? 0;
+              const qty = qtyById.get(item.id) ?? 0;
               return (
                 <div
                   key={item.id}
-                  className="flex gap-4 sm:gap-5 border border-border bg-white p-4 sm:p-5 transition-shadow hover:shadow-lg rounded-lg"
+                  className="group flex gap-4 sm:gap-5 border border-border bg-white p-4 sm:p-5 transition-shadow hover:shadow-lg rounded-lg"
                 >
                   {/* Item Image */}
                   <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 overflow-hidden rounded-md bg-muted">
@@ -191,7 +212,7 @@ export function OrderCatalog() {
                       alt={item.name}
                       fill
                       sizes="(max-width: 640px) 96px, 112px"
-                      className="object-cover transition-transform duration-700 hover:scale-105"
+                      className="object-cover motion-image-hover"
                     />
                   </div>
 
@@ -220,8 +241,8 @@ export function OrderCatalog() {
                           <button
                             type="button"
                             aria-label={`Remove one ${item.name}`}
-                            onClick={() => updateQty(item.name, -1)}
-                            className="flex h-8 w-8 items-center justify-center border border-border text-foreground transition-colors hover:border-primary hover:text-primary rounded cursor-pointer"
+                            onClick={() => updateQty(item.id, -1)}
+                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded border border-border text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           >
                             <Minus className="h-3.5 w-3.5" />
                           </button>
@@ -231,8 +252,10 @@ export function OrderCatalog() {
                           <button
                             type="button"
                             aria-label={`Add one ${item.name}`}
-                            onClick={() => addToCart(item.name, item.price)}
-                            className="flex h-8 w-8 items-center justify-center border border-border text-foreground transition-colors hover:border-primary hover:text-primary rounded cursor-pointer"
+                            onClick={() =>
+                              addToCart(item.id, item.name, item.price)
+                            }
+                            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded border border-border text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           >
                             <Plus className="h-3.5 w-3.5" />
                           </button>
@@ -240,8 +263,10 @@ export function OrderCatalog() {
                       ) : (
                         <button
                           type="button"
-                          onClick={() => addToCart(item.name, item.price)}
-                          className="flex items-center gap-1.5 bg-ink text-white hover:bg-primary px-4 py-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest transition-colors rounded cursor-pointer"
+                          onClick={() =>
+                            addToCart(item.id, item.name, item.price)
+                          }
+                          className="flex cursor-pointer items-center gap-1.5 rounded bg-ink px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white transition-colors hover:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:text-[11px]"
                         >
                           <Plus className="h-3.5 w-3.5" /> Add
                         </button>

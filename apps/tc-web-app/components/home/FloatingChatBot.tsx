@@ -1,7 +1,7 @@
 "use client";
 
 import { CalendarDays, MessageSquare, Send, Utensils, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
@@ -22,6 +22,7 @@ export function FloatingChatBot() {
     ],
   );
   const [inputValue, setInputValue] = useState("");
+  const shouldReduceMotion = useReducedMotion();
 
   const constraintsRef = useRef(null);
 
@@ -74,11 +75,19 @@ export function FloatingChatBot() {
         <AnimatePresence>
           {!isOpen && (
             <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
+              initial={{
+                opacity: 0,
+                transform: shouldReduceMotion ? "scale(1)" : "scale(0.95)",
+              }}
+              animate={{ opacity: 1, transform: "scale(1)" }}
+              exit={{
+                opacity: 0,
+                transform: shouldReduceMotion ? "scale(1)" : "scale(0.95)",
+              }}
               onClick={() => setIsOpen(true)}
-              className="bg-brand-gold text-brand-dark p-4 rounded-full shadow-2xl hover:scale-105 transition-transform flex items-center justify-center cursor-grab active:cursor-grabbing"
+              type="button"
+              aria-label="Open Tandoori assistant"
+              className="motion-button-pop flex cursor-grab items-center justify-center rounded-full bg-brand-gold p-4 text-brand-dark shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:cursor-grabbing"
             >
               <MessageSquare className="w-6 h-6" />
             </motion.button>
@@ -104,6 +113,7 @@ export function FloatingChatBot() {
                     </span>
                   </div>
                   <Button
+                    aria-label="Close Tandoori assistant"
                     onClick={() => setIsOpen(false)}
                     className="hover:bg-accent"
                     size="icon"
@@ -156,13 +166,17 @@ export function FloatingChatBot() {
                 <div className="p-3 bg-accent border-t border-border flex gap-2 items-center">
                   <Input
                     type="text"
+                    aria-label="Message"
+                    autoComplete="off"
+                    name="chatMessage"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                    placeholder="Type a message..."
+                    placeholder="Type a message…"
                     className="border-none"
                   />
                   <Button
+                    aria-label="Send message"
                     onClick={handleSend}
                     disabled={!inputValue.trim()}
                     size="icon"

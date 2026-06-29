@@ -1,4 +1,5 @@
 import type { PrismaClient } from "../generated/prisma/client.js";
+import { isNotFound, isUniqueViolation } from "../lib/prisma-errors.js";
 
 export interface CatalogItem {
   id: string;
@@ -495,18 +496,6 @@ function mapCatalogCategory(category: PrismaCatalogCategory): CatalogCategory {
     items: category.items.map(mapCatalogItem),
   };
 }
-
-function isErrorWithCode(error: unknown, code: string): boolean {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    (error as { code?: string }).code === code
-  );
-}
-
-const isUniqueViolation = (error: unknown) => isErrorWithCode(error, "P2002");
-const isNotFound = (error: unknown) => isErrorWithCode(error, "P2025");
 
 export function createMemoryCatalogService(
   seed: CatalogCategory[] = catalogSeedCategories,

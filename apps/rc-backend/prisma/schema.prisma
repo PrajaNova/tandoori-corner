@@ -103,3 +103,138 @@ model CatalogItem {
   @@index([status])
   @@map("catalog_items")
 }
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actor      String
+  action     String
+  entityType String   @map("entity_type")
+  entityId   String   @map("entity_id")
+  before     Json?
+  after      Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+
+  @@map("booking_status")
+}
+
+model Booking {
+  id           String        @id @default(cuid())
+  customerName String        @map("customer_name")
+  email        String
+  phone        String
+  partySize    Int           @map("party_size")
+  bookedFor    DateTime      @map("booked_for")
+  notes        String?       @db.Text
+  status       BookingStatus @default(PENDING)
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  @@index([bookedFor])
+  @@index([status])
+  @@map("bookings")
+}
+
+enum EventEnquiryStatus {
+  NEW
+  CONTACTED
+  CONFIRMED
+  CANCELLED
+  CLOSED
+
+  @@map("event_enquiry_status")
+}
+
+model EventEnquiry {
+  id            String             @id @default(cuid())
+  customerName  String             @map("customer_name")
+  email         String
+  phone         String
+  eventType     String             @map("event_type")
+  guestCount    Int                @map("guest_count")
+  preferredDate DateTime?          @map("preferred_date")
+  notes         String?            @db.Text
+  source        String             @default("form")
+  externalId    String?            @map("external_id")
+  status        EventEnquiryStatus @default(NEW)
+  createdAt     DateTime           @default(now()) @map("created_at")
+  updatedAt     DateTime           @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([preferredDate])
+  @@map("event_enquiries")
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  CONFIRMED
+  PREPARING
+  READY
+  COMPLETED
+  CANCELLED
+
+  @@map("order_status")
+}
+
+enum PaymentStatus {
+  REQUIRES_PAYMENT
+  PAID
+  FAILED
+  REFUNDED
+
+  @@map("payment_status")
+}
+
+model Order {
+  id                    String        @id @default(cuid())
+  customerName          String        @map("customer_name")
+  email                 String?
+  phone                 String
+  fulfillmentType       String        @map("fulfillment_type")
+  requestedAt           DateTime?     @map("requested_at")
+  address               String?       @db.Text
+  notes                 String?       @db.Text
+  subtotalCents         Int           @map("subtotal_cents")
+  taxCents              Int           @map("tax_cents")
+  deliveryFeeCents      Int           @map("delivery_fee_cents")
+  totalCents            Int           @map("total_cents")
+  currency              String        @default("SGD")
+  status                OrderStatus   @default(PENDING_PAYMENT)
+  paymentStatus         PaymentStatus @default(REQUIRES_PAYMENT) @map("payment_status")
+  stripePaymentIntentId String?       @unique @map("stripe_payment_intent_id")
+  createdAt             DateTime      @default(now()) @map("created_at")
+  updatedAt             DateTime      @updatedAt @map("updated_at")
+  items                 OrderItem[]
+
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id             String  @id @default(cuid())
+  orderId        String  @map("order_id")
+  order          Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId     String  @map("menu_item_id")
+  name           String
+  unitPriceCents Int     @map("unit_price_cents")
+  quantity       Int
+  notes          String? @db.Text
+  totalCents     Int     @map("total_cents")
+
+  @@index([orderId])
+  @@index([menuItemId])
+  @@map("order_items")
+}

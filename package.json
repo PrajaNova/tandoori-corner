@@ -10,10 +10,12 @@
     "build": "pnpm -r build",
     "build:backend": "pnpm --filter rc-backend build",
     "build:web": "pnpm --filter tc-web-app build",
+    "test:e2e": "playwright test",
     "lint": "biome check .",
     "format": "biome format --write ."
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.15"
+    "@biomejs/biome": "2.4.15",
+    "@playwright/test": "^1.61.1"
   }
 }

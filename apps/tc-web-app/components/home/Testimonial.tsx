@@ -32,15 +32,16 @@ export function Testimonial() {
       className="relative py-24 flex flex-col items-center justify-center overflow-hidden min-h-[550px]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
     >
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url('${testimonialContent.backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
+      <Image
+        src={testimonialContent.backgroundImage}
+        alt=""
+        fill
+        aria-hidden="true"
+        sizes="100vw"
+        className="absolute inset-0 z-0 object-cover"
       />
       <div className="absolute inset-0 bg-black/75 z-0" />
 
@@ -63,7 +64,10 @@ export function Testimonial() {
         {/* Carousel Container */}
         <div className="relative px-4 md:px-12">
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            key={startIndex}
+            className="motion-testimonial-track grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {visibleItems.map((item, idx) => {
               // We hide items responsively so only 1 shows on mobile, 2 on tablet, 3 on desktop
               const responsiveClasses =
@@ -76,7 +80,7 @@ export function Testimonial() {
               return (
                 <div
                   key={item.author}
-                  className={`${responsiveClasses} flex flex-col justify-between bg-white/90 backdrop-blur-md border border-white/20 p-8 rounded-lg shadow-xl hover:bg-white/95 transition-all duration-300 h-full transform hover:-translate-y-1`}
+                  className={`${responsiveClasses} motion-card-lift flex h-full flex-col justify-between rounded-lg border border-white/20 bg-white/90 p-8 shadow-xl transition-[background-color,transform] duration-200 ease-out hover:bg-white/95`}
                 >
                   <div>
                     {/* Stars */}

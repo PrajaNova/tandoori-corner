@@ -36,9 +36,9 @@ export function EventBookingCTA() {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 font-raleway text-xs font-bold uppercase tracking-widest text-[#25D366] transition-colors hover:text-[#128C7E]"
           >
-            <WhatsAppIcon className="h-5 w-5 fill-[#25D366] transition-transform group-hover:scale-110" />
+            <WhatsAppIcon className="h-5 w-5 fill-[#25D366] motion-icon-pop" />
             WhatsApp Us
-            <ArrowRight className="h-4 w-4 text-white transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 text-white motion-icon-nudge" />
           </a>
         </div>
       </div>

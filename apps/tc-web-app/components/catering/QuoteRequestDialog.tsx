@@ -17,7 +17,7 @@ type QuoteRequestDialogProps = {
 };
 
 const inputClassName =
-  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none";
+  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/30";
 
 export function QuoteRequestDialog({
   subject,
@@ -70,7 +70,9 @@ export function QuoteRequestDialog({
 
       <motion.div
         {...scaleIn}
+        aria-modal="true"
         className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-none border border-border bg-cream shadow-2xl"
+        role="dialog"
       >
         <button
           type="button"
@@ -145,6 +147,7 @@ export function QuoteRequestDialog({
                   <input
                     id="name"
                     name="name"
+                    autoComplete="name"
                     type="text"
                     required
                     placeholder="Priya Sharma"
@@ -155,6 +158,8 @@ export function QuoteRequestDialog({
                   <input
                     id="phone"
                     name="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
                     type="tel"
                     required
                     placeholder="+65 9XXX XXXX"
@@ -165,6 +170,9 @@ export function QuoteRequestDialog({
                   <input
                     id="email"
                     name="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    spellCheck={false}
                     type="email"
                     required
                     placeholder="you@email.com"
@@ -175,6 +183,7 @@ export function QuoteRequestDialog({
                   <input
                     id="guests"
                     name="guests"
+                    inputMode="numeric"
                     type="number"
                     min={1}
                     required

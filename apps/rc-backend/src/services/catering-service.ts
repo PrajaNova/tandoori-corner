@@ -1,4 +1,5 @@
 import type { Prisma, PrismaClient } from "../generated/prisma/client.js";
+import { isNotFound, isUniqueViolation } from "../lib/prisma-errors.js";
 import { slugify } from "./catalog-service.js";
 
 export type CateringAccent = "dark" | "mid" | "light";
@@ -180,18 +181,6 @@ function mapPackage(pkg: PrismaCateringPackage): CateringPackage {
     sortOrder: pkg.sortOrder,
   };
 }
-
-function isErrorWithCode(error: unknown, code: string): boolean {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    (error as { code?: string }).code === code
-  );
-}
-
-const isUniqueViolation = (error: unknown) => isErrorWithCode(error, "P2002");
-const isNotFound = (error: unknown) => isErrorWithCode(error, "P2025");
 
 export function createMemoryCateringService(
   seed: CateringPackage[] = cateringSeedPackages,

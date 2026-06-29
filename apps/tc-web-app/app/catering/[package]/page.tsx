@@ -4,9 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RequestQuoteButton } from "@/components/catering/RequestQuoteButton";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { cateringCourses, dishesForCourse } from "@/data/catering";
 import { getCateringPackageBySlug } from "@/lib/catering";
-import { buildPageMetadata } from "@/lib/seo";
+import {
+  buildBreadcrumbJsonLd,
+  buildCateringOfferCatalogJsonLd,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -55,9 +60,22 @@ export default async function CateringPackagePage({
       ...pkg.features.filter((f) => f.included).map((f) => f.label),
     ],
   };
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Catering", path: "/catering" },
+    { name: `${pkg.name} Package`, path: `/catering/${pkg.id}` },
+  ] as const;
 
   return (
     <div className="min-h-screen bg-background pb-24">
+      <JsonLd
+        id="catering-package-offer"
+        data={buildCateringOfferCatalogJsonLd([pkg])}
+      />
+      <JsonLd
+        id="catering-package-breadcrumbs"
+        data={buildBreadcrumbJsonLd(breadcrumbs)}
+      />
       <section className="relative flex items-center justify-center min-h-[360px] pt-24">
         <div
           className="absolute inset-0 z-0"
@@ -115,9 +133,9 @@ export default async function CateringPackagePage({
                   {pkg.badge}
                 </span>
               ) : null}
-              <h1 className="font-kaushan text-4xl uppercase tracking-[0.08em] sm:text-5xl">
+              <h2 className="font-kaushan text-4xl uppercase tracking-[0.08em] sm:text-5xl">
                 {pkg.name}
-              </h1>
+              </h2>
               <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-cream/75">
                 {pkg.description}
               </p>

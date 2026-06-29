@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { MenuHero } from "@/components/menu/MenuHero";
 import { OrderCatalog } from "@/components/order/OrderCatalog";
 import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getMenuCategories } from "@/lib/menu";
 import {
   buildBreadcrumbJsonLd,
   buildMenuJsonLd,
   buildPageMetadata,
-  jsonLdScript,
 } from "@/lib/seo";
-import { menuCategories } from "./menu-data";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/menu",
@@ -23,39 +22,40 @@ const breadcrumbs = [
   { name: "Menu", path: "/menu" },
 ] as const;
 
-const menuSchemaSections = menuCategories.map((category) => ({
-  title: category.title,
-  items: category.items.map((item) => ({
-    name: item.name,
-    description: item.desc,
-    priceText: item.price,
-  })),
-}));
+export default async function MenuPage() {
+  const { categories, error } = await getMenuCategories();
+  const menuSchemaSections = categories.map((category) => ({
+    title: category.title,
+    items: category.items.map((item) => ({
+      name: item.name,
+      description: item.desc,
+      priceText: item.price,
+    })),
+  }));
 
-export default function MenuPage() {
   return (
     <>
-      <Script
-        id="menu-schema"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildMenuJsonLd(menuSchemaSections)),
-        }}
-      />
-      <Script
-        id="menu-breadcrumbs"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
-        }}
-      />
+      <JsonLd id="menu-schema" data={buildMenuJsonLd(menuSchemaSections)} />
+      <JsonLd id="menu-breadcrumbs" data={buildBreadcrumbJsonLd(breadcrumbs)} />
       <div className="bg-white">
         <MenuHero />
-        <OrderCatalog />
+        {error ? (
+          <div className="border-b border-primary/20 bg-primary/10 px-4 py-3 text-center text-sm text-foreground">
+            {error}
+          </div>
+        ) : null}
+        {categories.length === 0 ? (
+          <div className="container mx-auto max-w-4xl px-4 py-24 text-center">
+            <h2 className="font-kaushan text-4xl text-foreground">
+              Menu coming soon
+            </h2>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Please check back shortly.
+            </p>
+          </div>
+        ) : (
+          <OrderCatalog categories={categories} />
+        )}
         <OrderFloatingCart />
       </div>
     </>

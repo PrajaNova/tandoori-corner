@@ -3,16 +3,34 @@ import { afterEach, describe, it } from "node:test";
 
 import { buildApp } from "../app.js";
 import {
+  type AuditEntry,
+  createMemoryAuditService,
+} from "../services/audit-service.js";
+import {
   CatalogError,
   type CatalogService,
   createMemoryCatalogService,
 } from "../services/catalog-service.js";
-import { createOrderService } from "../services/order-service.js";
+import { createMemoryOrderService } from "../services/order-service.js";
+import { createMemoryPaymentService } from "../services/payment-service.js";
 
-async function buildTestApp(catalogService?: CatalogService) {
+const adminToken = "test-admin-token";
+const adminHeaders = {
+  authorization: `Bearer ${adminToken}`,
+  "x-admin-user": "test-admin",
+};
+
+async function buildTestApp(
+  catalogService?: CatalogService,
+  auditEntries: AuditEntry[] = [],
+) {
+  const nextCatalogService = catalogService ?? createMemoryCatalogService();
   return buildApp({
-    catalogService: catalogService ?? createMemoryCatalogService(),
-    orderService: createOrderService(),
+    adminApiToken: adminToken,
+    auditService: createMemoryAuditService(auditEntries),
+    catalogService: nextCatalogService,
+    orderService: createMemoryOrderService(nextCatalogService),
+    paymentService: createMemoryPaymentService(),
   });
 }
 
@@ -77,6 +95,7 @@ describe("catalog mutations", () => {
     const response = await app.inject({
       method: "POST",
       url: "/api/catalog/categories",
+      headers: adminHeaders,
       payload: {
         title: "Tandoori Bar",
         subtitle: "Cocktails",
@@ -91,11 +110,51 @@ describe("catalog mutations", () => {
     assert.equal(body.category.id, "cat_tandoori_bar");
   });
 
+  it("requires admin auth for mutations", async () => {
+    app = await buildTestApp();
+    const response = await app.inject({
+      method: "POST",
+      url: "/api/catalog/categories",
+      payload: {
+        title: "Tandoori Bar",
+        subtitle: "Cocktails",
+        icon: "glassWater",
+      },
+    });
+    assert.equal(response.statusCode, 401);
+    assert.equal(response.json().error, "ADMIN_UNAUTHORIZED");
+  });
+
+  it("audit-logs catalog mutations", async () => {
+    const auditEntries: AuditEntry[] = [];
+    app = await buildTestApp(undefined, auditEntries);
+    const response = await app.inject({
+      method: "POST",
+      url: "/api/catalog/categories",
+      headers: adminHeaders,
+      payload: {
+        title: "Tandoori Bar",
+        subtitle: "Cocktails",
+        icon: "glassWater",
+      },
+    });
+    assert.equal(response.statusCode, 201);
+    assert.equal(auditEntries.length, 1);
+    assert.deepEqual(auditEntries[0], {
+      actor: "test-admin",
+      action: "create",
+      entityType: "catalogCategory",
+      entityId: "cat_tandoori_bar",
+      after: response.json().category,
+    });
+  });
+
   it("rejects a duplicate category slug with 409", async () => {
     app = await buildTestApp();
     const response = await app.inject({
       method: "POST",
       url: "/api/catalog/categories",
+      headers: adminHeaders,
       payload: {
         title: "Chef's Signatures",
         subtitle: "x",
@@ -112,6 +171,7 @@ describe("catalog mutations", () => {
     const response = await app.inject({
       method: "POST",
       url: "/api/catalog/categories",
+      headers: adminHeaders,
       payload: { subtitle: "x", icon: "chefHat" },
     });
     assert.equal(response.statusCode, 400);
@@ -122,6 +182,7 @@ describe("catalog mutations", () => {
     const response = await app.inject({
       method: "POST",
       url: "/api/catalog/items",
+      headers: adminHeaders,
       payload: {
         categoryId: "cat_curry_corner",
         name: "Paneer Tikka Masala",
@@ -140,6 +201,7 @@ describe("catalog mutations", () => {
     const response = await app.inject({
       method: "POST",
       url: "/api/catalog/items",
+      headers: adminHeaders,
       payload: {
         categoryId: "cat_nope",
         name: "Ghost Dish",
@@ -156,6 +218,7 @@ describe("catalog mutations", () => {
     const patch = await app.inject({
       method: "PATCH",
       url: "/api/catalog/items/item_og_butter_chicken",
+      headers: adminHeaders,
       payload: { priceCents: 2600 },
     });
     assert.equal(patch.statusCode, 200);
@@ -173,6 +236,7 @@ describe("catalog mutations", () => {
     const response = await app.inject({
       method: "PATCH",
       url: "/api/catalog/items/item_unknown",
+      headers: adminHeaders,
       payload: { priceCents: 100 },
     });
     assert.equal(response.statusCode, 404);
@@ -183,6 +247,7 @@ describe("catalog mutations", () => {
     const del = await app.inject({
       method: "DELETE",
       url: "/api/catalog/items/item_garlic_naan",
+      headers: adminHeaders,
     });
     assert.equal(del.statusCode, 204);
 
@@ -198,6 +263,7 @@ describe("catalog mutations", () => {
     const response = await app.inject({
       method: "DELETE",
       url: "/api/catalog/categories/cat_curry_corner",
+      headers: adminHeaders,
     });
     assert.equal(response.statusCode, 409);
     assert.equal(response.json().error, "CATALOG_HAS_REFERENCES");
@@ -214,6 +280,7 @@ describe("catalog mutations", () => {
     const response = await app.inject({
       method: "DELETE",
       url: "/api/catalog/items/item_og_butter_chicken",
+      headers: adminHeaders,
     });
     assert.equal(response.statusCode, 409);
     assert.equal(response.json().error, "CATALOG_HAS_REFERENCES");

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { DrawerLink } from "@/components/layout/header/DrawerLink";
 
 interface NavigationItem {
@@ -7,23 +8,45 @@ interface NavigationItem {
 
 interface MobileDrawerProps {
   items: NavigationItem[];
+  onClose: () => void;
+  open: boolean;
 }
 
-export function MobileDrawer({ items }: MobileDrawerProps) {
+export function MobileDrawer({ items, onClose, open }: MobileDrawerProps) {
+  useEffect(() => {
+    if (!open) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, open]);
+
   return (
     <>
-      {/* CSS-Only Backdrop (label targeting the checkbox to uncheck it on click) */}
-      <label
-        htmlFor="mobile-drawer-toggle"
-        className="fixed inset-0 z-40 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 peer-checked:opacity-100 peer-checked:pointer-events-auto min-[1080px]:hidden"
+      <button
+        type="button"
+        aria-label="Close menu"
+        className={`fixed inset-0 z-40 bg-black/60 transition-opacity duration-200 min-[1080px]:hidden ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={onClose}
       />
 
-      {/* CSS-Only Side Drawer */}
-      <div className="fixed left-0 top-0 z-50 h-full w-[82%] max-w-xs bg-ink text-white shadow-2xl -translate-x-full transition-transform duration-300 ease-in-out peer-checked:translate-x-0 min-[1080px]:hidden flex flex-col">
+      <div
+        aria-modal="true"
+        className={`fixed left-0 top-0 z-50 flex h-full w-[82%] max-w-xs flex-col bg-ink text-white shadow-2xl transition-transform duration-200 ease-out min-[1080px]:hidden ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
+        id="mobile-drawer"
+        role="dialog"
+      >
         {/* Drawer Links */}
         <nav className="flex flex-col px-2 py-4">
           {items.map((item) => (
-            <DrawerLink key={item.label} href={item.href}>
+            <DrawerLink key={item.label} href={item.href} onClick={onClose}>
               {item.label}
             </DrawerLink>
           ))}
@@ -33,6 +56,7 @@ export function MobileDrawer({ items }: MobileDrawerProps) {
         <div className="px-6 py-6 mt-auto">
           <a
             href="/order"
+            onClick={onClose}
             className="flex w-full items-center justify-center bg-primary px-6 py-4 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-ink text-center"
           >
             Order Online

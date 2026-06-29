@@ -1,5 +1,7 @@
 import type { FastifyInstance, FastifyReply } from "fastify";
 
+import { createAdminAuthGuard, getAdminActor } from "../lib/admin-auth.js";
+import type { AuditService } from "../services/audit-service.js";
 import {
   CatalogError,
   type CatalogService,
@@ -10,6 +12,8 @@ import {
 } from "../services/catalog-service.js";
 
 interface CatalogRouteOptions {
+  adminApiToken?: string;
+  auditService: AuditService;
   catalogService: CatalogService;
 }
 
@@ -103,7 +107,7 @@ function sendCatalogError(reply: FastifyReply, error: unknown) {
 
 export async function registerCatalogRoutes(
   app: FastifyInstance,
-  { catalogService }: CatalogRouteOptions,
+  { adminApiToken, auditService, catalogService }: CatalogRouteOptions,
 ) {
   // ---- Read endpoints (public) ----
   app.get("/categories", async () => ({
@@ -141,91 +145,143 @@ export async function registerCatalogRoutes(
   });
 
   // ---- Write endpoints (admin) ----
-  // NOTE: when auth is introduced, wrap the mutation routes below in a nested
-  // scope guarded by a single preHandler, e.g.:
-  //   app.register(async (admin) => {
-  //     admin.addHook("preHandler", requireAdmin);
-  //     /* move the POST/PATCH/DELETE routes here */
-  //   });
-  // Read routes above stay public.
+  await app.register(async (admin) => {
+    admin.addHook("preHandler", createAdminAuthGuard(adminApiToken));
 
-  app.post(
-    "/categories",
-    { schema: createCategorySchema },
-    async (request, reply) => {
-      try {
-        const category = await catalogService.createCategory(
-          request.body as CreateCategoryInput,
-        );
-        return reply.code(201).send({ category });
-      } catch (error) {
-        return sendCatalogError(reply, error);
-      }
-    },
-  );
+    admin.post(
+      "/categories",
+      { schema: createCategorySchema },
+      async (request, reply) => {
+        try {
+          const category = await catalogService.createCategory(
+            request.body as CreateCategoryInput,
+          );
+          await auditService.record({
+            actor: getAdminActor(request),
+            action: "create",
+            entityType: "catalogCategory",
+            entityId: category.id,
+            after: category,
+          });
+          return reply.code(201).send({ category });
+        } catch (error) {
+          return sendCatalogError(reply, error);
+        }
+      },
+    );
 
-  app.patch(
-    "/categories/:id",
-    { schema: updateCategorySchema },
-    async (request, reply) => {
+    admin.patch(
+      "/categories/:id",
+      { schema: updateCategorySchema },
+      async (request, reply) => {
+        const { id } = request.params as { id: string };
+        try {
+          const before = (await catalogService.listCategories()).find(
+            (category) => category.id === id,
+          );
+          const category = await catalogService.updateCategory(
+            id,
+            request.body as UpdateCategoryInput,
+          );
+          await auditService.record({
+            actor: getAdminActor(request),
+            action: "update",
+            entityType: "catalogCategory",
+            entityId: id,
+            before,
+            after: category,
+          });
+          return reply.send({ category });
+        } catch (error) {
+          return sendCatalogError(reply, error);
+        }
+      },
+    );
+
+    admin.delete("/categories/:id", async (request, reply) => {
       const { id } = request.params as { id: string };
       try {
-        const category = await catalogService.updateCategory(
-          id,
-          request.body as UpdateCategoryInput,
+        const before = (await catalogService.listCategories()).find(
+          (category) => category.id === id,
         );
-        return reply.send({ category });
+        await catalogService.deleteCategory(id);
+        await auditService.record({
+          actor: getAdminActor(request),
+          action: "delete",
+          entityType: "catalogCategory",
+          entityId: id,
+          before,
+        });
+        return reply.code(204).send();
       } catch (error) {
         return sendCatalogError(reply, error);
       }
-    },
-  );
+    });
 
-  app.delete("/categories/:id", async (request, reply) => {
-    const { id } = request.params as { id: string };
-    try {
-      await catalogService.deleteCategory(id);
-      return reply.code(204).send();
-    } catch (error) {
-      return sendCatalogError(reply, error);
-    }
-  });
+    admin.post(
+      "/items",
+      { schema: createItemSchema },
+      async (request, reply) => {
+        try {
+          const item = await catalogService.createItem(
+            request.body as CreateItemInput,
+          );
+          await auditService.record({
+            actor: getAdminActor(request),
+            action: "create",
+            entityType: "catalogItem",
+            entityId: item.id,
+            after: item,
+          });
+          return reply.code(201).send({ item });
+        } catch (error) {
+          return sendCatalogError(reply, error);
+        }
+      },
+    );
 
-  app.post("/items", { schema: createItemSchema }, async (request, reply) => {
-    try {
-      const item = await catalogService.createItem(
-        request.body as CreateItemInput,
-      );
-      return reply.code(201).send({ item });
-    } catch (error) {
-      return sendCatalogError(reply, error);
-    }
-  });
+    admin.patch(
+      "/items/:id",
+      { schema: updateItemSchema },
+      async (request, reply) => {
+        const { id } = request.params as { id: string };
+        try {
+          const before = await catalogService.getItem(id);
+          const item = await catalogService.updateItem(
+            id,
+            request.body as UpdateItemInput,
+          );
+          await auditService.record({
+            actor: getAdminActor(request),
+            action: "update",
+            entityType: "catalogItem",
+            entityId: id,
+            before,
+            after: item,
+          });
+          return reply.send({ item });
+        } catch (error) {
+          return sendCatalogError(reply, error);
+        }
+      },
+    );
 
-  app.patch(
-    "/items/:id",
-    { schema: updateItemSchema },
-    async (request, reply) => {
+    admin.delete("/items/:id", async (request, reply) => {
       const { id } = request.params as { id: string };
       try {
-        const item = await catalogService.updateItem(
-          id,
-          request.body as UpdateItemInput,
-        );
-        return reply.send({ item });
+        const before = await catalogService.getItem(id);
+        await catalogService.deleteItem(id);
+        await auditService.record({
+          actor: getAdminActor(request),
+          action: "delete",
+          entityType: "catalogItem",
+          entityId: id,
+          before,
+        });
+        return reply.code(204).send();
       } catch (error) {
         return sendCatalogError(reply, error);
       }
-    },
-  );
-
-  app.delete("/items/:id", async (request, reply) => {
-    const { id } = request.params as { id: string };
-    try {
-      await catalogService.deleteItem(id);
-      return reply.code(204).send();
-    } catch (error) {
-      return sendCatalogError(reply, error);
-    }
+    });
   });
 }

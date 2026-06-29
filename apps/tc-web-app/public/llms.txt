@@ -7,7 +7,7 @@
 - Address: 400 Balestier Road #01-12 Balestier Plaza, Singapore 329802
 - Phone: +65 9862 7334
 - Email: tandooricorner@singnet.com.sg
-- Website: https://www.tandooricorner.sg
+- Website: https://www.tandooricorner.com.sg
 - Map: https://maps.app.goo.gl/jE9ppAZ8BDcoJHZY9
 
 ## Hours
@@ -17,10 +17,16 @@
 
 ## Pages
 
-- [Home](https://www.tandooricorner.sg/): Overview, hero, daily offers, signature dishes, Google reviews.
-- [Menu](https://www.tandooricorner.sg/menu): Full North Indian menu — chef signatures, tandoori grills, curries, biryanis, breads, desserts, TCB Bar drinks.
-- [Experience](https://www.tandooricorner.sg/experience): Reservations, takeaway, private events, TCB Bar bookings, pet-friendly alfresco dining.
-- [Our Story](https://www.tandooricorner.sg/story): History, team, gallery, press features.
+- [Home](https://www.tandooricorner.com.sg/): Overview, hero, daily offers, signature dishes, Google reviews.
+- [Menu](https://www.tandooricorner.com.sg/menu): Full North Indian menu — chef signatures, tandoori grills, curries, biryanis, breads, desserts, TCB Bar drinks.
+- [Order Online](https://www.tandooricorner.com.sg/order): Browse the menu and order North Indian favourites for takeaway or home delivery.
+- [Catering](https://www.tandooricorner.com.sg/catering): Silver, Gold and Platinum North Indian catering packages for Singapore events.
+- [Build Your Own Catering Menu](https://www.tandooricorner.com.sg/catering/build): Custom catering menu builder for tailored party and corporate event quotes.
+- [Silver Catering Package](https://www.tandooricorner.com.sg/catering/silver): Intimate North Indian catering package from $24 per guest.
+- [Gold Catering Package](https://www.tandooricorner.com.sg/catering/gold): Crowd-favourite North Indian catering package from $34 per guest.
+- [Platinum Catering Package](https://www.tandooricorner.com.sg/catering/platinum): Full-feast North Indian catering package from $46 per guest.
+- [Private Events](https://www.tandooricorner.com.sg/private-events): TCB Bar bookings, private celebrations, corporate gatherings and pet-friendly alfresco dining.
+- [Our Story](https://www.tandooricorner.com.sg/story): History, team, gallery, press features.
 
 ## What We're Known For
 

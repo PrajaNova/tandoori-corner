@@ -21,7 +21,7 @@ export function HeaderLink({
   return (
     <Link
       href={href}
-      className={`font-raleway text-xs font-bold tracking-widest uppercase transition-colors hover:text-primary whitespace-nowrap ${
+      className={`whitespace-nowrap font-raleway text-xs font-bold uppercase tracking-widest transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
         isActive ? "text-primary" : "text-white"
       } ${className}`}
     >

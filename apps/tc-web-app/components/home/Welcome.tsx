@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { welcomeContent } from "@/content/welcome";
@@ -16,16 +17,21 @@ export function Welcome() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {welcomeContent.cards.map((card) => (
-            <FeatureCard
+          {welcomeContent.cards.map((card, idx) => (
+            <div
               key={card.title}
-              image={card.image}
-              title={card.title}
-              subtitle={card.subtitle}
-              description={card.description}
-              linkHref={card.linkHref}
-              linkLabel={card.linkLabel}
-            />
+              className="motion-list-item h-full"
+              style={{ "--motion-index": idx } as CSSProperties}
+            >
+              <FeatureCard
+                image={card.image}
+                title={card.title}
+                subtitle={card.subtitle}
+                description={card.description}
+                linkHref={card.linkHref}
+                linkLabel={card.linkLabel}
+              />
+            </div>
           ))}
         </div>
       </div>

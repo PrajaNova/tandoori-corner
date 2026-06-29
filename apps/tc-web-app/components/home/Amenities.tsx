@@ -1,3 +1,5 @@
+import Image from "next/image";
+import type { CSSProperties } from "react";
 import { IconCard } from "@/components/ui/IconCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { amenitiesContent } from "@/content/amenities";
@@ -5,14 +7,13 @@ import { amenitiesContent } from "@/content/amenities";
 export function Amenities() {
   return (
     <section className="relative py-24">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url('${amenitiesContent.backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
+      <Image
+        src={amenitiesContent.backgroundImage}
+        alt=""
+        fill
+        aria-hidden="true"
+        sizes="100vw"
+        className="absolute inset-0 z-0 object-cover"
       />
       <div className="absolute inset-0 z-0 bg-black/75" />
 
@@ -24,12 +25,14 @@ export function Amenities() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-14 text-center">
-          {amenitiesContent.items.map((item) => (
+          {amenitiesContent.items.map((item, idx) => (
             <IconCard
               key={item.title}
               icon={item.icon}
               title={item.title}
               description={item.desc}
+              className="motion-list-item"
+              style={{ "--motion-index": idx } as CSSProperties}
               dark
             />
           ))}

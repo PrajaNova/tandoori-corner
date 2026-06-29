@@ -5,7 +5,7 @@ export function BuildYourOwnCard() {
   return (
     <Link
       href="/catering/build"
-      className="group col-span-full flex flex-col items-center gap-6 overflow-hidden border-2 border-dashed border-primary/40 bg-ink p-7 text-white transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-xl sm:p-9 md:flex-row md:gap-8"
+      className="group motion-card-lift col-span-full flex flex-col items-center gap-6 overflow-hidden border-2 border-dashed border-primary/40 bg-ink p-7 text-white transition-[border-color,box-shadow,transform] duration-200 ease-out hover:border-primary hover:shadow-xl sm:p-9 md:flex-row md:gap-8"
     >
       <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
         <UtensilsCrossed className="h-7 w-7" />
@@ -28,7 +28,7 @@ export function BuildYourOwnCard() {
 
       <span className="inline-flex w-full shrink-0 items-center justify-center gap-2 bg-primary px-7 py-4 text-xs font-bold uppercase tracking-widest text-white transition-colors group-hover:bg-white group-hover:text-ink md:w-auto">
         Start Building
-        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        <ArrowRight className="h-4 w-4 motion-icon-nudge" />
       </span>
     </Link>
   );

@@ -18,7 +18,7 @@ type CourseFilter = "all" | string;
 type DietFilter = "all" | Diet;
 
 const inputClassName =
-  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none";
+  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/30";
 
 function DietDot({ diet }: { diet: Diet }) {
   const isVeg = diet === "veg";
@@ -181,9 +181,9 @@ export function BuildClient() {
 
         {step === "select" ? (
           <div className="mt-8">
-            <h1 className="font-kaushan text-3xl text-ink sm:text-4xl">
+            <h2 className="font-kaushan text-3xl text-ink sm:text-4xl">
               Build Your Own Feast
-            </h1>
+            </h2>
             <p className="mt-2 max-w-xl text-sm font-light leading-7 text-ink/60">
               Pick the dishes you love. Filter by course and veg / non-veg, then
               review and request a quote.
@@ -269,9 +269,9 @@ export function BuildClient() {
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
               <Check className="h-8 w-8" />
             </span>
-            <h1 className="font-kaushan text-3xl text-ink">
+            <h2 className="font-kaushan text-3xl text-ink">
               Almost there!
-            </h1>
+            </h2>
             <p className="text-sm font-light leading-relaxed text-ink/60">
               Tap below to send your menu — our catering team will reply within
               one business day with a tailored quote. Prefer to talk? Call{" "}
@@ -421,9 +421,9 @@ function ReviewStep({
       {/* Selected list grouped by course */}
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="font-kaushan text-2xl text-ink sm:text-3xl">
+          <h2 className="font-kaushan text-2xl text-ink sm:text-3xl">
             Review your menu
-          </h1>
+          </h2>
           <button
             type="button"
             onClick={onBack}
@@ -493,6 +493,7 @@ function ReviewStep({
               <input
                 id="guests"
                 name="guests"
+                inputMode="numeric"
                 type="number"
                 min={1}
                 required
@@ -504,6 +505,8 @@ function ReviewStep({
               <input
                 id="phone"
                 name="phone"
+                autoComplete="tel"
+                inputMode="tel"
                 type="tel"
                 required
                 placeholder="+65 9XXX XXXX"
@@ -515,6 +518,7 @@ function ReviewStep({
             <input
               id="name"
               name="name"
+              autoComplete="name"
               type="text"
               required
               placeholder="Priya Sharma"
@@ -525,6 +529,9 @@ function ReviewStep({
             <input
               id="email"
               name="email"
+              autoComplete="email"
+              inputMode="email"
+              spellCheck={false}
               type="email"
               required
               placeholder="you@email.com"

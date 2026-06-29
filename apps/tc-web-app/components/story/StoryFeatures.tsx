@@ -41,13 +41,7 @@ export function StoryFeatures() {
           {features.map((f) => (
             <div key={f.title} className="flex flex-col items-center">
               <div className="mb-6 h-16 flex items-center justify-center">
-                <Image
-                  src={f.icon}
-                  alt={f.title}
-                  width={64}
-                  height={64}
-                  style={{ height: "auto" }}
-                />
+                <Image src={f.icon} alt={f.title} width={64} height={64} />
               </div>
               <h3 className="font-raleway text-lg font-bold uppercase tracking-wide mb-4">
                 {f.title}

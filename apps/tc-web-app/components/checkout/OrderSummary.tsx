@@ -3,7 +3,7 @@ import type { CartItem } from "@/lib/cart";
 type OrderSummaryProps = {
   cart: CartItem[];
   deliveryFee: number;
-  onRemoveItem: (name: string) => void;
+  onRemoveItem: (menuItemId: string) => void;
   subtotal: number;
   tax: number;
   total: number;
@@ -34,7 +34,7 @@ export function OrderSummary({
                 </h4>
                 <button
                   type="button"
-                  onClick={() => onRemoveItem(item.name)}
+                  onClick={() => onRemoveItem(item.menuItemId)}
                   className="text-[10px] font-bold uppercase tracking-widest text-ink/40 transition-colors hover:text-red-400"
                 >
                   Remove
@@ -53,7 +53,7 @@ export function OrderSummary({
             <span>${subtotal.toFixed(2)}</span>
           </div>
           <div className="flex items-center justify-between text-ink/70">
-            <span>Tax (8%)</span>
+            <span>GST (9%)</span>
             <span>${tax.toFixed(2)}</span>
           </div>
           <div className="flex items-center justify-between text-ink/70">

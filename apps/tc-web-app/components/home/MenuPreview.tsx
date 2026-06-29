@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { MenuItem } from "@/components/ui/MenuItem";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -17,14 +18,19 @@ export function MenuPreview() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12 mb-16">
-          {menuPreviewContent.items.map((item) => (
-            <MenuItem
+          {menuPreviewContent.items.map((item, idx) => (
+            <div
               key={item.name}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-            />
+              className="motion-list-item"
+              style={{ "--motion-index": idx } as CSSProperties}
+            >
+              <MenuItem
+                name={item.name}
+                price={item.price}
+                description={item.description}
+                image={item.image}
+              />
+            </div>
           ))}
         </div>
 

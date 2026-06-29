@@ -38,7 +38,7 @@ export function FeatureCard({
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover hover:scale-105 transition-transform duration-700"
+          className="object-cover motion-image-hover"
         />
       </div>
       {subtitle && (

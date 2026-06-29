@@ -12,7 +12,7 @@ type EventEnquiryDialogProps = {
 };
 
 const inputClassName =
-  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none";
+  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/30";
 
 const eventTypeOptions = [
   "Corporate Gathering",
@@ -22,40 +22,43 @@ const eventTypeOptions = [
 ];
 
 export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
-  const [submitted, setSubmitted] = useState(false);
-  const [mailtoHref, setMailtoHref] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "sent">("idle");
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
 
-    const name = String(data.get("name") ?? "");
-    const phone = String(data.get("phone") ?? "");
-    const email = String(data.get("email") ?? "");
-    const eventType = String(data.get("eventType") ?? "");
-    const guests = String(data.get("guests") ?? "");
-    const date = String(data.get("date") ?? "");
-    const notes = String(data.get("notes") ?? "");
+    setStatus("submitting");
+    setError(null);
 
-    const bodyLines = [
-      "Private event enquiry — TCB Bar",
-      "",
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Email: ${email}`,
-      `Event type: ${eventType}`,
-      `Guests: ${guests}`,
-      `Preferred date: ${date}`,
-      notes ? `Notes: ${notes}` : "",
-    ].filter(Boolean);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000"}/api/event-enquiries`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          phone: data.get("phone"),
+          email: data.get("email"),
+          eventType: data.get("eventType"),
+          guests: Number(data.get("guests")),
+          date: data.get("date") || undefined,
+          notes: data.get("notes"),
+        }),
+      },
+    );
 
-    const subjectText = "Private Event Enquiry — TCB Bar";
-    const href = `${contact.emailHref}?subject=${encodeURIComponent(
-      subjectText,
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}));
+      setError(body.message ?? "We could not send your enquiry.");
+      setStatus("idle");
+      return;
+    }
 
-    setMailtoHref(href);
-    setSubmitted(true);
+    form.reset();
+    setStatus("sent");
   }
 
   return (
@@ -68,7 +71,9 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
 
       <motion.div
         {...scaleIn}
+        aria-modal="true"
         className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-none border border-border bg-cream shadow-2xl"
+        role="dialog"
       >
         <button
           type="button"
@@ -79,16 +84,15 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
           <X className="h-5 w-5" />
         </button>
 
-        {submitted ? (
+        {status === "sent" ? (
           <div className="flex flex-col items-center gap-4 px-8 py-12 text-center">
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
               <Check className="h-7 w-7" />
             </span>
             <h3 className="font-kaushan text-3xl text-ink">Almost there!</h3>
             <p className="max-w-sm text-sm font-light leading-relaxed text-ink/60">
-              Tap the button below to send your enquiry — our events team will
-              reply within one business day to plan your night. Prefer to talk?
-              Call us at{" "}
+              We received your enquiry. Our events team will reply within one
+              business day to plan your night. Prefer to talk? Call us at{" "}
               <a
                 href={contact.phoneHref}
                 className="font-semibold text-brand-gold"
@@ -97,12 +101,6 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
               </a>
               .
             </p>
-            <a
-              href={mailtoHref}
-              className="mt-2 w-full bg-brand-gold px-6 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
-            >
-              Send Enquiry Email
-            </a>
             <button
               type="button"
               onClick={onClose}
@@ -128,6 +126,7 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
                   <input
                     id="name"
                     name="name"
+                    autoComplete="name"
                     type="text"
                     required
                     placeholder="Priya Sharma"
@@ -138,6 +137,8 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
                   <input
                     id="phone"
                     name="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
                     type="tel"
                     required
                     placeholder="+65 9XXX XXXX"
@@ -148,6 +149,9 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
                   <input
                     id="email"
                     name="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    spellCheck={false}
                     type="email"
                     required
                     placeholder="you@email.com"
@@ -170,6 +174,7 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
                   <input
                     id="guests"
                     name="guests"
+                    inputMode="numeric"
                     type="number"
                     min={1}
                     required
@@ -200,10 +205,14 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
 
               <button
                 type="submit"
+                disabled={status === "submitting"}
                 className="w-full bg-brand-gold px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
               >
-                Submit Enquiry
+                {status === "submitting" ? "Sending…" : "Submit Enquiry"}
               </button>
+              {error ? (
+                <p className="text-center text-sm text-red-600">{error}</p>
+              ) : null}
             </form>
           </div>
         )}

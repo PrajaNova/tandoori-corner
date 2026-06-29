@@ -38,7 +38,7 @@ export function HighlightSection({
           )}
         >
           {/* Text Content */}
-          <div className="flex-1 text-center md:text-left">
+          <div className="flex-1 text-center md:text-left motion-reveal">
             <SectionHeading
               cursiveText={cursive}
               mainText={heading}
@@ -67,7 +67,7 @@ export function HighlightSection({
           </div>
 
           {/* Grid of Images */}
-          <div className="flex-1 w-full max-w-xs md:max-w-none mx-auto grid grid-cols-2 gap-4">
+          <div className="flex-1 w-full max-w-xs md:max-w-none mx-auto grid grid-cols-2 gap-4 motion-reveal motion-reveal-late">
             {images.map((img, idx) => (
               <div
                 key={img.src}
@@ -81,7 +81,7 @@ export function HighlightSection({
                   alt={img.alt}
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover"
+                  className="object-cover motion-image-hover"
                 />
               </div>
             ))}

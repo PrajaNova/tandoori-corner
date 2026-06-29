@@ -26,6 +26,15 @@ export default function RootLayout({
               <Link href="/menu" className="hover:underline">
                 Menu
               </Link>
+              <Link href="/bookings" className="hover:underline">
+                Bookings
+              </Link>
+              <Link href="/event-enquiries" className="hover:underline">
+                Events
+              </Link>
+              <Link href="/orders" className="hover:underline">
+                Orders
+              </Link>
               <Link href="/categories/new" className="hover:underline">
                 + Category
               </Link>

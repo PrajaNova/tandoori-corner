@@ -2,14 +2,19 @@ import { ButtonLink } from "@/components/ui/button";
 import type { Slide } from "./types";
 
 interface HeroSlideProps {
+  isPageHeading: boolean;
   slide: Slide;
   isActive: boolean;
 }
 
-export function HeroSlide({ slide, isActive }: HeroSlideProps) {
+export function HeroSlide({ slide, isActive, isPageHeading }: HeroSlideProps) {
+  const headingClassName = `mb-6 font-kaushan text-5xl capitalize leading-[1.15] text-white transition-[opacity,transform] delay-150 duration-300 ease-out motion-reduce:transform-none md:text-7xl ${
+    isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+  }`;
+
   return (
     <div
-      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out flex items-center justify-center ${
+      className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ease-out ${
         isActive
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
@@ -17,7 +22,9 @@ export function HeroSlide({ slide, isActive }: HeroSlideProps) {
     >
       {/* Background Image Layer */}
       <div
-        className="absolute inset-0 z-0"
+        className={`absolute inset-0 z-0 transition-transform duration-[6000ms] ease-out motion-reduce:transition-none ${
+          isActive ? "scale-105" : "scale-100"
+        }`}
         style={{
           backgroundImage: `url('${slide.image}')`,
           backgroundSize: "cover",
@@ -28,24 +35,22 @@ export function HeroSlide({ slide, isActive }: HeroSlideProps) {
       <div className="absolute inset-0 z-0 bg-black/45" />
 
       {/* Centered Text Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto h-full pb-36">
+      <div className="relative z-10 flex h-full max-w-4xl flex-col items-center justify-center px-4 pb-[clamp(9rem,18vh,12rem)] text-center mx-auto">
         <span
-          className={`font-script text-[#f9f9f9] text-3xl md:text-4xl mb-2 transition-all duration-700 delay-100 transform ${
+          className={`mb-2 font-script text-3xl text-[#f9f9f9] transition-[opacity,transform] delay-100 duration-300 ease-out motion-reduce:transform-none md:text-4xl ${
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
           {slide.cursive}
         </span>
-        <h1
-          className={`font-kaushan text-5xl md:text-7xl text-white mb-6 capitalize leading-[1.15] transition-all duration-700 delay-200 transform ${
-            isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
-        >
-          {slide.heading}
-        </h1>
+        {isPageHeading ? (
+          <h1 className={headingClassName}>{slide.heading}</h1>
+        ) : (
+          <h2 className={headingClassName}>{slide.heading}</h2>
+        )}
         {slide.desc && (
           <p
-            className={`font-raleway text-[#f9f9f9] text-base md:text-[17px] font-bold max-w-2xl transition-all duration-700 delay-300 transform ${
+            className={`max-w-2xl font-raleway text-base font-bold text-[#f9f9f9] transition-[opacity,transform] delay-200 duration-300 ease-out motion-reduce:transform-none md:text-[17px] ${
               isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -56,7 +61,7 @@ export function HeroSlide({ slide, isActive }: HeroSlideProps) {
 
       {/* Absolutely Positioned Buttons at Fixed Height */}
       <div
-        className={`absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-300 transform ${
+        className={`absolute bottom-[clamp(4.75rem,10vh,6rem)] left-1/2 z-10 flex -translate-x-1/2 flex-col gap-4 transition-[opacity,transform] delay-200 duration-300 ease-out motion-reduce:transform-none sm:flex-row ${
           isActive
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-4 pointer-events-none"

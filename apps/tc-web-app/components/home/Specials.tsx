@@ -1,3 +1,5 @@
+import Image from "next/image";
+import type { CSSProperties } from "react";
 import { MenuItem } from "@/components/ui/MenuItem";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { specialsContent } from "@/content/specials";
@@ -5,14 +7,13 @@ import { specialsContent } from "@/content/specials";
 export function Specials() {
   return (
     <section className="relative py-24">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url('${specialsContent.backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
+      <Image
+        src={specialsContent.backgroundImage}
+        alt=""
+        fill
+        aria-hidden="true"
+        sizes="100vw"
+        className="absolute inset-0 z-0 object-cover"
       />
       <div className="absolute inset-0 z-0 bg-black/70" />
 
@@ -25,14 +26,19 @@ export function Specials() {
 
         <div className="bg-white p-8 md:p-14 max-w-5xl mx-auto shadow-2xl mt-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-            {specialsContent.items.map((item) => (
-              <MenuItem
+            {specialsContent.items.map((item, idx) => (
+              <div
                 key={item.name}
-                name={item.name}
-                price={item.price}
-                description={item.description}
-                image={item.image}
-              />
+                className="motion-list-item"
+                style={{ "--motion-index": idx } as CSSProperties}
+              >
+                <MenuItem
+                  name={item.name}
+                  price={item.price}
+                  description={item.description}
+                  image={item.image}
+                />
+              </div>
             ))}
           </div>
         </div>

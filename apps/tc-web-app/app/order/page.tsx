@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { OrderCatalog } from "@/components/order/OrderCatalog";
 import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
 import { OrderHero } from "@/components/order/OrderHero";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getMenuCategories } from "@/lib/catalog";
 import {
   buildBreadcrumbJsonLd,
+  buildMenuJsonLd,
   buildPageMetadata,
-  jsonLdScript,
 } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -21,21 +22,30 @@ const breadcrumbs = [
   { name: "Order Online", path: "/order" },
 ] as const;
 
-export default function OrderPage() {
+export default async function OrderPage() {
+  const categories = await getMenuCategories();
+  const menuSchemaSections = categories.map((category) => ({
+    title: category.title,
+    items: category.items.map((item) => ({
+      name: item.name,
+      description: item.desc,
+      priceText: item.price,
+    })),
+  }));
+
   return (
     <>
-      <Script
+      <JsonLd
+        id="order-menu-schema"
+        data={buildMenuJsonLd(menuSchemaSections, "/order")}
+      />
+      <JsonLd
         id="order-breadcrumbs"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
-        }}
+        data={buildBreadcrumbJsonLd(breadcrumbs)}
       />
       <div className="bg-white">
         <OrderHero />
-        <OrderCatalog />
+        <OrderCatalog categories={categories} />
         <OrderFloatingCart />
       </div>
     </>

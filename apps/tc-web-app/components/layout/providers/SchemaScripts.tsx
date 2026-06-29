@@ -1,50 +1,28 @@
-import Script from "next/script";
+import { JsonLd } from "@/components/seo/JsonLd";
 import {
   buildOrganizationJsonLd,
   buildRestaurantJsonLd,
-  jsonLdScript,
   restaurantSeo,
 } from "@/lib/seo";
 
 export function SchemaScripts() {
   return (
     <>
-      <Script
-        id="restaurant-schema"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildRestaurantJsonLd()),
-        }}
-      />
-      <Script
+      <JsonLd id="restaurant-schema" data={buildRestaurantJsonLd()} />
+      <JsonLd
         id="website-schema"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "@id": `${restaurantSeo.siteUrl}/#website`,
-            name: restaurantSeo.name,
-            url: restaurantSeo.siteUrl,
-            publisher: {
-              "@id": `${restaurantSeo.siteUrl}/#restaurant`,
-            },
-          }),
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": `${restaurantSeo.siteUrl}/#website`,
+          name: restaurantSeo.name,
+          url: restaurantSeo.siteUrl,
+          publisher: {
+            "@id": `${restaurantSeo.siteUrl}/#restaurant`,
+          },
         }}
       />
-      <Script
-        id="organization-schema"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildOrganizationJsonLd()),
-        }}
-      />
+      <JsonLd id="organization-schema" data={buildOrganizationJsonLd()} />
     </>
   );
 }

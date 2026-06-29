@@ -14,7 +14,7 @@ export function OptionCard({ pkg }: { pkg: CateringPackage }) {
   return (
     <Link
       href={`/catering/${pkg.id}`}
-      className="group flex flex-col overflow-hidden border border-border bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary/45 hover:shadow-xl"
+      className="group motion-card-lift flex flex-col overflow-hidden border border-border bg-white transition-[border-color,box-shadow,transform] duration-200 ease-out hover:border-primary/45 hover:shadow-xl"
     >
       <div
         className={`relative px-6 py-7 text-center text-white ${accentBand[pkg.accent]}`}
@@ -57,7 +57,7 @@ export function OptionCard({ pkg }: { pkg: CateringPackage }) {
 
         <span className="mt-6 inline-flex items-center justify-center gap-2 bg-ink px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors group-hover:bg-primary">
           View Menu
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="h-4 w-4 motion-icon-nudge" />
         </span>
       </div>
     </Link>

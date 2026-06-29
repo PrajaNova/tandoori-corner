@@ -1,4 +1,4 @@
-import type { ElementType } from "react";
+import type { CSSProperties, ElementType } from "react";
 import { cn } from "@/lib/utils";
 
 interface IconCardProps {
@@ -6,6 +6,7 @@ interface IconCardProps {
   title: string;
   description: string;
   className?: string;
+  style?: CSSProperties;
   dark?: boolean;
 }
 
@@ -14,12 +15,14 @@ export function IconCard({
   title,
   description,
   className,
+  style,
   dark = false,
 }: IconCardProps) {
   return (
     <div
+      style={style}
       className={cn(
-        "flex flex-col items-center text-center transition-all duration-300",
+        "flex flex-col items-center text-center transition-[background-color,border-color,box-shadow,transform] duration-200 ease-out",
         dark
           ? "bg-white/90 backdrop-blur-md border border-white/20 p-8 hover:bg-white/95 shadow-xl"
           : "p-4",

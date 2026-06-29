@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://www.tandooricorner.sg";
+export const siteUrl = "https://www.tandooricorner.com.sg";
 
 const defaultDescription =
   "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza — tandoori grills, alfresco dining, home delivery and catering. Est. 2008.";
@@ -9,9 +9,9 @@ export const restaurantSeo = {
   name: "Tandoori Corner",
   legalName: "Tandoori Corner",
   siteUrl,
-  legacySiteUrl: "https://www.tandooricorner.com.sg",
+  legacySiteUrl: "https://www.tandooricorner.sg",
   description: defaultDescription,
-  logoPath: "/tandoori-corner-header-logo.png",
+  logoPath: "/tandoori-corner-logo.png",
   ogImagePath: "/opengraph-image",
   cuisine: ["North Indian", "Indian"],
   priceRange: "$$",
@@ -129,6 +129,22 @@ export const seoRoutes = [
       "North Indian catering at Balestier Plaza — Silver, Gold & Platinum party packages or build your own feast. Tandoori grills, curries & biryani for parties of 30+.",
     priority: 0.8,
     changeFrequency: "monthly",
+  },
+  {
+    path: "/catering/build",
+    title: "Build Your Own Catering Menu | Tandoori Corner",
+    description:
+      "Hand-pick dishes course by course — appetizers, mains, rice, breads and desserts — filter by veg or non-veg, and request a tailored catering quote.",
+    priority: 0.75,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/order",
+    title: "Order Online | Tandoori Corner Singapore",
+    description:
+      "Order North Indian favourites from Tandoori Corner, Balestier Plaza. Browse the full menu, filter by category, and place your order for pickup or delivery.",
+    priority: 0.8,
+    changeFrequency: "weekly",
   },
   {
     path: "/private-events",
@@ -355,6 +371,112 @@ export function buildMenuJsonLd(
             }
           : undefined,
       })),
+    })),
+  };
+}
+
+interface CateringOfferPackage {
+  id: string;
+  name: string;
+  description: string;
+  pricePerHead: string;
+  minGuests: number;
+  features: ReadonlyArray<{ label: string; included: boolean }>;
+}
+
+export function buildCateringOfferCatalogJsonLd(
+  packages: ReadonlyArray<CateringOfferPackage>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "@id": `${absoluteUrl("/catering")}#catering-packages`,
+    name: "Tandoori Corner Catering Packages",
+    url: absoluteUrl("/catering"),
+    itemListElement: packages.map((pkg) => ({
+      "@type": "Offer",
+      "@id": `${absoluteUrl(`/catering/${pkg.id}`)}#offer`,
+      name: `${pkg.name} Catering Package`,
+      url: absoluteUrl(`/catering/${pkg.id}`),
+      description: pkg.description,
+      price: pkg.pricePerHead.replace(/[^\d.]/g, ""),
+      priceCurrency: "SGD",
+      eligibleQuantity: {
+        "@type": "QuantitativeValue",
+        minValue: pkg.minGuests,
+        unitText: "guests",
+      },
+      itemOffered: {
+        "@type": "Service",
+        name: `${restaurantSeo.name} ${pkg.name} Catering`,
+        serviceType: "North Indian catering",
+        provider: {
+          "@id": `${siteUrl}/#restaurant`,
+        },
+        areaServed: restaurantSeo.areaServed,
+        offers: {
+          "@type": "Offer",
+          price: pkg.pricePerHead.replace(/[^\d.]/g, ""),
+          priceCurrency: "SGD",
+        },
+        additionalProperty: pkg.features.map((feature) => ({
+          "@type": "PropertyValue",
+          name: feature.label,
+          value: feature.included ? "Included" : "Not included",
+        })),
+      },
+    })),
+  };
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export const restaurantFaqs: ReadonlyArray<FaqItem> = [
+  {
+    question: "Where is Tandoori Corner located?",
+    answer:
+      "Tandoori Corner is located at 400 Balestier Road #01-12, Balestier Plaza, Singapore 329802.",
+  },
+  {
+    question: "Does Tandoori Corner offer Indian catering in Singapore?",
+    answer:
+      "Yes. Tandoori Corner offers North Indian catering in Singapore with Silver, Gold and Platinum party packages, plus a build-your-own catering menu for tailored events.",
+  },
+  {
+    question: "Can I order Tandoori Corner for takeaway or delivery?",
+    answer:
+      "Yes. Guests can order North Indian favourites from Tandoori Corner for takeaway or home delivery, including tandoori grills, curries, biryanis, breads and drinks.",
+  },
+  {
+    question: "Is Tandoori Corner pet friendly?",
+    answer:
+      "Yes. Tandoori Corner has a pet-friendly alfresco balcony at Balestier Plaza for well-behaved pets.",
+  },
+  {
+    question: "What cuisine does Tandoori Corner serve?",
+    answer:
+      "Tandoori Corner serves North Indian cuisine, including tandoori grills, curries, biryanis, Indian breads, vegetarian dishes, desserts and TCB Bar drinks.",
+  },
+];
+
+export function buildFaqJsonLd(
+  faqs: ReadonlyArray<FaqItem> = restaurantFaqs,
+  path = "/",
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${absoluteUrl(path)}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
     })),
   };
 }

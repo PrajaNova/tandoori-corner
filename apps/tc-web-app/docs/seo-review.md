@@ -111,24 +111,18 @@ No changes needed. Just confirm `metadataBase` resolves to absolute URLs in prod
 
 ## 6. Core Web Vitals → Search Ranking
 
-### Fonts (highest-impact change)
-`app/globals.css` imports Merriweather + Open Sans from Google Fonts via `@import`. This costs:
-- An extra render-blocking stylesheet round-trip.
-- No `preconnect` to `fonts.gstatic.com`.
-- FOUT/CLS risk on slow networks.
-
-Migrate to `next/font/google` in `app/layout.tsx`:
+### Fonts
+The app already self-hosts the committed brand fonts with `next/font/google` in `app/layout.tsx`:
 
 ```tsx
-import { Merriweather, Open_Sans } from "next/font/google";
+import { Great_Vibes, Kaushan_Script, Raleway } from "next/font/google";
 
-const merriweather = Merriweather({ subsets: ["latin"], weight: ["400","700","900"], display: "swap", variable: "--font-merriweather" });
-const openSans = Open_Sans({ subsets: ["latin"], weight: ["300","400","500","600","700","800"], display: "swap", variable: "--font-open-sans" });
-
-// <html className={`${merriweather.variable} ${openSans.variable}`}>
+const raleway = Raleway({ subsets: ["latin"], display: "swap", variable: "--ff-raleway" });
+const kaushan = Kaushan_Script({ subsets: ["latin"], weight: "400", display: "swap", variable: "--ff-kaushan" });
+const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400", display: "swap", variable: "--ff-script" });
 ```
 
-Then drop the `@import` from `globals.css`. Self-hosted fonts, no extra DNS hop, automatic preloading.
+No migration needed. Keep `theme/typography.css` mapped to `Raleway`, `Kaushan Script`, and `Great Vibes`; do not switch to Open Sans / Merriweather unless the visual brand is intentionally redesigned.
 
 ### Viewport (Next 16 requirement)
 Add to `app/layout.tsx`:

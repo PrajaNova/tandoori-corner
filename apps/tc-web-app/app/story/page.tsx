@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import { JsonLd } from "@/components/seo/JsonLd";
 
-import {
-  buildBreadcrumbJsonLd,
-  buildPageMetadata,
-  jsonLdScript,
-} from "@/lib/seo";
+import { buildBreadcrumbJsonLd, buildPageMetadata } from "@/lib/seo";
 
 import { StoryContent } from "./StoryContent";
 
@@ -24,14 +20,9 @@ const breadcrumbs = [
 export default function StoryPage() {
   return (
     <>
-      <Script
+      <JsonLd
         id="story-breadcrumbs"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
-        }}
+        data={buildBreadcrumbJsonLd(breadcrumbs)}
       />
       <StoryContent />
     </>

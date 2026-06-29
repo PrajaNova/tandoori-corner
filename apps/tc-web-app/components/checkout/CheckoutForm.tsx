@@ -1,13 +1,24 @@
-import { Apple, ChevronRight, CreditCard, MapPin, User } from "lucide-react";
+"use client";
+
+import { ChevronRight, CreditCard, MapPin, User } from "lucide-react";
 import type { FormEvent } from "react";
+import { useState } from "react";
 import { FormField } from "@/components/common/forms/FormField";
-import { checkoutDeliveryFields, checkoutPaymentFields } from "@/data/checkout";
+import { checkoutDeliveryFields } from "@/data/checkout";
 
 type CheckoutFormProps = {
-  onSubmit: (event: FormEvent) => void;
+  error?: string | null;
+  isSubmitting?: boolean;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
 
-export function CheckoutForm({ onSubmit }: CheckoutFormProps) {
+export function CheckoutForm({
+  error,
+  isSubmitting = false,
+  onSubmit,
+}: CheckoutFormProps) {
+  const [paymentMethod, setPaymentMethod] = useState("card");
+
   return (
     <div className="lg:col-span-7">
       <div className="mb-10 border-b border-border pb-10">
@@ -50,7 +61,10 @@ export function CheckoutForm({ onSubmit }: CheckoutFormProps) {
                         </span>
                         <input
                           required
+                          autoComplete={field.autoComplete}
                           id={field.id}
+                          inputMode={field.inputMode}
+                          name={field.id}
                           type={field.type}
                           className="w-full border-b border-border bg-transparent pb-2 pl-2 text-ink transition-colors focus:border-brand-gold focus:outline-none"
                           placeholder={field.placeholder}
@@ -59,10 +73,14 @@ export function CheckoutForm({ onSubmit }: CheckoutFormProps) {
                     ) : (
                       <input
                         required
+                        autoComplete={field.autoComplete}
                         id={field.id}
+                        inputMode={field.inputMode}
+                        name={field.id}
                         type={field.type}
                         className="w-full border-b border-border bg-transparent pb-2 text-ink transition-colors focus:border-brand-gold focus:outline-none"
                         placeholder={field.placeholder}
+                        spellCheck={field.type === "email" ? false : undefined}
                       />
                     )}
                   </FormField>
@@ -77,47 +95,68 @@ export function CheckoutForm({ onSubmit }: CheckoutFormProps) {
             <CreditCard className="h-6 w-6 text-brand-gold" /> Payment Method
           </h3>
 
-          <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="cursor-pointer border border-brand-gold bg-brand-gold/10 p-4">
+          <fieldset className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <legend className="sr-only">Payment Method</legend>
+            <label className="cursor-pointer border border-brand-gold bg-brand-gold/10 p-4 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-gold">
+              <input
+                checked={paymentMethod === "card"}
+                className="sr-only"
+                name="paymentMethod"
+                onChange={() => setPaymentMethod("card")}
+                type="radio"
+                value="card"
+              />
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-medium text-ink">
-                  Credit Card
+                  Stripe card payment
                 </span>
-                <div className="h-4 w-4 rounded-full border-4 border-brand-gold" />
+                <span className="h-4 w-4 rounded-full border-4 border-brand-gold" />
               </div>
               <CreditCard className="h-6 w-6 text-brand-gold/50" />
-            </div>
-            <div className="cursor-pointer border border-border bg-card p-4 transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground">
+            </label>
+            <label className="cursor-pointer border border-border bg-card p-4 transition-colors hover:border-primary hover:bg-primary/10 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-gold">
+              <input
+                checked={paymentMethod === "pay-at-counter"}
+                className="sr-only"
+                name="paymentMethod"
+                onChange={() => setPaymentMethod("pay-at-counter")}
+                type="radio"
+                value="pay-at-counter"
+              />
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-medium text-ink">Apple Pay</span>
-                <div className="h-4 w-4 rounded-full border border-border" />
+                <span className="text-sm font-medium text-ink">
+                  Pay at counter
+                </span>
+                <span
+                  className={`h-4 w-4 rounded-full ${
+                    paymentMethod === "pay-at-counter"
+                      ? "border-4 border-brand-gold"
+                      : "border border-border"
+                  }`}
+                />
               </div>
-              <Apple className="h-6 w-6 text-ink/50" />
-            </div>
-          </div>
+              <CreditCard className="h-6 w-6 text-ink/50" />
+            </label>
+          </fieldset>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {checkoutPaymentFields.map((field) => (
-              <div key={field.id}>
-                <FormField label={field.label} htmlFor={field.id} required>
-                  <input
-                    required
-                    id={field.id}
-                    type={field.type}
-                    className="w-full border-b border-border bg-transparent pb-2 font-sans text-ink transition-colors focus:border-brand-gold focus:outline-none"
-                    placeholder={field.placeholder}
-                  />
-                </FormField>
-              </div>
-            ))}
-          </div>
+          <p className="text-sm text-ink/60">
+            Card details are handled by Stripe after your order is created.
+          </p>
         </section>
+
+        {error ? (
+          <p className="border border-red-300 bg-red-50 p-3 text-sm text-red-700">
+            {error}
+          </p>
+        ) : null}
 
         <button
           type="submit"
-          className="mt-8 flex w-full items-center justify-center gap-3 bg-brand-gold px-10 py-5 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-cream"
+          disabled={isSubmitting}
+          className="mt-8 flex w-full items-center justify-center gap-3 bg-brand-gold px-10 py-5 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-cream disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Place Order <ChevronRight className="h-4 w-4" />
+          {isSubmitting ? "Creating Order" : "Place Order"}{" "}
+          <ChevronRight className="h-4 w-4" />
         </button>
       </form>
     </div>
