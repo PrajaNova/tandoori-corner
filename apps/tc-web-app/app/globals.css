@@ -24,6 +24,8 @@
   --input: #eeeeee;
   --ring: #c59d5f;
   --radius: 0.5rem;
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
   color-scheme: light;
 }
 
@@ -66,6 +68,17 @@ button {
   cursor: pointer;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
+  }
+}
+
 .pt-safe {
   padding-top: env(safe-area-inset-top);
 }
@@ -88,6 +101,154 @@ button {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: color-mix(in srgb, var(--color-brand-gold) 55%, transparent);
   border-radius: 999px;
+}
+
+.motion-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-list-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-testimonial-track {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-image-hover {
+  transform: scale(1);
+  transition: transform 260ms var(--ease-out-strong);
+}
+
+.motion-button-lift,
+.motion-card-lift,
+.motion-button-pop,
+.motion-icon-nudge,
+.motion-icon-pop,
+.motion-sheen {
+  transform: translate3d(0, 0, 0);
+  transition-duration: 200ms;
+  transition-property: transform;
+  transition-timing-function: var(--ease-out-strong);
+}
+
+.motion-button-lift,
+.motion-card-lift {
+  transition-property:
+    background-color, border-color, color, box-shadow, transform;
+}
+
+.motion-sheen {
+  transform: translateX(-100%);
+  transition-duration: 300ms;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .motion-image-hover,
+  .motion-image-hover:hover {
+    transform: scale(1.035);
+  }
+
+  .motion-button-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .motion-card-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .motion-button-pop:hover,
+  .group:hover .motion-icon-pop {
+    transform: scale(1.08);
+  }
+
+  .group:hover .motion-icon-nudge {
+    transform: translateX(4px);
+  }
+
+  .group:hover .motion-sheen {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes testimonial-track-reveal {
+  from {
+    opacity: 0.86;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @keyframes section-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes list-item-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .motion-reveal {
+    animation: section-reveal 1ms both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+
+  .motion-reveal-late {
+    animation-range: entry 8% cover 34%;
+  }
+
+  .motion-list-item {
+    animation: list-item-reveal 240ms var(--ease-out-strong) both;
+    animation-delay: calc(var(--motion-index, 0) * 45ms);
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+}
+
+.motion-testimonial-track {
+  animation: testimonial-track-reveal 220ms var(--ease-out-strong) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .motion-reveal-late,
+  .motion-list-item,
+  .motion-testimonial-track,
+  .motion-image-hover,
+  .motion-button-lift,
+  .motion-card-lift,
+  .motion-button-pop,
+  .motion-icon-nudge,
+  .motion-icon-pop,
+  .motion-sheen {
+    animation: none;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Scroll-driven transparent/solid header styling */

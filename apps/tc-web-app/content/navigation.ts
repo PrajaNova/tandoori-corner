@@ -5,4 +5,5 @@ export const navigationItems = [
   { href: "/order", label: "ORDER ONLINE" },
   { href: "/private-events", label: "EVENT SPACE" },
   { href: "/catering", label: "CATERING" },
+  { href: "/contact", label: "CONTACT" },
 ];

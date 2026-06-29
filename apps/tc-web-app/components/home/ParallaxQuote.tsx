@@ -4,18 +4,18 @@ import { quoteContent } from "@/content/quote";
 export function ParallaxQuote() {
   return (
     <section className="relative py-32 flex items-center justify-center min-h-[460px]">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url('${quoteContent.backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
+      <Image
+        src={quoteContent.backgroundImage}
+        alt=""
+        width={1920}
+        height={1080}
+        aria-hidden="true"
+        sizes="100vw"
+        className="absolute inset-0 z-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/70 z-0" />
 
-      <div className="container relative z-10 px-4 text-center max-w-4xl mx-auto">
+      <div className="container relative z-10 px-4 text-center max-w-4xl mx-auto motion-reveal">
         {quoteContent.iconImage && (
           <div className="flex justify-center mb-8">
             <Image
@@ -23,7 +23,6 @@ export function ParallaxQuote() {
               alt={quoteContent.iconAlt}
               width={70}
               height={70}
-              style={{ width: 70, height: "auto" }}
               className="opacity-90"
             />
           </div>

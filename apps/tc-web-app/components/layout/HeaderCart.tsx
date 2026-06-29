@@ -19,11 +19,11 @@ export function HeaderCart() {
     <Link
       href="/checkout"
       aria-label="View cart"
-      className="relative text-white hover:text-primary transition-colors flex items-center justify-center p-2"
+      className="relative flex h-11 w-11 items-center justify-center text-white transition-colors hover:text-primary"
     >
       <ShoppingBag className="w-5 h-5" />
       {cartCount > 0 && (
-        <span className="absolute top-0 right-0 bg-primary text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center text-white animate-in scale-in duration-300">
+        <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-white animate-in scale-in duration-300">
           {cartCount}
         </span>
       )}

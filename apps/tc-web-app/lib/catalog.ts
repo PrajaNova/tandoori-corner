@@ -41,6 +41,7 @@ function formatPrice(priceCents: number): string {
 
 function normalizeItem(item: CatalogApiItem): MenuItem {
   return {
+    id: item.id,
     name: item.name,
     desc: item.description,
     price: formatPrice(item.priceCents),

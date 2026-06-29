@@ -1,0 +1,17 @@
+# IndexNow: https://tandooricorner.sg/368790c38d65a4e6725cd9deccae23cd.txt
+User-Agent: GPTBot
+User-Agent: ChatGPT-User
+User-Agent: PerplexityBot
+User-Agent: ClaudeBot
+User-Agent: anthropic-ai
+User-Agent: Google-Extended
+User-Agent: Bingbot
+Allow: /
+Disallow: /checkout
+
+User-Agent: *
+Allow: /
+Disallow: /checkout
+
+Sitemap: https://tandooricorner.sg/sitemap.xml
+Host: https://tandooricorner.sg/

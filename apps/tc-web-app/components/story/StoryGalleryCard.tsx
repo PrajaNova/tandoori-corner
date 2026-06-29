@@ -10,7 +10,7 @@ export function StoryGalleryCard({ item }: { item: GalleryItem }) {
           fill
           src={item.img}
           alt={item.title}
-          className="w-full h-full object-cover transition-all duration-500"
+          className="h-full w-full object-cover transition-[opacity,transform] duration-300"
           sizes="(max-width: 640px) 100vw, 33vw"
         />
       </div>

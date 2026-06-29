@@ -1,13 +1,13 @@
 # Tandoori Corner
 
-> Tandoori Corner is a North Indian restaurant and TCB Bar inside Balestier Plaza, Singapore. We have been serving alfresco dining, tandoori grills, evening cocktails, home delivery, and catering for 15 years.
+> Tandoori Corner is a North Indian restaurant and TCB Bar inside Balestier Plaza, Singapore. Established in 2008, it serves alfresco dining, tandoori grills, evening cocktails, home delivery, and catering.
 
 ## Location & Contact
 
 - Address: 400 Balestier Road #01-12 Balestier Plaza, Singapore 329802
 - Phone: +65 9862 7334
 - Email: tandooricorner@singnet.com.sg
-- Website: https://www.tandooricorner.sg
+- Website: https://tandooricorner.sg
 - Map: https://maps.app.goo.gl/jE9ppAZ8BDcoJHZY9
 
 ## Hours
@@ -17,10 +17,27 @@
 
 ## Pages
 
-- [Home](https://www.tandooricorner.sg/): Overview, hero, daily offers, signature dishes, Google reviews.
-- [Menu](https://www.tandooricorner.sg/menu): Full North Indian menu — chef signatures, tandoori grills, curries, biryanis, breads, desserts, TCB Bar drinks.
-- [Experience](https://www.tandooricorner.sg/experience): Reservations, takeaway, private events, TCB Bar bookings, pet-friendly alfresco dining.
-- [Our Story](https://www.tandooricorner.sg/story): History, team, gallery, press features.
+- [Home](https://tandooricorner.sg/): Overview, daily offers, signature dishes, Google reviews, and table booking.
+- [Menu](https://tandooricorner.sg/menu): Full North Indian menu — chef signatures, tandoori grills, curries, biryanis, breads, desserts, TCB Bar drinks.
+- [Order Online](https://tandooricorner.sg/order): Browse the menu and place pickup or home delivery orders.
+- [Catering](https://tandooricorner.sg/catering): Silver, Gold and Platinum North Indian catering packages for Singapore events.
+- [Build Your Own Catering Menu](https://tandooricorner.sg/catering/build): Custom catering menu builder for party and corporate event quotes.
+- [Silver Catering Package](https://tandooricorner.sg/catering/silver): Intimate North Indian catering package from $24 per guest.
+- [Gold Catering Package](https://tandooricorner.sg/catering/gold): Crowd-favourite North Indian catering package from $34 per guest.
+- [Platinum Catering Package](https://tandooricorner.sg/catering/platinum): Full-feast North Indian catering package from $46 per guest.
+- [Private Events](https://tandooricorner.sg/private-events): Book TCB Bar event space for birthdays, corporate gatherings, celebrations and private dining.
+- [Contact](https://tandooricorner.sg/contact): Call, WhatsApp, get directions, confirm opening hours, or reserve a table.
+- [Gallery](https://tandooricorner.sg/gallery): Food, restaurant, TCB Bar, catering, and private event photos.
+- [Reviews](https://tandooricorner.sg/reviews): Guest reviews and links to review platforms.
+- [Our Story](https://tandooricorner.sg/story): History, team, gallery, press features.
+
+## Primary Actions
+
+- Book a table: https://tandooricorner.sg/#reservation
+- Order online: https://tandooricorner.sg/order
+- Book event space: https://tandooricorner.sg/private-events
+- Request catering: https://tandooricorner.sg/catering
+- Build a custom catering menu: https://tandooricorner.sg/catering/build
 
 ## What We're Known For
 

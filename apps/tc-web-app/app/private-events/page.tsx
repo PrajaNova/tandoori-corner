@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { EventBookingCTA } from "@/components/private-events/EventBookingCTA";
 import { EventGallerySection } from "@/components/private-events/EventGallerySection";
 import { EventHero } from "@/components/private-events/EventHero";
 import { EventHighlights } from "@/components/private-events/EventHighlights";
 import { EventTypes } from "@/components/private-events/EventTypes";
-import {
-  buildBreadcrumbJsonLd,
-  buildPageMetadata,
-  jsonLdScript,
-} from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd, buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/private-events",
-  title: "Private Events at the TCB Bar | Tandoori Corner Singapore",
+  title: "Book Event Space at TCB Bar | Tandoori Corner Singapore",
   description:
-    "Host your private event at TCB Bar in Balestier — corporate gatherings, birthdays & celebrations for up to 60 guests. Bespoke menus and full bar service.",
+    "Book event space at TCB Bar in Balestier for corporate gatherings, birthdays and private celebrations. Enquire for menus and bar service.",
 });
 
 const breadcrumbs = [
@@ -26,14 +22,9 @@ const breadcrumbs = [
 export default function PrivateEventsPage() {
   return (
     <>
-      <Script
+      <JsonLd
         id="private-events-breadcrumbs"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
-        }}
+        data={buildBreadcrumbJsonLd(breadcrumbs)}
       />
 
       <div className="bg-white">

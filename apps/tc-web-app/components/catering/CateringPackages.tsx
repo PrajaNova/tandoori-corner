@@ -1,10 +1,15 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import type { CateringPackage } from "@/data/catering";
 import { getCateringPackages } from "@/lib/catering";
 import { BuildYourOwnCard } from "./BuildYourOwnCard";
 import { OptionCard } from "./OptionCard";
 
-export async function CateringPackages() {
-  const cateringPackages = await getCateringPackages();
+export async function CateringPackages({
+  packages,
+}: {
+  packages?: CateringPackage[];
+}) {
+  const cateringPackages = packages ?? (await getCateringPackages());
 
   return (
     <section className="bg-white py-20">

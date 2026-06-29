@@ -1,14 +1,61 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { reservationContent } from "@/content/reservation";
+import { trackConversion } from "@/lib/analytics";
 import { contact } from "@/lib/seo";
 
 const selectClass =
   "flex h-12 w-full rounded-none border border-input bg-transparent px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-muted-foreground";
 
 export function Reservation() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "sent">("idle");
+  const [error, setError] = useState<string | null>(null);
+  const today = new Date().toISOString().slice(0, 10);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setStatus("submitting");
+    setError(null);
+
+    const data = new FormData(form);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000"}/api/bookings`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          partySize: Number(data.get("partySize")),
+          date: data.get("reservationDate"),
+          time: data.get("reservationTime"),
+          notes: data.get("specialRequest"),
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}));
+      setError(body.message ?? "We could not send your booking request.");
+      setStatus("idle");
+      return;
+    }
+
+    form.reset();
+    trackConversion("booking_request_submitted", {
+      form_type: "booking",
+      party_size: Number(data.get("partySize")),
+    });
+    setStatus("sent");
+  }
+
   return (
     <section
       id="reservation"
@@ -20,61 +67,114 @@ export function Reservation() {
           mainText={reservationContent.mainText}
         />
 
-        <div className="bg-card border border-border p-8 md:p-14 max-w-4xl mx-auto shadow-xl mt-12">
+        <div className="bg-card border border-border p-8 md:p-14 max-w-4xl mx-auto shadow-xl mt-12 motion-reveal motion-reveal-late">
           <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
             {reservationContent.description}
           </p>
 
-          <form className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <select className={selectClass} defaultValue="4 People">
-              {reservationContent.peopleOptions.map((o) => (
-                <option key={o}>{o}</option>
-              ))}
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          >
+            <select
+              aria-label="Party size"
+              className={selectClass}
+              defaultValue="4"
+              name="partySize"
+              required
+            >
+              {reservationContent.peopleOptions.map((option) => {
+                const value = Number.parseInt(option, 10);
+                return (
+                  <option key={option} value={value}>
+                    {option}
+                  </option>
+                );
+              })}
             </select>
-            <select className={selectClass} defaultValue="Today">
-              {reservationContent.dateOptions.map((o) => (
-                <option key={o}>{o}</option>
-              ))}
-            </select>
-            <select className={selectClass} defaultValue="8:00 PM">
-              {reservationContent.timeOptions.map((o) => (
-                <option key={o}>{o}</option>
+            <Input
+              aria-label="Reservation date"
+              className="h-12 rounded-none bg-transparent"
+              defaultValue={today}
+              min={today}
+              name="reservationDate"
+              required
+              type="date"
+            />
+            <select
+              aria-label="Reservation time"
+              className={selectClass}
+              defaultValue="20:00"
+              name="reservationTime"
+              required
+            >
+              {reservationContent.timeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
               ))}
             </select>
 
             <Input
+              autoComplete="name"
+              required
+              name="name"
               type="text"
-              placeholder="Your Name"
+              placeholder="Your name…"
               className="h-12 rounded-none bg-transparent"
             />
             <Input
+              autoComplete="email"
+              inputMode="email"
+              name="email"
+              required
+              spellCheck={false}
               type="email"
-              placeholder="Email"
+              placeholder="Email…"
               className="h-12 rounded-none bg-transparent"
             />
             <Input
+              autoComplete="tel"
+              inputMode="tel"
+              name="phone"
+              required
               type="tel"
-              placeholder="Phone Number"
+              placeholder="Phone number…"
               className="h-12 rounded-none bg-transparent"
             />
 
             <div className="md:col-span-3">
               <Input
+                autoComplete="off"
+                name="specialRequest"
                 type="text"
-                placeholder="Add A Special Request (Optional)"
+                placeholder="Add a special request…"
                 className="h-12 rounded-none bg-transparent"
               />
             </div>
 
             <div className="md:col-span-3 mt-2">
               <Button
-                type="button"
+                type="submit"
                 size="lg"
+                disabled={status === "submitting"}
                 className="w-full bg-ink text-white hover:bg-primary rounded-none h-14 text-xs tracking-widest uppercase font-bold"
               >
-                Find Table
+                {status === "submitting" ? "Sending…" : "Find Table"}
               </Button>
             </div>
+
+            {error ? (
+              <p className="md:col-span-3 text-center text-sm text-red-600">
+                {error}
+              </p>
+            ) : null}
+
+            {status === "sent" ? (
+              <p className="md:col-span-3 text-center text-sm text-leaf">
+                Booking request received. We will confirm your table shortly.
+              </p>
+            ) : null}
           </form>
 
           <p className="text-center text-[11px] tracking-widest uppercase text-muted-foreground mt-8 font-bold flex items-center justify-center gap-1.5">

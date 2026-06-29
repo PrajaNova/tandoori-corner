@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { CateringHero } from "@/components/catering/CateringHero";
 import { CateringPackages } from "@/components/catering/CateringPackages";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getCateringPackages } from "@/lib/catering";
 import {
   buildBreadcrumbJsonLd,
+  buildCateringOfferCatalogJsonLd,
   buildPageMetadata,
-  jsonLdScript,
 } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -23,21 +24,22 @@ const breadcrumbs = [
 ] as const;
 
 export default async function CateringPage() {
+  const cateringPackages = await getCateringPackages();
+
   return (
     <>
-      <Script
+      <JsonLd
+        id="catering-offer-catalog"
+        data={buildCateringOfferCatalogJsonLd(cateringPackages)}
+      />
+      <JsonLd
         id="catering-breadcrumbs"
-        strategy="beforeInteractive"
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is escaped before rendering.
-        dangerouslySetInnerHTML={{
-          __html: jsonLdScript(buildBreadcrumbJsonLd(breadcrumbs)),
-        }}
+        data={buildBreadcrumbJsonLd(breadcrumbs)}
       />
 
       <div className="bg-white">
         <CateringHero />
-        <CateringPackages />
+        <CateringPackages packages={cateringPackages} />
       </div>
     </>
   );

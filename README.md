@@ -91,8 +91,9 @@ To preserve design alignment and performance metrics across updates, follow thes
 ### 🍛 Brand & Theme Tokens
 Consult the live [Tandoori Corner Singapore](https://www.tandooricorner.com.sg/) site for copy, details, and color treatments.
 - **Typography**: 
-  - Headings: `Merriweather`
-  - Body copy: `Open Sans`
+  - Body/UI: `Raleway`
+  - Display headings: `Kaushan Script`
+  - Script accents: `Great Vibes`
 - **Tailwind v4 Theme Tokens**:
   - `tandoori`, `tandoori-dark` (rich branding red accents)
   - `cream` (soft background canvas)

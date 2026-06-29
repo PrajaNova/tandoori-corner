@@ -1,4 +1,7 @@
+"use client";
+
 import { Menu } from "lucide-react";
+import { useState } from "react";
 import { HeaderCart } from "@/components/layout/HeaderCart";
 import { BrandLogo } from "@/components/layout/header/BrandLogo";
 import { HeaderLink } from "@/components/layout/header/HeaderLink";
@@ -14,27 +17,24 @@ interface HeaderNavProps {
 }
 
 export function HeaderNav({ items }: HeaderNavProps) {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <>
-      {/* Hidden checkbox toggle for CSS-only side drawer */}
-      <input
-        type="checkbox"
-        id="mobile-drawer-toggle"
-        className="peer hidden"
-      />
-
-      <nav className="fixed top-0 z-50 w-full transition-all duration-500 py-4 md:py-5 scroll-header">
+      <nav className="fixed top-0 z-50 w-full py-4 transition-[background-color,box-shadow,backdrop-filter] duration-300 md:py-5 scroll-header">
         <div className="container mx-auto flex items-center justify-between relative px-5 sm:px-8 max-w-6xl">
           {/* Left Side: Logo (Desktop) / Hamburger (Mobile) */}
           <div className="flex items-center justify-start flex-1">
-            {/* Mobile Hamburger toggle label */}
-            <label
-              htmlFor="mobile-drawer-toggle"
-              className="text-white hover:text-primary transition-colors cursor-pointer p-2 -ml-2 min-[1080px]:hidden"
+            <button
+              type="button"
+              className="-ml-3 flex h-11 w-11 cursor-pointer items-center justify-center text-white transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary min-[1080px]:hidden"
               aria-label="Open menu"
+              aria-controls="mobile-drawer"
+              aria-expanded={drawerOpen}
+              onClick={() => setDrawerOpen(true)}
             >
               <Menu className="w-6 h-6" />
-            </label>
+            </button>
 
             {/* Desktop Brand Logo */}
             <BrandLogo desktop className="hidden min-[1080px]:flex" />
@@ -62,8 +62,11 @@ export function HeaderNav({ items }: HeaderNavProps) {
         </div>
       </nav>
 
-      {/* CSS-Only Side Drawer backdrop and container */}
-      <MobileDrawer items={items} />
+      <MobileDrawer
+        items={items}
+        onClose={() => setDrawerOpen(false)}
+        open={drawerOpen}
+      />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Great_Vibes, Kaushan_Script, Raleway } from "next/font/google";
 
@@ -31,6 +31,8 @@ import { SchemaScripts } from "@/components/layout/providers/SchemaScripts";
 import { siteMetadata } from "@/content/metadata";
 import { absoluteUrl, buildPageMetadata, restaurantSeo } from "@/lib/seo";
 
+const enableChatBot = process.env.NEXT_PUBLIC_ENABLE_CHATBOT === "true";
+
 export const metadata: Metadata = {
   ...buildPageMetadata({
     path: "/",
@@ -53,6 +55,10 @@ export const metadata: Metadata = {
     : undefined,
 };
 
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,7 +76,7 @@ export default function RootLayout({
         <AppHeader />
         <main className="flex-1 w-full">{children}</main>
         <AppFooter />
-        <LazyChatBot />
+        {enableChatBot ? <LazyChatBot /> : null}
         <AnalyticsScripts />
       </body>
     </html>

@@ -2,9 +2,12 @@ import { NewsletterForm } from "@/components/layout/footer/NewsletterForm";
 import { OpeningHours } from "@/components/layout/footer/OpeningHours";
 import { SocialLinks } from "@/components/layout/footer/SocialLinks";
 import { operationalHours } from "@/content/hours";
-import { contact } from "@/lib/seo";
+import { getContactSetting } from "@/lib/cms";
+import type { contact as fallbackContact } from "@/lib/seo";
 
-export function AppFooter() {
+export async function AppFooter() {
+  const contact = (await getContactSetting()) as typeof fallbackContact;
+
   return (
     <footer className="bg-[#1a1a1a] pt-16 pb-8 text-white relative mt-auto">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -47,6 +50,12 @@ export function AppFooter() {
               className="text-primary font-bold text-xs tracking-widest uppercase hover:text-white transition-colors"
             >
               Send A Message
+            </a>
+            <a
+              href="/account"
+              className="mt-3 text-primary font-bold text-xs tracking-widest uppercase hover:text-white transition-colors"
+            >
+              Customer Account
             </a>
           </div>
         </div>

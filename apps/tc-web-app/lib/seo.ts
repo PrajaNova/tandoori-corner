@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://www.tandooricorner.sg";
+export const siteUrl = "https://tandooricorner.sg";
 
 const defaultDescription =
-  "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza — tandoori grills, alfresco dining, home delivery and catering. Est. 2008.";
+  "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza — book a table, order online, enquire for events, or request catering. Est. 2008.";
 
 export const restaurantSeo = {
   name: "Tandoori Corner",
   legalName: "Tandoori Corner",
   siteUrl,
-  legacySiteUrl: "https://www.tandooricorner.com.sg",
   description: defaultDescription,
-  logoPath: "/tandoori-corner-header-logo.png",
+  logoPath: "/tandoori-corner-logo.png",
   ogImagePath: "/opengraph-image",
   cuisine: ["North Indian", "Indian"],
   priceRange: "$$",
@@ -43,7 +42,7 @@ export const restaurantSeo = {
     worstRating: 1,
   },
   foundingDate: "2008",
-  slogan: "15 years of North Indian cooking at Balestier Plaza.",
+  slogan: "North Indian cooking at Balestier Plaza since 2008.",
   areaServed: ["Singapore", "Balestier", "Novena"],
   knowsAbout: [
     "North Indian cuisine",
@@ -131,18 +130,58 @@ export const seoRoutes = [
     changeFrequency: "monthly",
   },
   {
-    path: "/private-events",
-    title: "Private Events at the TCB Bar | Tandoori Corner Singapore",
+    path: "/catering/build",
+    title: "Build Your Own Catering Menu | Tandoori Corner",
     description:
-      "Host your private event at the TCB Bar in Balestier — corporate gatherings, birthdays & celebrations. Browse past events, see the space, and enquire to book.",
+      "Hand-pick dishes course by course — appetizers, mains, rice, breads and desserts — filter by veg or non-veg, and request a tailored catering quote.",
+    priority: 0.75,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/order",
+    title: "Order Online | Tandoori Corner Singapore",
+    description:
+      "Order online from Tandoori Corner at Balestier Plaza. Browse North Indian favourites and place your pickup or home delivery order.",
+    priority: 0.8,
+    changeFrequency: "weekly",
+  },
+  {
+    path: "/private-events",
+    title: "Book Event Space at TCB Bar | Tandoori Corner Singapore",
+    description:
+      "Book event space at TCB Bar in Balestier for corporate gatherings, birthdays and private celebrations. Enquire for menus and bar service.",
     priority: 0.8,
     changeFrequency: "monthly",
   },
   {
-    path: "/story",
-    title: "Our Story | 15 Years at Balestier Plaza",
+    path: "/gallery",
+    title: "Food & Event Gallery | Tandoori Corner Singapore",
     description:
-      "The Tandoori Corner story — 15 years of North Indian cooking, the TCB Bar, alfresco dining, our team, and press from Balestier Plaza, Singapore.",
+      "Browse Tandoori Corner food, restaurant, TCB Bar, catering, and private event photos from Balestier Plaza.",
+    priority: 0.72,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/reviews",
+    title: "Guest Reviews | Tandoori Corner Singapore",
+    description:
+      "Read guest reviews for Tandoori Corner, a North Indian restaurant and TCB Bar at Balestier Plaza, Singapore.",
+    priority: 0.72,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/contact",
+    title: "Contact & Find Us | Tandoori Corner Balestier",
+    description:
+      "Find Tandoori Corner at Balestier Plaza, Singapore. Call, WhatsApp, view opening hours, get directions, or reserve a table.",
+    priority: 0.82,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/story",
+    title: "Our Story | Since 2008 at Balestier Plaza",
+    description:
+      "The Tandoori Corner story — North Indian cooking since 2008, the TCB Bar, alfresco dining, our team, and press from Balestier Plaza, Singapore.",
     priority: 0.7,
     changeFrequency: "monthly",
   },
@@ -300,6 +339,37 @@ export function buildOrganizationJsonLd() {
   };
 }
 
+export function buildWebPageJsonLd({
+  path,
+  name,
+  description,
+}: {
+  path: string;
+  name: string;
+  description: string;
+}) {
+  const url = absoluteUrl(path);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: "en-SG",
+    isPartOf: {
+      "@id": `${siteUrl}/#website`,
+    },
+    about: {
+      "@id": `${siteUrl}/#restaurant`,
+    },
+    publisher: {
+      "@id": `${siteUrl}/#organization`,
+    },
+  };
+}
+
 export function buildBreadcrumbJsonLd(
   items: ReadonlyArray<{ name: string; path: string }>,
 ) {
@@ -355,6 +425,112 @@ export function buildMenuJsonLd(
             }
           : undefined,
       })),
+    })),
+  };
+}
+
+interface CateringOfferPackage {
+  id: string;
+  name: string;
+  description: string;
+  pricePerHead: string;
+  minGuests: number;
+  features: ReadonlyArray<{ label: string; included: boolean }>;
+}
+
+export function buildCateringOfferCatalogJsonLd(
+  packages: ReadonlyArray<CateringOfferPackage>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "@id": `${absoluteUrl("/catering")}#catering-packages`,
+    name: "Tandoori Corner Catering Packages",
+    url: absoluteUrl("/catering"),
+    itemListElement: packages.map((pkg) => ({
+      "@type": "Offer",
+      "@id": `${absoluteUrl(`/catering/${pkg.id}`)}#offer`,
+      name: `${pkg.name} Catering Package`,
+      url: absoluteUrl(`/catering/${pkg.id}`),
+      description: pkg.description,
+      price: pkg.pricePerHead.replace(/[^\d.]/g, ""),
+      priceCurrency: "SGD",
+      eligibleQuantity: {
+        "@type": "QuantitativeValue",
+        minValue: pkg.minGuests,
+        unitText: "guests",
+      },
+      itemOffered: {
+        "@type": "Service",
+        name: `${restaurantSeo.name} ${pkg.name} Catering`,
+        serviceType: "North Indian catering",
+        provider: {
+          "@id": `${siteUrl}/#restaurant`,
+        },
+        areaServed: restaurantSeo.areaServed,
+        offers: {
+          "@type": "Offer",
+          price: pkg.pricePerHead.replace(/[^\d.]/g, ""),
+          priceCurrency: "SGD",
+        },
+        additionalProperty: pkg.features.map((feature) => ({
+          "@type": "PropertyValue",
+          name: feature.label,
+          value: feature.included ? "Included" : "Not included",
+        })),
+      },
+    })),
+  };
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export const restaurantFaqs: ReadonlyArray<FaqItem> = [
+  {
+    question: "Where is Tandoori Corner located?",
+    answer:
+      "Tandoori Corner is located at 400 Balestier Road #01-12, Balestier Plaza, Singapore 329802.",
+  },
+  {
+    question: "Does Tandoori Corner offer Indian catering in Singapore?",
+    answer:
+      "Yes. Tandoori Corner offers North Indian catering in Singapore with Silver, Gold and Platinum party packages, plus a build-your-own catering menu for tailored events.",
+  },
+  {
+    question: "Can I order Tandoori Corner for takeaway or delivery?",
+    answer:
+      "Yes. Guests can order North Indian favourites from Tandoori Corner for takeaway or home delivery, including tandoori grills, curries, biryanis, breads and drinks.",
+  },
+  {
+    question: "Is Tandoori Corner pet friendly?",
+    answer:
+      "Yes. Tandoori Corner has a pet-friendly alfresco balcony at Balestier Plaza for well-behaved pets.",
+  },
+  {
+    question: "What cuisine does Tandoori Corner serve?",
+    answer:
+      "Tandoori Corner serves North Indian cuisine, including tandoori grills, curries, biryanis, Indian breads, vegetarian dishes, desserts and TCB Bar drinks.",
+  },
+];
+
+export function buildFaqJsonLd(
+  faqs: ReadonlyArray<FaqItem> = restaurantFaqs,
+  path = "/",
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${absoluteUrl(path)}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
     })),
   };
 }

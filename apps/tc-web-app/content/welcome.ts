@@ -7,11 +7,30 @@ export interface WelcomeCard {
   linkLabel: string;
 }
 
+export interface WelcomeFact {
+  label: string;
+  value: string;
+}
+
 export const welcomeContent = {
   cursiveText: "Hello dear",
   mainText: "Welcome To Tandoori Corner",
   description:
     "Established in 2008, Tandoori Corner is Singapore's favourite North Indian curry house, nestled along the heritage trail of Balestier Road. We combine the warmth of alfresco dining with bold, authentic flavours that keep our guests coming back for more.",
+  facts: [
+    {
+      label: "Cuisine",
+      value: "North Indian tandoori grills, curries and biryani",
+    },
+    {
+      label: "Location",
+      value: "Balestier Plaza, Singapore 329802",
+    },
+    {
+      label: "Services",
+      value: "Dine-in, delivery, catering and private events",
+    },
+  ] satisfies WelcomeFact[],
   cards: [
     {
       subtitle: "Spices from the heart",

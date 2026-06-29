@@ -54,10 +54,11 @@ export function MenuItemList({
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">
             {activeCategory.items.map((item) => (
-              <div
+              <button
                 key={item.name}
-                className="flex flex-col cursor-pointer group hover:opacity-80 transition-opacity"
                 onClick={() => onOpenItem(item)}
+                type="button"
+                className="group flex cursor-pointer flex-col text-left transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-heading font-bold text-lg text-ink group-hover:text-primary transition-colors">
@@ -71,7 +72,7 @@ export function MenuItemList({
                 <p className="text-muted-foreground text-xs leading-relaxed">
                   {item.desc}
                 </p>
-              </div>
+              </button>
             ))}
           </div>
         </div>

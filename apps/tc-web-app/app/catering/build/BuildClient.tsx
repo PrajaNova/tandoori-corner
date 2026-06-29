@@ -11,6 +11,7 @@ import {
   type CateringDish,
   type Diet,
 } from "@/data/catering";
+import { trackConversion } from "@/lib/analytics";
 import { contact } from "@/lib/seo";
 
 type Step = "select" | "review" | "done";
@@ -18,7 +19,11 @@ type CourseFilter = "all" | string;
 type DietFilter = "all" | Diet;
 
 const inputClassName =
-  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none";
+  "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/30";
+
+function apiBaseUrl() {
+  return process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000";
+}
 
 function DietDot({ diet }: { diet: Diet }) {
   const isVeg = diet === "veg";
@@ -45,7 +50,8 @@ export function BuildClient() {
   const [courseFilter, setCourseFilter] = useState<CourseFilter>("all");
   const [dietFilter, setDietFilter] = useState<DietFilter>("all");
   const [submitted, setSubmitted] = useState(false);
-  const [mailtoHref, setMailtoHref] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const filteredDishes = useMemo(
     () =>
@@ -68,7 +74,7 @@ export function BuildClient() {
     );
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -91,11 +97,37 @@ export function BuildClient() {
       data.get("notes") ? `Notes: ${data.get("notes")}` : "",
     ].filter(Boolean);
 
-    const href = `${contact.emailHref}?subject=${encodeURIComponent(
-      "Catering Quote — Build Your Own",
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    setIsSubmitting(true);
+    setError(null);
 
-    setMailtoHref(href);
+    const response = await fetch(`${apiBaseUrl()}/api/event-enquiries`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        name: data.get("name"),
+        phone: data.get("phone"),
+        email: data.get("email"),
+        eventType: "Catering - Build Your Own",
+        guests: Number(data.get("guests")),
+        date: data.get("date"),
+        notes: bodyLines.join("\n").slice(0, 1000),
+        source: "catering-custom",
+      }),
+    });
+
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}));
+      setError(body.message ?? "We could not send your catering enquiry.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    trackConversion("catering_quote_requested", {
+      quote_type: "custom",
+      guest_count: Number(data.get("guests")),
+      selection_count: selectedDishes.length,
+    });
+    setIsSubmitting(false);
     setSubmitted(true);
     setStep("done");
   }
@@ -181,9 +213,9 @@ export function BuildClient() {
 
         {step === "select" ? (
           <div className="mt-8">
-            <h1 className="font-kaushan text-3xl text-ink sm:text-4xl">
+            <h2 className="font-kaushan text-3xl text-ink sm:text-4xl">
               Build Your Own Feast
-            </h1>
+            </h2>
             <p className="mt-2 max-w-xl text-sm font-light leading-7 text-ink/60">
               Pick the dishes you love. Filter by course and veg / non-veg, then
               review and request a quote.
@@ -261,6 +293,8 @@ export function BuildClient() {
             onBack={() => setStep("select")}
             onSubmit={handleSubmit}
             inputClassName={inputClassName}
+            isSubmitting={isSubmitting}
+            error={error}
           />
         ) : null}
 
@@ -269,23 +303,17 @@ export function BuildClient() {
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
               <Check className="h-8 w-8" />
             </span>
-            <h1 className="font-kaushan text-3xl text-ink">
-              Almost there!
-            </h1>
+            <h2 className="font-kaushan text-3xl text-ink">
+              Request received
+            </h2>
             <p className="text-sm font-light leading-relaxed text-ink/60">
-              Tap below to send your menu — our catering team will reply within
+              We received your custom catering menu. Our team will reply within
               one business day with a tailored quote. Prefer to talk? Call{" "}
               <a href={contact.phoneHref} className="font-semibold text-brand-gold">
                 {contact.phoneDisplay}
               </a>
               .
             </p>
-            <a
-              href={mailtoHref}
-              className="mt-2 w-full bg-brand-gold px-6 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
-            >
-              Send Enquiry Email
-            </a>
             <Link
               href="/catering"
               className="text-[11px] font-bold uppercase tracking-widest text-ink/40 hover:text-ink"
@@ -409,21 +437,25 @@ function ReviewStep({
   onBack,
   onSubmit,
   inputClassName,
+  isSubmitting,
+  error,
 }: {
   selectedDishes: CateringDish[];
   onRemove: (id: string) => void;
   onBack: () => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   inputClassName: string;
+  isSubmitting: boolean;
+  error: string | null;
 }) {
   return (
     <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
       {/* Selected list grouped by course */}
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="font-kaushan text-2xl text-ink sm:text-3xl">
+          <h2 className="font-kaushan text-2xl text-ink sm:text-3xl">
             Review your menu
-          </h1>
+          </h2>
           <button
             type="button"
             onClick={onBack}
@@ -493,6 +525,7 @@ function ReviewStep({
               <input
                 id="guests"
                 name="guests"
+                inputMode="numeric"
                 type="number"
                 min={1}
                 required
@@ -504,6 +537,8 @@ function ReviewStep({
               <input
                 id="phone"
                 name="phone"
+                autoComplete="tel"
+                inputMode="tel"
                 type="tel"
                 required
                 placeholder="+65 9XXX XXXX"
@@ -515,6 +550,7 @@ function ReviewStep({
             <input
               id="name"
               name="name"
+              autoComplete="name"
               type="text"
               required
               placeholder="Priya Sharma"
@@ -525,6 +561,9 @@ function ReviewStep({
             <input
               id="email"
               name="email"
+              autoComplete="email"
+              inputMode="email"
+              spellCheck={false}
               type="email"
               required
               placeholder="you@email.com"
@@ -543,10 +582,14 @@ function ReviewStep({
 
           <button
             type="submit"
+            disabled={isSubmitting}
             className="w-full bg-brand-gold px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
           >
-            Request Quote
+            {isSubmitting ? "Sending..." : "Request Quote"}
           </button>
+          {error ? (
+            <p className="text-center text-sm text-red-600">{error}</p>
+          ) : null}
         </form>
       </div>
     </div>

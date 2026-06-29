@@ -34,10 +34,10 @@ export function CateringHero() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
           <Link
             href="/catering/build"
-            className="group relative inline-flex items-center justify-center gap-2.5 bg-primary px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90"
+            className="group motion-button-lift relative inline-flex items-center justify-center gap-2.5 bg-primary px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-[background-color,transform] duration-200 ease-out hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Build Your Feast
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 motion-icon-nudge" />
           </Link>
           <a
             href={contact.whatsappHref}
@@ -45,9 +45,9 @@ export function CateringHero() {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 font-raleway text-xs font-bold uppercase tracking-widest text-[#25D366] transition-colors hover:text-[#128C7E]"
           >
-            <WhatsAppIcon className="h-5 w-5 fill-[#25D366] transition-transform group-hover:scale-110" />
+            <WhatsAppIcon className="h-5 w-5 fill-[#25D366] motion-icon-pop" />
             WhatsApp Us
-            <ArrowRight className="h-4 w-4 text-white transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="h-4 w-4 text-white motion-icon-nudge" />
           </a>
         </div>
 

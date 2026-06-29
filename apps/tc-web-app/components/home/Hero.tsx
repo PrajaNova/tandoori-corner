@@ -21,16 +21,18 @@ export function Hero() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="relative flex min-h-[700px] h-[700px] items-center justify-center overflow-hidden bg-ink group">
-      {/* Slides Container */}
+    <section className="relative flex h-[100svh] min-h-[620px] max-h-[820px] items-center justify-center overflow-hidden bg-ink group md:min-h-[700px]">
       {slides.map((slide, idx) => (
-        <HeroSlide key={idx} slide={slide} isActive={idx === currentSlide} />
+        <HeroSlide
+          key={idx}
+          slide={slide}
+          isActive={idx === currentSlide}
+          isPageHeading={idx === 0}
+        />
       ))}
 
-      {/* Manual Control: Left & Right Arrows */}
       <HeroArrows onPrev={prevSlide} onNext={nextSlide} />
 
-      {/* Manual Control: Dots indicator */}
       <HeroDots
         currentSlide={currentSlide}
         totalSlides={slides.length}

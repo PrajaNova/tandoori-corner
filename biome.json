@@ -16,6 +16,8 @@
       "!**/dist",
       "!build",
       "!**/build",
+      "!skills",
+      "!test-results",
       "!**/generated",
       "!**/src/generated"
     ]

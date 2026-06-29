@@ -13,7 +13,7 @@ type EventEnquiryButtonProps = {
 };
 
 const baseClass =
-  "group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-none px-10 py-5 text-xs font-bold uppercase tracking-widest shadow-lg transition-all duration-300 hover:-translate-y-0.5";
+  "group motion-button-lift relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-none px-10 py-5 text-xs font-bold uppercase tracking-widest shadow-lg transition-[background-color,color,box-shadow,transform] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
 const variantClass = {
   solid: "bg-primary text-white shadow-primary/30 hover:bg-ink hover:shadow-xl",
@@ -36,7 +36,7 @@ export function EventEnquiryButton({
         className={className ?? `${baseClass} ${variantClass[variant]}`}
       >
         {/* Sheen sweep on hover */}
-        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+        <span className="motion-sheen pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent motion-reduce:hidden" />
         <CalendarHeart className="h-4 w-4 shrink-0" />
         {label}
       </button>
