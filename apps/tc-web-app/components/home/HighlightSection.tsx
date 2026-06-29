@@ -79,9 +79,10 @@ export function HighlightSection({
                 <Image
                   src={img.src}
                   alt={img.alt}
-                  fill
+                  width={600}
+                  height={800}
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover motion-image-hover"
+                  className="h-full w-full object-cover motion-image-hover"
                 />
               </div>
             ))}

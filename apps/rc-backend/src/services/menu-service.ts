@@ -87,8 +87,11 @@ export class MenuError extends Error {
 }
 
 export interface MenuService {
-  listCategories: () => Promise<MenuCategory[]>;
-  getCategory: (slug: string) => Promise<MenuCategory | undefined>;
+  listCategories: (includeInactive?: boolean) => Promise<MenuCategory[]>;
+  getCategory: (
+    slug: string,
+    includeInactive?: boolean,
+  ) => Promise<MenuCategory | undefined>;
   getCategoryById: (id: string) => Promise<MenuCategory | undefined>;
   getItem: (id: string) => Promise<MenuItem | undefined>;
   createCategory: (input: CreateMenuCategoryInput) => Promise<MenuCategory>;
@@ -208,6 +211,14 @@ function categoryName(input: CreateMenuCategoryInput): string {
   return (input.name ?? input.title ?? "").trim();
 }
 
+function publicCategory(category: MenuCategory): MenuCategory | undefined {
+  if (category.status !== "active") return undefined;
+  return {
+    ...category,
+    items: category.items.filter((item) => item.status === "active"),
+  };
+}
+
 export function createMemoryMenuService(
   seed: MenuCategory[] = [],
 ): MenuService {
@@ -227,13 +238,21 @@ export function createMemoryMenuService(
   };
 
   return {
-    listCategories: async () =>
-      sortByDisplayOrder(categories).map((category) => ({
-        ...category,
-        items: sortByDisplayOrder(category.items),
-      })),
-    getCategory: async (slug) =>
-      categories.find((category) => category.slug === slug),
+    listCategories: async (includeInactive = false) =>
+      sortByDisplayOrder(categories)
+        .map((category) => ({
+          ...category,
+          items: sortByDisplayOrder(category.items),
+        }))
+        .map((category) =>
+          includeInactive ? category : publicCategory(category),
+        )
+        .filter((category): category is MenuCategory => Boolean(category)),
+    getCategory: async (slug, includeInactive = false) => {
+      const category = categories.find((candidate) => candidate.slug === slug);
+      if (!category) return undefined;
+      return includeInactive ? category : publicCategory(category);
+    },
     getCategoryById: async (id) => findCategory(id),
     getItem: async (id) => findItem(id)?.item,
     createCategory: async (input) => {
@@ -384,17 +403,28 @@ export function createPrismaMenuService(prisma: PrismaMenuClient): MenuService {
   };
 
   return {
-    listCategories: async () => {
+    listCategories: async (includeInactive = false) => {
       const categories = await prisma.menuCategory.findMany({
+        where: includeInactive ? undefined : { status: "active" },
         orderBy: { sortOrder: "asc" },
-        include: { items: { orderBy: { sortOrder: "asc" } } },
+        include: {
+          items: {
+            where: includeInactive ? undefined : { status: "active" },
+            orderBy: { sortOrder: "asc" },
+          },
+        },
       });
       return categories.map(mapMenuCategory);
     },
-    getCategory: async (slug) => {
-      const category = await prisma.menuCategory.findUnique({
-        where: { slug },
-        include: { items: { orderBy: { sortOrder: "asc" } } },
+    getCategory: async (slug, includeInactive = false) => {
+      const category = await prisma.menuCategory.findFirst({
+        where: { slug, ...(includeInactive ? {} : { status: "active" }) },
+        include: {
+          items: {
+            where: includeInactive ? undefined : { status: "active" },
+            orderBy: { sortOrder: "asc" },
+          },
+        },
       });
       return category ? mapMenuCategory(category) : undefined;
     },

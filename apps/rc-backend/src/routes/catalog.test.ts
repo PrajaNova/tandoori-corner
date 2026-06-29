@@ -7,8 +7,10 @@ import {
   createMemoryAuditService,
 } from "../services/audit-service.js";
 import {
+  type CatalogCategory,
   CatalogError,
   type CatalogService,
+  catalogSeedCategories,
   createMemoryCatalogService,
 } from "../services/catalog-service.js";
 import { createMemoryOrderService } from "../services/order-service.js";
@@ -80,6 +82,47 @@ describe("catalog read routes", () => {
     });
     assert.equal(response.statusCode, 404);
   });
+
+  it("hides inactive catalog content from public reads", async () => {
+    const seed: CatalogCategory[] = [
+      ...catalogSeedCategories,
+      {
+        ...catalogSeedCategories[0],
+        id: "cat_hidden",
+        slug: "hidden",
+        status: "inactive",
+        items: [
+          {
+            ...catalogSeedCategories[0].items[0],
+            id: "item_hidden",
+            slug: "hidden-item",
+            categoryId: "cat_hidden",
+            status: "active",
+          },
+        ],
+      },
+    ];
+    app = await buildTestApp(createMemoryCatalogService(seed));
+
+    const categories = await app.inject({
+      method: "GET",
+      url: "/api/catalog/categories",
+    });
+    assert.equal(
+      categories
+        .json()
+        .categories.some(
+          (category: CatalogCategory) => category.slug === "hidden",
+        ),
+      false,
+    );
+
+    const item = await app.inject({
+      method: "GET",
+      url: "/api/catalog/items/hidden-item",
+    });
+    assert.equal(item.statusCode, 404);
+  });
 });
 
 describe("catalog mutations", () => {
@@ -141,7 +184,7 @@ describe("catalog mutations", () => {
     assert.equal(response.statusCode, 201);
     assert.equal(auditEntries.length, 1);
     assert.deepEqual(auditEntries[0], {
-      actor: "test-admin",
+      actor: "admin",
       action: "create",
       entityType: "catalogCategory",
       entityId: "cat_tandoori_bar",

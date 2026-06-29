@@ -418,11 +418,20 @@ function matchesQuery(item: CatalogItem, query: string): boolean {
 }
 
 export interface CatalogService {
-  listCategories: () => Promise<CatalogCategory[]>;
-  listItems: (filters?: CatalogItemFilters) => Promise<CatalogItem[]>;
-  getCategory: (slug: string) => Promise<CatalogCategory | undefined>;
+  listCategories: (includeInactive?: boolean) => Promise<CatalogCategory[]>;
+  listItems: (
+    filters?: CatalogItemFilters,
+    includeInactive?: boolean,
+  ) => Promise<CatalogItem[]>;
+  getCategory: (
+    slug: string,
+    includeInactive?: boolean,
+  ) => Promise<CatalogCategory | undefined>;
   getItem: (id: string) => Promise<CatalogItem | undefined>;
-  getItemBySlug: (slug: string) => Promise<CatalogItem | undefined>;
+  getItemBySlug: (
+    slug: string,
+    includeInactive?: boolean,
+  ) => Promise<CatalogItem | undefined>;
   createCategory: (input: CreateCategoryInput) => Promise<CatalogCategory>;
   updateCategory: (
     id: string,
@@ -497,6 +506,16 @@ function mapCatalogCategory(category: PrismaCatalogCategory): CatalogCategory {
   };
 }
 
+function publicCatalogCategory(
+  category: CatalogCategory,
+): CatalogCategory | undefined {
+  if (category.status !== "active") return undefined;
+  return {
+    ...category,
+    items: category.items.filter((item) => item.status === "active"),
+  };
+}
+
 export function createMemoryCatalogService(
   seed: CatalogCategory[] = catalogSeedCategories,
 ): CatalogService {
@@ -522,26 +541,52 @@ export function createMemoryCatalogService(
     }));
 
   return {
-    listCategories: async () => orderedCategories(),
-    listItems: async (filters = {}) => {
+    listCategories: async (includeInactive = false) =>
+      orderedCategories()
+        .map((category) =>
+          includeInactive ? category : publicCatalogCategory(category),
+        )
+        .filter((category): category is CatalogCategory => Boolean(category)),
+    listItems: async (filters = {}, includeInactive = false) => {
+      const sourceCategories = includeInactive
+        ? categories
+        : categories.filter((category) => category.status === "active");
       const base = filters.categorySlug
-        ? (categories.find((category) => category.slug === filters.categorySlug)
-            ?.items ?? [])
-        : allItems();
-      const ordered = sortByDisplayOrder(base);
+        ? (sourceCategories.find(
+            (category) => category.slug === filters.categorySlug,
+          )?.items ?? [])
+        : sourceCategories.flatMap((category) => category.items);
+      const ordered = sortByDisplayOrder(
+        includeInactive
+          ? base
+          : base.filter((item) => item.status === "active"),
+      );
       return filters.query
         ? ordered.filter((item) => matchesQuery(item, filters.query as string))
         : ordered;
     },
-    getCategory: async (slug) => {
+    getCategory: async (slug, includeInactive = false) => {
       const category = categories.find((candidate) => candidate.slug === slug);
-      return category
-        ? { ...category, items: sortByDisplayOrder(category.items) }
-        : undefined;
+      if (!category) return undefined;
+      const ordered = {
+        ...category,
+        items: sortByDisplayOrder(category.items),
+      };
+      if (includeInactive) return ordered;
+      return publicCatalogCategory(ordered);
     },
     getItem: async (id) => findItem(id)?.item,
-    getItemBySlug: async (slug) =>
-      allItems().find((item) => item.slug === slug),
+    getItemBySlug: async (slug, includeInactive = false) => {
+      const category = categories.find((candidate) =>
+        candidate.items.some((item) => item.slug === slug),
+      );
+      const item = category?.items.find((candidate) => candidate.slug === slug);
+      if (!item || (!includeInactive && item.status !== "active")) {
+        return undefined;
+      }
+      if (!includeInactive && category?.status !== "active") return undefined;
+      return item;
+    },
     createCategory: async (input) => {
       const slug = slugify(input.slug ?? input.title);
       if (categories.some((category) => category.slug === slug)) {
@@ -680,18 +725,34 @@ export function createPrismaCatalogService(
   };
 
   return {
-    listCategories: async () => {
+    listCategories: async (includeInactive = false) => {
       const categories = await prisma.catalogCategory.findMany({
+        where: includeInactive ? undefined : { status: "active" },
         orderBy: { sortOrder: "asc" },
-        include: { items: { orderBy: { sortOrder: "asc" } } },
+        include: {
+          items: {
+            where: includeInactive ? undefined : { status: "active" },
+            orderBy: { sortOrder: "asc" },
+          },
+        },
       });
       return categories.map(mapCatalogCategory);
     },
-    listItems: async (filters = {}) => {
+    listItems: async (filters = {}, includeInactive = false) => {
       const items = await prisma.catalogItem.findMany({
-        where: filters.categorySlug
-          ? { category: { slug: filters.categorySlug } }
-          : undefined,
+        where: {
+          ...(includeInactive ? {} : { status: "active" }),
+          ...(filters.categorySlug
+            ? {
+                category: {
+                  slug: filters.categorySlug,
+                  ...(includeInactive ? {} : { status: "active" }),
+                },
+              }
+            : includeInactive
+              ? {}
+              : { category: { status: "active" } }),
+        },
         orderBy: { sortOrder: "asc" },
       });
       const mapped = items.map(mapCatalogItem);
@@ -699,10 +760,15 @@ export function createPrismaCatalogService(
         ? mapped.filter((item) => matchesQuery(item, filters.query as string))
         : mapped;
     },
-    getCategory: async (slug) => {
-      const category = await prisma.catalogCategory.findUnique({
-        where: { slug },
-        include: { items: { orderBy: { sortOrder: "asc" } } },
+    getCategory: async (slug, includeInactive = false) => {
+      const category = await prisma.catalogCategory.findFirst({
+        where: { slug, ...(includeInactive ? {} : { status: "active" }) },
+        include: {
+          items: {
+            where: includeInactive ? undefined : { status: "active" },
+            orderBy: { sortOrder: "asc" },
+          },
+        },
       });
       return category ? mapCatalogCategory(category) : undefined;
     },
@@ -710,8 +776,15 @@ export function createPrismaCatalogService(
       const item = await prisma.catalogItem.findUnique({ where: { id } });
       return item ? mapCatalogItem(item) : undefined;
     },
-    getItemBySlug: async (slug) => {
-      const item = await prisma.catalogItem.findUnique({ where: { slug } });
+    getItemBySlug: async (slug, includeInactive = false) => {
+      const item = await prisma.catalogItem.findFirst({
+        where: {
+          slug,
+          ...(includeInactive
+            ? {}
+            : { status: "active", category: { status: "active" } }),
+        },
+      });
       return item ? mapCatalogItem(item) : undefined;
     },
     createCategory: async (input) => {

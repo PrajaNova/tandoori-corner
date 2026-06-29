@@ -5,13 +5,20 @@ import { getConfig } from "./config.js";
 import type { PrismaClient } from "./generated/prisma/client.js";
 import { registerErrorHandler } from "./lib/error-handler.js";
 import { createPrismaClient } from "./lib/prisma.js";
+import { registerAccountRoutes } from "./routes/account.js";
 import { registerBookingRoutes } from "./routes/bookings.js";
 import { registerCatalogRoutes } from "./routes/catalog.js";
 import { registerCateringRoutes } from "./routes/catering.js";
+import { registerCmsRoutes } from "./routes/cms.js";
 import { registerEventEnquiryRoutes } from "./routes/event-enquiries.js";
 import { registerHealthRoutes } from "./routes/health.js";
 import { registerMenuRoutes } from "./routes/menu.js";
 import { registerOrderRoutes } from "./routes/orders.js";
+import {
+  type AccountService,
+  createNullAccountService,
+  createPrismaAccountService,
+} from "./services/account-service.js";
 import {
   type AuditService,
   createNullAuditService,
@@ -29,6 +36,10 @@ import {
   type CateringService,
   createPrismaCateringService,
 } from "./services/catering-service.js";
+import {
+  type CmsService,
+  createPrismaCmsService,
+} from "./services/cms-service.js";
 import {
   createPrismaEventEnquiryService,
   type EventEnquiryService,
@@ -51,11 +62,13 @@ import {
 } from "./services/payment-service.js";
 
 interface AppDependencies {
+  accountService?: AccountService;
   adminApiToken?: string;
   auditService?: AuditService;
   bookingService?: BookingService;
   catalogService?: CatalogService;
   cateringService?: CateringService;
+  cmsService?: CmsService;
   eventEnquiryService?: EventEnquiryService;
   menuService?: MenuService;
   notificationService?: NotificationService;
@@ -117,6 +130,13 @@ export async function buildApp(dependencies: AppDependencies = {}) {
   const eventEnquiryService =
     dependencies.eventEnquiryService ??
     createPrismaEventEnquiryService(prisma as PrismaClient);
+  const cmsService =
+    dependencies.cmsService ?? createPrismaCmsService(prisma as PrismaClient);
+  const accountService =
+    dependencies.accountService ??
+    (prisma
+      ? createPrismaAccountService(prisma as PrismaClient)
+      : createNullAccountService());
   const orderService =
     dependencies.orderService ??
     createPrismaOrderService(prisma as PrismaClient, catalogService);
@@ -159,12 +179,27 @@ export async function buildApp(dependencies: AppDependencies = {}) {
     auditService,
     menuService,
   });
+  await app.register(registerCmsRoutes, {
+    prefix: "/api/cms",
+    adminApiToken: dependencies.adminApiToken ?? config.adminApiToken,
+    auditService,
+    cmsService,
+  });
+  await app.register(registerAccountRoutes, {
+    prefix: "/api/account",
+    accountService,
+    googleClientId: config.googleClientId,
+    notificationService,
+  });
   await app.register(registerCateringRoutes, {
     prefix: "/api/catering",
+    adminApiToken: dependencies.adminApiToken ?? config.adminApiToken,
+    auditService,
     cateringService,
   });
   await app.register(registerBookingRoutes, {
     prefix: "/api/bookings",
+    accountService,
     adminApiToken: dependencies.adminApiToken ?? config.adminApiToken,
     auditService,
     bookingService,
@@ -174,6 +209,7 @@ export async function buildApp(dependencies: AppDependencies = {}) {
   });
   await app.register(registerEventEnquiryRoutes, {
     prefix: "/api/event-enquiries",
+    accountService,
     adminApiToken: dependencies.adminApiToken ?? config.adminApiToken,
     auditService,
     eventEnquiryService,
@@ -183,6 +219,7 @@ export async function buildApp(dependencies: AppDependencies = {}) {
   });
   await app.register(registerOrderRoutes, {
     prefix: "/api/orders",
+    accountService,
     adminApiToken: dependencies.adminApiToken ?? config.adminApiToken,
     auditService,
     notificationService,

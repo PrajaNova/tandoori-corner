@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const siteUrl = "https://www.tandooricorner.com.sg";
+const siteUrl = "https://tandooricorner.sg";
 const routes = [
   "/",
   "/menu",
@@ -9,6 +9,9 @@ const routes = [
   "/catering/silver",
   "/order",
   "/private-events",
+  "/gallery",
+  "/reviews",
+  "/contact",
   "/story",
 ] as const;
 
@@ -32,7 +35,7 @@ for (const route of routes) {
     );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      route === "/" ? siteUrl : `${siteUrl}${route}`,
+      route === "/" ? `${siteUrl}/` : `${siteUrl}${route}`,
     );
     await expect(
       page.locator('script[type="application/ld+json"]'),

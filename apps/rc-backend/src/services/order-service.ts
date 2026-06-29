@@ -23,6 +23,7 @@ export type PublicPaymentStatus =
   | "refunded";
 
 export interface CreateOrderInput {
+  customerId?: string;
   customer: {
     name: string;
     phone: string;
@@ -53,6 +54,7 @@ export interface OrderItem {
 
 export interface Order {
   id: string;
+  customerId?: string;
   customerName: string;
   email?: string;
   phone: string;
@@ -109,6 +111,7 @@ type PrismaOrderClient = Pick<PrismaClient, "order">;
 
 type PrismaOrder = {
   id: string;
+  customerId: string | null;
   customerName: string;
   email: string | null;
   phone: string;
@@ -182,6 +185,7 @@ function toPublicPaymentStatus(
 function mapOrder(order: PrismaOrder): Order {
   return {
     id: order.id,
+    customerId: order.customerId ?? undefined,
     customerName: order.customerName,
     email: order.email ?? undefined,
     phone: order.phone,
@@ -303,6 +307,7 @@ export function createMemoryOrderService(
       const now = new Date().toISOString();
       const order: Order = {
         id: `order_${randomUUID()}`,
+        customerId: input.customerId,
         ...data,
         requestedAt: data.requestedAt?.toISOString(),
         status: "pending_payment",
@@ -373,6 +378,7 @@ export function createPrismaOrderService(
       const data = await validateAndBuild(input, catalogService);
       const order = await prisma.order.create({
         data: {
+          customerId: input.customerId,
           customerName: data.customerName,
           email: data.email,
           phone: data.phone,

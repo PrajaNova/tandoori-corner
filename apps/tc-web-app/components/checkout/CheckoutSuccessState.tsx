@@ -1,5 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 type CheckoutSuccessStateProps = {
   orderId?: string;
@@ -25,6 +26,12 @@ export function CheckoutSuccessState({ orderId }: CheckoutSuccessStateProps) {
           Order {orderId}
         </p>
       ) : null}
+      <Link
+        href="/account"
+        className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-gold hover:text-ink"
+      >
+        View account
+      </Link>
     </div>
   );
 }

@@ -27,7 +27,7 @@ const payload = {
   phone: "+6590000000",
   eventType: "Birthday / Milestone",
   guests: 40,
-  date: "2026-07-20",
+  date: "2099-07-20",
   notes: "Cocktail style",
 };
 
@@ -141,6 +141,6 @@ describe("event enquiry routes", () => {
     assert.equal(update.statusCode, 200);
     assert.equal(update.json().enquiry.status, "contacted");
     assert.equal(auditEntries.at(-1)?.action, "updateStatus");
-    assert.equal(auditEntries.at(-1)?.actor, "test-admin");
+    assert.equal(auditEntries.at(-1)?.actor, "admin");
   });
 });

@@ -6,6 +6,7 @@ import type {
 } from "fastify";
 
 import { createAdminAuthGuard, getAdminActor } from "../lib/admin-auth.js";
+import type { AccountService } from "../services/account-service.js";
 import type { AuditService } from "../services/audit-service.js";
 import type { NotificationService } from "../services/notification-service.js";
 import {
@@ -21,6 +22,7 @@ import {
 } from "../services/payment-service.js";
 
 interface OrderRouteOptions {
+  accountService?: AccountService;
   adminApiToken?: string;
   auditService: AuditService;
   notificationService: NotificationService;
@@ -180,6 +182,10 @@ function sendOrderError(reply: FastifyReply, error: unknown) {
   throw error;
 }
 
+function tokenFromHeader(value: string | undefined) {
+  return value?.startsWith("Bearer ") ? value.slice("Bearer ".length) : "";
+}
+
 function formatMoney(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
 }
@@ -294,9 +300,24 @@ export async function registerOrderRoutes(
     { schema: createOrderSchema, preHandler: rateLimitPublicWrites() },
     async (request, reply) => {
       try {
-        let order = await options.orderService.createOrder(
-          request.body as CreateOrderInput,
-        );
+        const body = request.body as CreateOrderInput;
+        const token = tokenFromHeader(request.headers.authorization);
+        const account = token
+          ? await options.accountService
+              ?.getAccountByToken(token)
+              .catch(() => undefined)
+          : undefined;
+        const customer =
+          account?.customer ??
+          (await options.accountService?.linkCustomer({
+            name: body.customer.name,
+            email: body.customer.email,
+            phone: body.customer.phone,
+          }));
+        let order = await options.orderService.createOrder({
+          ...body,
+          customerId: customer?.id,
+        });
         await options.auditService.record({
           actor: "customer",
           action: "create",

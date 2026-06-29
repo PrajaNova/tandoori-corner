@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { MenuHero } from "@/components/menu/MenuHero";
 import { OrderCatalog } from "@/components/order/OrderCatalog";
-import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getMenuCategories } from "@/lib/menu";
 import {
@@ -56,7 +55,6 @@ export default async function MenuPage() {
         ) : (
           <OrderCatalog categories={categories} />
         )}
-        <OrderFloatingCart />
       </div>
     </>
   );

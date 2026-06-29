@@ -119,19 +119,19 @@ export function createStripePaymentService(
         clientSecret: intent.client_secret ?? undefined,
       };
     },
-    parseWebhook: async ({ parsedBody, rawBody, signature }) => {
-      if (stripe && config.stripeWebhookSecret) {
-        if (!rawBody || !signature) throw new PaymentError("INVALID_WEBHOOK");
-        return parseSupportedEvent(
-          stripe.webhooks.constructEvent(
-            rawBody,
-            signature,
-            config.stripeWebhookSecret,
-          ),
-        );
+    parseWebhook: async ({ rawBody, signature }) => {
+      if (!stripe || !config.stripeWebhookSecret) {
+        throw new PaymentError("PAYMENT_NOT_CONFIGURED");
       }
+      if (!rawBody || !signature) throw new PaymentError("INVALID_WEBHOOK");
 
-      return parseSupportedEvent(parsedBody as Stripe.Event);
+      return parseSupportedEvent(
+        stripe.webhooks.constructEvent(
+          rawBody,
+          signature,
+          config.stripeWebhookSecret,
+        ),
+      );
     },
   };
 }

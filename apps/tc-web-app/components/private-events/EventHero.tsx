@@ -27,7 +27,7 @@ export function EventHero() {
             alt="The TCB Bar"
             width={175}
             height={175}
-            priority
+            loading="eager"
             className="w-24 h-auto md:w-28"
           />
         </div>

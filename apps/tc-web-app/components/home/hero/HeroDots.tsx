@@ -18,13 +18,17 @@ export function HeroDots({
           key={idx}
           onClick={() => onChange(idx)}
           variant="ghost"
-          className={`h-2.5 w-2.5 min-h-0 min-w-0 cursor-pointer rounded-full border-none p-0 shadow-none transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-            idx === currentSlide
-              ? "bg-primary hover:bg-primary"
-              : "bg-white/40 hover:bg-primary"
-          }`}
+          className="group h-11 w-11 cursor-pointer rounded-full border-none bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           aria-label={`Go to slide ${idx + 1}`}
-        />
+        >
+          <span
+            className={`block h-2.5 w-2.5 rounded-full transition-colors ${
+              idx === currentSlide
+                ? "bg-primary"
+                : "bg-white/40 group-hover:bg-primary"
+            }`}
+          />
+        </Button>
       ))}
     </div>
   );

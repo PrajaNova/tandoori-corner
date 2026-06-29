@@ -56,6 +56,15 @@ Detailed doc: `docs/orders.md`
 - Data model: `CateringPackage`.
 - SEO includes package sitemap entries and offer catalog JSON-LD.
 
+## CMS and Customer Accounts
+
+Detailed doc: `docs/cms-and-accounts.md`
+
+- Admin content editor for promotions, gallery images, testimonials, and JSON settings.
+- Public CMS-backed gallery, reviews, contact, and homepage promotion content with static fallbacks.
+- Passwordless customer account login by email or WhatsApp.
+- Account history links orders, bookings, and event enquiries through `Customer`.
+
 ## SEO
 
 Detailed doc: `docs/seo.md`

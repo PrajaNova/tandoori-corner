@@ -26,6 +26,40 @@ type ItemFormProps = {
   initial?: Partial<ItemFormValues>;
 };
 
+const STARTERS = [
+  {
+    label: "Signature curry",
+    values: {
+      name: "Butter Chicken",
+      description:
+        "Tender tandoori chicken tikka cooked in a creamy tomato sauce.",
+      priceDollars: "17.00",
+      tags: "Signature",
+      ingredients: "Chicken, Tomatoes, Cream",
+    },
+  },
+  {
+    label: "Vegetarian main",
+    values: {
+      name: "Paneer Makhni",
+      description: "Fresh cottage cheese cooked in a creamy tomato sauce.",
+      priceDollars: "16.00",
+      tags: "Vegetarian",
+      ingredients: "Paneer, Tomatoes, Cream",
+    },
+  },
+  {
+    label: "Bar drink",
+    values: {
+      name: "House Pour",
+      description: "Bar menu pour served by the glass.",
+      priceDollars: "10.00",
+      tags: "Bar",
+      ingredients: "",
+    },
+  },
+] satisfies Array<{ label: string; values: Partial<ItemFormValues> }>;
+
 function toList(value: string): string[] {
   return value
     .split(",")
@@ -106,11 +140,41 @@ export function ItemForm({ mode, categories, initial }: ItemFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl space-y-4">
+    <form onSubmit={handleSubmit} className="max-w-3xl space-y-5">
       {error ? (
         <div className="rounded border border-red-300 bg-red-50 p-3 text-sm text-red-700">
           {error}
         </div>
+      ) : null}
+
+      {mode === "create" ? (
+        <section className="rounded-xl border border-black/10 bg-white p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-sm font-semibold">Start from a menu shape</h2>
+              <p className="mt-1 text-sm text-black/55">
+                Fills the repetitive fields. Edit the details before saving.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {STARTERS.map((starter) => (
+                <button
+                  key={starter.label}
+                  type="button"
+                  onClick={() =>
+                    setValues((current) => ({
+                      ...current,
+                      ...starter.values,
+                    }))
+                  }
+                  className="rounded-full border border-black/10 px-3 py-1.5 text-sm font-medium hover:bg-black/5"
+                >
+                  {starter.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
       ) : null}
 
       <Field label="Category">

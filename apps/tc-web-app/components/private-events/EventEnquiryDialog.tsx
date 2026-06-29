@@ -4,6 +4,7 @@ import { Check, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { FormField } from "@/components/common/forms/FormField";
+import { trackConversion } from "@/lib/analytics";
 import { fade, scaleIn } from "@/lib/motion";
 import { contact } from "@/lib/seo";
 
@@ -58,6 +59,11 @@ export function EventEnquiryDialog({ onClose }: EventEnquiryDialogProps) {
     }
 
     form.reset();
+    trackConversion("event_enquiry_submitted", {
+      form_type: "event_space",
+      event_type: String(data.get("eventType") ?? ""),
+      guest_count: Number(data.get("guests")),
+    });
     setStatus("sent");
   }
 

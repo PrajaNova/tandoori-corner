@@ -1,20 +1,27 @@
 "use client";
 
-import { ChevronRight, CreditCard, MapPin, User } from "lucide-react";
+import { ChevronRight, CreditCard, MapPin } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { FormField } from "@/components/common/forms/FormField";
 import { checkoutDeliveryFields } from "@/data/checkout";
+import { GoogleCheckoutSignIn } from "./GoogleCheckoutSignIn";
 
 type CheckoutFormProps = {
+  accountStatus?: string | null;
+  defaults?: Record<string, string>;
   error?: string | null;
   isSubmitting?: boolean;
+  onGoogleCredential: (credential: string) => Promise<void>;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
 
 export function CheckoutForm({
+  accountStatus,
+  defaults = {},
   error,
   isSubmitting = false,
+  onGoogleCredential,
   onSubmit,
 }: CheckoutFormProps) {
   const [paymentMethod, setPaymentMethod] = useState("card");
@@ -28,16 +35,14 @@ export function CheckoutForm({
               Have an account?
             </h3>
             <p className="text-xs font-light text-ink/50">
-              Log in for a faster checkout and to redeem points.
+              Optional. Sign in to prefill delivery details and save this order.
             </p>
           </div>
-          <button
-            type="button"
-            className="flex shrink-0 items-center gap-2 border border-border bg-accent px-6 py-3 text-xs font-bold uppercase tracking-widest text-ink transition-colors hover:bg-accent"
-          >
-            <User className="h-4 w-4" /> Login Provider
-          </button>
+          <GoogleCheckoutSignIn onCredential={onGoogleCredential} />
         </div>
+        {accountStatus ? (
+          <p className="mt-3 text-sm text-leaf">{accountStatus}</p>
+        ) : null}
       </div>
 
       <form onSubmit={onSubmit} className="space-y-12">
@@ -64,6 +69,7 @@ export function CheckoutForm({
                           autoComplete={field.autoComplete}
                           id={field.id}
                           inputMode={field.inputMode}
+                          defaultValue={defaults[field.id]}
                           name={field.id}
                           type={field.type}
                           className="w-full border-b border-border bg-transparent pb-2 pl-2 text-ink transition-colors focus:border-brand-gold focus:outline-none"
@@ -76,6 +82,7 @@ export function CheckoutForm({
                         autoComplete={field.autoComplete}
                         id={field.id}
                         inputMode={field.inputMode}
+                        defaultValue={defaults[field.id]}
                         name={field.id}
                         type={field.type}
                         className="w-full border-b border-border bg-transparent pb-2 text-ink transition-colors focus:border-brand-gold focus:outline-none"

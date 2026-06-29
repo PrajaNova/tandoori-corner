@@ -36,9 +36,10 @@ export function FeatureCard({
         <Image
           src={image}
           alt={title}
-          fill
+          width={800}
+          height={600}
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover motion-image-hover"
+          className="h-full w-full object-cover motion-image-hover"
         />
       </div>
       {subtitle && (

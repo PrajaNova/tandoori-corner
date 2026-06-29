@@ -7,9 +7,9 @@ import { StoryContent } from "./StoryContent";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/story",
-  title: "Our Story | 15 Years at Balestier Plaza",
+  title: "Our Story | Since 2008 at Balestier Plaza",
   description:
-    "The Tandoori Corner story — 15 years of North Indian cooking, the TCB Bar, alfresco dining, our team, and press from Balestier Plaza, Singapore.",
+    "The Tandoori Corner story — North Indian cooking since 2008, the TCB Bar, alfresco dining, our team, and press from Balestier Plaza, Singapore.",
 });
 
 const breadcrumbs = [

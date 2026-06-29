@@ -3,13 +3,19 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 
 export function AnalyticsScripts() {
+  const enableVercelAnalytics =
+    process.env.NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS === "true";
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const fbPixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
 
   return (
     <>
-      <Analytics />
-      <SpeedInsights />
+      {enableVercelAnalytics ? (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
+      ) : null}
       {gaId ? (
         <>
           <Script

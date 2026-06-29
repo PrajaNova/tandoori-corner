@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://www.tandooricorner.com.sg";
+export const siteUrl = "https://tandooricorner.sg";
 
 const defaultDescription =
-  "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza — tandoori grills, alfresco dining, home delivery and catering. Est. 2008.";
+  "Tandoori Corner is a North Indian restaurant and TCB Bar at Balestier Plaza — book a table, order online, enquire for events, or request catering. Est. 2008.";
 
 export const restaurantSeo = {
   name: "Tandoori Corner",
   legalName: "Tandoori Corner",
   siteUrl,
-  legacySiteUrl: "https://www.tandooricorner.sg",
   description: defaultDescription,
   logoPath: "/tandoori-corner-logo.png",
   ogImagePath: "/opengraph-image",
@@ -43,7 +42,7 @@ export const restaurantSeo = {
     worstRating: 1,
   },
   foundingDate: "2008",
-  slogan: "15 years of North Indian cooking at Balestier Plaza.",
+  slogan: "North Indian cooking at Balestier Plaza since 2008.",
   areaServed: ["Singapore", "Balestier", "Novena"],
   knowsAbout: [
     "North Indian cuisine",
@@ -142,23 +141,47 @@ export const seoRoutes = [
     path: "/order",
     title: "Order Online | Tandoori Corner Singapore",
     description:
-      "Order North Indian favourites from Tandoori Corner, Balestier Plaza. Browse the full menu, filter by category, and place your order for pickup or delivery.",
+      "Order online from Tandoori Corner at Balestier Plaza. Browse North Indian favourites and place your pickup or home delivery order.",
     priority: 0.8,
     changeFrequency: "weekly",
   },
   {
     path: "/private-events",
-    title: "Private Events at the TCB Bar | Tandoori Corner Singapore",
+    title: "Book Event Space at TCB Bar | Tandoori Corner Singapore",
     description:
-      "Host your private event at the TCB Bar in Balestier — corporate gatherings, birthdays & celebrations. Browse past events, see the space, and enquire to book.",
+      "Book event space at TCB Bar in Balestier for corporate gatherings, birthdays and private celebrations. Enquire for menus and bar service.",
     priority: 0.8,
     changeFrequency: "monthly",
   },
   {
-    path: "/story",
-    title: "Our Story | 15 Years at Balestier Plaza",
+    path: "/gallery",
+    title: "Food & Event Gallery | Tandoori Corner Singapore",
     description:
-      "The Tandoori Corner story — 15 years of North Indian cooking, the TCB Bar, alfresco dining, our team, and press from Balestier Plaza, Singapore.",
+      "Browse Tandoori Corner food, restaurant, TCB Bar, catering, and private event photos from Balestier Plaza.",
+    priority: 0.72,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/reviews",
+    title: "Guest Reviews | Tandoori Corner Singapore",
+    description:
+      "Read guest reviews for Tandoori Corner, a North Indian restaurant and TCB Bar at Balestier Plaza, Singapore.",
+    priority: 0.72,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/contact",
+    title: "Contact & Find Us | Tandoori Corner Balestier",
+    description:
+      "Find Tandoori Corner at Balestier Plaza, Singapore. Call, WhatsApp, view opening hours, get directions, or reserve a table.",
+    priority: 0.82,
+    changeFrequency: "monthly",
+  },
+  {
+    path: "/story",
+    title: "Our Story | Since 2008 at Balestier Plaza",
+    description:
+      "The Tandoori Corner story — North Indian cooking since 2008, the TCB Bar, alfresco dining, our team, and press from Balestier Plaza, Singapore.",
     priority: 0.7,
     changeFrequency: "monthly",
   },
@@ -313,6 +336,37 @@ export function buildOrganizationJsonLd() {
         email: restaurantSeo.email,
       },
     ],
+  };
+}
+
+export function buildWebPageJsonLd({
+  path,
+  name,
+  description,
+}: {
+  path: string;
+  name: string;
+  description: string;
+}) {
+  const url = absoluteUrl(path);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: "en-SG",
+    isPartOf: {
+      "@id": `${siteUrl}/#website`,
+    },
+    about: {
+      "@id": `${siteUrl}/#restaurant`,
+    },
+    publisher: {
+      "@id": `${siteUrl}/#organization`,
+    },
   };
 }
 

@@ -176,7 +176,7 @@ export async function registerCatalogRoutes(
       async (request, reply) => {
         const { id } = request.params as { id: string };
         try {
-          const before = (await catalogService.listCategories()).find(
+          const before = (await catalogService.listCategories(true)).find(
             (category) => category.id === id,
           );
           const category = await catalogService.updateCategory(
@@ -201,7 +201,7 @@ export async function registerCatalogRoutes(
     admin.delete("/categories/:id", async (request, reply) => {
       const { id } = request.params as { id: string };
       try {
-        const before = (await catalogService.listCategories()).find(
+        const before = (await catalogService.listCategories(true)).find(
           (category) => category.id === id,
         );
         await catalogService.deleteCategory(id);

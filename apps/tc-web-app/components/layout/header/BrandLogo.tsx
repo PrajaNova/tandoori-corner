@@ -11,14 +11,14 @@ export function BrandLogo({ desktop = false, className = "" }: BrandLogoProps) {
     <Link
       href="/"
       aria-label="Tandoori Corner — home"
-      className={`flex items-center ${className}`}
+      className={`flex min-h-11 items-center justify-center ${className}`}
     >
       <Image
         src="/homepage/tc-logo.png"
         alt="Tandoori Corner — North Indian Curry House"
         width={600}
         height={183}
-        priority
+        loading="eager"
         className={
           desktop
             ? "h-12 w-auto rounded bg-white px-3 py-1.5 shadow-md"

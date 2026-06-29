@@ -13,6 +13,7 @@ export type PublicBookingStatus =
 
 export interface Booking {
   id: string;
+  customerId?: string;
   customerName: string;
   email: string;
   phone: string;
@@ -25,6 +26,7 @@ export interface Booking {
 }
 
 export interface CreateBookingInput {
+  customerId?: string;
   name: string;
   email: string;
   phone: string;
@@ -61,6 +63,7 @@ type PrismaBookingClient = Pick<PrismaClient, "booking">;
 
 type PrismaBooking = {
   id: string;
+  customerId: string | null;
   customerName: string;
   email: string;
   phone: string;
@@ -96,9 +99,16 @@ function parseBookingDate(date: string, time: string) {
   return bookedFor;
 }
 
+function isServiceTime(time: string) {
+  return (
+    (time >= "12:00" && time <= "14:45") || (time >= "18:00" && time <= "21:45")
+  );
+}
+
 function mapBooking(booking: PrismaBooking): Booking {
   return {
     id: booking.id,
+    customerId: booking.customerId ?? undefined,
     customerName: booking.customerName,
     email: booking.email,
     phone: booking.phone,
@@ -123,7 +133,9 @@ function validate(input: CreateBookingInput) {
     !email.includes("@") ||
     phone.length < 6 ||
     input.partySize < 1 ||
-    input.partySize > 30
+    input.partySize > 30 ||
+    !isServiceTime(input.time) ||
+    bookedFor.getTime() <= Date.now()
   ) {
     throw new BookingError("INVALID_BOOKING");
   }
@@ -155,6 +167,7 @@ export function createMemoryBookingService(
       const now = new Date().toISOString();
       const booking: Booking = {
         id: `booking_${randomUUID()}`,
+        customerId: input.customerId,
         customerName: data.customerName,
         email: data.email,
         phone: data.phone,
@@ -189,6 +202,7 @@ export function createPrismaBookingService(
       const booking = await prisma.booking.create({
         data: {
           customerName: data.customerName,
+          customerId: input.customerId,
           email: data.email,
           phone: data.phone,
           partySize: data.partySize,

@@ -11,8 +11,10 @@ test("menu page renders the customer ordering entry point", async ({
   await expect(page.getByText("Tandoori Corner Singapore")).toBeVisible();
   await expect(page.getByRole("link", { name: "Menu" }).first()).toBeVisible();
 
-  await page.getByRole("searchbox", { name: "Search dishes" }).fill("sandwich");
+  await page.getByRole("searchbox", { name: "Search dishes" }).fill("butter");
   await expect(page.getByText(/Showing \d+ dish/)).toBeVisible();
   await page.getByRole("button", { name: /^Add$/ }).first().click();
-  await expect(page.getByText("1").first()).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /View Cart & Checkout/i }),
+  ).toBeVisible();
 });

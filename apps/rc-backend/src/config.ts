@@ -8,6 +8,7 @@ export interface AppConfig {
   bookingRestaurantWhatsApp?: string;
   eventRestaurantEmail?: string;
   eventWebhookToken?: string;
+  googleClientId?: string;
   brevoApiKey?: string;
   brevoFromEmail?: string;
   metaGraphApiVersion?: string;
@@ -31,6 +32,7 @@ export function getConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     bookingRestaurantWhatsApp: env.BOOKING_RESTAURANT_WHATSAPP,
     eventRestaurantEmail: env.EVENT_RESTAURANT_EMAIL,
     eventWebhookToken: env.EVENT_WEBHOOK_TOKEN,
+    googleClientId: env.GOOGLE_CLIENT_ID,
     brevoApiKey: env.BREVO_API_KEY,
     brevoFromEmail: env.BREVO_FROM_EMAIL,
     metaGraphApiVersion: env.META_GRAPH_API_VERSION,

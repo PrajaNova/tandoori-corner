@@ -2,6 +2,7 @@ import { Check, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { FormField } from "@/components/common/forms/FormField";
+import { trackConversion } from "@/lib/analytics";
 import { fade, scaleIn } from "@/lib/motion";
 import { contact } from "@/lib/seo";
 
@@ -19,14 +20,18 @@ type QuoteRequestDialogProps = {
 const inputClassName =
   "w-full border-b border-border bg-transparent pb-2 text-ink placeholder:text-ink/30 focus:border-brand-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/30";
 
+function apiBaseUrl() {
+  return process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000";
+}
+
 export function QuoteRequestDialog({
   subject,
   onClose,
 }: QuoteRequestDialogProps) {
-  const [submitted, setSubmitted] = useState(false);
-  const [mailtoHref, setMailtoHref] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "sent">("idle");
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -51,13 +56,37 @@ export function QuoteRequestDialog({
       notes ? `Notes: ${notes}` : "",
     ].filter(Boolean);
 
-    const subjectText = `Catering Quote Request — ${subject.name}`;
-    const href = `${contact.emailHref}?subject=${encodeURIComponent(
-      subjectText,
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    setStatus("submitting");
+    setError(null);
 
-    setMailtoHref(href);
-    setSubmitted(true);
+    const response = await fetch(`${apiBaseUrl()}/api/event-enquiries`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone,
+        email,
+        eventType: `Catering - ${subject.name}`.slice(0, 120),
+        guests: Number(guests),
+        date: date || undefined,
+        notes: bodyLines.join("\n").slice(0, 1000),
+        source: `catering-${subject.kind}`,
+      }),
+    });
+
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}));
+      setError(body.message ?? "We could not send your catering enquiry.");
+      setStatus("idle");
+      return;
+    }
+
+    trackConversion("catering_quote_requested", {
+      quote_type: subject.kind,
+      guest_count: Number(guests),
+      selection_count: subject.lines.length,
+    });
+    setStatus("sent");
   }
 
   return (
@@ -83,16 +112,15 @@ export function QuoteRequestDialog({
           <X className="h-5 w-5" />
         </button>
 
-        {submitted ? (
+        {status === "sent" ? (
           <div className="flex flex-col items-center gap-4 px-8 py-12 text-center">
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold">
               <Check className="h-7 w-7" />
             </span>
-            <h3 className="font-kaushan text-2xl text-ink">Almost there!</h3>
+            <h3 className="font-kaushan text-2xl text-ink">Request received</h3>
             <p className="max-w-sm text-sm font-light leading-relaxed text-ink/60">
-              Tap the button below to send your enquiry — our catering team will
-              reply within one business day with a tailored quote. Prefer to
-              talk? Call us at{" "}
+              We received your catering enquiry. Our team will reply within one
+              business day with a tailored quote. Prefer to talk? Call us at{" "}
               <a
                 href={contact.phoneHref}
                 className="font-semibold text-brand-gold"
@@ -101,12 +129,6 @@ export function QuoteRequestDialog({
               </a>
               .
             </p>
-            <a
-              href={mailtoHref}
-              className="mt-2 w-full bg-brand-gold px-6 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
-            >
-              Send Enquiry Email
-            </a>
             <button
               type="button"
               onClick={onClose}
@@ -216,10 +238,14 @@ export function QuoteRequestDialog({
 
               <button
                 type="submit"
+                disabled={status === "submitting"}
                 className="w-full bg-brand-gold px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-dark hover:text-cream"
               >
-                Submit Request
+                {status === "submitting" ? "Sending..." : "Submit Request"}
               </button>
+              {error ? (
+                <p className="text-center text-sm text-red-600">{error}</p>
+              ) : null}
             </form>
           </div>
         )}

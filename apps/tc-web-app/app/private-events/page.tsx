@@ -9,9 +9,9 @@ import { buildBreadcrumbJsonLd, buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/private-events",
-  title: "Private Events at the TCB Bar | Tandoori Corner Singapore",
+  title: "Book Event Space at TCB Bar | Tandoori Corner Singapore",
   description:
-    "Host your private event at TCB Bar in Balestier — corporate gatherings, birthdays & celebrations for up to 60 guests. Bespoke menus and full bar service.",
+    "Book event space at TCB Bar in Balestier for corporate gatherings, birthdays and private celebrations. Enquire for menus and bar service.",
 });
 
 const breadcrumbs = [

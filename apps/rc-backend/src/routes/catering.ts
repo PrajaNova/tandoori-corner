@@ -1,5 +1,7 @@
 import type { FastifyInstance, FastifyReply } from "fastify";
 
+import { createAdminAuthGuard, getAdminActor } from "../lib/admin-auth.js";
+import type { AuditService } from "../services/audit-service.js";
 import {
   CateringError,
   type CateringService,
@@ -8,6 +10,8 @@ import {
 } from "../services/catering-service.js";
 
 interface CateringRouteOptions {
+  adminApiToken?: string;
+  auditService: AuditService;
   cateringService: CateringService;
 }
 
@@ -74,20 +78,19 @@ function sendCateringError(reply: FastifyReply, error: unknown) {
 
 export async function registerCateringRoutes(
   app: FastifyInstance,
-  { cateringService }: CateringRouteOptions,
+  { adminApiToken, auditService, cateringService }: CateringRouteOptions,
 ) {
   // ---- Read endpoints (public) ----
-  app.get("/packages", async (request) => {
-    const { all } = request.query as { all?: string };
+  app.get("/packages", async () => {
     return {
-      packages: await cateringService.listPackages(all === "true"),
+      packages: await cateringService.listPackages(),
     };
   });
 
   app.get("/packages/:slug", async (request, reply) => {
     const { slug } = request.params as { slug: string };
     const pkg = await cateringService.getPackageBySlug(slug);
-    if (!pkg) {
+    if (!pkg || pkg.status !== "active") {
       return reply.code(404).send({
         error: "CATERING_NOT_FOUND",
         message: "Catering package was not found.",
@@ -97,45 +100,73 @@ export async function registerCateringRoutes(
   });
 
   // ---- Write endpoints (admin) ----
-  app.post(
-    "/packages",
-    { schema: createPackageSchema },
-    async (request, reply) => {
-      try {
-        const pkg = await cateringService.createPackage(
-          request.body as CreatePackageInput,
-        );
-        return reply.code(201).send({ package: pkg });
-      } catch (error) {
-        return sendCateringError(reply, error);
-      }
-    },
-  );
+  await app.register(async (admin) => {
+    admin.addHook("preHandler", createAdminAuthGuard(adminApiToken));
 
-  app.patch(
-    "/packages/:id",
-    { schema: updatePackageSchema },
-    async (request, reply) => {
+    admin.post(
+      "/packages",
+      { schema: createPackageSchema },
+      async (request, reply) => {
+        try {
+          const pkg = await cateringService.createPackage(
+            request.body as CreatePackageInput,
+          );
+          await auditService.record({
+            actor: getAdminActor(request),
+            action: "create",
+            entityType: "cateringPackage",
+            entityId: pkg.id,
+            after: pkg,
+          });
+          return reply.code(201).send({ package: pkg });
+        } catch (error) {
+          return sendCateringError(reply, error);
+        }
+      },
+    );
+
+    admin.patch(
+      "/packages/:id",
+      { schema: updatePackageSchema },
+      async (request, reply) => {
+        const { id } = request.params as { id: string };
+        try {
+          const before = await cateringService.getPackage(id);
+          const pkg = await cateringService.updatePackage(
+            id,
+            request.body as UpdatePackageInput,
+          );
+          await auditService.record({
+            actor: getAdminActor(request),
+            action: "update",
+            entityType: "cateringPackage",
+            entityId: id,
+            before,
+            after: pkg,
+          });
+          return reply.send({ package: pkg });
+        } catch (error) {
+          return sendCateringError(reply, error);
+        }
+      },
+    );
+
+    admin.delete("/packages/:id", async (request, reply) => {
       const { id } = request.params as { id: string };
       try {
-        const pkg = await cateringService.updatePackage(
-          id,
-          request.body as UpdatePackageInput,
-        );
-        return reply.send({ package: pkg });
+        const before = await cateringService.getPackage(id);
+        await cateringService.deletePackage(id);
+        await auditService.record({
+          actor: getAdminActor(request),
+          action: "delete",
+          entityType: "cateringPackage",
+          entityId: id,
+          before,
+        });
+        return reply.code(204).send();
       } catch (error) {
         return sendCateringError(reply, error);
       }
-    },
-  );
-
-  app.delete("/packages/:id", async (request, reply) => {
-    const { id } = request.params as { id: string };
-    try {
-      await cateringService.deletePackage(id);
-      return reply.code(204).send();
-    } catch (error) {
-      return sendCateringError(reply, error);
-    }
+    });
   });
 }

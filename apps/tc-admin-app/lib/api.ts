@@ -111,6 +111,44 @@ export type AdminOrder = {
   }>;
 };
 
+export type AdminPromotion = {
+  id: string;
+  title: string;
+  description: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  placement: string;
+  status: "active" | "inactive";
+  startsAt?: string;
+  endsAt?: string;
+  sortOrder: number;
+};
+
+export type AdminGalleryImage = {
+  id: string;
+  title: string;
+  alt: string;
+  imageUrl: string;
+  category: string;
+  status: "active" | "inactive";
+  sortOrder: number;
+};
+
+export type AdminTestimonial = {
+  id: string;
+  author: string;
+  quote: string;
+  source?: string;
+  rating?: number;
+  status: "active" | "inactive";
+  sortOrder: number;
+};
+
+export type AdminSiteSetting = {
+  key: string;
+  value: unknown;
+};
+
 export type CategoryInput = {
   title: string;
   subtitle: string;
@@ -142,6 +180,7 @@ const menuUrl = (path: string) => `${baseUrl()}/api/menu${path}`;
 const bookingUrl = (path: string) => `${baseUrl()}/api/bookings${path}`;
 const eventUrl = (path: string) => `${baseUrl()}/api/event-enquiries${path}`;
 const orderUrl = (path: string) => `${baseUrl()}/api/orders${path}`;
+const cmsUrl = (path: string) => `${baseUrl()}/api/cms${path}`;
 
 function adminHeaders() {
   const token = process.env.ADMIN_API_TOKEN;
@@ -166,8 +205,9 @@ async function handle(response: Response) {
 }
 
 export async function listCategories(): Promise<AdminCategory[]> {
-  const response = await fetch(menuUrl("/categories"), {
+  const response = await fetch(menuUrl("/admin/categories"), {
     cache: "no-store",
+    headers: adminHeaders(),
   });
   const body = (await handle(response)) as { categories: AdminCategory[] };
   return body.categories;
@@ -312,6 +352,115 @@ export async function updateOrderStatus(id: string, status: OrderStatus) {
       method: "PATCH",
       headers: adminHeaders(),
       body: JSON.stringify({ status }),
+    }),
+  );
+}
+
+export async function listAdminPromotions(): Promise<AdminPromotion[]> {
+  const response = await fetch(cmsUrl("/admin/promotions"), {
+    cache: "no-store",
+    headers: adminHeaders(),
+  });
+  const body = (await handle(response)) as { promotions: AdminPromotion[] };
+  return body.promotions;
+}
+
+export async function savePromotion(input: Partial<AdminPromotion>) {
+  const id = input.id;
+  return handle(
+    await fetch(cmsUrl(id ? `/admin/promotions/${id}` : "/admin/promotions"), {
+      method: id ? "PATCH" : "POST",
+      headers: adminHeaders(),
+      body: JSON.stringify(input),
+    }),
+  );
+}
+
+export async function deletePromotion(id: string) {
+  return handle(
+    await fetch(cmsUrl(`/admin/promotions/${id}`), {
+      method: "DELETE",
+      headers: adminHeaders(),
+    }),
+  );
+}
+
+export async function listAdminGalleryImages(): Promise<AdminGalleryImage[]> {
+  const response = await fetch(cmsUrl("/admin/gallery"), {
+    cache: "no-store",
+    headers: adminHeaders(),
+  });
+  const body = (await handle(response)) as { images: AdminGalleryImage[] };
+  return body.images;
+}
+
+export async function saveGalleryImage(input: Partial<AdminGalleryImage>) {
+  const id = input.id;
+  return handle(
+    await fetch(cmsUrl(id ? `/admin/gallery/${id}` : "/admin/gallery"), {
+      method: id ? "PATCH" : "POST",
+      headers: adminHeaders(),
+      body: JSON.stringify(input),
+    }),
+  );
+}
+
+export async function deleteGalleryImage(id: string) {
+  return handle(
+    await fetch(cmsUrl(`/admin/gallery/${id}`), {
+      method: "DELETE",
+      headers: adminHeaders(),
+    }),
+  );
+}
+
+export async function listAdminTestimonials(): Promise<AdminTestimonial[]> {
+  const response = await fetch(cmsUrl("/admin/testimonials"), {
+    cache: "no-store",
+    headers: adminHeaders(),
+  });
+  const body = (await handle(response)) as { testimonials: AdminTestimonial[] };
+  return body.testimonials;
+}
+
+export async function saveTestimonial(input: Partial<AdminTestimonial>) {
+  const id = input.id;
+  return handle(
+    await fetch(
+      cmsUrl(id ? `/admin/testimonials/${id}` : "/admin/testimonials"),
+      {
+        method: id ? "PATCH" : "POST",
+        headers: adminHeaders(),
+        body: JSON.stringify(input),
+      },
+    ),
+  );
+}
+
+export async function deleteTestimonial(id: string) {
+  return handle(
+    await fetch(cmsUrl(`/admin/testimonials/${id}`), {
+      method: "DELETE",
+      headers: adminHeaders(),
+    }),
+  );
+}
+
+export async function listAdminSettings(): Promise<AdminSiteSetting[]> {
+  const response = await fetch(cmsUrl("/admin/settings"), {
+    cache: "no-store",
+    headers: adminHeaders(),
+  });
+  const body = (await handle(response)) as { settings: AdminSiteSetting[] };
+  return body.settings;
+}
+
+export async function saveSetting(key: string, value: unknown) {
+  return handle(
+    await fetch(cmsUrl(`/admin/settings/${key}`), {
+      method: "PUT",
+      headers: adminHeaders(),
+      body: JSON.stringify({ value }),
     }),
   );
 }

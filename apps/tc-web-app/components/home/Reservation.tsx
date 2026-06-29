@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { reservationContent } from "@/content/reservation";
+import { trackConversion } from "@/lib/analytics";
 import { contact } from "@/lib/seo";
 
 const selectClass =
@@ -48,6 +49,10 @@ export function Reservation() {
     }
 
     form.reset();
+    trackConversion("booking_request_submitted", {
+      form_type: "booking",
+      party_size: Number(data.get("partySize")),
+    });
     setStatus("sent");
   }
 

@@ -27,7 +27,7 @@ export function HeaderNav({ items }: HeaderNavProps) {
           <div className="flex items-center justify-start flex-1">
             <button
               type="button"
-              className="-ml-2 cursor-pointer p-2 text-white transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary min-[1080px]:hidden"
+              className="-ml-3 flex h-11 w-11 cursor-pointer items-center justify-center text-white transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary min-[1080px]:hidden"
               aria-label="Open menu"
               aria-controls="mobile-drawer"
               aria-expanded={drawerOpen}

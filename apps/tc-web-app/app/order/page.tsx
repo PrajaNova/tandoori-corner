@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { OrderCatalog } from "@/components/order/OrderCatalog";
-import { OrderFloatingCart } from "@/components/order/OrderFloatingCart";
 import { OrderHero } from "@/components/order/OrderHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getMenuCategories } from "@/lib/catalog";
@@ -46,7 +45,6 @@ export default async function OrderPage() {
       <div className="bg-white">
         <OrderHero />
         <OrderCatalog categories={categories} />
-        <OrderFloatingCart />
       </div>
     </>
   );

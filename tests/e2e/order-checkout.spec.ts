@@ -2,9 +2,22 @@ import { expect, test } from "@playwright/test";
 
 test("customer can create an online order from checkout", async ({ page }) => {
   await page.route("**/api/orders", async (route) => {
+    if (route.request().method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          "access-control-allow-headers": "content-type",
+          "access-control-allow-methods": "POST,OPTIONS",
+          "access-control-allow-origin": "*",
+        },
+      });
+      return;
+    }
+
     await route.fulfill({
       status: 201,
       contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
       body: JSON.stringify({
         order: { id: "order_test" },
         payment: {
@@ -17,8 +30,9 @@ test("customer can create an online order from checkout", async ({ page }) => {
   });
 
   await page.goto("/order");
+  await page.waitForLoadState("networkidle");
   await page.getByRole("button", { name: /^Add$/ }).first().click();
-  await page.getByRole("link", { name: /View Cart/i }).click();
+  await page.getByRole("link", { name: /View Cart & Checkout/i }).click();
   await page.getByLabel("First Name").fill("Asha");
   await page.getByLabel("Last Name").fill("Rao");
   await page.getByLabel("Delivery Address").fill("123 Balestier Road");

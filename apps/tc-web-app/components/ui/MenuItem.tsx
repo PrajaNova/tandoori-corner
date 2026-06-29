@@ -23,9 +23,10 @@ export function MenuItem({
           <Image
             src={image}
             alt={name}
-            fill
+            width={88}
+            height={88}
             sizes="88px"
-            className="object-cover"
+            className="h-full w-full object-cover"
           />
         </div>
       )}

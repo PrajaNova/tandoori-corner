@@ -18,7 +18,6 @@ export function createAdminAuthGuard(token?: string) {
   };
 }
 
-export function getAdminActor(request: FastifyRequest): string {
-  const header = request.headers["x-admin-user"];
-  return typeof header === "string" && header.trim() ? header : "admin";
+export function getAdminActor(_request: FastifyRequest): string {
+  return "admin";
 }

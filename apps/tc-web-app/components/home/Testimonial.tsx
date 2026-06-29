@@ -11,7 +11,6 @@ export function Testimonial() {
   const items = testimonialContent.items;
   const length = items.length;
 
-  // Auto-rotate every 5 seconds
   useEffect(() => {
     if (isHovered) return;
     const interval = setInterval(() => {
@@ -20,7 +19,6 @@ export function Testimonial() {
     return () => clearInterval(interval);
   }, [isHovered, length]);
 
-  // Get current 3 items to show
   const visibleItems = [
     items[startIndex],
     items[(startIndex + 1) % length],
@@ -38,10 +36,11 @@ export function Testimonial() {
       <Image
         src={testimonialContent.backgroundImage}
         alt=""
-        fill
+        width={1920}
+        height={1080}
         aria-hidden="true"
         sizes="100vw"
-        className="absolute inset-0 z-0 object-cover"
+        className="absolute inset-0 z-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/75 z-0" />
 
@@ -101,9 +100,10 @@ export function Testimonial() {
                       <Image
                         src={item.avatar}
                         alt={`Review by ${item.author.replace(/^-\s*/, "")}`}
-                        fill
+                        width={48}
+                        height={48}
                         sizes="48px"
-                        className="object-cover"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                     <div>

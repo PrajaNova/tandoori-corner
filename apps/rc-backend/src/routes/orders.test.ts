@@ -123,7 +123,7 @@ describe("order routes", () => {
     assert.equal(update.statusCode, 200);
     assert.equal(update.json().order.status, "preparing");
     assert.equal(auditEntries.at(-1)?.action, "updateStatus");
-    assert.equal(auditEntries.at(-1)?.actor, "test-admin");
+    assert.equal(auditEntries.at(-1)?.actor, "admin");
   });
 
   it("marks an order paid from a Stripe webhook", async () => {

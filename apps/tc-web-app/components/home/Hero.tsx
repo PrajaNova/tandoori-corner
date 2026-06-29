@@ -22,7 +22,6 @@ export function Hero() {
 
   return (
     <section className="relative flex h-[100svh] min-h-[620px] max-h-[820px] items-center justify-center overflow-hidden bg-ink group md:min-h-[700px]">
-      {/* Slides Container */}
       {slides.map((slide, idx) => (
         <HeroSlide
           key={idx}
@@ -32,10 +31,8 @@ export function Hero() {
         />
       ))}
 
-      {/* Manual Control: Left & Right Arrows */}
       <HeroArrows onPrev={prevSlide} onNext={nextSlide} />
 
-      {/* Manual Control: Dots indicator */}
       <HeroDots
         currentSlide={currentSlide}
         totalSlides={slides.length}

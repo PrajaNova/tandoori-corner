@@ -6,6 +6,7 @@ import type {
 } from "fastify";
 
 import { createAdminAuthGuard, getAdminActor } from "../lib/admin-auth.js";
+import type { AccountService } from "../services/account-service.js";
 import type { AuditService } from "../services/audit-service.js";
 import {
   type EventEnquiry,
@@ -16,6 +17,7 @@ import {
 import type { NotificationService } from "../services/notification-service.js";
 
 interface EventEnquiryRouteOptions {
+  accountService?: AccountService;
   adminApiToken?: string;
   auditService: AuditService;
   eventEnquiryService: EventEnquiryService;
@@ -219,9 +221,18 @@ export async function registerEventEnquiryRoutes(
     { schema: createEnquirySchema, preHandler: rateLimitPublicWrites() },
     async (request, reply) => {
       try {
-        const enquiry = await options.eventEnquiryService.createEnquiry(
-          request.body as Parameters<EventEnquiryService["createEnquiry"]>[0],
-        );
+        const body = request.body as Parameters<
+          EventEnquiryService["createEnquiry"]
+        >[0];
+        const customer = await options.accountService?.linkCustomer({
+          name: body.name,
+          email: body.email,
+          phone: body.phone,
+        });
+        const enquiry = await options.eventEnquiryService.createEnquiry({
+          ...body,
+          customerId: customer?.id,
+        });
         await options.auditService.record({
           actor: "customer",
           action: "create",
@@ -242,10 +253,17 @@ export async function registerEventEnquiryRoutes(
     { schema: webhookSchema, preHandler: requireWebhook },
     async (request, reply) => {
       try {
+        const body = request.body as Parameters<
+          EventEnquiryService["createEnquiry"]
+        >[0];
+        const customer = await options.accountService?.linkCustomer({
+          name: body.name,
+          email: body.email,
+          phone: body.phone,
+        });
         const enquiry = await options.eventEnquiryService.createEnquiry({
-          ...(request.body as Parameters<
-            EventEnquiryService["createEnquiry"]
-          >[0]),
+          ...body,
+          customerId: customer?.id,
           source: "webhook",
         });
         await options.auditService.record({

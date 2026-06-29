@@ -27,7 +27,7 @@ const bookingPayload = {
   email: "asha@example.com",
   phone: "+6590000000",
   partySize: 4,
-  date: "2026-07-03",
+  date: "2099-07-03",
   time: "19:30",
 };
 
@@ -90,6 +90,16 @@ describe("booking routes", () => {
     assert.equal(response.statusCode, 401);
   });
 
+  it("rejects bookings outside service hours", async () => {
+    app = await buildTestApp();
+    const response = await app.inject({
+      method: "POST",
+      url: "/api/bookings",
+      payload: { ...bookingPayload, time: "15:30" },
+    });
+    assert.equal(response.statusCode, 400);
+  });
+
   it("updates booking status and audit logs the change", async () => {
     const auditEntries: AuditEntry[] = [];
     app = await buildTestApp(auditEntries);
@@ -111,7 +121,7 @@ describe("booking routes", () => {
     assert.equal(update.statusCode, 200);
     assert.equal(update.json().booking.status, "confirmed");
     assert.equal(auditEntries.at(-1)?.action, "updateStatus");
-    assert.equal(auditEntries.at(-1)?.actor, "test-admin");
+    assert.equal(auditEntries.at(-1)?.actor, "admin");
   });
 
   it("rate-limits public booking writes", async () => {

@@ -6,6 +6,7 @@ import type {
 } from "fastify";
 
 import { createAdminAuthGuard, getAdminActor } from "../lib/admin-auth.js";
+import type { AccountService } from "../services/account-service.js";
 import type { AuditService } from "../services/audit-service.js";
 import {
   type Booking,
@@ -17,6 +18,7 @@ import {
 import type { NotificationService } from "../services/notification-service.js";
 
 interface BookingRouteOptions {
+  accountService?: AccountService;
   adminApiToken?: string;
   auditService: AuditService;
   bookingService: BookingService;
@@ -236,9 +238,16 @@ export async function registerBookingRoutes(
     { schema: createBookingSchema, preHandler: rateLimitPublicWrites() },
     async (request, reply) => {
       try {
-        const booking = await options.bookingService.createBooking(
-          request.body as CreateBookingInput,
-        );
+        const body = request.body as CreateBookingInput;
+        const customer = await options.accountService?.linkCustomer({
+          name: body.name,
+          email: body.email,
+          phone: body.phone,
+        });
+        const booking = await options.bookingService.createBooking({
+          ...body,
+          customerId: customer?.id,
+        });
         await options.auditService.record({
           actor: "customer",
           action: "create",

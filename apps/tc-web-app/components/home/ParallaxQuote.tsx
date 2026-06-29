@@ -7,10 +7,11 @@ export function ParallaxQuote() {
       <Image
         src={quoteContent.backgroundImage}
         alt=""
-        fill
+        width={1920}
+        height={1080}
         aria-hidden="true"
         sizes="100vw"
-        className="absolute inset-0 z-0 object-cover"
+        className="absolute inset-0 z-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/70 z-0" />
 

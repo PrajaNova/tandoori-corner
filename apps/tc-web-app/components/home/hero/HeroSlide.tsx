@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
 import type { Slide } from "./types";
 
@@ -25,12 +26,19 @@ export function HeroSlide({ slide, isActive, isPageHeading }: HeroSlideProps) {
         className={`absolute inset-0 z-0 transition-transform duration-[6000ms] ease-out motion-reduce:transition-none ${
           isActive ? "scale-105" : "scale-100"
         }`}
-        style={{
-          backgroundImage: `url('${slide.image}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      >
+        <Image
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover"
+          height={1080}
+          loading={isPageHeading ? undefined : "lazy"}
+          preload={isPageHeading}
+          sizes="100vw"
+          src={slide.image}
+          width={1920}
+        />
+      </div>
       {/* Dark overlay */}
       <div className="absolute inset-0 z-0 bg-black/45" />
 

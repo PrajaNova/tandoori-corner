@@ -150,6 +150,10 @@ export async function registerMenuRoutes(
   await app.register(async (admin) => {
     admin.addHook("preHandler", createAdminAuthGuard(adminApiToken));
 
+    admin.get("/admin/categories", async () => ({
+      categories: await menuService.listCategories(true),
+    }));
+
     admin.post(
       "/categories",
       { schema: createCategorySchema },

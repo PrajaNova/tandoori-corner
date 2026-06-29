@@ -82,6 +82,44 @@ describe("menu routes", () => {
     assert.equal(body.categories[0].items[0].name, "Vegetable Samosa");
   });
 
+  it("hides inactive menu content from public reads only", async () => {
+    const catalogService = createMemoryCatalogService();
+    app = await buildApp({
+      adminApiToken: adminToken,
+      auditService: createMemoryAuditService([]),
+      catalogService,
+      menuService: createMemoryMenuService([
+        {
+          ...seedMenu[0],
+          items: [
+            ...seedMenu[0].items,
+            { ...seedMenu[0].items[0], id: "hidden_item", status: "inactive" },
+          ],
+        },
+        {
+          ...seedMenu[0],
+          id: "hidden_cat",
+          slug: "hidden",
+          status: "inactive",
+        },
+      ]),
+      orderService: createMemoryOrderService(catalogService),
+      paymentService: createMemoryPaymentService(),
+    });
+
+    const publicList = await app.inject({ method: "GET", url: "/api/menu" });
+    assert.equal(publicList.json().categories.length, 1);
+    assert.equal(publicList.json().categories[0].items.length, 1);
+
+    const adminList = await app.inject({
+      method: "GET",
+      url: "/api/menu/admin/categories",
+      headers: adminHeaders,
+    });
+    assert.equal(adminList.json().categories.length, 2);
+    assert.equal(adminList.json().categories[0].items.length, 2);
+  });
+
   it("requires admin auth for menu mutations", async () => {
     app = await buildTestApp();
     const response = await app.inject({

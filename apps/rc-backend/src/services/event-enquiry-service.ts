@@ -14,6 +14,7 @@ export type EventEnquiryStatus =
 
 export interface EventEnquiry {
   id: string;
+  customerId?: string;
   customerName: string;
   email: string;
   phone: string;
@@ -29,6 +30,7 @@ export interface EventEnquiry {
 }
 
 export interface CreateEventEnquiryInput {
+  customerId?: string;
   name: string;
   email: string;
   phone: string;
@@ -63,6 +65,7 @@ type PrismaEventEnquiryClient = Pick<PrismaClient, "eventEnquiry">;
 
 type PrismaEventEnquiry = {
   id: string;
+  customerId: string | null;
   customerName: string;
   email: string;
   phone: string;
@@ -105,6 +108,7 @@ function toPrismaStatus(status: EventEnquiryStatus) {
 function mapEnquiry(enquiry: PrismaEventEnquiry): EventEnquiry {
   return {
     id: enquiry.id,
+    customerId: enquiry.customerId ?? undefined,
     customerName: enquiry.customerName,
     email: enquiry.email,
     phone: enquiry.phone,
@@ -171,6 +175,7 @@ export function createMemoryEventEnquiryService(
       const now = new Date().toISOString();
       const enquiry: EventEnquiry = {
         id: `event_${randomUUID()}`,
+        customerId: input.customerId,
         customerName: data.customerName,
         email: data.email,
         phone: data.phone,
@@ -205,7 +210,9 @@ export function createPrismaEventEnquiryService(
   return {
     createEnquiry: async (input) => {
       const data = validate(input);
-      const enquiry = await prisma.eventEnquiry.create({ data });
+      const enquiry = await prisma.eventEnquiry.create({
+        data: { ...data, customerId: input.customerId },
+      });
       return mapEnquiry(enquiry);
     },
     listEnquiries: async () => {
