@@ -17,7 +17,7 @@ export const highlightsContent: HighlightData[] = [
     cursive: "Must try",
     heading: "Butter Chicken",
     description:
-      "Our legendary Butter Chicken is a Singapore favourite. Tender chicken tikka simmered in a velvety tomato-cream sauce infused with fenugreek, cardamom and our house butter. Rich, indulgent and utterly satisfying — best paired with a Peshawari Naan fresh from our clay tandoor oven.",
+      "Our Butter Chicken is a Singapore favourite. Tender chicken tikka simmers in tomato-cream sauce with fenugreek, cardamom and house butter. Pair it with Peshawari Naan from the clay tandoor.",
     price: "S$18.00 per portion",
     ctaHref: "/checkout",
     imagePosition: "right",
@@ -25,11 +25,11 @@ export const highlightsContent: HighlightData[] = [
     images: [
       {
         src: "/granny/granny_banners_11.jpg",
-        alt: "Butter Chicken",
+        alt: "Butter chicken curry in a creamy tomato sauce",
       },
       {
         src: "/granny/granny_banners_12.jpg",
-        alt: "Butter Chicken served with naan",
+        alt: "Butter chicken served with fresh naan for dipping",
       },
     ],
   },
@@ -38,7 +38,7 @@ export const highlightsContent: HighlightData[] = [
     cursive: "From the clay oven",
     heading: "Tandoori Chicken",
     description:
-      "Whole chicken marinated for 24 hours in yoghurt, fresh ginger, garlic and our signature spice blend, then fired at high heat in our traditional clay tandoor. Gloriously smoky, juicy and deeply flavoured — a dish that has defined Tandoori Corner since day one.",
+      "Whole chicken marinates for 24 hours. Yoghurt, ginger, garlic and our signature spice blend build the flavour. It is fired in the clay tandoor until smoky and juicy.",
     price: "S$22.00 per portion",
     ctaHref: "/checkout",
     imagePosition: "left",
@@ -46,11 +46,11 @@ export const highlightsContent: HighlightData[] = [
     images: [
       {
         src: "/granny/granny_banners_6.jpg",
-        alt: "Tandoori Chicken",
+        alt: "Whole tandoori chicken grilled in the clay oven",
       },
       {
         src: "/granny/granny_banners_7.jpg",
-        alt: "Tandoori Chicken from the clay oven",
+        alt: "Smoky tandoori chicken with North Indian spices",
       },
     ],
   },

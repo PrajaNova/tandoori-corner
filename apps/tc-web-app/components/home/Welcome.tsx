@@ -16,6 +16,20 @@ export function Welcome() {
           {welcomeContent.description}
         </p>
 
+        <div className="mx-auto mb-12 max-w-4xl border-y border-border py-6">
+          <p className="text-center text-sm leading-7 text-muted-foreground">
+            {welcomeContent.answerBlock}
+          </p>
+          <ul className="mt-6 grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
+            {welcomeContent.highlights.map((item) => (
+              <li key={item.label} className="leading-6 text-muted-foreground">
+                <span className="font-bold text-foreground">{item.label}:</span>{" "}
+                {item.value}
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <dl className="mx-auto mb-16 grid max-w-4xl grid-cols-1 border-y border-border text-center sm:grid-cols-3">
           {welcomeContent.facts.map((fact) => (
             <div
@@ -41,6 +55,7 @@ export function Welcome() {
             >
               <FeatureCard
                 image={card.image}
+                imageAlt={card.imageAlt}
                 title={card.title}
                 subtitle={card.subtitle}
                 description={card.description}

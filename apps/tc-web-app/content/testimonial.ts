@@ -5,7 +5,7 @@ export interface TestimonialItem {
 }
 
 export const testimonialContent = {
-  backgroundImage: "/granny/granny_background_7.jpg",
+  backgroundImage: "/granny/granny_background_7.webp",
   items: [
     {
       quote:

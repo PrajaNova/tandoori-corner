@@ -39,6 +39,7 @@ export function Testimonial() {
         width={1920}
         height={1080}
         aria-hidden="true"
+        loading="lazy"
         sizes="100vw"
         className="absolute inset-0 z-0 h-full w-full object-cover"
       />
@@ -102,6 +103,7 @@ export function Testimonial() {
                         alt={`Review by ${item.author.replace(/^-\s*/, "")}`}
                         width={48}
                         height={48}
+                        loading="lazy"
                         sizes="48px"
                         className="h-full w-full object-cover"
                       />

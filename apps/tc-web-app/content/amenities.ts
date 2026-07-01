@@ -17,12 +17,12 @@ export interface Amenity {
 export const amenitiesContent = {
   cursiveText: "Why choose us",
   mainText: "Your Comfort, Our Priority",
-  backgroundImage: "/granny/granny_background_1.jpg",
+  backgroundImage: "/granny/granny_background_1.webp",
   items: [
     {
       icon: Accessibility,
       title: "Wheelchair Accessible",
-      desc: "Our ground-floor entrance and dining areas are fully accessible, ensuring every guest enjoys a comfortable visit.",
+      desc: "Our ground-floor entrance and dining areas are accessible for a comfortable visit.",
     },
     {
       icon: Car,

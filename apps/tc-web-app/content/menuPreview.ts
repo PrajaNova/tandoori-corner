@@ -2,12 +2,11 @@ export const menuPreviewContent = {
   cursiveText: "Chef's selection",
   mainText: "Discover Our Chef Specials",
   description:
-    "Experience our most celebrated dishes, handcrafted by our master chefs using time-honoured recipes and the finest ingredients.",
+    "Explore our most requested tandoori grills, curries, breads and biryani.",
   items: [
     {
       name: "Tandoori Chicken",
-      description:
-        "Tender chicken marinated overnight in yoghurt, fresh ginger, garlic & aromatic spices, charred in the tandoor.",
+      description: "Chicken marinated overnight, then charred in the tandoor.",
       price: "S$22.00",
       image: "/granny/granny_specials_1.jpg",
     },

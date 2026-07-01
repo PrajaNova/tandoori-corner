@@ -10,6 +10,7 @@ export function ParallaxQuote() {
         width={1920}
         height={1080}
         aria-hidden="true"
+        loading="lazy"
         sizes="100vw"
         className="absolute inset-0 z-0 h-full w-full object-cover"
       />
@@ -23,6 +24,7 @@ export function ParallaxQuote() {
               alt={quoteContent.iconAlt}
               width={70}
               height={70}
+              loading="lazy"
               className="opacity-90"
             />
           </div>

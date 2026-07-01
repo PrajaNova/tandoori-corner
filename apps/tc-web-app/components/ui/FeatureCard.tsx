@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface FeatureCardProps {
   image: string;
+  imageAlt?: string;
   title: string;
   subtitle?: string;
   description: string;
@@ -15,6 +16,7 @@ interface FeatureCardProps {
 
 export function FeatureCard({
   image,
+  imageAlt,
   title,
   subtitle,
   description,
@@ -35,9 +37,10 @@ export function FeatureCard({
       >
         <Image
           src={image}
-          alt={title}
+          alt={imageAlt ?? title}
           width={800}
           height={600}
+          loading="lazy"
           sizes="(max-width: 768px) 100vw, 33vw"
           className="h-full w-full object-cover motion-image-hover"
         />
