@@ -13,6 +13,7 @@ export function Specials() {
         width={1920}
         height={1080}
         aria-hidden="true"
+        loading="lazy"
         sizes="100vw"
         className="absolute inset-0 z-0 h-full w-full object-cover"
       />

@@ -81,6 +81,7 @@ export function HighlightSection({
                   alt={img.alt}
                   width={600}
                   height={800}
+                  loading="lazy"
                   sizes="(max-width: 768px) 50vw, 25vw"
                   className="h-full w-full object-cover motion-image-hover"
                 />

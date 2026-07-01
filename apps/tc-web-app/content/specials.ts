@@ -8,7 +8,7 @@ export interface SpecialItem {
 export const specialsContent = {
   cursiveText: "Chef's selection",
   mainText: "Our Signature Dishes",
-  backgroundImage: "/granny/granny_background_8.jpg",
+  backgroundImage: "/granny/granny_background_8.webp",
   items: [
     {
       name: "Tandoori Chicken",

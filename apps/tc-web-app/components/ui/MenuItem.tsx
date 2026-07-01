@@ -22,9 +22,10 @@ export function MenuItem({
         <div className="relative w-[88px] h-[88px] shrink-0 overflow-hidden rounded">
           <Image
             src={image}
-            alt={name}
+            alt={`${name} at Tandoori Corner`}
             width={88}
             height={88}
+            loading="lazy"
             sizes="88px"
             className="h-full w-full object-cover"
           />

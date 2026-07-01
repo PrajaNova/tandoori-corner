@@ -1,5 +1,5 @@
 export const quoteContent = {
-  backgroundImage: "/granny/granny_background_2.jpg",
+  backgroundImage: "/granny/granny_background_2.webp",
   iconImage: "/granny/granny_testimonial_chef-hat2.png",
   iconAlt: "Chef hat icon representing Tandoori Corner's culinary heritage",
   quote:

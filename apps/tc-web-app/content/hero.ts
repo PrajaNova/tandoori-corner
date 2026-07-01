@@ -2,7 +2,7 @@ import type { Slide } from "@/components/home/hero/types";
 
 export const slides: Slide[] = [
   {
-    image: "/granny/granny_sliders_slide-bg_3.jpg",
+    image: "/granny/granny_sliders_slide-bg_3.webp",
     cursive: "Since 2008",
     heading: "Authentic North Indian Cuisine",
     desc: "Tandoori Corner is a beloved North Indian curry house on Balestier Road, Singapore. Experience tandoor-fired perfection and time-honoured recipes from our master chefs.",
@@ -12,7 +12,7 @@ export const slides: Slide[] = [
     ],
   },
   {
-    image: "/granny/granny_sliders_slide-bg_4.jpg",
+    image: "/granny/granny_sliders_slide-bg_4.webp",
     cursive: "Expert Chefs",
     heading: "Tandoor-Fired Perfection",
     actions: [
@@ -20,7 +20,7 @@ export const slides: Slide[] = [
     ],
   },
   {
-    image: "/granny/granny_sliders_slide-bg_7.jpg",
+    image: "/granny/granny_sliders_slide-bg_7.webp",
     cursive: "Balestier Road, Singapore",
     heading: "Discover Our Flavours",
     desc: "From succulent Tandoori Chicken to rich Butter Chicken and freshly baked Peshawari Naan — every dish tells a story of passion and authentic spice.",
